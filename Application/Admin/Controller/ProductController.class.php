@@ -122,7 +122,7 @@ class ProductController extends Controller {
         $saveData = array(
             'state' => $state,
         );
-        if( $model->where('id='.I('post.id'))->update($saveData) ){
+        if( $model->where('id='.I('post.id'))->save($saveData) ){
             f_return(1,'success');
         }else{
             f_return(4002,'改变失败');

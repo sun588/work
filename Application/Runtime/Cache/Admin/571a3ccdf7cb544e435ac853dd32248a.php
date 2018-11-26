@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<?php if (!defined('THINK_PATH')) exit();?>﻿<!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8">
@@ -7,14 +7,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <!--[if lt IE 9]>
-<script type="text/javascript" src="__PUBLIC__/Admin/lib/html5shiv.js"></script>
-<script type="text/javascript" src="__PUBLIC__/Admin/lib/respond.min.js"></script>
+<script type="text/javascript" src="/Public/Admin/lib/html5shiv.js"></script>
+<script type="text/javascript" src="/Public/Admin/lib/respond.min.js"></script>
 <![endif]-->
-<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/static/h-ui/css/H-ui.min.css" />
-<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/static/h-ui.admin/css/H-ui.admin.css" />
-<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
-<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/static/h-ui.admin/skin/default/skin.css" id="skin" />
-<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/Public/Admin/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/Public/Admin/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="/Public/Admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="/Public/Admin/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="/Public/Admin/static/h-ui.admin/css/style.css" />
 <!--[if IE 6]>
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
@@ -45,15 +45,15 @@
 </div>
 
 <!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="__PUBLIC__/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/Admin/lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="__PUBLIC__/Admin/static/h-ui/js/H-ui.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/Admin/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/Admin/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/Public/Admin/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="/Public/Admin/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="__PUBLIC__/Admin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
-<script type="text/javascript" src="__PUBLIC__/Admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/Admin/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="/Public/Admin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/Public/Admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/Public/Admin/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
     var dataTableObj = $('.table-sort').dataTable({
         "aaSorting": [[ 1, "desc" ]],//默认第几个排序
@@ -63,7 +63,7 @@
         ],
         "serverSide": true,
         "ajax":{
-            "url":"<{:U('getPicture')}>",
+            "url":"<?php echo U('getPicture');?>",
             "type":"POST",
             "dataSrc":AddColumns,
         },
@@ -130,7 +130,7 @@ function picture_add(){
 	var index = layer.open({
 		type: 2,
 		title: '添加图片',
-		content: "<{:U('add')}>",
+		content: "<?php echo U('add');?>",
 	});
 	layer.full(index);
 }
@@ -148,7 +148,7 @@ function picture_show(url){
 /*图片-下架*/
 function picture_stop(obj,id){
 	layer.confirm('确认要下架吗？',function(index){
-		$.post('<{:U("changeState")}>',{id:id,state:2},function (rs) {
+		$.post('<?php echo U("changeState");?>',{id:id,state:2},function (rs) {
 			if(rs){
                 rs = JSON.parse(rs);
 				if(rs['errno'] == 1){
@@ -169,7 +169,7 @@ function picture_stop(obj,id){
 /*图片-发布*/
 function picture_start(obj,id){
 	layer.confirm('确认要发布吗？',function(index){
-		$.post('<{:U("changeState")}>',{id:id,state:1},function (rs) {
+		$.post('<?php echo U("changeState");?>',{id:id,state:1},function (rs) {
 			if(rs){
 			    rs = JSON.parse(rs);
 				if(rs['errno'] == 1){
@@ -205,7 +205,7 @@ function picture_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '<{:U("del")}>',
+			url: '<?php echo U("del");?>',
 			dataType: 'json',
 			data:{id:id},
 			success: function(rs){

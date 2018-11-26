@@ -59,9 +59,20 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">排序值：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="0" placeholder="" name="od">
+				<input type="text" class="input-text" value="<{$picture.od}>" placeholder="" name="od">
 			</div>
 		</div>
+
+		<notempty name="picture.pic">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">当前图片：</label>
+			<div class="formControls col-xs-8 col-sm-9 row" id="productImg">
+				<div class="col-xs-3">
+					<img style="width: 100%" src="<{$picture.pic}>" id="picUrl1">
+				</div>
+			</div>
+		</div>
+		</notempty>
 
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">图片：</label>
@@ -74,6 +85,7 @@
 		</div>
 
 		<div class="row cl" style="text-align: center;">
+			<input type="hidden" value="<{$picture.id}>" id="pictureID">
 			<button onClick="article_save_submit();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
 		</div>
 	</form>
@@ -92,6 +104,15 @@
 <script type="text/javascript" src="__PUBLIC__/Admin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script type="text/javascript">
 function article_save_submit() {
+    if( $("input[name='name']").val() == '' ){
+        alert('产品名称必须填写');
+        return false;
+    }
+
+    var pictureID = "<{$picture.id}>";
+    if(pictureID > 0 && $('#pictureID').val() == pictureID){
+        $('#pictureID').attr('name','id');
+    }
 	$('#form-article-add').submit();
 }
 </script>
