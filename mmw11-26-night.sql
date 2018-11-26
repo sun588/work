@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50553
+Source Server         : root
+Source Server Version : 50528
 Source Host           : localhost:3306
 Source Database       : mmw
 
 Target Server Type    : MYSQL
-Target Server Version : 50553
+Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2018-11-26 17:43:33
+Date: 2018-11-26 23:56:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -121,15 +121,16 @@ CREATE TABLE `picture` (
   `od` int(11) NOT NULL DEFAULT '0',
   `pic` varchar(255) DEFAULT NULL,
   `type` tinyint(4) DEFAULT NULL COMMENT '1:轮播图  2:广告图',
+  `state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1:启用 2停用',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of picture
 -- ----------------------------
-INSERT INTO `picture` VALUES ('1', '123', null, '0', '/public/Img/2018-11-26/15432251992922.jpg', '1');
-INSERT INTO `picture` VALUES ('2', '轮播图2', null, '1', '/public/Img/2018-11-26/15432253121022.jpg', '1');
-INSERT INTO `picture` VALUES ('3', '轮播图3', '#', '2', '/public/Img/2018-11-26/15432253369416.jpg', '1');
+INSERT INTO `picture` VALUES ('4', '轮播图1', 'http://www.baidu.com', '1', '/public/Img/2018-11-26/15432437063833.png', '1', '1');
+INSERT INTO `picture` VALUES ('5', '广告图1', '#', '1', '/public/Img/2018-11-26/15432457457363.png', '2', '1');
+INSERT INTO `picture` VALUES ('6', '轮播2改', '#', '3', '/public/Img/2018-11-26/15432476763824.png', '1', '1');
 
 -- ----------------------------
 -- Table structure for `product`
@@ -160,7 +161,7 @@ CREATE TABLE `product` (
 -- Records of product
 -- ----------------------------
 INSERT INTO `product` VALUES ('2', '测试产品1', 'test001', '1542970679', '/public/Img/2018-11-23/15429706671101.jpg', '', '', '', '3', '23', '24', '0', '0', '0', '&lt;p&gt;你好&lt;br/&gt;&lt;/p&gt;', '&lt;p&gt;我很好&lt;br/&gt;&lt;/p&gt;', '1');
-INSERT INTO `product` VALUES ('3', '测试产品改', 'test002', '1543030520', '/public/Img/2018-11-23/15429706671101.jpg', '', '', '', '2', '2', '3', '13', '14', '1', '&lt;p&gt;你好该&lt;br/&gt;&lt;/p&gt;', '&lt;p&gt;我很好改&lt;br/&gt;&lt;/p&gt;', '1');
+INSERT INTO `product` VALUES ('3', '测试产品改', 'test002', '1543030520', '/public/Img/2018-11-23/15429706671101.jpg', '', '', '', '2', '2', '3', '13', '14', '1', '&lt;p&gt;你好该&lt;br/&gt;&lt;/p&gt;', '&lt;p&gt;我很好改11&lt;br/&gt;&lt;/p&gt;', '1');
 
 -- ----------------------------
 -- Table structure for `productattr`
