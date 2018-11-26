@@ -1,0 +1,223 @@
+<header id="header" class=" typeheader-1" style="background-color:#fff;">
+    <!-- Header Top -->
+    <div class="top-bar" style="background-color:#222;">
+        <div class="container" style="width:1200px;color: #fff;">
+            <span style="color:#d9d7d7;line-height: 35px;">欢迎来到竞价买卖网!</span>
+            <a href="login.html"  style="color:#d9d7d7;margin-left:15px"><span>请登录</span></a>
+            <a href="reg-1.html"  style="color:#d9d7d7;margin-left:15px"><span>免费注册</span></a>
+            <div class="right-sec" style="color:#d9d7d7;">
+                <ul style="margin-top: 3px;" class="baobei">
+                    <li class=""><a href="#." style="color:#d9d7d7;">我的宝贝</a>
+                        <ul class="baobei-ying">
+                            <a href=""><li style="display:block;">已买到的宝贝</li></a>
+                            <a href=""><li style="display:block;">已卖出的宝贝</li></a>
+                        </ul>
+                    </li>
+                    <li><a href="collection.html" style="color:#d9d7d7;">收藏夹</a></li>
+                    <li><a href="#." style="color:#d9d7d7;"><span><img src="__PUBLIC__/Home/image/hy/sj.png" style="margin-right:5px;"></span>手机版</a></li>
+                    <li><a href="#." style="color:#d9d7d7;"><span><img src="__PUBLIC__/Home/image/hy/wx2.png" style="margin-right:5px;"></span>微信公众号 </a></li>
+                    <li><a href="#." style="color:#d9d7d7;">购物指南 </a></li>
+                    <li><a href="enter-ad.html" style="color:#d9d7d7;">商家入驻 </a></li>
+                    <li><a href="#." style="color:#d9d7d7;"><span><img src="__PUBLIC__/Home/image/hy/dh.png" style="margin-right:5px;"></span>网站导航</a></li>
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header style="padding-top:40px;">
+        <div class="container" >
+            <div class="logo"> <a href="index.html"><img src="__PUBLIC__/Home/images/logo.png" alt="" ></a> </div>
+            <div class="search-cate" style="    float: left;">
+                <input type="search" placeholder="请输入您想要的商品">
+                <select style="font-size: 16px;border: 0px;margin-top: 14px;width: 60px;float: left;">
+                    <option>产品</option>
+                    <option>型号</option>
+                </select>
+                <button class="submit" type="submit">询价</button>
+            </div>
+
+            <!-- Cart Part -->
+            <ul class="nav navbar-right cart-pop">
+                <li class="dropdown" style="display: inline-block;"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="itm-cont">3</span> <i class="fa fa-shopping-bag"></i> <strong>购物车</strong> <br>
+                </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="media-left"> <a href="#." class="thumb"> <img src="__PUBLIC__/Home/images/item-img-1-1.jpg" class="img-responsive" alt="" > </a> </div>
+                            <div class="media-body"> <a href="#." class="tittle ">海尔 冰箱 BCD-470WDPG 470升十字对开变频静音节能干湿分储电冰箱</a> <span>250 x 1</span> </div>
+                        </li>
+                        <li class="">
+                            <div class="media-left"> <a href="#." class="thumb" > <img src="__PUBLIC__/Home/images/item-img-1-2.jpg" class="img-responsive" alt="" > </a> </div>
+                            <div class="media-body"> <a href="#." class="tittle">海尔 冰箱 BCD-470WDPG 470升十字对开变频静音节能干湿分储电冰箱</a> <span>250 x 1</span> </div>
+                        </li>
+                        <li class="btn-cart"> <a href="#." class="btn-round">查看更多</a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Nav -->
+        <div class="header-bottom hidden-compact" style="margin-top: 30px;background-color: red;">
+            <div class="container">
+                <div class="row">
+
+                    <div class="bottom1 menu-vertical col-lg-2 col-md-3 col-sm-3">
+                        <div class="responsive so-megamenu megamenu-style-dev ">
+                            <div class="so-vertical-menu ">
+                                <nav class="navbar-default">
+
+                                    <div class="container-megamenu vertical">
+                                        <div id="menuHeading">
+                                            <div class="megamenuToogle-wrapper">
+                                                <div class="megamenuToogle-pattern">
+                                                    <div class="container">
+                                                        <div>
+                                                            <span></span>
+                                                            <span></span>
+                                                            <span></span>
+                                                        </div>
+                                                        商品分类
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="navbar-header">
+                                            <button type="button" id="show-verticalmenu" data-toggle="collapse" class="navbar-toggle">
+                                                <i class="fa fa-bars"></i>
+                                                <span>  All Categories     </span>
+                                            </button>
+                                        </div>
+                                        <div class="vertical-wrapper" >
+                                            <span id="remove-verticalmenu" class="fa fa-times"></span>
+                                            <div class="megamenu-pattern">
+                                                <div class="container-mega">
+                                                    <ul class="megamenu">
+
+
+                                                    <volist name="headerCategory" id="row">
+                                                        <li class="item-vertical  with-sub-menu hover">
+                                                            <p class="close-menu"></p>
+
+                                                                <span>
+                                                                    <volist name="row.c2" id="row2">
+                                                                        <a href="<{:U('Product/list',array(cid=>$row2['id']))}>"><{$row2.name}></a> |
+                                                                    </volist>
+                                                                </span>
+                                                                <a>
+                                                                <b class="fa-angle-right"></b>
+                                                                </a>
+
+                                                            <div class="sub-menu" data-subwidth="60"  >
+                                                                <div class="content" >
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 static-menu">
+                                                                                    <div class="menu title-sy">
+                                                                                        <ul>
+                                                                                            <volist name="row.c2" id="row2">
+                                                                                            <li class="">
+                                                                                                <a href="<{:U('Product/list',array(cid=>$row2['id']))}>"  class="main-menu"><{$row2.name}></a>
+                                                                                                <ul class="erji">
+                                                                                                    <volist name="row2.c3" id="row3">
+                                                                                                    <li><a href="<{:U('Product/list',array(cid=>$row3['id']))}>"><{$row3.name}></a></li>
+                                                                                                    </volist>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                            </volist>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </volist>
+                                                        <!--头部栏目-->
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--common header-->
+                    <!-- Main menu -->
+                    <div class="main-menu-w col-lg-10 col-md-9">
+                        <div class="responsive so-megamenu megamenu-style-dev">
+                            <nav class="navbar-default">
+                                <div class=" container-megamenu  horizontal open ">
+                                    <div class="navbar-header">
+                                        <button type="button" id="show-megamenu" data-toggle="collapse" class="navbar-toggle">
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                    </div>
+
+                                    <div class="megamenu-wrapper">
+                                        <span id="remove-megamenu" class="fa fa-times"></span>
+                                        <div class="megamenu-pattern">
+                                            <div class="container-mega">
+                                                <ul class="megamenu" data-transition="slide" data-animationtime="250">
+                                                    <li class="home hover">
+                                                        <a href="index.html">首页 </a>
+
+                                                    </li>
+                                                    <li class="with-sub-menu hover">
+                                                        <p class="close-menu"></p>
+                                                        <a href="#" class="clearfix">
+                                                            <strong>精品推荐</strong>
+                                                        </a>
+                                                    </li>
+                                                    <li class="with-sub-menu hover">
+                                                        <p class="close-menu"></p>
+                                                        <a href="#" class="clearfix">
+                                                            <strong>智能潮货</strong>
+                                                        </a>
+                                                    </li>
+                                                    <li class="with-sub-menu hover">
+                                                        <p class="close-menu"></p>
+                                                        <a href="#" class="clearfix">
+                                                            <strong>家用电器</strong>
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <p class="close-menu"></p>
+                                                        <a href="#" class="clearfix">
+                                                            <strong>品牌汽车</strong>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- //end Main menu -->
+
+                    <div class="bottom3">
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </header>
+    <!-- //Header center -->
+</header>

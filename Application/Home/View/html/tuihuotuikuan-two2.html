@@ -1,0 +1,935 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Basic page needs
+    ============================================ -->
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="Magentech">
+    <meta name="robots" content="index, follow" />
+   
+    <!-- Mobile specific metas
+    ============================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Favicon
+    ============================================ -->
+    <link rel="shortcut icon" type="image/png" href="ico/favicon-16x16.png">
+    
+    <!-- 新引入 -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/app-orange.css" id="theme_color" />
+    <!-- end -->
+   
+    <!-- Libs CSS
+    ============================================ -->
+    <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
+    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="css/themecss/lib.css" rel="stylesheet">
+
+    <!-- Theme CSS
+    ============================================ -->
+    <link href="css/themecss/so_searchpro.css" rel="stylesheet">
+    <link href="css/themecss/so_megamenu.css" rel="stylesheet">
+    <link href="css/themecss/so-categories.css" rel="stylesheet">
+    <link href="css/themecss/so-listing-tabs.css" rel="stylesheet">
+    <link href="css/themecss/so-category-slider.css" rel="stylesheet">
+    <link href="css/themecss/so-newletter-popup.css" rel="stylesheet">
+
+    <link href="css/footer/footer1.css" rel="stylesheet">
+    <link href="css/header/header1.css" rel="stylesheet">
+    <link id="color_scheme" href="css/theme.css" rel="stylesheet"> 
+    <link href="css/responsive.css" rel="stylesheet">
+
+     <!-- Google web fonts
+
+    ============================================ -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' rel='stylesheet' type='text/css'>     
+<style type="text/css">
+body{font-family:'Poppins', sans-serif;
+}
+.cart_item td{
+          text-align: center;
+         }
+.content-top .entry-summary table thead tr th, .entry-content .entry-summary table thead tr th, .commentlist .entry-summary table thead tr th {
+           border-right: 0px;
+}
+.Max_msg {
+    margin-left: -7%;
+    bottom: 36%;
+    position: absolute;
+}
+
+.tuihuo-three{
+    background-color: #c4c2c2;
+}
+.tuihuo-three .nubme{
+	color:#c4c2c2;
+	}
+</style>
+
+
+</head>
+
+<body class="res layout-subpage layout-1 banners-effect-5">
+
+    <div id="wrapper" class="wrapper-fluid">
+   <!-- Header Container  -->
+    <header id="header" class=" typeheader-1" style="background-color:#fff;">
+        
+        <!-- Header Top -->
+        <div class="top-bar" style="background-color:#222;">
+            <div class="container" style="width:1200px;color: #fff;">
+              <span style="color:#d9d7d7;line-height: 35px;">欢迎来到竞价买卖网!</span>
+              <a href="login.html"  style="color:#d9d7d7;margin-left:15px"><span>请登录</span></a>
+              <a href="reg-1.html"  style="color:#d9d7d7;margin-left:15px"><span>免费注册</span></a>
+              <div class="right-sec" style="color:#d9d7d7;">
+                <ul style="margin-top: 3px;" class="baobei">
+                  <li class=""><a href="#." style="color:#d9d7d7;">我的宝贝</a>
+                      <ul class="baobei-ying">
+                          <a href=""><li style="display:block;">已买到的宝贝</li></a>
+                          <a href=""><li style="display:block;">已卖出的宝贝</li></a>
+                      </ul>
+                  </li>
+                  <li><a href="#." style="color:#d9d7d7;">收藏夹</a></li>
+                  <li><a href="#." style="color:#d9d7d7;"><span><img src="image/hy/sj.png" style="margin-right:5px;"></span>手机站</a></li>
+                  <li><a href="#." style="color:#d9d7d7;"><span><img src="image/hy/wx2.png" style="margin-right:5px;"></span>微信公众号 </a></li>
+                  <li><a href="#." style="color:#d9d7d7;">帮助中心 </a></li>
+                  <li><a href="#." style="color:#d9d7d7;"><span><img src="image/hy/dh.png" style="margin-right:5px;"></span>网站导航</a></li>  
+
+                </ul>
+               
+              </div>
+            </div>
+          </div>
+      
+      
+  <!-- Header -->
+          <header style="padding-top:40px;">
+            <div class="container" >
+              <div class="logo"> <a href="index.html"><img src="images/logo.png" alt="" ></a> </div>
+              <div class="search-cate" style="    float: left;">
+                <select class="selectpicker">
+                  <option> All Categories</option>
+                  <option> Home Audio & Theater</option>
+                  <option> TV & Video</option>
+                  <option> Camera, Photo & Video</option>
+                  <option> Cell Phones & Accessories</option>
+                  <option> Headphones</option>
+                  <option> Video Games</option>
+                  <option> Bluetooth & Wireless </option>
+                  <option> Gaming Console</option>
+                  <option> Computers & Tablets</option>
+                  <option> Monitors </option>
+                </select>
+                <input type="search" placeholder="请输入您想要的商品">
+                <button class="submit" type="submit">询价</button>
+              </div>
+              
+              <!-- Cart Part -->
+              <ul class="nav navbar-right cart-pop">
+              
+                <li class="dropdown" style="display: inline-block;"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="itm-cont">3</span> <i class="fa fa-shopping-bag"></i> <strong>购物车</strong> <br>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <div class="media-left"> <a href="#." class="thumb"> <img src="images/item-img-1-1.jpg" class="img-responsive" alt="" > </a> </div>
+                      <div class="media-body"> <a href="#." class="tittle ">海尔 冰箱 BCD-470WDPG 470升十字对开变频静音节能干湿分储电冰箱</a> <span>250 x 1</span> </div>
+                    </li>
+                    <li class="">
+                      <div class="media-left"> <a href="#." class="thumb" > <img src="images/item-img-1-2.jpg" class="img-responsive" alt="" > </a> </div>
+                      <div class="media-body"> <a href="#." class="tittle">海尔 冰箱 BCD-470WDPG 470升十字对开变频静音节能干湿分储电冰箱</a> <span>250 x 1</span> </div>
+                    </li>
+                    <li class="btn-cart"> <a href="#." class="btn-round">查看更多</a> </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- Nav -->
+            <div class="header-bottom hidden-compact" style="margin-top: 30px;background-color: red;">
+            <div class="container">
+                <div class="row">
+                    
+                    <div class="bottom1 menu-vertical col-lg-2 col-md-3 col-sm-3">
+                        <div class="responsive so-megamenu megamenu-style-dev ">
+                            <div class="so-vertical-menu ">
+                                <nav class="navbar-default">    
+                                    
+                                    <div class="container-megamenu vertical">
+                                        <div id="menuHeading">
+                                            <div class="megamenuToogle-wrapper">
+                                                <div class="megamenuToogle-pattern">
+                                                    <div class="container">
+                                                        <div>
+                                                            <span></span>
+                                                            <span></span>
+                                                            <span></span>
+                                                        </div>
+                                                        商品分类                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     
+                                        <div class="navbar-header">
+                                            <button type="button" id="show-verticalmenu" data-toggle="collapse" class="navbar-toggle">      
+                                                <i class="fa fa-bars"></i>
+                                                <span>  All Categories     </span>
+                                            </button>
+                                        </div>
+                                        <div class="vertical-wrapper" >
+                                            <span id="remove-verticalmenu" class="fa fa-times"></span>
+                                            <div class="megamenu-pattern">
+                                                <div class="container-mega">
+                                                    <ul class="megamenu">
+                                                        <li class="item-vertical  with-sub-menu hover">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                
+                                                                <span>冰箱 | 空调 | 洗衣机</span>
+                                                                <b class="fa-angle-right"></b>
+                                                            </a>
+                                                            <div class="sub-menu" data-subwidth="60"  >
+                                                                <div class="content" >
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 static-menu">
+                                                                                    <div class="menu title-sy">
+                                                                                        <ul>
+                                                                                            <li class="">
+                                                                                                <a href="#"  class="main-menu">空调</a>
+                                                                                                <ul class="erji">
+                                                                                                    <li><a href="#" >变频</a></li>
+                                                                                                    <li><a href="#" >1.5匹</a></li>
+                                                                                                    <li><a  href="#" >1匹 </a></li>
+                                                                                                    <li><a href="#" >挂机/壁挂式</a></li>
+                                                                                                    <li><a href="#" >移动空调</a></li>
+                                                                                                    <li><a href="#" >中央空调</a></li>
+                                                                                                    <li><a  href="#" >柜机/立柜式</a></li>
+                                                                                                    <li><a href="#" >定频</a></li>
+                                                                                                    <li><a href="#" >冷暖型</a></li>
+                                                                                                    <li><a href="#" >单冷型 </a></li>
+                                                                                                    <li><a href="#" >艺术柜机</a></li>
+                                                                                                    <li><a href="#" >静音 </a></li>
+                                                                                                    <li><a href="#" >节能 </a></li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-12 static-menu title-sy">
+                                                                                    <div class="menu">
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                                <a href="#"  class="main-menu">冰箱/冷柜</a> 
+                                                                                                <ul>
+                                                                                                    <li><a href="#" >对开门</a></li>
+                                                                                                    <li><a href="#" >多门</a></li>
+                                                                                                    <li><a href="#" >四门</a></li>
+                                                                                                    <li><a href="#" >三门</a></li>
+                                                                                                    <li><a href="#" >两门</a></li>
+                                                                                                    <li><a href="#" >冷柜</a></li>
+                                                                                                    <li><a href="#" >酒柜</a></li>
+                                                                                                    <li><a href="#" >小冰箱</a></li>
+                                                                                                    <li><a href="#" >风冷无霜</a></li>
+                                                                                                    <li><a href="#" >电脑温控</a></li>
+                                                                                                    <li><a href="#" >变频冰箱</a></li>
+                                                                                                    <li><a href="#" >进口冰箱</a></li>
+                                                                                                    <li><a href="#" >海尔</a></li>
+                                                                                                    <li><a href="#" >美的</a></li>
+                                                                                                    <li><a href="#" >西门子</a></li>
+                                                                                                    <li><a href="#" >容声</a></li>
+                                                                                                    <li><a href="#" >美菱</a></li>
+                                                                                                    <li><a href="#" >海信</a></li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-12 static-menu title-sy">
+                                                                                    <div class="menu">
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                                <a href="#"  class="main-menu">洗衣机</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="#" onclick="window.location = '18_46';">波轮</a></li>
+                                                                                                    <li><a href="#" onclick="window.location = '24_64';">滚筒</a></li>
+                                                                                                    <li><a href="#" onclick="window.location = '18_45';">双缸</a></li>
+                                                                                                    <li><a href="#" onclick="window.location = '18_30';">迷你洗衣机</a>
+                                                                                                    <li><a href="#" onclick="window.location = '18_46';">烘干机</a></li>
+                                                                                                    <li><a href="#" onclick="window.location = '24_64';">甩干机</a></li>
+                                                                                                    <li><a href="#" onclick="window.location = '18_45';">洗烘一体</a></li>
+                                                                                                    <li><a href="#" onclick="window.location = '18_30';">海尔</a>
+                                                                                                    <li><a href="#" onclick="window.location = '18_46';">西门子</a></li>
+                                                                                                    <li><a href="#" onclick="window.location = '24_64';">小天鹅</a></li>
+                                                                                                    <li><a href="#" onclick="window.location = '18_45';">三洋</a></li>
+                                                                                                    <li><a href="#" onclick="window.location = '18_30';">美的</a>
+                                                                                                    <li><a href="#" onclick="window.location = '18_46';">格兰仕</a></li>
+                                                                                                    <li><a href="#" onclick="window.location = '24_64';">松下</a></li>
+                                                                                                    <li><a href="#" onclick="window.location = '18_45';">三星</a></li>
+                                                                                                    <li><a href="#" onclick="window.location = '18_30';">博世</a></li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="item-vertical">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <span>平板电视 | 家庭影院 | 耳机</span>
+                                                                
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-vertical  style1 with-sub-menu hover">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <span class="label"></span>
+                                                                <span>热水器 | 烟机烟灶</span>
+                                                                 
+                                                                <b class="fa-angle-right"></b>
+                                                            </a>
+                                                            <div class="sub-menu" data-subwidth="40" >
+                                                                <div class="content">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 static-menu">
+                                                                                    <div class="menu">
+                                                                                        <ul>
+                                                                                            <li><a href="#" class="main-menu">Smartphone</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="#">Esdipiscing</a>
+                                                                                                    </li>
+                                                                                                    <li><a href="#">Scanners</a>
+                                                                                                    </li>
+                                                                                                    <li><a href="#">Apple</a>
+                                                                                                    </li>
+                                                                                                    <li><a href="#">Dell</a>
+                                                                                                    </li>
+                                                                                                    <li><a href="#">Scanners</a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                            <li><a href="#" class="main-menu">Electronics</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="#">Asdipiscing</a>
+                                                                                                    </li>
+                                                                                                    <li><a href="#">Diam sit</a>
+                                                                                                    </li>
+                                                                                                    <li><a href="#">Labore et</a>
+                                                                                                    </li>
+                                                                                                    <li><a href="#">Monitors</a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="row banner">
+                                                                                <a href="#">
+                                                                                    <img src="image/catalog/menu/megabanner/vbanner1.jpg" alt="banner1">
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        <li class="item-vertical with-sub-menu hover">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <span>厨房电器 | 生活电器</span>
+                                                                <b class="fa-angle-right"></b>
+                                                            </a>
+                                                            <div class="sub-menu" data-subwidth="60" >
+                                                                <div class="content" >
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 static-menu">
+                                                                                    <div class="menu">
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                                <a href="#" class="main-menu">Car Alarms and Security</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="#" >Car Audio &amp; Speakers</a></li>
+                                                                                                    <li><a href="#" >Gadgets &amp; Auto Parts</a></li>
+                                                                                                    <li><a href="#" >Gadgets &amp; Auto Parts</a></li>
+                                                                                                    <li><a href="#" >Headphones, Headsets</a></li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a href="24" onclick="window.location = '24';" class="main-menu">Health &amp; Beauty</a>
+                                                                                                <ul>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Home Audio</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Helicopters &amp; Parts</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Outdoor &amp; Traveling</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#">Toys &amp; Hobbies</a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 static-menu">
+                                                                                    <div class="menu">
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                                <a href="#"  class="main-menu">Electronics</a>
+                                                                                                <ul>
+                                                                                                    <li>
+                                                                                                        <a href="#">Earings</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Salon &amp; Spa Equipment</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Shaving &amp; Hair Removal</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#">Smartphone &amp; Tablets</a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a href="#"  class="main-menu">Sports &amp; Outdoors</a>
+                                                                                                <ul>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Flashlights &amp; Lamps</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Fragrances</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Fishing</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" >FPV System &amp; Parts</a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 static-menu">
+                                                                                    <div class="menu">
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                                <a href="#" class="main-menu">More Car Accessories</a>
+                                                                                                <ul>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Lighter &amp; Cigar Supplies</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Mp3 Players &amp; Accessories</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Men Watches</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Mobile Accessories</a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a href="#" class="main-menu">Gadgets &amp; Auto Parts</a>
+                                                                                                <ul>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Gift &amp; Lifestyle Gadgets</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Gift for Man</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Gift for Woman</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" >Gift for Woman</a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="item-vertical css-menu with-sub-menu hover">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <span>个护电器 | 健康电器</span>
+                                                                <b class="fa-angle-right"></b>
+                                                            </a>
+                                                            <div class="sub-menu" data-subwidth="20">
+                                                                <div class="content" >
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-12 hover-menu">
+                                                                                    <div class="menu">
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                                <a href="#" class="main-menu">Headphones, Headsets</a>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a href="#" class="main-menu">Home Audio</a>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a href="#" class="main-menu">Health &amp; Beauty</a>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a href="#" class="main-menu">Helicopters &amp; Parts</a>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a href="#" class="main-menu">Helicopters &amp; Parts</a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="item-vertical">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <span>手机 </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-vertical">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <span>笔记本 | 平板 | 品牌台式机</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-vertical">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <span>智能数码 | 数码配件</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-vertical" >
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <span>DIY装机 | 电玩游戏 | 游戏本</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-vertical" >
+                                                            <p class="close-menu"></p>
+                                                            
+                                                            <a href="#" class="clearfix">
+                                                                <span>电脑硬件 | 移动存储 | 网络设备</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-vertical" style="display: none;">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <span>摄影摄像 | 相机配件 </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-vertical" style="display: none;">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <span>办公设备 | 文具电教 | 耗材</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-vertical" style="display: none;">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                 <img src="image/catalog/menu/icons/ico9.png" alt="icon">
+                                                                <span>Home &amp; Lights</span>
+                                                            </a>
+                                                        </li> 
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <!-- Main menu -->
+                    <div class="main-menu-w col-lg-10 col-md-9">
+                        <div class="responsive so-megamenu megamenu-style-dev">
+                            <nav class="navbar-default">
+                                <div class=" container-megamenu  horizontal open ">
+                                    <div class="navbar-header">
+                                        <button type="button" id="show-megamenu" data-toggle="collapse" class="navbar-toggle">
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="megamenu-wrapper">
+                                        <span id="remove-megamenu" class="fa fa-times"></span>
+                                        <div class="megamenu-pattern">
+                                            <div class="container-mega">
+                                                <ul class="megamenu" data-transition="slide" data-animationtime="250">
+                                                    <li class="home hover">
+                                                        <a href="index.html">首页 </a>
+                                                        
+                                                    </li>
+                                                    <li class="with-sub-menu hover">
+                                                        <p class="close-menu"></p>
+                                                        <a href="#" class="clearfix">
+                                                            <strong>精品推荐</strong>
+                                                        </a>                                                      
+                                                    </li>
+                                                    <li class="with-sub-menu hover">
+                                                        <p class="close-menu"></p>
+                                                        <a href="#" class="clearfix">
+                                                            <strong>智能潮货</strong>
+                                                        </a> 
+                                                    </li>
+                                                    <li class="with-sub-menu hover">
+                                                        <p class="close-menu"></p>
+                                                        <a href="#" class="clearfix">
+                                                            <strong>家用电器</strong>
+                                                        </a> 
+                                                    </li>
+                                                    <li class="">
+                                                        <p class="close-menu"></p>
+                                                        <a href="#" class="clearfix">
+                                                            <strong>爆款汽车</strong>
+                                                        </a>
+                                                    </li>
+
+                                                </ul>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- //end Main menu -->
+                                      
+                    <div class="bottom3">                        
+                        
+                                        
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+          </header>
+        <!-- //Header center -->
+
+    </header>
+    <!-- //Header Container  -->
+
+	<!-- Main Container  -->
+	<div class="main-container container">
+		
+		<div class="container">
+			<div class="row">
+        <div id="contents" role="main" class="main-page col-lg-2 hy-list">
+           <div class="huiyuan">
+               <span>会员中心</span>
+           </div>
+           <nav>
+               <ul>
+                  <li><a href="dindan.html" bank><i class="fa fa-pencil-square-o" style="font-size: 16px;margin-right: 4px;"></i>我的订单<span class="sign-10">(20)</span></a></li>
+                  <li><a href="cart.html" bank><i class="fa fa-shopping-cart" style="font-size: 16px;margin-right: 4px;"></i>我的购物车<span class="sign-10">(20)</span></a></li>
+                  <li><a href="collection.html" bank><i class="fa fa-heart-o" style="font-size: 16px;margin-right: 4px;"></i>我的收藏<span class="sign-10">(20)</span></a></li>
+                  <li><a href="cart.html" bank><i class="fa fa-star-o" style="font-size: 16px;margin-right: 4px;"></i>评价管理<span class="sign-10">(10)</span></a></li>
+                  <li><a href="cart.html" bank><i class="fa fa-map-marker" style="font-size: 16px;margin-right: 4px;"></i>收货地址</a></li>
+                  <li><a href="cart.html" bank><i class="fa fa-cog" style="font-size: 16px;margin-right: 4px;"></i>账号设置</a></li>
+                  <li><a href="cart.html" bank><i class="fa fa-sign-out" style="font-size: 16px;margin-right: 4px;"></i>退出登录</a></li>
+               </ul>
+           </nav>
+        </div>
+		<div id="contents" role="main" class="main-page col-lg-10 col-md-12 col-sm-12 col-xs-12">
+           <!-- <div class="col-lg-12 statr-list" style="padding:0px;margin-bottom: 16px;">
+              <div class="dindan-title">
+                <h3>申请退款</h3> 
+              </div>
+           </div> -->
+           
+           <div class="fuwu-num">
+                <div class="tuihuo-one">
+        					<span class="nubme">1</span><span>买家申请退货退款</span>
+        				</div>
+        				<div class="tuihuo-two">
+        					<span class="nubme">2</span><span>卖家处理退货退款申请</span>
+        				</div>
+        				<div class="tuihuo-three">
+        					<span class="nubme">3</span><span>退货完毕</span>
+        				</div>
+            </div>
+
+			<div class="page type-page status-publish hentry">
+			<div class="entry-content">
+					  <div class="chuli">
+               <h3 style="font-weight:bold;">商家已拒绝，请在下方填写寄回的商品快递单号</h3>
+               <span>拒绝原因：其他</span><br>
+               <span>拒绝说明：商品影响二次销售，无法退货。</span><br>
+               <span>您可以修改退货申请再次发起，商家会重新处理</span><br>
+               <span>如果您逾期未处理，本次申请将撤销。</span>
+            </div>
+
+            <form action="#" method="get" id="form-login" accept-charset="utf-8">
+              <div class="form-box buzou fuwu-1">
+                <input id="load" value="修改申请" type="button"  style="border-radius: 20px;background-color: #ff5e00;color:#fff;"/>
+              </div><!-- /.form-box -->
+            </form><!-- /#form-login -->
+				
+				</div>
+				
+				<div class="clearfix"></div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- //Main Container -->
+</div> 
+
+
+    <!-- Footer Container -->
+    <footer class="footer-container typefooter-1">
+        <!-- Footer Top Container -->
+ 
+            <div class="container">
+                <div class="row footer-top">
+                    <div class="col-lg-3 " style="text-align: center;">
+                          <img src="image/tu/pin.png" style="    width: 30px; margin-bottom: 5px; margin-right: 6px;">
+                          <span style="font-size: 24px;color:#fff;">品质</span>
+                          <span style="font-size: 14px;color:#fff;margin-left:10px;">正品行货 购物无忧</span>
+                    </div>
+                    <div class="col-lg-3 " style="text-align: center;">
+                         <img src="image/tu/di.png" style="    width: 30px; margin-bottom: 5px; margin-right: 6px;">
+                        <span style="font-size: 24px;color:#fff;">低价</span>
+                        <span style="font-size: 14px;color:#fff;margin-left:10px;">普惠实价 帮你省钱</span>
+                    </div>
+                    <div class="col-lg-3 " style="text-align: center;">
+                           <img src="image/tu/su.png" style="    width: 30px; margin-bottom: 5px; margin-right: 6px;">
+                          <span style="font-size: 24px;color:#fff;">速达</span>
+                          <span style="font-size: 14px;color:#fff;margin-left:10px;">专业配送 按时按需</span>
+                    </div>
+                    <div class="col-lg-3 " style="text-align: center;">
+                           <img src="image/tu/wu.png" style="    width: 30px; margin-bottom: 5px; margin-right: 6px;">
+                          <span style="font-size: 24px;color:#fff;">无忧</span>
+                          <span style="font-size: 14px;color:#fff;margin-left:10px;">售后15天可退换货</span>
+                    </div>
+                </div>
+            </div>
+      
+        <!-- /Footer Top Container -->
+        
+        <div class="footer-middle ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-infos">
+                        <div class="infos-footer">
+                            <a href="#"><img src="images/logo.png" alt="image"></a>
+                            <ul class="menu">
+                                
+                                <li class="phone">
+                                    0577-86787446
+                                </li>
+                                <li class="time">
+                                    工作时间: 8:00AM - 6:00PM
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
+                        <div class="box-information box-footer">
+                            <div class="module clearfix">
+                                <h3 class="modtitle">购物指南</h3>
+                                <div class="modcontent">
+                                    <ul class="menu">
+                                        <li><a href="#">注册登录</a></li>
+                                        <li><a href="#">密码相关</a></li>
+                                        <li><a href="#">购物流程</a></li>
+                                        <li><a href="#">交易条款ion</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
+                        <div class="box-account box-footer">
+                            <div class="module clearfix">
+                                <h3 class="modtitle">支付方式</h3>
+                                <div class="modcontent">
+                                    <ul class="menu">
+                                        <li><a href="#">支付宝支付</a></li>
+                                        <li><a href="#">微信支付</a></li>
+                                        <li><a href="#">发票说明</a></li>
+                                        <li><a href="#">电子发票s</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-clear">
+                        <div class="box-service box-footer">
+                          <div class="module clearfix">
+                            <h3 class="modtitle">售后服务</h3>
+                            <div class="modcontent">
+                              <ul class="menu">
+                                <li><a href="#">售后服务政策</a></li>
+                                <li><a href="#">退换货说明</a></li>
+                                <li><a href="#">安装/维修</a></li>
+                                <li><a href="#">咨询投诉</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
+                        <div class="box-service box-footer">
+                            <div class="module clearfix">
+                                <h3 class="modtitle">商家入驻</h3>
+                                <div class="modcontent">
+                                    <ul class="menu">
+                                        <li><a href="#">入驻说明</a></li>
+                                        <li><a href="#">入驻流程</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
+                        <div class="box-service box-footer">
+                          <div class="module clearfix">
+                            <h3 class="modtitle">关于我们</h3>
+                            <div class="modcontent">
+                              <ul class="menu">
+                                <li><a href="#">平台简介</a></li>
+                                <li><a href="#">联系我们</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
+
+                    
+                </div>
+            </div>
+        </div>
+      
+        <!-- Footer Bottom Container -->
+        <div class="footer-bottom">
+            <div class="copyright-w">
+                <div class="container">
+                    <div class="copyright">
+                    Copyright &copy; 2018.邢台尚进网络科技有限公司.
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <!-- /Footer Bottom Container -->
+        
+        
+            <!--Back To Top-->
+        <div class="back-to-top"><i class="fa fa-angle-up"></i></div>
+    </footer>
+    <!-- //end Footer Container -->
+
+</div>
+   
+
+<!-- End Color Scheme
+============================================ -->
+
+
+
+<!-- Include Libs & Plugins
+============================================ -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="js/slick-slider/slick.js"></script>
+<script type="text/javascript" src="js/themejs/libs.js"></script>
+
+<!-- Theme files
+============================================ -->
+
+<script type="text/javascript" src="js/themejs/so_megamenu.js"></script>
+<script type="text/javascript" src="js/themejs/addtocart.js"></script>  
+
+
+<script type="text/javascript">
+        //多行文本输入框剩余字数计算
+        function checkMaxInput(obj, maxLen) {
+            if (obj == null || obj == undefined || obj == "") {
+                return;
+            }
+            if (maxLen == null || maxLen == undefined || maxLen == "") {
+                maxLen = 100;
+            }
+ 
+            var strResult;
+            var $obj = $(obj);
+            var newid = $obj.attr("id") + 'msg';
+ 
+            if (obj.value.length > maxLen) {  //如果输入的字数超过了限制
+                obj.value = obj.value.substring(0, maxLen); //就去掉多余的字
+                strResult = '<span id="' + newid + '" class=\'Max_msg\' ><br/>(' + (maxLen - obj.value.length) + ')/200</span>'; //计算并显示剩余字数
+            }
+            else {
+                strResult = '<span id="' + newid + '" class=\'Max_msg\' ><br/>(' + (maxLen - obj.value.length) + ')/200</span>'; //计算并显示剩余字数
+            }
+ 
+            var $msg = $("#" + newid);
+            if ($msg.length == 0) {
+                $obj.after(strResult);
+            }
+            else {
+                $msg.html(strResult);
+            }
+        }
+ 
+     
+</script>
+
+</body>
+</html>
+
+
