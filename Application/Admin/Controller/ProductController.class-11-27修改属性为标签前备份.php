@@ -34,17 +34,17 @@ class ProductController extends Controller {
             $product['time'] = time();
         }
 
-        //提取出产品标签
-        $productTag = $product['tag'];
-        unset($product['tag']);
+        //提取出产品规格
+        $productAttr = $product['attr'];
+        unset($product['attr']);
 
         $model = D('Product');
         if($model->create($product)){
             if( isset($product['id']) ){
                 if($model->save()){
                     $newProductID = $product['id'];
-                    //清空产品的标签
-                    $model = D('Producttag');
+                    //清空产品的属性
+                    $model = D('Productattr');
                     $model->where('pid='.$product['id'])->delete();
                 }else{
                     $this->error('修改产品失败');
@@ -54,12 +54,12 @@ class ProductController extends Controller {
                 $newProductID = $model->add();
             }
             //保存产品属性
-            if($newProductID && is_array($productTag) && count($productTag) > 0 ){
-                $model = D('Producttag');
-                foreach ($productTag as $v){
+            if($newProductID && is_array($productAttr) && count($productAttr) > 0 ){
+                $model = D('Productattr');
+                foreach ($productAttr as $v){
                     $saveData = array(
                         'pid' => $newProductID,
-                        'tagValueID' => $v,
+                        'attrValueID' => $v,
                     );
                     $model->add($saveData);
                 }
@@ -179,15 +179,15 @@ class ProductController extends Controller {
         return $thumbPath = $pathInfo['dirname'] . '/' . $pathInfo['filename'] . 'thump.' . $pathInfo['extension'];
     }
 
-    function getProductTag($pid){
+    function getProductAttr($pid){
         $pid = empty($pid) ? I('post.pid') : $pid;
 
-        $model = D('Producttag');
-        $rs = $model->field('tagValueID')->where("pid=$pid")->select();
+        $model = D('Productattr');
+        $rs = $model->field('attrValueID')->where("pid=$pid")->select();
 
         $reurnData = array();
         foreach ($rs as $v){
-            $reurnData[] = $v['tagvalueid'];
+            $reurnData[] = $v['attrvalueid'];
         }
 
         if(IS_AJAX){

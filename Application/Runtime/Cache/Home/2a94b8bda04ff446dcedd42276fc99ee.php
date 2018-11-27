@@ -499,42 +499,27 @@
                             </div>
                         </div>
                         <div class="page-top" style="background-color:#ebe8e8;">
-                            <div style="" class="mulu-lf">
+                            <?php if(is_array($tag1)): $i = 0; $__LIST__ = $tag1;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i; if(($i) == "1"): ?><div style="" class="mulu-lf">
                                  <div style="" class="title-list-lf">
-                                      <h3><span style="margin-right:10px;"><img src="/Public/Home/image/hy/le1.png"></span>电脑网络</h3>
+                                      <h3><span style="margin-right:10px;"><img src="/Public/Home/image/hy/le1.png"></span><?php echo ($row["name"]); ?></h3>
                                  </div>
                                  <div style="" class="title-list-rg">
                                       <ul>
-                                        <a href=""><li>笔记本</li></a>
-                                        <a href=""><li>平板</li></a>
-                                        <a href=""><li>DIY电脑</li></a>
-                                        <a href=""><li>电脑整机</li></a>
-                                        <a href=""><li>显示器</li></a>
-                                        <a href=""><li>游戏本</li></a>
-                                        <a href=""><li>平板二合一</li></a>
-                                        <a href=""><li>显卡</li></a>
-                                        <a href=""><li>键盘</li></a>
-                                        <a href=""><li>网络设备</li></a>
+                                        <?php if(is_array($row["value"])): $i = 0; $__LIST__ = $row["value"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><a href=""><li><?php echo ($row1["name"]); ?></li></a><?php endforeach; endif; else: echo "" ;endif; ?>
                                      </ul>
                                  </div>
-                            </div> 
+                            </div>
+                            <?php else: ?>
                             <div style="" class="mulu-rg">
-                                 <div style="" class="title-list-lf-lf">
-                                      <h3><span style="margin-right:10px;"><img src="/Public/Home/image/hy/le2.png"></span>办公文教</h3>
-                                 </div>
-                                 <div style="" class="title-list-lf-rg">
-                                      <ul>
-                                        <a href=""><li>打印机</li></a>
-                                        <a href=""><li>投影</li></a>
-                                        <a href=""><li>保险柜</li></a>
-                                        <a href=""><li>文具</li></a>
-                                        <a href=""><li>墨盒</li></a>
-                                        <a href=""><li>硒鼓</li></a>
-                                        <a href=""><li>硒鼓硒鼓</li></a>
-                                        <a href=""><li>硒鼓</li></a>
-                                     </ul>
-                                 </div>
-                            </div> 
+                                <div style="" class="title-list-lf-lf">
+                                      <h3><span style="margin-right:10px;"><img src="/Public/Home/image/hy/le2.png"></span><?php echo ($row["name"]); ?></h3>
+                                </div>
+                                <div style="" class="title-list-lf-rg">
+                                    <ul>
+                                        <?php if(is_array($row["value"])): $i = 0; $__LIST__ = $row["value"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><a href=""><li><?php echo ($row1["name"]); ?></li></a><?php endforeach; endif; else: echo "" ;endif; ?>
+                                    </ul>
+                                </div>
+                            </div><?php endif; endforeach; endif; else: echo "" ;endif; ?>
                         </div>
                         <div class="categoryslider-content row">
                             <div class="item-cat-image erjimul col-md-4" style="">
@@ -546,278 +531,35 @@
                                 </div>
                             </div>
                             <div class="category-slider-inner products-list row col-md-8" >
-
-
                                 <div class="col-md-9">
                                     <div class="row product-layout transition product-grid">
-                                        <div class="col-md-3 product-item-container">
-                                            <div class="left-block left-b">
-                                                <div class="product-image-container second_img">
-                                                    <a href="product.html" target="_self">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e6.jpg" class="img-1 img-responsive" alt="image1">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e2.jpg" class="img-2 img-responsive" alt="image2">
-                                                    </a>
+                                        <?php if(is_array($product1)): $i = 0; $__LIST__ = $product1;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><div class="col-md-3 product-item-container">
+                                                <div class="left-block left-b">
+                                                    <div class="product-image-container second_img">
+                                                        <a href="product.html" target="_self">
+                                                            <img src="<?php echo ($row["pic1"]); ?>" class="img-1 img-responsive">
+                                                            <noempty name="row.pic2"></noempty>
+                                                            <img src="<?php echo ($row["pic2"]); ?>" class="img-2 img-responsive">
+                                                            </noempty>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                                <!--quickview--> 
-                                                <div class="so-quickview">
-                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                </div>                                                     
-                                                <!--end quickview-->
-                                            </div>
-                                            <div class="right-block">
-                                                <div class="button-group so-quickview cartinfo--left">
-                                                    <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                        <span>加入购物车 </span>   
-                                                    </button>
-                                                    <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                    </button>
-                                                    <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
-                                                    </button>
+                                                <div class="right-block">
+                                                    <div class="button-group so-quickview cartinfo--left">
+                                                        <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
+                                                            <span>加入购物车 </span>
+                                                        </button>
+                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
+                                                        </button>
+                                                        <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="caption hide-cont element1">
+                                                        <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self"><?php echo ($row["name"]); ?></a></h4>
+                                                    </div>
+                                                    <p class="price"><span style="color: #666;">型号：</span><?php echo ($row["type"]); ?></p>
                                                 </div>
-                                                <div class="caption hide-cont element1">
-                                                    
-                                                    <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">数码相机微单套机粉色2420万像素全像素双核CMOS电池LP-E1</a></h4>
-                                                    
-                                                </div>
-                                                <p class="price"><span style="color: #666;">型号：</span>14-ce0016TU</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 product-item-container">
-                                            <div class="left-block left-b">
-                                                <div class="product-image-container second_img">
-                                                    <a href="product.html" target="_self">
-                                                         <img src="/Public/Home/image/catalog/demo/product/270/e4.jpg" class="img-1 img-responsive" alt="image1">
-                                                            <img src="/Public/Home/image/catalog/demo/product/270/e7.jpg" class="img-2 img-responsive" alt="image2">
-                                                    </a>
-                                                </div>
-                                                <!--quickview--> 
-                                                <div class="so-quickview">
-                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                </div>                                                     
-                                                <!--end quickview-->
-                                            </div>
-                                            <div class="right-block">
-                                                <div class="button-group so-quickview cartinfo--left">
-                                                    <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                        <span>加入购物车 </span>   
-                                                    </button>
-                                                    <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                    </button>
-                                                    <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
-                                                    </button>
-                                                </div>
-                                                <div class="caption hide-cont element1">
-                                                    
-                                                    <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">数码相机微单套机粉色2420万像素全像素双核CMOS电池LP-E1</a></h4>
-                                                    
-                                                </div>
-                                                <p class="a2">型号: <b style="color:#ff5e00;">14-ce0016TU</b></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 product-item-container">
-                                            <div class="left-block left-b">
-                                                <div class="product-image-container second_img">
-                                                    <a href="product.html" target="_self">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e1.jpg" class="img-1 img-responsive" alt="image1">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e10.jpg" class="img-2 img-responsive" alt="image2">
-                                                    </a>
-                                                </div>
-                                                <!--quickview--> 
-                                                <div class="so-quickview">
-                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                </div>                                                     
-                                                <!--end quickview-->
-                                            </div>
-                                            <div class="right-block">
-                                                <div class="button-group so-quickview cartinfo--left">
-                                                    <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                        <span>加入购物车 </span>   
-                                                    </button>
-                                                    <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i>
-                                                        <span>收藏</span>
-                                                    </button>
-                                                    <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i>
-                                                        <span>询价</span>
-                                                    </button>
-                                                </div>
-                                                <div class="caption hide-cont element1">
-                                                    
-                                                    <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">数码相机微单套机粉色2420万像素全像素双核CMOS电池LP-E1</a></h4>
-                                                    
-                                                </div>
-                                                <p class="a2">型号: <b style="color:#ff5e00;">14-ce0016TU</b></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 product-item-container">
-                                            <div class="left-block left-b">
-                                                <div class="product-image-container second_img">
-                                                    <a href="product.html" target="_self">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e4.jpg" class="img-1 img-responsive" alt="image1">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e6.jpg" class="img-2 img-responsive" alt="image2">
-                                                    </a>
-                                                </div>
-                                                <!--quickview--> 
-                                                <div class="so-quickview">
-                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                </div>                                                     
-                                                <!--end quickview-->
-                                            </div>
-                                            <div class="right-block">
-                                                <div class="button-group so-quickview cartinfo--left">
-                                                    <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                      <span>加入购物车 </span>   
-                                                      </button>
-                                                      <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-
-
-                                                      heart-o"></i><span>收藏</span>
-                                                      </button>
-                                                      <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa 
-
-                                                      fa-retweet"></i><span>询价</span>
-                                                      </button>
-                                                </div>
-                                                <div class="caption hide-cont element1">
-                                                    
-                                                    <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">数码相机微单套机粉色2420万像素全像素双核CMOS电池LP-E1</a></h4>
-                                                    
-                                                </div>
-                                               <p class="a2">型号: <b style="color:#ff5e00;">14-ce0016TU</b></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 product-item-container">
-                                            <div class="left-block left-b">
-                                                <div class="product-image-container second_img">
-                                                    <a href="product.html" target="_self">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e2.jpg" class="img-1 img-responsive" alt="image1">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e9.jpg" class="img-2 img-responsive" alt="image2">
-                                                    </a>
-                                                </div>
-                                                <!--quickview--> 
-                                                <div class="so-quickview">
-                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                </div>                                                     
-                                                <!--end quickview-->
-                                            </div>
-                                            <div class="right-block">
-                                                <div class="button-group so-quickview cartinfo--left">
-                                                    <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                        <span>加入购物车 </span>   
-                                                    </button>
-                                                    <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i>
-                                                        <span>收藏</span>
-                                                    </button>
-                                                    <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i>
-                                                        <span>询价</span>
-                                                    </button>
-                                                </div>
-                                                <div class="caption hide-cont element1">
-                                                    
-                                                    <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">数码相机微单套机粉色2420万像素全像素双核CMOS电池LP-E1</a></h4>
-                                                    
-                                                </div>
-                                                <p class="a2">型号: <b style="color:#ff5e00;">14-ce0016TU</b></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 product-item-container">
-                                            <div class="left-block left-b">
-                                                <div class="product-image-container second_img">
-                                                    <a href="product.html" target="_self">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e3.jpg" class="img-1 img-responsive" alt="image1">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e7.jpg" class="img-2 img-responsive" alt="image2">
-                                                    </a>
-                                                </div>
-                                                <!--quickview--> 
-                                                <div class="so-quickview">
-                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                </div>                                                     
-                                                <!--end quickview-->
-                                            </div>
-                                            <div class="right-block">
-                                                <div class="button-group so-quickview cartinfo--left">
-                                                    <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                        <span>加入购物车 </span>   
-                                                    </button>
-                                                    <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i>
-                                                        <span>收藏</span>
-                                                    </button>
-                                                    <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i>
-                                                        <span>询价</span>
-                                                    </button>
-                                                </div>
-                                                <div class="caption hide-cont element1">
-                                                    
-                                                    <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">数码相机微单套机粉色2420万像素全像素双核CMOS电池LP-E1</a></h4>
-                                                    
-                                                </div>
-                                                <p class="a2">型号: <b style="color:#ff5e00;">14-ce0016TU</b></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 product-item-container">
-                                            <div class="left-block left-b">
-                                                <div class="product-image-container second_img">
-                                                    <a href="product.html" target="_self">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e10.jpg" class="img-1 img-responsive" alt="image1">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e6.jpg" class="img-2 img-responsive" alt="image2">
-                                                    </a>
-                                                </div>
-                                                <!--quickview--> 
-                                                <div class="so-quickview">
-                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                </div>                                                     
-                                                <!--end quickview-->
-                                            </div>
-                                            <div class="right-block">
-                                                <div class="button-group so-quickview cartinfo--left">
-                                                    <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                        <span>加入购物车 </span>   
-                                                    </button>
-                                                    <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i>
-                                                        <span>收藏</span>
-                                                    </button>
-                                                    <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i>
-                                                        <span>询价</span>
-                                                    </button>
-                                                </div>
-                                                <div class="caption hide-cont element1">
-                                                    
-                                                    <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">数码相机微单套机粉色2420万像素全像素双核CMOS电池LP-E1</a></h4>
-                                                    
-                                                </div>
-                                                <p class="price"><span style="color: #666;">型号：</span>14-ce0016TU</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 product-item-container">
-                                            <div class="left-block left-b">
-                                                <div class="product-image-container second_img">
-                                                    <a href="product.html" target="_self">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e5.jpg" class="img-1 img-responsive" alt="image1">
-                                                        <img src="/Public/Home/image/catalog/demo/product/270/e6.jpg" class="img-2 img-responsive" alt="image2">
-                                                    </a>
-                                                </div>
-                                                <!--quickview--> 
-                                                <div class="so-quickview">
-                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                </div>                                                     
-                                                <!--end quickview-->
-                                            </div>
-                                            <div class="right-block">
-                                                <div class="button-group so-quickview cartinfo--left">
-                                                    <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                        <span>加入购物车 </span>   
-                                                    </button>
-                                                    <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                    </button>
-                                                    <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
-                                                    </button>
-                                                </div>
-                                                <div class="caption hide-cont element1">
-                                                    
-                                                    <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">数码相机微单套机粉色2420万像素全像素双核CMOS电池LP-E1</a></h4>
-                                                    
-                                                </div>
-                                                <p class="a2">型号: <b style="color:#ff5e00;">14-ce0016TU</b></p>
-                                            </div>
-                                        </div>
+                                            </div><?php endforeach; endif; else: echo "" ;endif; ?>
                                     </div>
                                 </div>
                              <!-- col-md-9 -->
@@ -4874,14 +4616,12 @@
 $('#div-1').css('display','block');
 function showContent(id) {
     id = '#' + id;
-    console.log(id);
     for(var i = 0; i < 6; i++){
         var name = '#div-' + i;
         $(name).css('display','none');
     }
     $(id).css('display','block');
 }
-
 </script>
 </body>
 </html>

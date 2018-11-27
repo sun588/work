@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit();?><!--_meta 作为公共模版分离出去-->
+<!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -8,39 +8,39 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <!--[if lt IE 9]>
-<script type="text/javascript" src="/Public/Admin/lib/html5shiv.js"></script>
-<script type="text/javascript" src="/Public/Admin/lib/respond.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/lib/html5shiv.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/lib/respond.min.js"></script>
 
 <![endif]-->
-<link rel="stylesheet" type="text/css" href="/Public/Admin/static/h-ui/css/H-ui.min.css" />
-<link rel="stylesheet" type="text/css" href="/Public/Admin/static/h-ui.admin/css/H-ui.admin.css" />
-<link rel="stylesheet" type="text/css" href="/Public/Admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
 
-<link rel="stylesheet" type="text/css" href="/Public/Admin/static/h-ui.admin/skin/default/skin.css" id="skin" />
-<link rel="stylesheet" type="text/css" href="/Public/Admin/static/h-ui.admin/css/style.css" />
-<link rel="stylesheet" type="text/css" href="/Public/Admin/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
 <!--[if IE 6]>
-<script type="text/javascript" src="/Public/Admin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
 <!--/meta 作为公共模版分离出去-->
 
-<link href="/Public/Admin/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Admin/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div class="page-container">
-	<form method="post" class="form form-horizontal" id="productAdd_form" action="<?php echo U('save');?>">
+	<form method="post" class="form form-horizontal" id="productAdd_form" action="<{:U('save')}>">
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品标题：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="<?php echo ($product["name"]); ?>" placeholder="" name="name">
+				<input type="text" class="input-text" value="<{$product.name}>" placeholder="" name="name">
 			</div>
 		</div>
 
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品型号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="<?php echo ($product["type"]); ?>" placeholder="" name="type">
+				<input type="text" class="input-text" value="<{$product.type}>" placeholder="" name="type">
 			</div>
 		</div>
 
@@ -61,7 +61,9 @@
 				<span class="select-box">
 					<select name="c1" id="c1" class="select" onchange="getCategory(2,this)">
 						<option value="0">请选择分类</option>
-						<?php if(is_array($category)): $i = 0; $__LIST__ = $category;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><option value="<?php echo ($row["id"]); ?>"><?php echo ($row["name"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+						<volist name="category" id="row">
+							<option value="<{$row.id}>"><{$row.name}></option>
+						</volist>
 					</select>
 				</span>
 				<span class="select-box" style="margin-top: 5px;">
@@ -83,13 +85,13 @@
 		</div>
 
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">商品标签：</label>
+			<label class="form-label col-xs-4 col-sm-2">商品属性：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<table>
 					<thead>
 
 					</thead>
-					<tbody id="tag">
+					<tbody id="attr">
 
 					</tbody>
 				</table>
@@ -99,14 +101,14 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">排序值：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="<?php echo ($product["od"]); ?>" placeholder="" name="od">
+				<input type="text" class="input-text" value="<{$product.od}>" placeholder="" name="od">
 			</div>
 		</div>
 
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">优惠率：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="<?php echo ($product["discount"]); ?>" placeholder="" name="discount">
+				<input type="text" class="input-text" value="<{$product.discount}>" placeholder="" name="discount">
 			</div>
 		</div>
 
@@ -114,34 +116,46 @@
 			<label class="form-label col-xs-4 col-sm-2">栏目展示：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<label class="checkbox-inline">
-					<?php if(($product["isdiscount"]) == "1"): ?><input checked type="checkbox" id="inlineCheckbox1" name="isdiscount" value="1"> 今日优惠 |
-					<?php else: ?>
-						<input type="checkbox" id="inlineCheckbox1" name="isdiscount" value="1"> 今日优惠 |<?php endif; ?>
+					<eq name="product.isdiscount" value="1">
+						<input checked type="checkbox" id="inlineCheckbox1" name="isdiscount" value="1"> 今日优惠 |
+					<else/>
+						<input type="checkbox" id="inlineCheckbox1" name="isdiscount" value="1"> 今日优惠 |
+					</eq>
 				</label>
 				<label class="checkbox-inline">
-					<?php if(($product["column1"]) == "1"): ?><input checked type="checkbox" id="inlineCheckbox2" name="column1" value="1"> 电脑 |
-					<?php else: ?>
-						<input type="checkbox" id="inlineCheckbox2" name="column1" value="1"> 电脑 |<?php endif; ?>
+					<eq name="product.column1" value="1">
+						<input checked type="checkbox" id="inlineCheckbox2" name="column1" value="1"> 电脑 |
+					<else/>
+						<input type="checkbox" id="inlineCheckbox2" name="column1" value="1"> 电脑 |
+					</eq>
 				</label>
 				<label class="checkbox-inline">
-					<?php if(($product["column2"]) == "1"): ?><input checked type="checkbox" id="inlineCheckbox3" name="column2" value="1"> 手机 |
-					<?php else: ?>
-						<input type="checkbox" id="inlineCheckbox3" name="column2" value="1"> 手机 |<?php endif; ?>
+					<eq name="product.column2" value="1">
+						<input checked type="checkbox" id="inlineCheckbox3" name="column2" value="1"> 手机 |
+					<else/>
+						<input type="checkbox" id="inlineCheckbox3" name="column2" value="1"> 手机 |
+					</eq>
 				</label>
 				<label class="checkbox-inline">
-					<?php if(($product["column3"]) == "1"): ?><input checked type="checkbox" id="inlineCheckbox4" name="column3" value="1"> 大家电 |
-					<?php else: ?>
-						<input type="checkbox" id="inlineCheckbox4" name="column3" value="1"> 大家电 |<?php endif; ?>
+					<eq name="product.column3" value="1">
+						<input checked type="checkbox" id="inlineCheckbox4" name="column3" value="1"> 大家电 |
+					<else/>
+						<input type="checkbox" id="inlineCheckbox4" name="column3" value="1"> 大家电 |
+					</eq>
 				</label>
 				<label class="checkbox-inline">
-					<?php if(($product["column4"]) == "1"): ?><input checked type="checkbox" id="inlineCheckbox5" name="column4" value="1"> 影音娱乐 |
-					<?php else: ?>
-						<input type="checkbox" id="inlineCheckbox5" name="column4" value="1"> 影音娱乐 |<?php endif; ?>
+					<eq name="product.column4" value="1">
+						<input checked type="checkbox" id="inlineCheckbox5" name="column4" value="1"> 影音娱乐 |
+					<else/>
+						<input type="checkbox" id="inlineCheckbox5" name="column4" value="1"> 影音娱乐 |
+					</eq>
 				</label>
 				<label class="checkbox-inline">
-					<?php if(($product["column5"]) == "1"): ?><input checked type="checkbox" id="inlineCheckbox6" name="column5" value="1"> 汽车 |
-					<?php else: ?>
-						<input type="checkbox" id="inlineCheckbox6" name="column5" value="1"> 汽车 |<?php endif; ?>
+					<eq name="product.column5" value="1">
+						<input checked type="checkbox" id="inlineCheckbox6" name="column5" value="1"> 汽车 |
+					<else/>
+						<input type="checkbox" id="inlineCheckbox6" name="column5" value="1"> 汽车 |
+					</eq>
 				</label>
 			</div>
 		</div>
@@ -150,32 +164,32 @@
 			<label class="form-label col-xs-4 col-sm-2">产品图片：</label>
 			<div class="formControls col-xs-8 col-sm-9 row" id="productImg">
 				<div class="col-xs-3">
-					<img style="width: 100%" src="<?php echo ($product["pic1"]); ?>" id="picUrl1">
+					<img style="width: 100%" src="<{$product.pic1}>" id="picUrl1">
 					<div style="text-align: center; background-color: #0b0b0b" >
 						<button style="height:20px;" type="button" class="btn btn-xs" onclick="delPic(1)">删除</button>
 					</div>
-					<input type="hidden" name="pic1" id="picPath1" value="<?php echo ($product["pic1"]); ?>">
+					<input type="hidden" name="pic1" id="picPath1" value="<{$product.pic1}>">
 				</div>
 				<div class="col-xs-3">
-					<img style="width: 100%" src="<?php echo ($product["pic2"]); ?>" id="picUrl2">
+					<img style="width: 100%" src="<{$product.pic2}>" id="picUrl2">
 					<div style="text-align: center; background-color: #0b0b0b" >
 						<button style="height:20px;" type="button" class="btn btn-xs" onclick="delPic(2)">删除</button>
 					</div>
-					<input type="hidden" name="pic2" id="picPath2" value="<?php echo ($product["pic2"]); ?>">
+					<input type="hidden" name="pic2" id="picPath2" value="<{$product.pic2}>">
 				</div>
 				<div class="col-xs-3">
-					<img style="width: 100%" src="<?php echo ($product["pic3"]); ?>" id="picUrl3">
+					<img style="width: 100%" src="<{$product.pic3}>" id="picUrl3">
 					<div style="text-align: center; background-color: #0b0b0b" >
 						<button style="height:20px;" type="button" class="btn btn-xs" onclick="delPic(3)">删除</button>
 					</div>
-					<input type="hidden" name="pic3" id="picPath3" value="<?php echo ($product["pic3"]); ?>">
+					<input type="hidden" name="pic3" id="picPath3" value="<{$product.pic3}>">
 				</div>
 				<div class="col-xs-3">
-					<img style="width: 100%" src="<?php echo ($product["pic4"]); ?>" id="picUrl4">
+					<img style="width: 100%" src="<{$product.pic4}>" id="picUrl4">
 					<div style="text-align: center; background-color: #0b0b0b" >
 						<button style="height:20px;" type="button" class="btn btn-xs" onclick="delPic(4)">删除</button>
 					</div>
-					<input type="hidden" name="pic4"id="picPath4" value="<?php echo ($product["pic4"]); ?>">
+					<input type="hidden" name="pic4"id="picPath4" value="<{$product.pic4}>">
 				</div>
 			</div>
 		</div>
@@ -218,7 +232,7 @@
 		</div>
 
 		<!--编辑产品时候这里存放产品ID-->
-		<input id="productID" type="hidden" value="<?php echo ($product["id"]); ?>">
+		<input id="productID" type="hidden" value="<{$product.id}>">
 
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
@@ -229,21 +243,21 @@
 </div>
 
 <!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="/Public/Admin/lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="/Public/Admin/static/h-ui/js/H-ui.min.js"></script>
-<script type="text/javascript" src="/Public/Admin/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="__PUBLIC__/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="/Public/Admin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
-<script type="text/javascript" src="/Public/Admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
-<script type="text/javascript" src="/Public/Admin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
-<script type="text/javascript" src="/Public/Admin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
-<script type="text/javascript" src="/Public/Admin/lib/webuploader/0.1.5/webuploader.min.js"></script>
-<script type="text/javascript" src="/Public/Admin/lib/ueditor/1.4.3/ueditor.config.js"></script>
-<script type="text/javascript" src="/Public/Admin/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
-<script type="text/javascript" src="/Public/Admin/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
-<script type="text/javascript" src="/Public/Admin/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/lib/webuploader/0.1.5/webuploader.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/lib/ueditor/1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+<script type="text/javascript" src="__PUBLIC__/Admin/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     (function( $ ){
         // 当domReady的时候开始初始化
@@ -310,10 +324,10 @@
                 },
                 dnd: '#dndArea',
                 paste: '#uploader',
-                swf: '/Public/Admin/lib/webuploader/0.1.5/Uploader.swf',
+                swf: '__PUBLIC__/Admin/lib/webuploader/0.1.5/Uploader.swf',
                 chunked: false,
                 chunkSize: 512 * 1024,
-                server: '<?php echo U("fileUpload");?>',
+                server: '<{:U("fileUpload")}>',
 
                 // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
                 disableGlobalDnd: true,
@@ -726,12 +740,12 @@
 $(function(){
 	var ue = UE.getEditor('editor');
 	ue.ready(function () {
-        ue.setContent(htmldecode("<?php echo ($product["pcontent"]); ?>"));
+        ue.setContent(htmldecode("<{$product.pcontent}>"));
     })
 
     var ue1 = UE.getEditor('editor1');
     ue1.ready(function () {
-        ue1.setContent(htmldecode("<?php echo ($product["tcontent"]); ?>"));
+        ue1.setContent(htmldecode("<{$product.tcontent}>"));
     })
 });
 
@@ -761,9 +775,9 @@ function getCategory(level,obj) {
 
 
 	//获取商品属性
-	if(level == 2){
+	if(level == 3){
         $('#attr').html('');
-        $.post('<?php echo U("Tag/getTagByCID");?>',{cid:pid},function (rs) {
+        $.post('<{:U("Attr/getAttrByCID")}>',{cid:pid},function (rs) {
             if(rs){
                 rs = JSON.parse(rs);
                 var content = '';
@@ -775,18 +789,18 @@ function getCategory(level,obj) {
 					for(var key1 in row['value']){
 					    var row1 = row['value'][key1];
 					    content += '<label class="checkbox-inline">';
-					    content += '<input name="tag[]" type="checkbox" value="' + row1.id + '">' + row1.name;
+					    content += '<input name="attr[]" type="checkbox" value="' + row1.id + '">' + row1.name;
 					    content += '</label>';
 					}
                 }
                 content += "</td></tr>";
-                $('#tag').html(content);
+                $('#attr').html(content);
             }
         })
 	}
 
 	//获取子类
-    $.post('<?php echo U("Category/getCategoryByPID");?>',{pid:pid},function (rs) {
+    $.post('<{:U("Category/getCategoryByPID")}>',{pid:pid},function (rs) {
         if(rs){
             rs = JSON.parse(rs);
             var content = "<option value='0'>请选择分类</option>";
@@ -802,20 +816,20 @@ function getCategory(level,obj) {
 
 /*修改产品时设置产品分类 属性*/
 function setCategory(){
-    var pid = '<?php echo ($product["id"]); ?>';
-    var c1 = '<?php echo ($product["c1"]); ?>';
-    var c2 = '<?php echo ($product["c2"]); ?>';
-    var c3 = '<?php echo ($product["c3"]); ?>';
-    var c4 = '<?php echo ($product["c4"]); ?>';
+    var pid = '<{$product.id}>';
+    var c1 = '<{$product.c1}>';
+    var c2 = '<{$product.c2}>';
+    var c3 = '<{$product.c3}>';
+    var c4 = '<{$product.c4}>';
     if(c1 > 0){
         getBrothersCategory(c1,1);
 	}
     if(c2 > 0){
         getBrothersCategory(c2,2);
-        $.post('<?php echo U("getProductAttr");?>',{pid:pid},function (selectAttr) {
+        $.post('<{:U("getProductAttr")}>',{pid:pid},function (selectAttr) {
 			if(selectAttr){
                 selectAttr = JSON.parse(selectAttr);
-                $.post('<?php echo U("Attr/getAttrByCID");?>',{cid:c2},function (rs) {
+                $.post('<{:U("Attr/getAttrByCID")}>',{cid:c2},function (rs) {
                     if(rs){
                         rs = JSON.parse(rs);
                         var content = '';
@@ -865,7 +879,7 @@ function attrIsSelected(productAttrID,attrID) {
 
 function getBrothersCategory(id,level) {
     var selectedID = id;
-    $.post('<?php echo U("Category/getBrothersCategory");?>',{id:id},function (rs) {
+    $.post('<{:U("Category/getBrothersCategory")}>',{id:id},function (rs) {
         if(rs){
             rs = JSON.parse(rs);
             var content = "<option value='0'>请选择分类</option>";
@@ -883,9 +897,9 @@ function getBrothersCategory(id,level) {
     })
 }
 
-$.post('<?php echo U("Brand/getAllBrand");?>',{},function (rs) {
+$.post('<{:U("Brand/getAllBrand")}>',{},function (rs) {
     //修改产品时候需要
-    var selectedID = '<?php echo ($product["brand"]); ?>';
+    var selectedID = '<{$product.brand}>';
 	if(rs){
 		rs = JSON.parse(rs);
 		var content = '<option value="0">请选择品牌</option>';
@@ -923,7 +937,7 @@ function article_save_submit() {
     }
 
     /*编辑产品的时候给隐藏的input控件加上name属性*/
-    var productID = "<?php echo ($product["id"]); ?>";
+    var productID = "<{$product.id}>";
 	if(productID > 0 && $('#productID').val() == productID){
 		$('#productID').attr('name','id');
 	}

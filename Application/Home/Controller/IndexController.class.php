@@ -7,6 +7,10 @@ class IndexController extends CommonController {
         $this->assign('newProduct',$this->newProduct());
         $this->assign('discountProduct',$this->discountProduct());
         $this->assign('brandCommend',$this->brandCommend());
+
+        /*电脑 cid 6*/
+        $this->assign('tag1',$this->getTag(6));
+        $this->assign('product1',$this->getModelProduct('column1'));
         $this->display();
     }
 
@@ -52,6 +56,30 @@ class IndexController extends CommonController {
             $returnArr[] = $rs;
         }
         return $returnArr;
+    }
+
+    /*获取标签*/
+    function getTag($cid){
+        $model = M('tagkey');
+        $tagKey = $model->where("cid=$cid")->field('id,name')->order('od desc')->limit(2)->select();
+
+        $model = M('tagvalue');
+        for($i = 0; $i < count($tagKey); $i++){
+            $tagValue = $model->where('keyID='.$tagKey[$i]['id'])->field('id,name')->order('od desc')->limit(15)->select();
+            $tagKey[$i]['value'] = $tagValue;
+        }
+        return $tagKey;
+    }
+
+    /*获取不同模块的产品*/
+    function getModelProduct($column){
+        $model = M('product');
+        $rs = $model->field('id,pic1,pic2,type,name')->where("$column=1")->order('od desc')->limit(8)->select();
+        for($i = 0; $i < count($rs); $i++){
+            $rs[$i]['pic1'] = $this->getThumpPic($rs[$i]['pic1']);
+            $rs[$i]['pic2'] = $this->getThumpPic($rs[$i]['pic2']);
+        }
+        return $rs;
     }
 
 }

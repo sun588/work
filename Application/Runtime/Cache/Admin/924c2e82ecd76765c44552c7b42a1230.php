@@ -83,13 +83,13 @@
 		</div>
 
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">商品属性：</label>
+			<label class="form-label col-xs-4 col-sm-2">商品标签：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<table>
 					<thead>
 
 					</thead>
-					<tbody id="attr">
+					<tbody id="tag">
 
 					</tbody>
 				</table>
@@ -761,9 +761,9 @@ function getCategory(level,obj) {
 
 
 	//获取商品属性
-	if(level == 3){
+	if(level == 2){
         $('#attr').html('');
-        $.post('<?php echo U("Attr/getAttrByCID");?>',{cid:pid},function (rs) {
+        $.post('<?php echo U("Tag/getTagByCID");?>',{cid:pid},function (rs) {
             if(rs){
                 rs = JSON.parse(rs);
                 var content = '';
@@ -775,12 +775,12 @@ function getCategory(level,obj) {
 					for(var key1 in row['value']){
 					    var row1 = row['value'][key1];
 					    content += '<label class="checkbox-inline">';
-					    content += '<input name="attr[]" type="checkbox" value="' + row1.id + '">' + row1.name;
+					    content += '<input name="tag[]" type="checkbox" value="' + row1.id + '">' + row1.name;
 					    content += '</label>';
 					}
                 }
                 content += "</td></tr>";
-                $('#attr').html(content);
+                $('#tag').html(content);
             }
         })
 	}
@@ -809,13 +809,10 @@ function setCategory(){
     var c4 = '<?php echo ($product["c4"]); ?>';
     if(c1 > 0){
         getBrothersCategory(c1,1);
-	}
-    if(c2 > 0){
-        getBrothersCategory(c2,2);
-        $.post('<?php echo U("getProductAttr");?>',{pid:pid},function (selectAttr) {
-			if(selectAttr){
-                selectAttr = JSON.parse(selectAttr);
-                $.post('<?php echo U("Attr/getAttrByCID");?>',{cid:c2},function (rs) {
+        $.post('<?php echo U("getProductTag");?>',{pid:pid},function (selectTag) {
+            if(selectTag){
+                selectTag = JSON.parse(selectTag);
+                $.post('<?php echo U("Tag/getTagByCID");?>',{cid:c1},function (rs) {
                     if(rs){
                         rs = JSON.parse(rs);
                         var content = '';
@@ -827,20 +824,23 @@ function setCategory(){
                             for(var key1 in row['value']){
                                 var row1 = row['value'][key1];
                                 content += '<label class="checkbox-inline">';
-                                if(attrIsSelected(selectAttr,row1.id)){
-                                    content += '<input checked name="attr[]" type="checkbox" value="' + row1.id + '">' + row1.name;
-								}else {
-                                    content += '<input name="attr[]" type="checkbox" value="' + row1.id + '">' + row1.name;
-								}
+                                if(attrIsSelected(selectTag,row1.id)){
+                                    content += '<input checked name="tag[]" type="checkbox" value="' + row1.id + '">' + row1.name;
+                                }else {
+                                    content += '<input name="tag[]" type="checkbox" value="' + row1.id + '">' + row1.name;
+                                }
                                 content += '</label>';
                             }
                         }
                         content += "</td></tr>";
-                        $('#attr').html(content);
+                        $('#tag').html(content);
                     }
                 })
-			}
+            }
         })
+	}
+    if(c2 > 0){
+        getBrothersCategory(c2,2);
     }
     if(c3 > 0){
         getBrothersCategory(c3,3);
