@@ -23,6 +23,13 @@ class ProductController extends Controller {
     function save(){
         $product = I();
 
+        $product['isdiscount'] = isset($product['isdiscount']) ? $product['isdiscount'] : 2;
+        $product['column1'] = isset($product['column1']) ? $product['column1'] : 2;
+        $product['column2'] = isset($product['column2']) ? $product['column2'] : 2;
+        $product['column3'] = isset($product['column3']) ? $product['column3'] : 2;
+        $product['column4'] = isset($product['column4']) ? $product['column4'] : 2;
+        $product['column5'] = isset($product['column5']) ? $product['column5'] : 2;
+
         if( !isset($product['id']) ){
             $product['time'] = time();
         }

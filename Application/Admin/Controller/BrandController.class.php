@@ -15,22 +15,22 @@ class BrandController extends Controller
     }
 
     function add(){
-        $model = D('Brand');
-        if($model->create()){
-            $rs = $model->add();
-            f_return('1','success');
-        }else{
-            f_return('4001',$model->getError());
+        $saveData = I();
+        $rs = f_fileUP(C('MAX_FILE_UPLOAD_SIZE'),C('FILE_UPLOAD_TYPE'),C('IMG_SAVE_PATE'));
+        $rs = json_decode($rs,true);
+        if($rs['errno'] == 1){
+            $saveData['pic'] = $rs['data']['url'];
         }
-    }
-
-    function upData(){
         $model = D('Brand');
-        if($model->create()){
-            $rs = $model->save();
-            f_return('1','success');
+        if($model->create($saveData)){
+            if( isset($saveData['id']) && $saveData['id'] > 0 ){
+                $rs = $model->save();
+            }else{
+                $rs = $model->add();
+            }
+            $this->success('保存成功');
         }else{
-            f_return('4001',$model->getError());
+            $this->error($model->getError());
         }
     }
 
@@ -67,7 +67,7 @@ class BrandController extends Controller
             $recordsTotal = $model->where($where)->count('id');
 
             //查数据
-            $rs = $model->field('id,name')->where($where)->order("id desc")->limit("{$start},{$length}")->select();
+            $rs = $model->field('id,name,pic,cid')->where($where)->order("id desc")->limit("{$start},{$length}")->select();
 
             //组装返回数据
             $returnData = array();

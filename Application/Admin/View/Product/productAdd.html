@@ -106,6 +106,61 @@
 		</div>
 
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">优惠率：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<{$product.discount}>" placeholder="" name="discount">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">栏目展示：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<label class="checkbox-inline">
+					<eq name="product.isdiscount" value="1">
+						<input checked type="checkbox" id="inlineCheckbox1" name="isdiscount" value="1"> 今日优惠 |
+					<else/>
+						<input type="checkbox" id="inlineCheckbox1" name="isdiscount" value="1"> 今日优惠 |
+					</eq>
+				</label>
+				<label class="checkbox-inline">
+					<eq name="product.column1" value="1">
+						<input checked type="checkbox" id="inlineCheckbox2" name="column1" value="1"> 电脑 |
+					<else/>
+						<input type="checkbox" id="inlineCheckbox2" name="column1" value="1"> 电脑 |
+					</eq>
+				</label>
+				<label class="checkbox-inline">
+					<eq name="product.column2" value="1">
+						<input checked type="checkbox" id="inlineCheckbox3" name="column2" value="1"> 手机 |
+					<else/>
+						<input type="checkbox" id="inlineCheckbox3" name="column2" value="1"> 手机 |
+					</eq>
+				</label>
+				<label class="checkbox-inline">
+					<eq name="product.column3" value="1">
+						<input checked type="checkbox" id="inlineCheckbox4" name="column3" value="1"> 大家电 |
+					<else/>
+						<input type="checkbox" id="inlineCheckbox4" name="column3" value="1"> 大家电 |
+					</eq>
+				</label>
+				<label class="checkbox-inline">
+					<eq name="product.column4" value="1">
+						<input checked type="checkbox" id="inlineCheckbox5" name="column4" value="1"> 影音娱乐 |
+					<else/>
+						<input type="checkbox" id="inlineCheckbox5" name="column4" value="1"> 影音娱乐 |
+					</eq>
+				</label>
+				<label class="checkbox-inline">
+					<eq name="product.column5" value="1">
+						<input checked type="checkbox" id="inlineCheckbox6" name="column5" value="1"> 汽车 |
+					<else/>
+						<input type="checkbox" id="inlineCheckbox6" name="column5" value="1"> 汽车 |
+					</eq>
+				</label>
+			</div>
+		</div>
+
+		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">产品图片：</label>
 			<div class="formControls col-xs-8 col-sm-9 row" id="productImg">
 				<div class="col-xs-3">

@@ -321,7 +321,7 @@ function f_fileUP($fileSize,$fileType,$filePath,$makeThumb = false){
             $thumbSavePath = $dirPath . '/' . $thumbSaveName;
             $imgClass = new \Think\Image();
             $imgClass->open($savePath);
-            $imgClass->thumb(200,200);
+            $imgClass->thumb(300,300);
             $imgClass->save($thumbSavePath);
             $returnArr['thumbUrl'] = ltrim($thumbSavePath,'.');
         }

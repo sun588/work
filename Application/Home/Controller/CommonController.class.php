@@ -15,6 +15,7 @@ class CommonController extends Controller
     function _initialize(){
         $this->headerCategory = $this->headerCategory();
     }
+
     function headerCategory(){
         $model = D('Category');
         $c1 = $model->where('pid=0')->field('id,name')->order('od desc')->limit(10)->select();
@@ -29,5 +30,15 @@ class CommonController extends Controller
             $c1[$i]['c2'] = $c2;
         }
         return $c1;
+    }
+
+    /**
+     * @param $file 文件路径
+     * @return string
+     */
+    public function getThumpPic($file){
+        if( empty($file) ) return;
+        $pathInfo = pathinfo($file);
+        return $thumbPath = $pathInfo['dirname'] . '/' . $pathInfo['filename'] . 'thump.' . $pathInfo['extension'];
     }
 }
