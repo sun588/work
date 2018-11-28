@@ -97,6 +97,20 @@
 		</div>
 
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">商品属性：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<table>
+					<thead>
+
+					</thead>
+					<tbody id="attr">
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">排序值：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="<?php echo ($product["od"]); ?>" placeholder="" name="od">
@@ -760,7 +774,7 @@ function getCategory(level,obj) {
 	}
 
 
-	//获取商品属性
+	//获取商品标签
 	if(level == 2){
         $('#attr').html('');
         $.post('<?php echo U("Tag/getTagByCID");?>',{cid:pid},function (rs) {
@@ -784,6 +798,31 @@ function getCategory(level,obj) {
             }
         })
 	}
+
+    //获取商品属性
+    if(level == 3){
+        $('#attr').html('');
+        $.post('<?php echo U("Attr/getAttrByCID");?>',{cid:pid},function (rs) {
+            if(rs){
+                rs = JSON.parse(rs);
+                var content = '';
+                for(var key in rs){
+                    var row = rs[key];
+                    content += '<tr>';
+                    content += '<td>' + row.name + '</td>';
+                    content += '<td>';
+                    for(var key1 in row['value']){
+                        var row1 = row['value'][key1];
+                        content += '<label class="checkbox-inline">';
+                        content += '<input name="attr[]" type="checkbox" value="' + row1.id + '">' + row1.name;
+                        content += '</label>';
+                    }
+                }
+                content += "</td></tr>";
+                $('#attr').html(content);
+            }
+        })
+    }
 
 	//获取子类
     $.post('<?php echo U("Category/getCategoryByPID");?>',{pid:pid},function (rs) {
@@ -841,6 +880,35 @@ function setCategory(){
 	}
     if(c2 > 0){
         getBrothersCategory(c2,2);
+        $.post('<?php echo U("getProductAttr");?>',{pid:pid},function (selectAttr) {
+            if(selectAttr){
+                selectAttr = JSON.parse(selectAttr);
+                $.post('<?php echo U("Attr/getAttrByCID");?>',{cid:c2},function (rs) {
+                    if(rs){
+                        rs = JSON.parse(rs);
+                        var content = '';
+                        for(var key in rs){
+                            var row = rs[key];
+                            content += '<tr>';
+                            content += '<td>' + row.name + '</td>';
+                            content += '<td>';
+                            for(var key1 in row['value']){
+                                var row1 = row['value'][key1];
+                                content += '<label class="checkbox-inline">';
+                                if(attrIsSelected(selectAttr,row1.id)){
+                                    content += '<input checked name="attr[]" type="checkbox" value="' + row1.id + '">' + row1.name;
+                                }else {
+                                    content += '<input name="attr[]" type="checkbox" value="' + row1.id + '">' + row1.name;
+                                }
+                                content += '</label>';
+                            }
+                        }
+                        content += "</td></tr>";
+                        $('#attr').html(content);
+                    }
+                })
+            }
+        })
     }
     if(c3 > 0){
         getBrothersCategory(c3,3);

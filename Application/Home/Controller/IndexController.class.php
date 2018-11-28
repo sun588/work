@@ -8,9 +8,29 @@ class IndexController extends CommonController {
         $this->assign('discountProduct',$this->discountProduct());
         $this->assign('brandCommend',$this->brandCommend());
 
+        $datas = array();
+        $categoryID = array('6','8','23','1','2');
+        $categoryName = array('电脑','手机','大家电','影音娱乐','汽车');
         /*电脑 cid 6*/
-        $this->assign('tag1',$this->getTag(6));
-        $this->assign('product1',$this->getModelProduct('column1'));
+        for($i = 0; $i < count($categoryID); $i++){
+            $tag = $this->getTag($categoryID[$i]);
+            $product = $this->getModelProduct('column' . ($i + 1));
+            $tproduct = $this->getProductByTag($tag);
+            $tempArr = array(
+                'modelName' => $categoryName[$i],
+                'tag' => $tag,
+                'product' => $product,
+                'tproduct' => $tproduct
+            );
+            $datas[] = $tempArr;
+        }
+        //f_dump($datas);exit;
+        $this->assign('datas',$datas);
+        //$tag1 = $this->getTag(6);
+        //$this->assign('tag1',$tag1);
+        //$this->assign('product1',$this->getModelProduct('column1'));
+        //$this->assign('tproduct1',$this->getProductByTag($tag1));
+
         $this->display();
     }
 
@@ -80,6 +100,29 @@ class IndexController extends CommonController {
             $rs[$i]['pic2'] = $this->getThumpPic($rs[$i]['pic2']);
         }
         return $rs;
+    }
+
+    function getProductByTag($tag){
+        $returnArr = array();
+        $model = M('producttag');
+        $len = count($tag) > 2 ? 2 : count($tag);
+        for($i = 0; $i < $len; $i++){
+            $tagV = $tag[$i]['value'];
+            $vlen = count($tagV) > 2 ? 2 : count($tagV);
+            for($j = 0; $j < $vlen; $j++){
+                $model->alias('t');
+                $model->join('LEFT JOIN product p ON t.pid=p.id');
+                $model->where('p.state=1 and t.tagValueID='.$tagV[$j]['id']);
+                $rs = $model->field('p.id,p.name,p.pic1,p.type')->order('p.od')->limit(6)->select();
+                for($k = 0; $k < count($rs); $k++){
+                    $rs[$k]['pic1'] = $this->getThumpPic($rs[$k]['pic1']);
+                }
+                $tempArr['tagName'] = $tagV[$j]['name'];
+                $tempArr['product'] = $rs;
+                $returnArr[] = $tempArr;
+            }
+        }
+        return $returnArr;
     }
 
 }

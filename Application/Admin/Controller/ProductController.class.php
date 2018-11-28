@@ -38,6 +38,10 @@ class ProductController extends Controller {
         $productTag = $product['tag'];
         unset($product['tag']);
 
+        //提取出产品属性
+        $productAttr = $product['attr'];
+        unset($product['attr']);
+
         $model = D('Product');
         if($model->create($product)){
             if( isset($product['id']) ){
@@ -46,6 +50,10 @@ class ProductController extends Controller {
                     //清空产品的标签
                     $model = D('Producttag');
                     $model->where('pid='.$product['id'])->delete();
+
+                    //清空产品的属性
+                    $model = D('Productattr');
+                    $model->where('pid='.$product['id'])->delete();
                 }else{
                     $this->error('修改产品失败');
                     return;
@@ -53,7 +61,7 @@ class ProductController extends Controller {
             }else{
                 $newProductID = $model->add();
             }
-            //保存产品属性
+            //保存产品标签
             if($newProductID && is_array($productTag) && count($productTag) > 0 ){
                 $model = D('Producttag');
                 foreach ($productTag as $v){
@@ -64,6 +72,19 @@ class ProductController extends Controller {
                     $model->add($saveData);
                 }
             }
+
+            //保存产品属性
+            if($newProductID && is_array($productAttr) && count($productAttr) > 0 ){
+                $model = D('Productattr');
+                foreach ($productAttr as $v){
+                    $saveData = array(
+                        'pid' => $newProductID,
+                        'attrValueID' => $v,
+                    );
+                    $model->add($saveData);
+                }
+            }
+
             if($newProductID){
                 $this->success('保存产品成功');
             }else{
@@ -145,6 +166,10 @@ class ProductController extends Controller {
             $model = D('Productattr');
             $model->where("pid=$id")->delete();
 
+            //删除产品标签
+            $model = D('Producttag');
+            $model->where("pid=$id")->delete();
+
             //删除产图片
             foreach ($imgPath as $v){
                 if($imgPath){
@@ -188,6 +213,24 @@ class ProductController extends Controller {
         $reurnData = array();
         foreach ($rs as $v){
             $reurnData[] = $v['tagvalueid'];
+        }
+
+        if(IS_AJAX){
+            exit(json_encode($reurnData));
+        }else{
+            return $reurnData;
+        }
+    }
+
+    function getProductAttr($pid){
+        $pid = empty($pid) ? I('post.pid') : $pid;
+
+        $model = D('Productattr');
+        $rs = $model->field('attrValueID')->where("pid=$pid")->select();
+
+        $reurnData = array();
+        foreach ($rs as $v){
+            $reurnData[] = $v['attrvalueid'];
         }
 
         if(IS_AJAX){

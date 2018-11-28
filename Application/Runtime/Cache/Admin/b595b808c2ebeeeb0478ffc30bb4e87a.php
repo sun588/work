@@ -93,7 +93,7 @@
 					<li><a data-href="<?php echo U('Brand/brand');?>" data-title="品牌管理" href="javascript:void(0)">品牌管理</a></li>
 					<li><a data-href="<?php echo U('Category/category');?>" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
 					<li><a data-href="<?php echo U('Tag/tag');?>" data-title="分类标签" href="javascript:void(0)">分类标签</a></li>
-                    <!--<li><a data-href="<?php echo U('Attr/attr');?>" data-title="属性管理" href="javascript:void(0)">属性管理</a></li>-->
+                    <li><a data-href="<?php echo U('Attr/attr');?>" data-title="属性管理" href="javascript:void(0)">属性管理</a></li>
 					<li><a data-href="<?php echo U('Product/product');?>" data-title="产品管理" href="javascript:void(0)">产品管理</a></li>
 			</ul>
 		</dd>
