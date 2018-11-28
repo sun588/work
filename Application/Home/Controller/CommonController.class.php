@@ -41,4 +41,56 @@ class CommonController extends Controller
         $pathInfo = pathinfo($file);
         return $thumbPath = $pathInfo['dirname'] . '/' . $pathInfo['filename'] . 'thump.' . $pathInfo['extension'];
     }
+
+    function addCart(){
+        $userInfo = session('userInfo');
+        $pid = I('post.id');
+        if(!$pid){
+            f_return('4001','商品不存在');
+            return;
+        }
+        if(!$userInfo['id']){
+            f_return('4002','请先登录');
+            return;
+        }
+
+        $saveData = array(
+            'uid' => $userInfo['id'],
+            'pid' => $pid,
+            'time' => time(),
+        );
+        $model = M('cart');
+        $rs = $model->add($saveData);
+        if($rs){
+            f_return(1,'添加成功');
+        }else{
+            f_return('4003','添加失败');
+        }
+    }
+
+    function addWishlist(){
+        $userInfo = session('userInfo');
+        $pid = I('post.id');
+        if(!$pid){
+            f_return('4001','商品不存在');
+            return;
+        }
+        if(!$userInfo['id']){
+            f_return('4002','请先登录');
+            return;
+        }
+
+        $saveData = array(
+            'uid' => $userInfo['id'],
+            'pid' => $pid,
+            'time' => time(),
+        );
+        $model = M('wishlist');
+        $rs = $model->add($saveData);
+        if($rs){
+            f_return(1,'添加成功');
+        }else{
+            f_return('4003','添加失败');
+        }
+    }
 }

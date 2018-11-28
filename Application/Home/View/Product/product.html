@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Basic page needs
+    ============================================ -->
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="Magentech">
+    <meta name="robots" content="index, follow" />
+   
+    <!-- Mobile specific metas
+    ============================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Favicon
+    ============================================ -->
+    <link rel="shortcut icon" type="image/png" href="__PUBLIC__/Home/ico/favicon-16x16.png">
+  
+    <!-- 新引入 -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/main.css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
+    <!-- end -->
+    <!-- Libs CSS
+    ============================================ -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap/css/bootstrap.min.css">
+    <link href="__PUBLIC__/Home/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/lib.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/js/minicolors/miniColors.css" rel="stylesheet">
+    
+    <!-- Theme CSS
+    ============================================ -->
+    <link href="__PUBLIC__/Home/css/themecss/so_searchpro.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so_megamenu.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-categories.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-listing-tabs.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-category-slider.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-newletter-popup.css" rel="stylesheet">
+
+    <link href="__PUBLIC__/Home/css/footer/footer1.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/header/header1.css" rel="stylesheet">
+    <link id="color_scheme" href="__PUBLIC__/Home/css/theme.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/responsive.css" rel="stylesheet">
+
+     <!-- Google web fonts
+    ============================================ -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' rel='stylesheet' type='text/css'>     
+    <style type="text/css">
+         body{font-family:'Poppins', sans-serif;}
+    </style>
+
+</head>
+
+<body class="res layout-1 listing-page">
+
+    
+    <div id="wrapper" class="wrapper-fluid banners-effect-5">
+     <!-- Header Container  -->
+        <include file="common:header" />
+    <!-- //Header Container  -->
+
+ 
+	<!-- Main Container  -->
+	<div class="main-container container">
+		<ul class="breadcrumb">
+			<li><a href="<{:U('Index/index')}>"><i class="fa fa-home"></i>首页</a></li>
+			<li><a href="category-one.html">大家电</a></li>
+            <li><input type="" name=""><i class="fa fa-search" style="margin-left: -20px;"></i></li>
+		</ul>
+		
+		<div class="row">
+        	<!--Middle Part Start-->
+        	<div id="content" class="col-md-12 col-sm-8">
+        		<div class="products-category">
+                   <!--  <h3 class="title-category ">Accessories</h3> -->
+        			<div class="category-desc">
+        				<div class="row">
+
+                            <!--品牌类目-->
+                            <notempty name="brand">
+        					<div class="col-sm-12 list-top" style="padding:0px;">
+                                <div class="list-pingpai">
+                                    <h3>品牌</h3>
+                                </div>
+                                <div class="list-pingpai-list" id="brandContent" style="height:66px;">
+                                    <div style="width:95%;float:left;">
+                                        <ul id="brandList">
+                                            <volist name="brand" id="row">
+                                            <li class="yy"><a href="<{:U('product',array('bid'=>$row['id'],'c1'=>$c1))}>"><{$row.name}></a></li>
+                                            </volist>
+                                        </ul>
+                                    </div>
+                                    <div class="list-pinpai-gengduo">
+                                         <a id="brandButton"><span>更多</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            </notempty>
+                            <!--品牌类目-->
+
+                            <notempty name="category">
+                                <volist name="category" id="row">
+                                    <div class="col-sm-12 list-top" style="padding:0px;">
+                                          <div class="list-leixing">
+                                                <h3><{$row.name}></h3>
+                                          </div>
+                                          <div class="list-leixing-list">
+                                               <div style="width:95%;float:left;">
+                                                  <ul>
+                                                      <volist name="row.c3" id="row1">
+                                                         <li><a href=""><{$row1.name}></a></li>
+                                                      </volist>
+                                                  </ul>
+                                              </div>
+                                              <div class="list-pinpai-gengduo2">
+                                                 <!--   <a href=""><span>更多</span></a> -->
+                                              </div>
+                                          </div>
+                                    </div>
+                                </volist>
+                            </notempty>
+
+                        </div>
+        			</div>
+        		</div>
+        			<!-- Filters -->
+              <div class="product-filter product-filter-top filters-panel sort" style="margin-top:50px;">
+                   <ul>
+                       <li><a href="">综合<span ><img src="__PUBLIC__/Home/image/hy/do.png"></span></a></li>
+                       <li><a href="">人气新品<span ><img src="__PUBLIC__/Home/image/hy/do.png"></span></a></li>
+                       <li><a href="">销量<span ><img src="__PUBLIC__/Home/image/hy/do.png"></span></a></li>
+                       <li style="width:150px;float: right;">
+                            <span style="margin-right:10px;">1/20</span>
+                            <button><i class="fa fa-angle-left"></i></button>
+                            <button><i class="fa fa-angle-right"></i></button>
+                       </li>
+                   </ul>
+              </div>
+              <!-- //end Filters -->
+
+        			<!--changed listings-->
+              <div class="products-list row nopadding-xs so-filter-gird">
+                  <volist name="product" id="row" empty="没有产品">
+        				<div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
+                            <div class="product-item-container">
+                                <div class="left-block left-b">
+                                    <div class="product-image-container second_img">
+                                        <a href="<{:U('productDetail',array('id'=>$row['id']))}>" target="_self" title="Lastrami bacon">
+                                            <img src="<{$row.pic1}>" class="img-1 img-responsive" alt="image1">
+                                            <img src="<{$row.pic2}>" class="img-2 img-responsive" alt="image2">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="right-block">
+                                    <div class="button-group so-quickview cartinfo--left">
+                                        <button type="button" class="addToCart" title="加入购物车" onclick="addCart('<{$row.id}>')">
+                                            <span>加入购物车</span>   
+                                        </button>
+                                        <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="addWishlist('<{$row.id}>')">
+                                            <i class="fa fa-heart-o"></i>
+                                            <span>收藏</span>
+                                        </button>
+                                    </div>
+                                    <div class="caption hide-cont element1">
+                                        
+                                        <h4><a href="product.html" title="Pastrami bacon" target="_self"><{$row.name}></a></h4>
+                                        
+                                    </div>
+                                    <p class="price">
+                                      <span class="price-new">型号:<{$row.type}></span>
+                                    </p>
+                                    <div class="list-block">
+                                        <button class="addToCart btn-button" type="button" title="加入购物车" onclick="cart.add('101', '1');"><i class="fa fa-shopping-basket"></i>
+                                        </button>
+                                        <button type="button" class="wishlist btn-button" title="添加收藏" onclick="wishlist.add('60');">
+                                            <i class="fa fa-heart-o"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                  </volist>
+              </div>
+        			<!--// End Changed listings-->
+        			<!-- Filters -->
+        			<div class="product-filter product-filter-bottom filters-panel">
+                        <div class="row">
+                            <div class="col-sm-6 text-left"></div>
+                           <!--  <div class="col-sm-6 text-right">Showing 1 to 15 of 15 (1 Pages)</div> -->
+                        </div>
+                    </div>
+        			<!-- //end Filters -->
+        			
+        		</div>
+        		
+        	</div>
+        	
+
+        	<!--Middle Part End-->
+        </div>
+    </div>
+	<!-- //Main Container -->
+	
+
+	<!-- Footer Container -->
+    <include file="common:footer" />
+    <!-- //end Footer Container -->
+
+    </div>
+	
+	
+	<!-- Cpanel Block -->
+	<div id="sp-cpanel_btn" class="isDown visible-lg">
+	<i class="fa fa-cog"></i>
+</div>		
+
+<!-- Include Libs & Plugins
+	============================================ -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="__PUBLIC__/Home/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/slick-slider/slick.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/libs.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/unveil/jquery.unveil.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/countdown/jquery.countdown.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/datetimepicker/moment.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-ui/jquery-ui.min.js"></script>
+	
+	
+	<!-- Theme files
+	============================================ -->
+	
+	
+	<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/so_megamenu.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/addtocart.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/application.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/JS/common.js"></script>
+
+	<script type="text/javascript">
+    // Check if Cookie exists
+    if($.cookie('display')){
+        view = $.cookie('display');
+    }else{
+        view = 'grid';
+    }
+    if(view) display(view);
+    /*头部框下拉*/
+    $('#brandButton').on('click',function(){
+        var state = $('#brandContent').css('height');
+        if(state == '66px'){
+            $('#brandButton span').text('收起');
+            $('#brandContent').css('height','auto');
+        }else{
+            $('#brandButton span').text('更多');
+            $('#brandContent').css('height','66px');
+        }
+    })
+    </script> 
+</body>
+</html>
+

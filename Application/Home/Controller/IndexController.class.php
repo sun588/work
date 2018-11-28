@@ -18,6 +18,7 @@ class IndexController extends CommonController {
             $tproduct = $this->getProductByTag($tag);
             $tempArr = array(
                 'modelName' => $categoryName[$i],
+                'modelID' => $categoryID[$i],
                 'tag' => $tag,
                 'product' => $product,
                 'tproduct' => $tproduct

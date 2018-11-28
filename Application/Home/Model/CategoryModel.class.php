@@ -9,5 +9,7 @@ namespace Home\Model;
 use Think\Model;
 class CategoryModel extends Model
 {
-
+    function getCategoryByID($id){
+        return $this->where("id=$id")->field('id,name,pid')->find();
+    }
 }

@@ -497,7 +497,7 @@
                         <div class="page-top" style="margin-bottom: 0px;">
                             <div class="page-title-categoryslider"><?php echo ($model['modelName']); ?></div>
                             <div class="item-sub-cat"  style="    margin-top: 20px;">
-                                <a href="" style="margin-right:30px;"><span>查看更多&gt</span></a>
+                                <a href="<?php echo U('Product/product',array('c1'=>$model['modelID']));?>" style="margin-right:30px;"><span>查看更多&gt</span></a>
                             </div>
                         </div>
                         <!-- 模块标题结束 -->
@@ -617,7 +617,7 @@
                         <div class="page-top" style="margin-bottom:0px;">
                             <div class="page-title-categoryslider"><?php echo ($model["modelName"]); ?></div>
                             <div class="item-sub-cat" style="    margin-top: 20px;">  
-                                 <a href="" style="margin-right:30px;"><span>查看更多&gt</span></a>
+                                 <a href="<?php echo U('Product/product',array('c1'=>$model['modelID']));?>" style="margin-right:30px;"><span>查看更多&gt</span></a>
                             </div> 
                         </div>
 
