@@ -30,14 +30,16 @@
     <header style="padding-top:40px;">
         <div class="container" >
             <div class="logo"> <a href="index.html"><img src="__PUBLIC__/Home/images/logo.png" alt="" ></a> </div>
+            <form action="index.php/Home/Product/product" method="get" id="searchProduct">
             <div class="search-cate" style="    float: left;">
-                <input type="search" placeholder="请输入您想要的商品">
-                <select style="font-size: 16px;border: 0px;margin-top: 14px;width: 60px;float: left;">
-                    <option>产品</option>
-                    <option>型号</option>
+                <input type="search" name="searchValue" placeholder="请输入您想要的商品">
+                <select style="font-size: 16px;border: 0px;margin-top: 14px;width: 60px;float: left;" name="searchType">
+                    <option value="1">产品</option>
+                    <option value="2">型号</option>
                 </select>
                 <button class="submit" type="submit">询价</button>
             </div>
+            </form>
 
             <!-- Cart Part -->
             <ul class="nav navbar-right cart-pop">
@@ -103,7 +105,7 @@
 
                                                                 <span>
                                                                     <volist name="row.c2" id="row2">
-                                                                        <a href="<{:U('Product/list',array(cid=>$row2['id']))}>"><{$row2.name}></a> |
+                                                                        <a href="<{:U('Product/product',array(c2=>$row2['id']))}>"><{$row2.name}></a> |
                                                                     </volist>
                                                                 </span>
                                                                 <a>
@@ -121,10 +123,10 @@
                                                                                         <ul>
                                                                                             <volist name="row.c2" id="row2">
                                                                                             <li class="">
-                                                                                                <a href="<{:U('Product/list',array(cid=>$row2['id']))}>"  class="main-menu"><{$row2.name}></a>
+                                                                                                <a href="<{:U('Product/product',array(c2=>$row2['id']))}>"  class="main-menu"><{$row2.name}></a>
                                                                                                 <ul class="erji">
                                                                                                     <volist name="row2.c3" id="row3">
-                                                                                                    <li><a href="<{:U('Product/list',array(cid=>$row3['id']))}>"><{$row3.name}></a></li>
+                                                                                                    <li><a href="<{:U('Product/product',array(c3=>$row3['id']))}>"><{$row3.name}></a></li>
                                                                                                     </volist>
                                                                                                 </ul>
                                                                                             </li>

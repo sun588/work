@@ -14,7 +14,9 @@ class ProductController extends CommonController {
 
         $where = $this->getCondition();
         $this->assign('brand',$this->getBrand());
-        $this->assign('category',$this->getChildCategory($this->c1));
+
+        if($this->c1) $this->assign('category',$this->getChildCategory($this->c1));
+
         $this->assign('product',$this->getProduct());
         $this->display();
     }
@@ -46,6 +48,14 @@ class ProductController extends CommonController {
             $this->bid = I('bid');
             $where .= ' and brand=' . I('bid');
             $this->assign('bid',I('bid'));
+        }
+        if(I('searchValue') && I('searchType')){
+            $searchV = I('searchValue');
+            if(I('searchType') == 1){
+                $where .= " and name like '%$searchV%'";
+            }else{
+                $where .= " and type like '%$searchV%'";
+            }
         }
         $this->where = $where;
         return $where;

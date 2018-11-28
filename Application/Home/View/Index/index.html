@@ -140,12 +140,12 @@
                                         <div class="product-layout item-inner style1 ">
                                             <div class="item-image">
                                                 <div class="item-img-info">
-                                                    <a href="<{:U('Product/product',array('id'=>$row1.id))}>" target="_self" title="Mandouille short "><img src="<{$row1.pic1}>" alt="Mandouille short"></a>
+                                                    <a href="<{:U('Product/productDetail',array('id'=>$row1['id']))}>" target="_self"><img src="<{$row1.pic1}>"></a>
                                                 </div>
                                             </div>
                                             <div class="item-info">
                                                 <div class="item-title element">
-                                                    <a href="<{:U('Product/product',array('id'=>$row1.id))}>" target="_self" title="Mandouille short"><{$row1.name}> </a>
+                                                    <a href="<{:U('Product/productDetail',array('id'=>$row1['id']))}>" target="_self"><{$row1.name}> </a>
                                                 </div>
                                                 <div class="content_price price">
                                                     <span style="font-size: 14px;color: #666;">型号:</span><span class="price-new product-price"><{$row1.type}></span>&nbsp;&nbsp;
@@ -189,7 +189,7 @@
                     <div class="head-title">
                         <div class="modtitle">
                             <span>今日优惠</span>
-                              <a class="viewall" href="�route=product�special.html">查看更多</a>
+                              <a class="viewall" href="#">查看更多</a>
                         </div>    
                     </div>
                     <div class="modcontent">
@@ -204,24 +204,22 @@
                                                         <span class="label-product label-sale"><{$row.discount}></span>
                                                     </div>
                                                     <div class="product-image-container second_img">
-                                                        <a href="product.html" target="_self" title="Pastrami bacon">
-                                                            <img src="<{$row.pic1}>" class="img-1 img-responsive" alt="image1">
-                                                            <img src="<{$row.pic2}>" class="img-2 img-responsive" alt="image2">
+                                                        <a href="<{:U('Product/productDetail',array('id'=>$row['id']))}>" target="_self" title="Pastrami bacon">
+                                                            <img src="<{$row.pic1}>" class="img-1 img-responsive">
+                                                            <img src="<{$row.pic2}>" class="img-2 img-responsive">
                                                         </a>
                                                     </div>
                                                 </div>
                                                 <div class="right-block">
                                                     <div class="button-group so-quickview cartinfo--left">
-                                                        <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
+                                                        <button type="button" class="addToCart" title="加入购物车" onclick="addCart('<{$row.id}>');">
                                                             <span>加入购物车 </span>
                                                         </button>
-                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                        </button>
-                                                        <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
+                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="addWishlist('<{$row.id}>');"><i class="fa fa-heart-o"></i><span>收藏</span>
                                                         </button>
                                                     </div>
                                                     <div class="caption hide-cont element1" >
-                                                        <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self"><{$row.name}></a></h4>
+                                                        <h4 style="margin:0;"><a href="<{:U('Product/productDetail',array('id'=>$row1['id']))}>" title="Pastrami bacon" target="_self"><{$row.name}></a></h4>
                                                     </div>
                                                 </div>
 
@@ -274,7 +272,7 @@
                                   <volist name="brandCommend" id="row">
                                       <ul id="div-<{$key + 1}>" style="display: none;">
                                           <volist name="row" id="row1">
-                                              <li><a href=""><img src="<{$row1.pic}>"></a></li>
+                                              <li><a href="<{:U('Product/product',array('bid'=>$row1['id']))}>"><img src="<{$row1.pic}>"></a></li>
                                           </volist>
                                       </ul>
                                   </volist>
@@ -313,7 +311,7 @@
                                  <div style="" class="title-list-rg">
                                       <ul>
                                         <volist name="row.value" id="row1">
-                                        <a href=""><li><{$row1.name}></li></a>
+                                        <a href="<{:U('Product/product',array('tid'=>$row1['id']))}>"><li><{$row1.name}></li></a>
                                         </volist>
                                      </ul>
                                  </div>
@@ -326,7 +324,7 @@
                                 <div style="" class="title-list-lf-rg">
                                     <ul>
                                         <volist name="row.value" id="row1">
-                                            <a href=""><li><{$row1.name}></li></a>
+                                            <a href="<{:U('Product/product',array('tid'=>$row1['id']))}>"><li><{$row1.name}></li></a>
                                         </volist>
                                     </ul>
                                 </div>
@@ -355,7 +353,7 @@
                                             <div class="col-md-3 product-item-container">
                                                 <div class="left-block left-b">
                                                     <div class="product-image-container second_img">
-                                                        <a href="product.html" target="_self">
+                                                        <a href="<{:U('Product/productDetail',array('id'=>$row['id']))}>" target="_self">
                                                             <img src="<{$row.pic1}>" class="img-1 img-responsive">
                                                             <noempty name="row.pic2"></noempty>
                                                             <img src="<{$row.pic2}>" class="img-2 img-responsive">
@@ -365,16 +363,14 @@
                                                 </div>
                                                 <div class="right-block">
                                                     <div class="button-group so-quickview cartinfo--left">
-                                                        <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
+                                                        <button type="button" class="addToCart" title="加入购物车" onclick="addCart('<{$row.id}>');">
                                                             <span>加入购物车 </span>
                                                         </button>
-                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                        </button>
-                                                        <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
+                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="addWishlist('<{$row.id}>');"><i class="fa fa-heart-o"></i><span>收藏</span>
                                                         </button>
                                                     </div>
                                                     <div class="caption hide-cont element1">
-                                                        <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self"><{$row.name}></a></h4>
+                                                        <h4 style="margin:0;"><a href="<{:U('Product/productDetail',array('id'=>$row1['id']))}>" title="Pastrami bacon" target="_self"><{$row.name}></a></h4>
                                                     </div>
                                                     <p class="price"><span style="color: #666;">型号：</span><{$row.type}></p>
                                                 </div>
@@ -389,7 +385,7 @@
                                     <div class="left-title" style=" border: 1px solid #eee;margin-bottom:20px;">
                                         <ul>
                                             <volist name="model.tproduct" id="row">
-                                            <li onmouseover="showTagContent('m<{$mk}>-','<{$i}>')"><a href=""><{$row.tagName}></a></li>
+                                            <li onmouseover="showTagContent('m<{$mk}>-','<{$i}>')"><{$row.tagName}></li>
                                             </volist>
                                         </ul>
                                     </div>
@@ -400,17 +396,15 @@
                                                <div class="product-layout item-inner style1 col-md-12" style="">
                                                   <div class="item-image" style="width: 24%;float: left;">
                                                       <div class="item-img-info">
-                                                          <a href="product.html" target="_self" title="Mandouille short ">
+                                                          <a href="<{:U('Product/productDetail',array('id'=>$row1['id']))}>" target="_self">
                                                               <img src="<{$row1.pic1}>" alt="Mandouille short">
                                                               </a>
                                                       </div>
-
                                                   </div>
                                                   <div class="item-info ele" style="width: 70%;float: left;margin-top:3%;margin-left:10px;">
                                                       <div class="item-title element ">
-                                                          <a href="product.html" target="_self" title="Mandouille short"><{$row1.name}></a>
+                                                          <a href="<{:U('Product/productDetail',array('id'=>$row1['id']))}>" target="_self"><{$row1.name}></a>
                                                       </div>
-
                                                       <div class="content_price price">
                                                           <p class="a2" style="color:#666;">型号: <b style="color:#ff5e00;"><{$row1.type}></b></p>
                                                       </div>
@@ -447,7 +441,7 @@
                                         <div style="" class="title-list-rg">
                                             <ul>
                                                 <volist name="row.value" id="row1">
-                                                    <a href=""><li><{$row1.name}></li></a>
+                                                    <a href="<{:U('Product/product',array('tid'=>$row1['id']))}>"><li><{$row1.name}></li></a>
                                                 </volist>
                                             </ul>
                                         </div>
@@ -460,7 +454,7 @@
                                         <div style="" class="title-list-lf-rg">
                                             <ul>
                                                 <volist name="row.value" id="row1">
-                                                    <a href=""><li><{$row1.name}></li></a>
+                                                    <a href="<{:U('Product/product',array('tid'=>$row1['id']))}>"><li><{$row1.name}></li></a>
                                                 </volist>
                                             </ul>
                                         </div>
@@ -485,7 +479,7 @@
                                     <div class="left-title" style=" border: 1px solid #eee;margin-bottom:20px;">
                                         <ul>
                                             <volist name="model.tproduct" id="row">
-                                                <li onmouseover="showTagContent('m<{$mk}>-','<{$i}>')"><a href=""><{$row.tagName}></a></li>
+                                                <li onmouseover="showTagContent('m<{$mk}>-','<{$i}>')"><{$row.tagName}></li>
                                             </volist>
                                         </ul>
                                     </div>
@@ -496,15 +490,15 @@
                                                 <div class="product-layout item-inner style1 col-md-12" style="">
                                                     <div class="item-image" style="width: 24%;float: left;">
                                                         <div class="item-img-info">
-                                                            <a href="product.html" target="_self" title="Mandouille short ">
-                                                                <img src="<{$row1.pic1}>" alt="Mandouille short">
+                                                            <a href="<{:U('Product/productDetail',array('id'=>$row1['id']))}>" target="_self">
+                                                                <img src="<{$row1.pic1}>">
                                                             </a>
                                                         </div>
 
                                                     </div>
                                                     <div class="item-info ele" style="width: 70%;float: left;margin-top:3%;margin-left:10px;">
                                                         <div class="item-title element ">
-                                                            <a href="product.html" target="_self" title="Mandouille short"><{$row1.name}></a>
+                                                            <a href="<{:U('Product/productDetail',array('id'=>$row1['id']))}>" target="_self"><{$row1.name}></a>
                                                         </div>
 
                                                         <div class="content_price price">
@@ -524,7 +518,7 @@
                                             <div class="col-md-3 product-item-container">
                                                 <div class="left-block left-b">
                                                     <div class="product-image-container second_img">
-                                                        <a href="product.html" target="_self">
+                                                        <a href="<{:U('Product/productDetail',array('id'=>$row['id']))}>" target="_self">
                                                             <img src="<{$row.pic1}>" class="img-1 img-responsive">
                                                             <noempty name="row.pic2"></noempty>
                                                             <img src="<{$row.pic2}>" class="img-2 img-responsive">
@@ -534,16 +528,14 @@
                                                 </div>
                                                 <div class="right-block">
                                                     <div class="button-group so-quickview cartinfo--left">
-                                                        <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
+                                                        <button type="button" class="addToCart" title="加入购物车" onclick="addCart('<{$row.id}>');">
                                                             <span>加入购物车 </span>
                                                         </button>
-                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                        </button>
-                                                        <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
+                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="addWishlist('<{$row.id}>');"><i class="fa fa-heart-o"></i><span>收藏</span>
                                                         </button>
                                                     </div>
                                                     <div class="caption hide-cont element1">
-                                                        <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self"><{$row.name}></a></h4>
+                                                        <h4 style="margin:0;"><a href="<{:U('Product/productDetail',array('id'=>$row['id']))}>" target="_self"><{$row.name}></a></h4>
                                                     </div>
                                                     <p class="price"><span style="color: #666;">型号：</span><{$row.type}></p>
                                                 </div>
@@ -1017,6 +1009,7 @@
 <script type="text/javascript" src="__PUBLIC__/Home/js/themejs/toppanel.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Home/js/themejs/so_megamenu.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Home/js/themejs/addtocart.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/JS/common.js"></script>
 
 <script language="javascript">
 $('#div-1').css('display','block');
