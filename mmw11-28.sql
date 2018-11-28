@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-11-27 20:28:37
+Date: 2018-11-28 21:07:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `attrkey` (
   `cid` int(11) DEFAULT NULL COMMENT '所属分类ID',
   `od` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of attrkey
@@ -33,6 +33,7 @@ CREATE TABLE `attrkey` (
 INSERT INTO `attrkey` VALUES ('4', '能耗', '4', '0');
 INSERT INTO `attrkey` VALUES ('6', '按功能分类', '24', '0');
 INSERT INTO `attrkey` VALUES ('7', '按客户端分类', '24', '0');
+INSERT INTO `attrkey` VALUES ('8', '内存', '7', '0');
 
 -- ----------------------------
 -- Table structure for `attrvalue`
@@ -44,7 +45,7 @@ CREATE TABLE `attrvalue` (
   `keyID` int(11) DEFAULT NULL COMMENT '属性键ID',
   `od` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of attrvalue
@@ -52,6 +53,8 @@ CREATE TABLE `attrvalue` (
 INSERT INTO `attrvalue` VALUES ('3', '高清屏', '6', '0');
 INSERT INTO `attrvalue` VALUES ('2', '二级', '4', '1');
 INSERT INTO `attrvalue` VALUES ('4', '高性能', '6', '1');
+INSERT INTO `attrvalue` VALUES ('6', '4G', '8', '0');
+INSERT INTO `attrvalue` VALUES ('7', '8G', '8', '0');
 
 -- ----------------------------
 -- Table structure for `brand`
@@ -75,6 +78,23 @@ INSERT INTO `brand` VALUES ('4', '中兴', '/public/Img/2018-11-27/1543291329112
 INSERT INTO `brand` VALUES ('5', '娃哈哈', '/public/Img/2018-11-27/15433001663388.jpg', null, '2');
 
 -- ----------------------------
+-- Table structure for `cart`
+-- ----------------------------
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `pid` int(11) NOT NULL,
+  `time` int(11) DEFAULT NULL,
+  `num` tinyint(4) NOT NULL DEFAULT '1' COMMENT '商品数量',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cart
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `category`
 -- ----------------------------
 DROP TABLE IF EXISTS `category`;
@@ -86,32 +106,21 @@ CREATE TABLE `category` (
   `od` int(11) NOT NULL DEFAULT '0' COMMENT '排序 降序排列',
   `note` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
 INSERT INTO `category` VALUES ('1', '影音娱乐', '0', '', '2', '');
 INSERT INTO `category` VALUES ('2', '汽车', '0', '', '1', '');
-INSERT INTO `category` VALUES ('3', '冰箱', '2', '', '1', '');
-INSERT INTO `category` VALUES ('4', '空调', '2', '', '1', '没有');
+INSERT INTO `category` VALUES ('29', '游戏本', '7', '', '0', '');
 INSERT INTO `category` VALUES ('6', '电脑', '0', '', '5', '');
-INSERT INTO `category` VALUES ('7', '绿野', '6', '', '3', '1');
+INSERT INTO `category` VALUES ('7', '笔记本', '6', '', '3', '1');
 INSERT INTO `category` VALUES ('8', '手机', '0', '', '4', '');
-INSERT INTO `category` VALUES ('9', '热水器', '8', '', '0', '');
-INSERT INTO `category` VALUES ('10', '空调', '1', '', '0', '');
-INSERT INTO `category` VALUES ('11', '洗衣机', '1', '', '0', '');
-INSERT INTO `category` VALUES ('13', '能耗', '3', '', '0', '');
-INSERT INTO `category` VALUES ('14', '1级能耗', '13', '', '0', '');
-INSERT INTO `category` VALUES ('15', '2级能耗', '13', '', '0', '');
-INSERT INTO `category` VALUES ('17', ' 壁挂式 ', '10', '', '0', '');
-INSERT INTO `category` VALUES ('18', '柜机 ', '10', '', '0', '');
-INSERT INTO `category` VALUES ('19', '家用中央空调 ', '10', '', '0', '');
-INSERT INTO `category` VALUES ('20', '移动空调', '10', '', '0', '');
-INSERT INTO `category` VALUES ('21', ' 1匹 ', '17', '', '0', '');
-INSERT INTO `category` VALUES ('22', '大1匹 ', '17', '', '0', '');
+INSERT INTO `category` VALUES ('30', '娱乐本', '7', '', '0', '');
 INSERT INTO `category` VALUES ('23', '大家电', '0', '', '3', '');
-INSERT INTO `category` VALUES ('24', '手机', '23', '', '0', '');
+INSERT INTO `category` VALUES ('25', '空调', '23', '', '0', '');
+INSERT INTO `category` VALUES ('28', '台式', '6', '', '0', '');
 
 -- ----------------------------
 -- Table structure for `picture`
@@ -165,7 +174,7 @@ CREATE TABLE `product` (
   `column4` tinyint(4) NOT NULL DEFAULT '2' COMMENT '1:推荐  2:不推荐',
   `column5` tinyint(4) NOT NULL DEFAULT '2' COMMENT '1:推荐  2:不推荐',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of product
@@ -174,8 +183,9 @@ INSERT INTO `product` VALUES ('2', '测试产品1', 'test001', '1542970679', '/p
 INSERT INTO `product` VALUES ('3', '测试产品改', 'test002', '1543030520', '/public/Img/2018-11-27/15432819211254.jpg', '', '', '', '2', '2', '3', '13', '14', '1', '&lt;p&gt;你好该&lt;br/&gt;&lt;/p&gt;', '&lt;p&gt;我很好改11&lt;br/&gt;&lt;/p&gt;', '1', '1', '', '2', '2', '2', '2', '2');
 INSERT INTO `product` VALUES ('4', '测试产品3', 'test003', '1543282733', '/public/Img/2018-11-27/15432827207644.jpg', '', '', '', '2', '1', '10', '17', '21', '1', 'hellow', '你好啊啊', '1', '2', null, '2', '2', '2', '2', '2');
 INSERT INTO `product` VALUES ('5', '测试产品4', 'test0004', '1543282789', '/public/Img/2018-11-27/15432828462890.jpg', '', '', '', '2', '2', '4', '0', '0', '3', '', '', '1', '2', null, '2', '2', '2', '2', '2');
-INSERT INTO `product` VALUES ('6', '测试产品5', '00588', '1543282829', '/public/Img/2018-11-27/15432828246454.jpg', '', '', '', '3', '1', '10', '17', '21', '1', '&lt;p&gt;阿斯&lt;/p&gt;', '', '1', '1', '15%', '2', '1', '1', '1', '1');
-INSERT INTO `product` VALUES ('7', '数码相机微单', '14-ceute', '1543307746', '/public/Img/2018-11-27/15433077392236.jpg', '', '', '', '3', '6', '0', '0', '0', '0', '&lt;p&gt;111&lt;/p&gt;', '&lt;p&gt;333&lt;/p&gt;', '1', '1', '15%', '1', '2', '2', '2', '2');
+INSERT INTO `product` VALUES ('6', '测试产品5', '00588', '1543282829', '/public/Img/2018-11-27/15432828246454.jpg', '', '', '', '3', '1', '10', '17', '21', '1', '&lt;p&gt;阿斯&lt;/p&gt;', '', '1', '1', '15%', '2', '1', '1', '1', '2');
+INSERT INTO `product` VALUES ('7', '数码相机微单', '14-ceute', '1543307746', '/public/Img/2018-11-27/15433077392236.jpg', '', '', '', '3', '6', '7', '0', '0', '0', '&lt;p&gt;111&lt;/p&gt;', '&lt;p&gt;333&lt;/p&gt;', '1', '1', '15%', '1', '2', '2', '2', '2');
+INSERT INTO `product` VALUES ('8', '外星人笔记本', 'wxr-c10-8g-256', '1543377427', '/public/Img/2018-11-28/15433773974789.jpg', '', '', '', '4', '6', '7', '0', '0', '0', '外星人笔记本', '8g内容 256g固态硬盘&lt;br/&gt;', '1', '1', '5%', '1', '2', '2', '2', '2');
 
 -- ----------------------------
 -- Table structure for `productattr`
@@ -186,13 +196,15 @@ CREATE TABLE `productattr` (
   `pid` int(11) DEFAULT NULL COMMENT '产品ID',
   `attrValueID` int(11) DEFAULT NULL COMMENT '属性值ID',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of productattr
 -- ----------------------------
 INSERT INTO `productattr` VALUES ('7', '2', '4');
 INSERT INTO `productattr` VALUES ('9', '5', '2');
+INSERT INTO `productattr` VALUES ('10', '7', '5');
+INSERT INTO `productattr` VALUES ('11', '8', '7');
 
 -- ----------------------------
 -- Table structure for `producttag`
@@ -203,14 +215,13 @@ CREATE TABLE `producttag` (
   `pid` int(11) DEFAULT NULL COMMENT '产品ID',
   `tagValueID` int(11) DEFAULT NULL COMMENT '属性值ID',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of producttag
 -- ----------------------------
-INSERT INTO `producttag` VALUES ('15', '7', '10');
-INSERT INTO `producttag` VALUES ('14', '7', '9');
-INSERT INTO `producttag` VALUES ('13', '7', '7');
+INSERT INTO `producttag` VALUES ('17', '8', '8');
+INSERT INTO `producttag` VALUES ('16', '7', '7');
 
 -- ----------------------------
 -- Table structure for `tagkey`
@@ -222,13 +233,15 @@ CREATE TABLE `tagkey` (
   `cid` int(11) DEFAULT NULL COMMENT '所属分类ID',
   `od` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tagkey
 -- ----------------------------
 INSERT INTO `tagkey` VALUES ('8', '电脑网络', '6', '1');
 INSERT INTO `tagkey` VALUES ('9', '办公文教', '6', '1');
+INSERT INTO `tagkey` VALUES ('10', '标签1', '8', '0');
+INSERT INTO `tagkey` VALUES ('11', '标签2', '8', '0');
 
 -- ----------------------------
 -- Table structure for `tagvalue`
@@ -240,7 +253,7 @@ CREATE TABLE `tagvalue` (
   `keyID` int(11) DEFAULT NULL COMMENT '属性键ID',
   `od` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tagvalue
@@ -251,3 +264,66 @@ INSERT INTO `tagvalue` VALUES ('8', '电脑整机', '8', '0');
 INSERT INTO `tagvalue` VALUES ('9', '显示器', '8', '0');
 INSERT INTO `tagvalue` VALUES ('10', '打印机', '9', '0');
 INSERT INTO `tagvalue` VALUES ('11', '投影', '9', '0');
+INSERT INTO `tagvalue` VALUES ('12', '标签值1', '10', '0');
+INSERT INTO `tagvalue` VALUES ('13', '标签值2', '11', '0');
+
+-- ----------------------------
+-- Table structure for `telverify`
+-- ----------------------------
+DROP TABLE IF EXISTS `telverify`;
+CREATE TABLE `telverify` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sendtime` int(11) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `verify` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `endtime` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of telverify
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `user`
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `nickname` varchar(255) DEFAULT NULL,
+  `headpic` varchar(255) DEFAULT NULL,
+  `companyname` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `companyphone` varchar(255) DEFAULT NULL,
+  `cardpic1` varchar(255) DEFAULT NULL,
+  `cardpic2` varchar(255) DEFAULT NULL,
+  `businesspic` varchar(255) DEFAULT NULL,
+  `accounttype` tinyint(4) NOT NULL DEFAULT '1' COMMENT '账号类型 1:普通用户  2:商家',
+  `salt` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wishlist`
+-- ----------------------------
+DROP TABLE IF EXISTS `wishlist`;
+CREATE TABLE `wishlist` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `pid` int(11) NOT NULL,
+  `time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wishlist
+-- ----------------------------
