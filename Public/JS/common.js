@@ -29,3 +29,20 @@ function addWishlist(id) {
         }
     })
 }
+
+function fileAjaxUP(obj,url,callback){
+    var upfile = $(obj)[0].files[0];
+    formData = new FormData();
+    formData.append('file',upfile);
+    $.ajax({
+        url: url,
+        type: 'POST',
+        cache: false,
+        data: formData,
+        processData: false,
+        contentType: false,
+        success:function (rs) {
+            callback(rs);
+        }
+    })
+}

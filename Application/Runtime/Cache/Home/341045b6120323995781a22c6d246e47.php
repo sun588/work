@@ -117,21 +117,23 @@
 							<div class="title" style="    margin-bottom: 40px;">
 								<h3>登陆</h3>
 							</div>
-							<form action="#" method="get" id="form-login" accept-charset="utf-8">
+							<form action="<?php echo U('login');?>" method="post" accept-charset="utf-8">
 								<div class="form-box">
-									<label for="name-login" style="text-align: left;width: 20px;"><img src="/Public/Home/image/hy/zh.png" > </label>
-									<input type="text" id="name-login" name="name-login" placeholder="输入账号" style="width: 77%;margin: 10px;">
+									<label for="user" style="text-align: left;width: 20px;"><img src="/Public/Home/image/hy/zh.png" > </label>
+									<input type="text" id="user" name="user" placeholder="输入手机号" style="width: 77%;margin: 10px;">
 								</div><!-- /.form-box -->
 								<div class="form-box">
-									<label for="password-login" style="text-align: left;width: 20px;"><img src="/Public/Home/image/hy/ma.png" > </label>
-									<input type="text" id="password-login" name="password-login" placeholder="请输入密码" style="width: 77%;margin: 10px;">
+									<label for="password" style="text-align: left;width: 20px;"><img src="/Public/Home/image/hy/ma.png" > </label>
+									<input type="text" id="password" name="password" placeholder="请输入密码" style="width: 77%;margin: 10px;">
 								</div><!-- /.form-box -->
-
+								<div class="form-box" style="text-align: center;">
+									<p style="color:red; font-size: 14px;"><?php echo ($errmsg); ?></p>
+								</div><!-- /.form-box -->
 								<div class="form-box">
 									<button type="submit" class="login" style=" margin:20px 0px;width:200px;padding: 5px 0px;color: #fff;border: 0px; background-color: #ff5e00; width: 250px;border-radius: 20px;">登陆</button><br>
-									<a href="forget.html" title="">忘记密码</a>
+									<a href="<?php echo U('retrieve');?>" title="">忘记密码</a>
 									<a href="<?php echo U('register');?>" title="" style="margin-left: 20px;">免费注册 </a>
-									<a href="enter-1.html" title="" style="margin-left: 20px;">企业入驻 </a>
+									<a href="<?php echo U('businessRegister');?>" title="" style="margin-left: 20px;">企业入驻 </a>
 								</div><!-- /.form-box -->
 							</form><!-- /#form-login -->
 							<div>

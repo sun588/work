@@ -6,7 +6,7 @@
 	<!-- Basic Page Needs -->
 	<meta charset="UTF-8">
 	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-	<title>登陆</title>
+	<title>忘记密码</title>
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
    <link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
@@ -105,49 +105,46 @@
 		</section><!-- /#header -->
 
 		
-		<section class="flat-account background">
+		<section class="flat-account " >
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8">
-					   <img src="__PUBLIC__/Home/image/catalog/slideshow/home1/slider-3.jpg" style="    height: 400px;">
-						
-					</div><!-- /.col-md-6 -->
-					<div class="col-md-4">
-						<div class="form-login">
-							<div class="title" style="    margin-bottom: 40px;">
-								<h3>登陆</h3>
-							</div>
-							<form action="<{:U('login')}>" method="post" accept-charset="utf-8">
+				    <div class="col-md-12 zhuce">
+                         <h3 style="    text-align: center;">修改密码</h3>
+				    </div>
+				    <div class="col-md-12">
+				        <div style="    margin-left: 25%;width: 50%; margin-top: 30px;background-color: #fff;">
+				        <form action="#" method="get" id="form-retrieve" accept-charset="utf-8">
 								<div class="form-box">
-									<label for="user" style="text-align: left;width: 20px;"><img src="__PUBLIC__/Home/image/hy/zh.png" > </label>
-									<input type="text" id="user" name="user" placeholder="输入手机号" style="width: 77%;margin: 10px;">
+									<label for="phone">手机号： </label>
+									<input type="text" id="phone" name="phone" placeholder="请输入你的手机号" style="margin: 10px;">
 								</div><!-- /.form-box -->
 								<div class="form-box">
-									<label for="password" style="text-align: left;width: 20px;"><img src="__PUBLIC__/Home/image/hy/ma.png" > </label>
-									<input type="text" id="password" name="password" placeholder="请输入密码" style="width: 77%;margin: 10px;">
-								</div><!-- /.form-box -->
-								<div class="form-box" style="text-align: center;">
-									<p style="color:red; font-size: 14px;"><{$errmsg}></p>
+									<label for="verify">验证码： </label>
+									<input type="text" id="verify" name="verify" placeholder="请输入验证码" style="width:41%;">
+									<button style="color: #fff;background-color: #ff5e00;border: 0px;line-height: 35px; width: 18%;" onclick="return getVerify()">获取验证码</button>
 								</div><!-- /.form-box -->
 								<div class="form-box">
-									<button type="submit" class="login" style=" margin:20px 0px;width:200px;padding: 5px 0px;color: #fff;border: 0px; background-color: #ff5e00; width: 250px;border-radius: 20px;">登陆</button><br>
-									<a href="<{:U('retrieve')}>" title="">忘记密码</a>
-									<a href="<{:U('register')}>" title="" style="margin-left: 20px;">免费注册 </a>
-									<a href="<{:U('businessRegister')}>" title="" style="margin-left: 20px;">企业入驻 </a>
+									<label for="password">输入新密码： </label>
+									<input type="password" id="password" name="password" placeholder="请输入你的新密码">
+								<div class="form-box">
+									<label for="password1">请再次输入密码： </label>
+									<input type="password" id="password1" name="password1" placeholder="请输入你的新密码" >
+								</div><!-- /.form-box -->
+                                <!-- <div class="form-box" style="text-align: center; margin-top: 14px;">
+                                    <input type="checkbox" name="" style="vertical-align: middle;width: 20px;"> <a href=""><span>我已阅读并同意协议</span></a>
+                                </div> -->
+								<div class="form-box buzou">
+									<a href="javascript:void(0);" onclick="register()"  class="login" style="color:#fff;"><span>确认</span></a>
 								</div><!-- /.form-box -->
 							</form><!-- /#form-login -->
-							<div>
-							     其他方式登陆
-							     <a href=""><img src="__PUBLIC__/Home/image/hy/wee.png" style="margin-left: 20px;    width: 20px;"></a>
-							     <a href=""><img src="__PUBLIC__/Home/image/hy/qq.png" style="margin-left: 20px;    width: 20px;"></a>
-							</div>
-						</div><!-- /.form-login -->
-					</div><!-- /.col-md-6 -->
+				        </div>
+				    </div>	
+
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-account -->
 
-		<section class="flat-row flat-iconbox style1 background" style="padding: 80px;">
+		<section class="flat-row flat-iconbox style1" style="padding: 80px;">
 			<div class="container" style="text-align: center;">
 				<p>Copyright &copy; 2018.邢台尚进网络科技有限公司
                 <!--  <a href="">Legal Statement|</a>
@@ -164,5 +161,53 @@
 
 
 
-</body>	
+</body>
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-2.2.4.min.js"></script>
+<script>
+    function getVerify() {
+        phone = $('#phone').val();
+        $.post('<{:U("sendVerifyCode")}>',{phone:phone,retrieve:1},function (rs) {
+            if(rs){
+                rs = JSON.parse(rs);
+                if(rs['errno'] == 1){
+                    alert('验证码发送成功');
+                }else {
+                    alert(rs['msg']);
+                }
+            }else {
+                alert('验证码发送失败');
+            }
+        })
+        return false;
+    }
+
+    function register() {
+        var pwd = $('#password').val();
+        var pwd1 = $('#password1').val();
+        var phone = $('#phone').val();
+        var verify = $('#verify').val();
+
+        if(pwd.length < 6 || pwd.length > 16){
+            alert('密码名必须大于6位小于16位');
+            return;
+        }
+        if(pwd != pwd1){
+            alert('2次密码输入不一致');
+            return;
+        }
+        $.post('<{:U("retrieve")}>',$('#form-retrieve').serialize(),function(rs){
+            if(rs){
+                rs = JSON.parse(rs);
+                if(rs['errno'] == 1){
+                    alert('修改密码成功')
+                    location.href = '<{:U(login)}>';
+                }else {
+                    alert(rs['msg']);
+                }
+            }else {
+                alert('修改密码失败');
+            }
+        })
+    }
+</script>
 </html>

@@ -3,8 +3,12 @@
     <div class="top-bar" style="background-color:#222;">
         <div class="container" style="width:1200px;color: #fff;">
             <span style="color:#d9d7d7;line-height: 35px;">欢迎来到竞价买卖网!</span>
-            <a href="login.html"  style="color:#d9d7d7;margin-left:15px"><span>请登录</span></a>
-            <a href="reg-1.html"  style="color:#d9d7d7;margin-left:15px"><span>免费注册</span></a>
+            <empty name="Think.session.userInfo.id">
+                <a href="<{:U('Register/login')}>"  style="color:#d9d7d7;margin-left:15px"><span>请登录</span></a>
+                <a href="<{:U('Register/register')}>"  style="color:#d9d7d7;margin-left:15px"><span>免费注册</span></a>
+            <else/>
+                <a href="<{:U('User/user')}>"  style="color:#d9d7d7;margin-left:15px"><span>欢迎你：<{$Think.session.userInfo.nickname}></span></a>
+            </empty>
             <div class="right-sec" style="color:#d9d7d7;">
                 <ul style="margin-top: 3px;" class="baobei">
                     <li class=""><a href="#." style="color:#d9d7d7;">我的宝贝</a>
@@ -43,7 +47,7 @@
 
             <!-- Cart Part -->
             <ul class="nav navbar-right cart-pop">
-                <li class="dropdown" style="display: inline-block;"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="itm-cont">3</span> <i class="fa fa-shopping-bag"></i> <strong>购物车</strong> <br>
+                <li class="dropdown" style="display: inline-block;"> <a href="<{:U('User/cart')}>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="itm-cont">3</span> <i class="fa fa-shopping-bag"></i> <strong>购物车</strong> <br>
                 </a>
                     <ul class="dropdown-menu">
                         <li>

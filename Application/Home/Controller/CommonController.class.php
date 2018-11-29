@@ -32,6 +32,16 @@ class CommonController extends Controller
         return $c1;
     }
 
+    function isLogin(){
+        $userInfo = session('userInfo');
+        if(!$userInfo || empty($userInfo['id'])){
+            $this->error('你还未登录 请先登录',U('Index/index'));
+            return false;
+        }else{
+            return $userInfo['id'];
+        }
+    }
+
     /**
      * @param $file 文件路径
      * @return string

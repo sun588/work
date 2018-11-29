@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
@@ -6,45 +6,45 @@
 	<!-- Basic Page Needs -->
 	<meta charset="UTF-8">
 	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-	<title>企业入驻</title>
+	<title>填写入驻信息</title>
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="/Public/Home/css/style.css">
 	<!-- Boostrap style -->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Home/css/bootstrap.min.css">
 	<!-- Theme style -->
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Home/css/style.css">
 	<!-- Reponsive -->
 
     <link rel="shortcut icon" type="image/png" href="ico/favicon-16x16.png">
   
     <!-- 新引入 -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/Public/Home/css/main.css">
+    <link rel="stylesheet" href="/Public/Home/css/style.css">
     <!-- end -->
     <!-- Libs CSS
     ============================================ -->
-    <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
-    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="css/themecss/lib.css" rel="stylesheet">
-    <link href="js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
-    <link href="js/minicolors/miniColors.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Public/Home/css/bootstrap/css/bootstrap.min.css">
+    <link href="/Public/Home/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/Public/Home/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="/Public/Home/js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="/Public/Home/css/themecss/lib.css" rel="stylesheet">
+    <link href="/Public/Home/js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+    <link href="/Public/Home/js/minicolors/miniColors.css" rel="stylesheet">
     
     <!-- Theme CSS
     ============================================ -->
-    <link href="css/themecss/so_searchpro.css" rel="stylesheet">
-    <link href="css/themecss/so_megamenu.css" rel="stylesheet">
-    <link href="css/themecss/so-categories.css" rel="stylesheet">
-    <link href="css/themecss/so-listing-tabs.css" rel="stylesheet">
-    <link href="css/themecss/so-category-slider.css" rel="stylesheet">
-    <link href="css/themecss/so-newletter-popup.css" rel="stylesheet">
+    <link href="/Public/Home/css/themecss/so_searchpro.css" rel="stylesheet">
+    <link href="/Public/Home/css/themecss/so_megamenu.css" rel="stylesheet">
+    <link href="/Public/Home/css/themecss/so-categories.css" rel="stylesheet">
+    <link href="/Public/Home/css/themecss/so-listing-tabs.css" rel="stylesheet">
+    <link href="/Public/Home/css/themecss/so-category-slider.css" rel="stylesheet">
+    <link href="/Public/Home/css/themecss/so-newletter-popup.css" rel="stylesheet">
 
-    <link href="css/footer/footer1.css" rel="stylesheet">
-    <link href="css/header/header1.css" rel="stylesheet">
-    <link id="color_scheme" href="css/theme.css" rel="stylesheet"> 
-    <link href="css/responsive.css" rel="stylesheet">
+    <link href="/Public/Home/css/footer/footer1.css" rel="stylesheet">
+    <link href="/Public/Home/css/header/header1.css" rel="stylesheet">
+    <link id="color_scheme" href="/Public/Home/css/theme.css" rel="stylesheet">
+    <link href="/Public/Home/css/responsive.css" rel="stylesheet">
 
 
 </head>
@@ -78,11 +78,11 @@
 	                      </ul>
 	                  </li>
 	                  <li><a href="#." style="color:#d9d7d7;">收藏夹</a></li>
-	                  <li><a href="#." style="color:#d9d7d7;"><span><img src="image/hy/sj.png" style="margin-right:5px;"></span>手机站</a></li>
-	                  <li><a href="#." style="color:#d9d7d7;"><span><img src="image/hy/wx2.png" style="margin-right:5px;"></span>微信公众号 </a></li>
+	                  <li><a href="#." style="color:#d9d7d7;"><span><img src="/Public/Home/image/hy/sj.png" style="margin-right:5px;"></span>手机站</a></li>
+	                  <li><a href="#." style="color:#d9d7d7;"><span><img src="/Public/Home/image/hy/wx2.png" style="margin-right:5px;"></span>微信公众号 </a></li>
 	                  <li><a href="#." style="color:#d9d7d7;">帮助中心 </a></li>
 	                  <li><a href="enter-1.html" style="color:#d9d7d7;">商家入驻 </a></li>
-	                  <li><a href="#." style="color:#d9d7d7;"><span><img src="image/hy/dh.png" style="margin-right:5px;"></span>网站导航</a></li>  
+	                  <li><a href="#." style="color:#d9d7d7;"><span><img src="/Public/Home/image/hy/dh.png" style="margin-right:5px;"></span>网站导航</a></li>
 
 	                </ul>
 	               
@@ -96,7 +96,7 @@
 						<div class="col-md-3">
 							<div id="logo" class="logo" style="height: 85px;">
 								<a href="index.html" title="">
-									<img src="images/logo.png" alt="" style=" margin-top: 20px;">
+									<img src="/Public/Home/images/logo.png" alt="" style=" margin-top: 20px;">
 								</a>
 							</div><!-- /#logo -->
 						</div><!-- /.col-md-3 -->
@@ -104,8 +104,8 @@
 				</div><!-- /.container -->
 			</div><!-- /.header-middle -->	
 		</section><!-- /#header -->
-         
-         <section class="flat-account " >
+        
+        <section class="flat-account " >
 			<div class="container">
 			   <div style="width:100%;,margin-left:30%; ">
 			       <div style="width:50%;float:left;padding-left: 24%;text-align: center;font-size: 22px;line-height: 50px;">
@@ -126,30 +126,17 @@
 				    <div class="col-md-12 zhuce">
                        <ul style="  margin-left: 23%;margin-bottom: 30px;">
                           <a href=""><li style="border-bottom: 4px solid #ff5e00;line-height: 57px;"><span>1</span>设置用户名</li></a>
-                          <a href=""><li><span style="border-bottom: 4px solid #ff5e00;line-height: 57px;">2</span>填写入驻信息</li></a>
-                          <a href=""><li><span style="background-color: #999;">3</span>等待审核</li></a>
+                          <a href=""><li style="border-bottom: 4px solid #ff5e00;line-height: 57px;"><span style="border-bottom: 4px solid #ff5e00;line-height: 57px;">2</span>填写入驻信息</li></a>
+                          <a href=""><li style="border-bottom: 4px solid #ff5e00;line-height: 57px;"><span>3</span>等待审核</li></a>
                           <a href=""><li><span style="background-color: #999;">4</span>注册成功</li></a>
                        </ul>
 				    </div>
 				    <div class="col-md-12">
 				        <div style="    margin-left: 25%;width: 50%; margin-top: 30px;background-color: #fff;">
-				        <form action="#" method="get" id="form-login" accept-charset="utf-8">
-								<div class="form-box">
-									<label for="name-login"><span class="sign">*</span>手机号： </label>
-									<input type="text"  name="name-login" placeholder="请输入你的手机号"  id="phone" onblur="upperCase()">
-								</div><!-- /.form-box -->
-								<div class="form-box">
-									<label for="password-login"><span class="sign">*</span>验证码： </label>
-									<input type="text" id="password-login" name="password-login" placeholder="请输入验证码" style="width:41%;">
-									<button style="color: #fff;background-color: #ff5e00;border: 0px;line-height: 35px; width: 18%;">获取验证码</button>
-								</div><!-- /.form-box -->
-                                <div class="form-box" style="text-align: center; margin-top: 14px;">
-                                    <input type="checkbox" name="" style="vertical-align: middle;width: 20px;"> <a href=""><span>我已阅读并同意协议</span></a>
-                                </div>
-								<div class="form-box buzou">
-									<a href="enter-2.html" class="login" style="color:#fff;"><span>下一步</span></a>
-								</div><!-- /.form-box -->
-							</form><!-- /#form-login -->
+				           <div style="text-align:center;">
+				                 <img src="/Public/Home/image/hy/time.png" style="width: 100px;    margin: 25px;"><br>
+							   <span style="font-size:18px;">你的申请已提交，正在等待审核。请耐心等待<a href="<?php echo U('login');?>">点击登录</a></span>
+				             </div>
 				        </div>
 				    </div>	
 
@@ -174,16 +161,5 @@
 
 
 
-</body>
-<script>
-function upperCase()
-        {
-        var phone = document.getElementById('phone').value;
-        if(!(/^1[34578]\d{9}$/.test(phone))){ 
-            alert("手机号码有误，请重填");  
-            return false; 
-        } 
-        }
-
-</script>	
+</body>	
 </html>

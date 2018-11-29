@@ -75,8 +75,10 @@
     <div class="top-bar" style="background-color:#222;">
         <div class="container" style="width:1200px;color: #fff;">
             <span style="color:#d9d7d7;line-height: 35px;">欢迎来到竞价买卖网!</span>
-            <a href="login.html"  style="color:#d9d7d7;margin-left:15px"><span>请登录</span></a>
-            <a href="reg-1.html"  style="color:#d9d7d7;margin-left:15px"><span>免费注册</span></a>
+            <?php if(empty($_SESSION['userInfo']['id'])): ?><a href="<?php echo U('Register/login');?>"  style="color:#d9d7d7;margin-left:15px"><span>请登录</span></a>
+                <a href="<?php echo U('Register/register');?>"  style="color:#d9d7d7;margin-left:15px"><span>免费注册</span></a>
+            <?php else: ?>
+                <a href="<?php echo U('User/user');?>"  style="color:#d9d7d7;margin-left:15px"><span>欢迎你：<?php echo ($_SESSION['userInfo']['nickname']); ?></span></a><?php endif; ?>
             <div class="right-sec" style="color:#d9d7d7;">
                 <ul style="margin-top: 3px;" class="baobei">
                     <li class=""><a href="#." style="color:#d9d7d7;">我的宝贝</a>
@@ -102,18 +104,20 @@
     <header style="padding-top:40px;">
         <div class="container" >
             <div class="logo"> <a href="index.html"><img src="/Public/Home/images/logo.png" alt="" ></a> </div>
+            <form action="index.php/Home/Product/product" method="get" id="searchProduct">
             <div class="search-cate" style="    float: left;">
-                <input type="search" placeholder="请输入您想要的商品">
-                <select style="font-size: 16px;border: 0px;margin-top: 14px;width: 60px;float: left;">
-                    <option>产品</option>
-                    <option>型号</option>
+                <input type="search" name="searchValue" placeholder="请输入您想要的商品">
+                <select style="font-size: 16px;border: 0px;margin-top: 14px;width: 60px;float: left;" name="searchType">
+                    <option value="1">产品</option>
+                    <option value="2">型号</option>
                 </select>
                 <button class="submit" type="submit">询价</button>
             </div>
+            </form>
 
             <!-- Cart Part -->
             <ul class="nav navbar-right cart-pop">
-                <li class="dropdown" style="display: inline-block;"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="itm-cont">3</span> <i class="fa fa-shopping-bag"></i> <strong>购物车</strong> <br>
+                <li class="dropdown" style="display: inline-block;"> <a href="<?php echo U('User/cart');?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="itm-cont">3</span> <i class="fa fa-shopping-bag"></i> <strong>购物车</strong> <br>
                 </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -173,7 +177,7 @@
                                                             <p class="close-menu"></p>
 
                                                                 <span>
-                                                                    <?php if(is_array($row["c2"])): $i = 0; $__LIST__ = $row["c2"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row2): $mod = ($i % 2 );++$i;?><a href="<?php echo U('Product/list',array(cid=>$row2['id']));?>"><?php echo ($row2["name"]); ?></a> |<?php endforeach; endif; else: echo "" ;endif; ?>
+                                                                    <?php if(is_array($row["c2"])): $i = 0; $__LIST__ = $row["c2"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row2): $mod = ($i % 2 );++$i;?><a href="<?php echo U('Product/product',array(c2=>$row2['id']));?>"><?php echo ($row2["name"]); ?></a> |<?php endforeach; endif; else: echo "" ;endif; ?>
                                                                 </span>
                                                                 <a>
                                                                 <b class="fa-angle-right"></b>
@@ -189,9 +193,9 @@
                                                                                     <div class="menu title-sy">
                                                                                         <ul>
                                                                                             <?php if(is_array($row["c2"])): $i = 0; $__LIST__ = $row["c2"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row2): $mod = ($i % 2 );++$i;?><li class="">
-                                                                                                <a href="<?php echo U('Product/list',array(cid=>$row2['id']));?>"  class="main-menu"><?php echo ($row2["name"]); ?></a>
+                                                                                                <a href="<?php echo U('Product/product',array(c2=>$row2['id']));?>"  class="main-menu"><?php echo ($row2["name"]); ?></a>
                                                                                                 <ul class="erji">
-                                                                                                    <?php if(is_array($row2["c3"])): $i = 0; $__LIST__ = $row2["c3"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row3): $mod = ($i % 2 );++$i;?><li><a href="<?php echo U('Product/list',array(cid=>$row3['id']));?>"><?php echo ($row3["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+                                                                                                    <?php if(is_array($row2["c3"])): $i = 0; $__LIST__ = $row2["c3"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row3): $mod = ($i % 2 );++$i;?><li><a href="<?php echo U('Product/product',array(c3=>$row3['id']));?>"><?php echo ($row3["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
                                                                                                 </ul>
                                                                                             </li><?php endforeach; endif; else: echo "" ;endif; ?>
                                                                                         </ul>
@@ -350,12 +354,12 @@
                                     <?php if(is_array($row)): $i = 0; $__LIST__ = $row;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><div class="product-layout item-inner style1 ">
                                             <div class="item-image">
                                                 <div class="item-img-info">
-                                                    <a href="<?php echo U('Product/product',array('id'=>$row1.id));?>" target="_self" title="Mandouille short "><img src="<?php echo ($row1["pic1"]); ?>" alt="Mandouille short"></a>
+                                                    <a href="<?php echo U('Product/productDetail',array('id'=>$row1['id']));?>" target="_self"><img src="<?php echo ($row1["pic1"]); ?>"></a>
                                                 </div>
                                             </div>
                                             <div class="item-info">
                                                 <div class="item-title element">
-                                                    <a href="<?php echo U('Product/product',array('id'=>$row1.id));?>" target="_self" title="Mandouille short"><?php echo ($row1["name"]); ?> </a>
+                                                    <a href="<?php echo U('Product/productDetail',array('id'=>$row1['id']));?>" target="_self"><?php echo ($row1["name"]); ?> </a>
                                                 </div>
                                                 <div class="content_price price">
                                                     <span style="font-size: 14px;color: #666;">型号:</span><span class="price-new product-price"><?php echo ($row1["type"]); ?></span>&nbsp;&nbsp;
@@ -397,7 +401,7 @@
                     <div class="head-title">
                         <div class="modtitle">
                             <span>今日优惠</span>
-                              <a class="viewall" href="�route=product�special.html">查看更多</a>
+                              <a class="viewall" href="#">查看更多</a>
                         </div>    
                     </div>
                     <div class="modcontent">
@@ -411,24 +415,22 @@
                                                         <span class="label-product label-sale"><?php echo ($row["discount"]); ?></span>
                                                     </div>
                                                     <div class="product-image-container second_img">
-                                                        <a href="product.html" target="_self" title="Pastrami bacon">
-                                                            <img src="<?php echo ($row["pic1"]); ?>" class="img-1 img-responsive" alt="image1">
-                                                            <img src="<?php echo ($row["pic2"]); ?>" class="img-2 img-responsive" alt="image2">
+                                                        <a href="<?php echo U('Product/productDetail',array('id'=>$row['id']));?>" target="_self" title="Pastrami bacon">
+                                                            <img src="<?php echo ($row["pic1"]); ?>" class="img-1 img-responsive">
+                                                            <img src="<?php echo ($row["pic2"]); ?>" class="img-2 img-responsive">
                                                         </a>
                                                     </div>
                                                 </div>
                                                 <div class="right-block">
                                                     <div class="button-group so-quickview cartinfo--left">
-                                                        <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
+                                                        <button type="button" class="addToCart" title="加入购物车" onclick="addCart('<?php echo ($row["id"]); ?>');">
                                                             <span>加入购物车 </span>
                                                         </button>
-                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                        </button>
-                                                        <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
+                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="addWishlist('<?php echo ($row["id"]); ?>');"><i class="fa fa-heart-o"></i><span>收藏</span>
                                                         </button>
                                                     </div>
                                                     <div class="caption hide-cont element1" >
-                                                        <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self"><?php echo ($row["name"]); ?></a></h4>
+                                                        <h4 style="margin:0;"><a href="<?php echo U('Product/productDetail',array('id'=>$row1['id']));?>" title="Pastrami bacon" target="_self"><?php echo ($row["name"]); ?></a></h4>
                                                     </div>
                                                 </div>
 
@@ -478,7 +480,7 @@
                               <div class=" tab-content">
                                 <div class="tab-pane active pinpai-div element1" >
                                   <?php if(is_array($brandCommend)): $i = 0; $__LIST__ = $brandCommend;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><ul id="div-<?php echo ($key + 1); ?>" style="display: none;">
-                                          <?php if(is_array($row)): $i = 0; $__LIST__ = $row;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><li><a href=""><img src="<?php echo ($row1["pic"]); ?>"></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+                                          <?php if(is_array($row)): $i = 0; $__LIST__ = $row;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><li><a href="<?php echo U('Product/product',array('bid'=>$row1['id']));?>"><img src="<?php echo ($row1["pic"]); ?>"></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
                                       </ul><?php endforeach; endif; else: echo "" ;endif; ?>
                                 </div>
                               </div>
@@ -510,7 +512,7 @@
                                  </div>
                                  <div style="" class="title-list-rg">
                                       <ul>
-                                        <?php if(is_array($row["value"])): $i = 0; $__LIST__ = $row["value"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><a href=""><li><?php echo ($row1["name"]); ?></li></a><?php endforeach; endif; else: echo "" ;endif; ?>
+                                        <?php if(is_array($row["value"])): $i = 0; $__LIST__ = $row["value"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><a href="<?php echo U('Product/product',array('tid'=>$row1['id']));?>"><li><?php echo ($row1["name"]); ?></li></a><?php endforeach; endif; else: echo "" ;endif; ?>
                                      </ul>
                                  </div>
                             </div>
@@ -521,7 +523,7 @@
                                 </div>
                                 <div style="" class="title-list-lf-rg">
                                     <ul>
-                                        <?php if(is_array($row["value"])): $i = 0; $__LIST__ = $row["value"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><a href=""><li><?php echo ($row1["name"]); ?></li></a><?php endforeach; endif; else: echo "" ;endif; ?>
+                                        <?php if(is_array($row["value"])): $i = 0; $__LIST__ = $row["value"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><a href="<?php echo U('Product/product',array('tid'=>$row1['id']));?>"><li><?php echo ($row1["name"]); ?></li></a><?php endforeach; endif; else: echo "" ;endif; ?>
                                     </ul>
                                 </div>
                             </div><?php endif; endforeach; endif; else: echo "" ;endif; ?>
@@ -546,7 +548,7 @@
                                         <?php if(is_array($model["product"])): $i = 0; $__LIST__ = $model["product"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><div class="col-md-3 product-item-container">
                                                 <div class="left-block left-b">
                                                     <div class="product-image-container second_img">
-                                                        <a href="product.html" target="_self">
+                                                        <a href="<?php echo U('Product/productDetail',array('id'=>$row['id']));?>" target="_self">
                                                             <img src="<?php echo ($row["pic1"]); ?>" class="img-1 img-responsive">
                                                             <noempty name="row.pic2"></noempty>
                                                             <img src="<?php echo ($row["pic2"]); ?>" class="img-2 img-responsive">
@@ -556,16 +558,14 @@
                                                 </div>
                                                 <div class="right-block">
                                                     <div class="button-group so-quickview cartinfo--left">
-                                                        <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
+                                                        <button type="button" class="addToCart" title="加入购物车" onclick="addCart('<?php echo ($row["id"]); ?>');">
                                                             <span>加入购物车 </span>
                                                         </button>
-                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                        </button>
-                                                        <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
+                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="addWishlist('<?php echo ($row["id"]); ?>');"><i class="fa fa-heart-o"></i><span>收藏</span>
                                                         </button>
                                                     </div>
                                                     <div class="caption hide-cont element1">
-                                                        <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self"><?php echo ($row["name"]); ?></a></h4>
+                                                        <h4 style="margin:0;"><a href="<?php echo U('Product/productDetail',array('id'=>$row1['id']));?>" title="Pastrami bacon" target="_self"><?php echo ($row["name"]); ?></a></h4>
                                                     </div>
                                                     <p class="price"><span style="color: #666;">型号：</span><?php echo ($row["type"]); ?></p>
                                                 </div>
@@ -578,7 +578,7 @@
                                 <div class="col-md-3" >
                                     <div class="left-title" style=" border: 1px solid #eee;margin-bottom:20px;">
                                         <ul>
-                                            <?php if(is_array($model["tproduct"])): $i = 0; $__LIST__ = $model["tproduct"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><li onmouseover="showTagContent('m<?php echo ($mk); ?>-','<?php echo ($i); ?>')"><a href=""><?php echo ($row["tagName"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+                                            <?php if(is_array($model["tproduct"])): $i = 0; $__LIST__ = $model["tproduct"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><li onmouseover="showTagContent('m<?php echo ($mk); ?>-','<?php echo ($i); ?>')"><?php echo ($row["tagName"]); ?></li><?php endforeach; endif; else: echo "" ;endif; ?>
                                         </ul>
                                     </div>
 
@@ -586,17 +586,15 @@
                                            <?php if(is_array($row["product"])): $i = 0; $__LIST__ = $row["product"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><div class="product-layout item-inner style1 col-md-12" style="">
                                                   <div class="item-image" style="width: 24%;float: left;">
                                                       <div class="item-img-info">
-                                                          <a href="product.html" target="_self" title="Mandouille short ">
+                                                          <a href="<?php echo U('Product/productDetail',array('id'=>$row1['id']));?>" target="_self">
                                                               <img src="<?php echo ($row1["pic1"]); ?>" alt="Mandouille short">
                                                               </a>
                                                       </div>
-
                                                   </div>
                                                   <div class="item-info ele" style="width: 70%;float: left;margin-top:3%;margin-left:10px;">
                                                       <div class="item-title element ">
-                                                          <a href="product.html" target="_self" title="Mandouille short"><?php echo ($row1["name"]); ?></a>
+                                                          <a href="<?php echo U('Product/productDetail',array('id'=>$row1['id']));?>" target="_self"><?php echo ($row1["name"]); ?></a>
                                                       </div>
-
                                                       <div class="content_price price">
                                                           <p class="a2" style="color:#666;">型号: <b style="color:#ff5e00;"><?php echo ($row1["type"]); ?></b></p>
                                                       </div>
@@ -628,7 +626,7 @@
                                         </div>
                                         <div style="" class="title-list-rg">
                                             <ul>
-                                                <?php if(is_array($row["value"])): $i = 0; $__LIST__ = $row["value"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><a href=""><li><?php echo ($row1["name"]); ?></li></a><?php endforeach; endif; else: echo "" ;endif; ?>
+                                                <?php if(is_array($row["value"])): $i = 0; $__LIST__ = $row["value"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><a href="<?php echo U('Product/product',array('tid'=>$row1['id']));?>"><li><?php echo ($row1["name"]); ?></li></a><?php endforeach; endif; else: echo "" ;endif; ?>
                                             </ul>
                                         </div>
                                     </div>
@@ -639,7 +637,7 @@
                                         </div>
                                         <div style="" class="title-list-lf-rg">
                                             <ul>
-                                                <?php if(is_array($row["value"])): $i = 0; $__LIST__ = $row["value"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><a href=""><li><?php echo ($row1["name"]); ?></li></a><?php endforeach; endif; else: echo "" ;endif; ?>
+                                                <?php if(is_array($row["value"])): $i = 0; $__LIST__ = $row["value"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><a href="<?php echo U('Product/product',array('tid'=>$row1['id']));?>"><li><?php echo ($row1["name"]); ?></li></a><?php endforeach; endif; else: echo "" ;endif; ?>
                                             </ul>
                                         </div>
                                     </div><?php endif; endforeach; endif; else: echo "" ;endif; ?>
@@ -660,7 +658,7 @@
                                 <div class="col-md-3" >
                                     <div class="left-title" style=" border: 1px solid #eee;margin-bottom:20px;">
                                         <ul>
-                                            <?php if(is_array($model["tproduct"])): $i = 0; $__LIST__ = $model["tproduct"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><li onmouseover="showTagContent('m<?php echo ($mk); ?>-','<?php echo ($i); ?>')"><a href=""><?php echo ($row["tagName"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+                                            <?php if(is_array($model["tproduct"])): $i = 0; $__LIST__ = $model["tproduct"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><li onmouseover="showTagContent('m<?php echo ($mk); ?>-','<?php echo ($i); ?>')"><?php echo ($row["tagName"]); ?></li><?php endforeach; endif; else: echo "" ;endif; ?>
                                         </ul>
                                     </div>
 
@@ -668,15 +666,15 @@
                                             <?php if(is_array($row["product"])): $i = 0; $__LIST__ = $row["product"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><div class="product-layout item-inner style1 col-md-12" style="">
                                                     <div class="item-image" style="width: 24%;float: left;">
                                                         <div class="item-img-info">
-                                                            <a href="product.html" target="_self" title="Mandouille short ">
-                                                                <img src="<?php echo ($row1["pic1"]); ?>" alt="Mandouille short">
+                                                            <a href="<?php echo U('Product/productDetail',array('id'=>$row1['id']));?>" target="_self">
+                                                                <img src="<?php echo ($row1["pic1"]); ?>">
                                                             </a>
                                                         </div>
 
                                                     </div>
                                                     <div class="item-info ele" style="width: 70%;float: left;margin-top:3%;margin-left:10px;">
                                                         <div class="item-title element ">
-                                                            <a href="product.html" target="_self" title="Mandouille short"><?php echo ($row1["name"]); ?></a>
+                                                            <a href="<?php echo U('Product/productDetail',array('id'=>$row1['id']));?>" target="_self"><?php echo ($row1["name"]); ?></a>
                                                         </div>
 
                                                         <div class="content_price price">
@@ -693,7 +691,7 @@
                                         <?php if(is_array($model["product"])): $i = 0; $__LIST__ = $model["product"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><div class="col-md-3 product-item-container">
                                                 <div class="left-block left-b">
                                                     <div class="product-image-container second_img">
-                                                        <a href="product.html" target="_self">
+                                                        <a href="<?php echo U('Product/productDetail',array('id'=>$row['id']));?>" target="_self">
                                                             <img src="<?php echo ($row["pic1"]); ?>" class="img-1 img-responsive">
                                                             <noempty name="row.pic2"></noempty>
                                                             <img src="<?php echo ($row["pic2"]); ?>" class="img-2 img-responsive">
@@ -703,16 +701,14 @@
                                                 </div>
                                                 <div class="right-block">
                                                     <div class="button-group so-quickview cartinfo--left">
-                                                        <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
+                                                        <button type="button" class="addToCart" title="加入购物车" onclick="addCart('<?php echo ($row["id"]); ?>');">
                                                             <span>加入购物车 </span>
                                                         </button>
-                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                        </button>
-                                                        <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
+                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="addWishlist('<?php echo ($row["id"]); ?>');"><i class="fa fa-heart-o"></i><span>收藏</span>
                                                         </button>
                                                     </div>
                                                     <div class="caption hide-cont element1">
-                                                        <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self"><?php echo ($row["name"]); ?></a></h4>
+                                                        <h4 style="margin:0;"><a href="<?php echo U('Product/productDetail',array('id'=>$row['id']));?>" target="_self"><?php echo ($row["name"]); ?></a></h4>
                                                     </div>
                                                     <p class="price"><span style="color: #666;">型号：</span><?php echo ($row["type"]); ?></p>
                                                 </div>
@@ -1326,6 +1322,7 @@
 <script type="text/javascript" src="/Public/Home/js/themejs/toppanel.js"></script>
 <script type="text/javascript" src="/Public/Home/js/themejs/so_megamenu.js"></script>
 <script type="text/javascript" src="/Public/Home/js/themejs/addtocart.js"></script>
+    <script type="text/javascript" src="/Public/JS/common.js"></script>
 
 <script language="javascript">
 $('#div-1').css('display','block');

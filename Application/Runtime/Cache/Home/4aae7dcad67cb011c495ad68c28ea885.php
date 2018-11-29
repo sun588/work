@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
@@ -6,7 +6,7 @@
 	<!-- Basic Page Needs -->
 	<meta charset="UTF-8">
 	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-	<title>填写入驻信息</title>
+	<title>企业入驻</title>
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
    <link rel="stylesheet" href="css/style.css">
@@ -104,8 +104,8 @@
 				</div><!-- /.container -->
 			</div><!-- /.header-middle -->	
 		</section><!-- /#header -->
-        
-        <section class="flat-account " >
+         
+         <section class="flat-account " >
 			<div class="container">
 			   <div style="width:100%;,margin-left:30%; ">
 			       <div style="width:50%;float:left;padding-left: 24%;text-align: center;font-size: 22px;line-height: 50px;">
@@ -126,128 +126,28 @@
 				    <div class="col-md-12 zhuce">
                        <ul style="  margin-left: 23%;margin-bottom: 30px;">
                           <a href=""><li style="border-bottom: 4px solid #ff5e00;line-height: 57px;"><span>1</span>设置用户名</li></a>
-                          <a href=""><li style="border-bottom: 4px solid #ff5e00;line-height: 57px;"><span style="border-bottom: 4px solid #ff5e00;line-height: 57px;">2</span>填写入驻信息</li></a>
+                          <a href=""><li><span style="border-bottom: 4px solid #ff5e00;line-height: 57px;">2</span>填写入驻信息</li></a>
                           <a href=""><li><span style="background-color: #999;">3</span>等待审核</li></a>
                           <a href=""><li><span style="background-color: #999;">4</span>注册成功</li></a>
                        </ul>
 				    </div>
 				    <div class="col-md-12">
 				        <div style="    margin-left: 25%;width: 50%; margin-top: 30px;background-color: #fff;">
-				            <form action="#" method="get" id="form-login" accept-charset="utf-8">
-				                <div class="form-box" style="    margin-left: 12%;">
-									<label for="name-login">登陆名：12345678 </label>
-								</div><!-- /.form-box -->
-								<h3>请设置登录密码登录时验证，保护账号信息</h3>
-								<div class="form-box">
-									<label for="name-login"><span class="sign">*</span>登陆密码： </label>
-									<input type="text" id="name-login" name="name-login" placeholder="设置你的密码" >
-								</div><!-- /.form-box -->
-								<div class="form-box">
-									<label for="password-login"><span class="sign">*</span>密码确认： </label>
-									<input type="text" id="password-login" name="password-login" placeholder="请再次输入密码" >
-								</div><!-- /.form-box -->
-								<h3>设置昵称</h3>
-                                <div class="form-box">
-									<label for="name-login">昵称： </label>
-									<input type="text" id="name-login" name="name-login" placeholder="请输入你的会员名" >
-								</div><!-- /.form-box -->
-								<h3><span class="sign">*</span>填写公司信息</h3>
-								<div class="form-box">
-									<label for="name-login"><span class="sign">*</span>公司名称： </label>
-									<input type="text" id="name-login" name="name-login" placeholder="请输入你的公司名称" >
-								</div><!-- /.form-box -->
-								<div class="form-box dizhi">
-									<label for="name-login"><span class="sign">*</span>地址： </label>
-									<ul>
-									   <li>
-									       <select>
-											    <option>--省--</option>
-											    <option>浙江省</option>
-											    <option>安徽省</option>
-											    <option>浙江省</option>
-											</select>
-									   </li>
-									   <li>
-									       <select>
-											    <option>--市--</option>
-											    <option>温州市</option>
-											    <option>温州市</option>
-											    <option>温州市</option>
-											</select>
-									   </li>
-									   <li>
-									       <select>
-											    <option>--区--</option>
-											    <option>瓯海区</option>
-											    <option>瓯海区</option>
-											    <option>瓯海区</option>
-											</select>
-									   </li>
-									</ul>
-								</div><!-- /.form-box -->
-								<div class="form-box">
-									<label for="name-login"><span class="sign">*</span>详细地址 </label>
-									<input type="text" id="name-login" name="name-login" placeholder="请输入你公司的地址" >
-								</div><!-- /.form-box -->
-								<div class="form-box">
-									<label for="name-login"><span class="sign">*</span>联系电话： </label>
-									<input type="tel" name="telephone"  name="name-login" placeholder="请输入你公司的联系电话" onkeyup="this.value=this.value.replace(/[^0-9-]+/,'');" >
-								</div><!-- /.form-box -->
+				        <form action="#" method="get" id="form-login" accept-charset="utf-8">
 								<div class="form-box">
 									<label for="name-login"><span class="sign">*</span>手机号： </label>
 									<input type="text"  name="name-login" placeholder="请输入你的手机号"  id="phone" onblur="upperCase()">
 								</div><!-- /.form-box -->
 								<div class="form-box">
-									<label for="name-login"><span class="sign">*</span>E-mail </label>
-									<input id="email" name="email" type="email"  name="name-login" placeholder="请输入你的E-mail" />
-
-
+									<label for="password-login"><span class="sign">*</span>验证码： </label>
+									<input type="text" id="password-login" name="password-login" placeholder="请输入验证码" style="width:41%;">
+									<button style="color: #fff;background-color: #ff5e00;border: 0px;line-height: 35px; width: 18%;">获取验证码</button>
 								</div><!-- /.form-box -->
-								<div class="form-box">
-									<label for="name-login">请上传营业执照 </label>
-									<div style=" float:left; padding:2%;margin-left: 30%;">
-										<label class='div_img div_img1 bg-f' name='pic1' style="width:340px;">
-											<div style="margin-top:10%; text-align: center;">
-												<p class="file-icon1" ><img src="image/tu/add.png"></p>
-												<p class="font14">添加照片</p>
-												 <input type="file"  id="file"  accept="image/*" style="display: none;" />
-											</div>
-										</label>
-									</div>
-								</div><!-- /.form-box -->
-								<div class="form-box special  clearfix">
-									<label for="name-login"><span class="sign">*</span>请上传网站负责人身份证正反面照 </label>
-											<div class="form-group">
-											  <div class="xx btn-file">
-												<div style=" float:left; padding:2%;    margin-left: 30%;">
-													<label class="font14 fontw">负责人身份证正面照</label>
-													<div class="xx" style="">
-														<label class='div_img div_img1 bg-f' name='pic1' style="width:340px;">
-															<div style="margin-top:10%;    text-align: center;">
-																<p class="file-icon1" ><img src="image/tu/add.png"></p>
-																<p class="font14">添加照片</p>
-																 <input type="file"  id="file"  accept="image/*" style="display: none;" />
-															</div>
-														</label>
-													</div>
-												</div>
-
-												<div style=" float:left; padding:2%;margin-left: 30%;">
-													<label class="font14 fontw">负责人身份证反面照</label>
-													<label class='div_img div_img1 bg-f' name='pic1' style="width:340px;">
-														<div style="margin-top:10%; text-align: center;">
-															<p class="file-icon1" ><img src="image/tu/add.png"></p>
-															<p class="font14">添加照片</p>
-															 <input type="file"  id="file"  accept="image/*" style="display: none;" />
-														</div>
-													</label>
-												</div>
-
-											</div>
-										</div>
-								</div><!-- /.form-box -->
+                                <div class="form-box" style="text-align: center; margin-top: 14px;">
+                                    <input type="checkbox" name="" style="vertical-align: middle;width: 20px;"> <a href=""><span>我已阅读并同意协议</span></a>
+                                </div>
 								<div class="form-box buzou">
-									<input id="load" value="提交" type="button" onclick="check()" style="     border-radius: 20px;   background-color: #ff5e00;color:#fff;" />
+									<a href="enter-2.html" class="login" style="color:#fff;"><span>下一步</span></a>
 								</div><!-- /.form-box -->
 							</form><!-- /#form-login -->
 				        </div>
@@ -274,7 +174,7 @@
 
 
 
-</body>	
+</body>
 <script>
 function upperCase()
         {
@@ -285,76 +185,5 @@ function upperCase()
         } 
         }
 
-
-
-// 邮件设置
-
-function check()
-{
- 
-var email=document.getElementById("email").value;
- 
-//
-if(email=="")
-{
-    alert("电子邮件不能为空");
-    return false;
-}
-else
-{
-    reg=/^([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/gi;
-    if(!reg.test(email))
-    {
-        alert("非法的电子邮件");
-        return false;
-    }
-}
-}
-
-</script>
-
-<script>
-$('.div_img').click(function(){
-  var index= $($('.div_img')).index(this);
-  $("#file").attr('data-id',index);
-  $("#file").click();
-})
-//图片上传，ajax中data值可加上name辨别
-$('#file').change(function(){
-  var index=$(this).attr('data-id');
-  var name=$(".div_img").eq(index).attr('name');
-  if (this.files.length === 0) return;
-  var img="<img src=''> <input type='hidden' name='"+name+"' >";
-  $(".div_img").eq(index).html(img);
-  $("#loading").show();
-	lrz(this.files[0], {width: 300}).then(function (rst) {　　
-		//请求ajax把图片地址传过去
-		rst.formData.append('base64img', rst.base64);
-		$.ajax({
-			url: '../upload.php',
-　　　　　　type: 'post',
-			data: rst.formData, //rst.base64就是这个图片的地址 base64字符串
-			processData: false,
-            contentType: false,
-　　　　　　error: function(e){
-				$("#loading").hide();
-				layer.msg(e)
-			},
-　　　　　　success: function(e){
-				$("#loading").hide();
-				$(".div_img").eq(index).children('img').attr('src','.'+e);
-	            $(".div_img").eq(index).children('input').val(e);
-	            layer.msg("图片上传成功");
-			},
-　　　　});
-　　}).catch(function (err) {
-		$("#loading").hide();　　
-		//捕获错误，而且一旦出错上面的then都不会执行　　
-		layer.msg(err)
-	}).always(function () {　　
-		//无论成败都会执行这里　
-		$("#loading").hide();　　
-	});
-})
-</script>
+</script>	
 </html>
