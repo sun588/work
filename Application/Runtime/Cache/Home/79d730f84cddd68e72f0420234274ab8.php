@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="/Public/Home/css/main.css">
     <link rel="stylesheet" href="/Public/Home/css/style.css">
     <link rel="stylesheet" href="/Public/Home/css/app-orange.css" id="theme_color" />
-    <link href="/Public/Home/css/theme.css" rel="stylesheet">
     <!-- end -->
    
     <!-- Libs CSS
@@ -66,8 +65,6 @@
 
     <div id="wrapper" class="wrapper-fluid">
    <!-- Header Container  -->
-
-        <!-- //Header center -->
         <header id="header" class=" typeheader-1" style="background-color:#fff;">
     <!-- Header Top -->
     <div class="top-bar" style="background-color:#222;">
@@ -291,73 +288,107 @@
 </header>
     <!-- //Header Container  -->
 
-  <!-- Main Container  -->
-  <div class="main-container container">
-    
-    <div class="container">
-      <div class="row">
+	<!-- Main Container  -->
+	<div class="main-container container">
+		
+		<div class="container">
+			<div class="row">
 
-          <!--左侧导航栏-->
-          <div id="contents" role="main" class="main-page col-lg-2 hy-list">
+                <!-- 商家会员中心侧边栏  -->
+                <div id="contents" role="main" class="main-page col-lg-2 hy-list">
     <div class="huiyuan">
-        <span>会员中心</span>
+        <span>商家会员中心</span>
     </div>
     <nav>
         <ul>
-            <li><a href="cart.html" bank><i class="fa fa-pencil-square-o" style="font-size: 16px;margin-right: 4px;"></i>我的订单<span class="sign-10">(20)</span></a></li>
-            <li><a href="cart.html" bank><i class="fa fa-shopping-cart" style="font-size: 16px;margin-right: 4px;"></i>我的购物车<span class="sign-10">(<?php echo ($cartCount); ?>)</span></a></li>
-            <li><a href="<?php echo U('wishlist');?>" bank><i class="fa fa-heart-o" style="font-size: 16px;margin-right: 4px;"></i>我的收藏<span class="sign-10">(<?php echo ($wishlistCount); ?>)</span></a></li>
-            <li><a href="cart.html" bank><i class="fa fa-star-o" style="font-size: 16px;margin-right: 4px;"></i>评价管理<span class="sign-10">(10)</span></a></li>
-            <li><a href="<?php echo U('address');?>" bank><i class="fa fa-map-marker" style="font-size: 16px;margin-right: 4px;"></i>收货地址</a></li>
+            <li><a href="sj-dindan.html" bank><i class="fa fa-pencil-square-o" style="font-size: 16px;margin-right: 4px;"></i>我的订单<span class="sign-10">(20)</span></a></li>
+            <li><a href="<?php echo U('offer');?>" bank><i class="fa fa-jpy" style="font-size: 16px;margin-right: 4px;"></i>报价管理<span class="sign-10">(<?php echo ($offerCount); ?>)</span></a></li>
+            <li><a href="tixian-ad.html" bank><i class="fa fa-credit-card" style="font-size: 16px;margin-right: 4px;"></i>提现管理</a></li>
+            <li><a href="pingjia-ad.html" bank><i class="fa fa-star-o" style="font-size: 16px;margin-right: 4px;"></i>评价管理<span class="sign-10">(10)</span></a></li>
+            <li><a href="shouhuo-ad.html" bank><i class="fa fa-cog" style="font-size: 16px;margin-right: 4px;"></i>售后管理</a></li>
             <li><a href="cart.html" bank><i class="fa fa-cog" style="font-size: 16px;margin-right: 4px;"></i>账号设置</a></li>
             <li><a href="<?php echo U('Register/logout');?>" bank><i class="fa fa-sign-out" style="font-size: 16px;margin-right: 4px;"></i>退出登录</a></li>
         </ul>
     </nav>
 </div>
-          <!--左侧导航栏-->
+                <!-- 商家会员中心侧边栏  -->
 
-        <div id="contents" role="main" class="main-page col-lg-10 col-md-12 col-sm-12 col-xs-12 ">
-            <div class="shoucang">
-                <span>收藏的商品</span>
-            </div>
-              <!--changed listings-->
-              <div class="products-list row nopadding-xs so-filter-gird">
-                <?php if(is_array($product)): $i = 0; $__LIST__ = $product;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            
-                            <div class="product-image-container second_img">
-                                <a href="<?php echo U('Product/productDetail',array('id'=>$row['id']));?>" target="_self" title="Lastrami bacon">
-                                    <img src="<?php echo ($row["pic1"]); ?>" class="img-1 img-responsive">
-                                    <img src="<?php echo ($row["pic2"]); ?>" class="img-2 img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="right-block"> 
-                            <div class="caption hide-cont element1">
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self"><?php echo ($row["name"]); ?></a></h4>
-                            </div>
-                            <p class="price">
-                              <span class="price-new">型号:<?php echo ($row["type"]); ?></span>
-                            </p>
-                        </div>
-                    </div>
-                </div><?php endforeach; endif; else: echo "" ;endif; ?>
-            </div>
-
-            <div><?php echo ($page); ?></div>
-
+		<div id="contents" role="main" class="main-page col-lg-10 col-md-12 col-sm-12 col-xs-12">
+        <div class="bjls" style="    text-align: center;background-color: #484747;color: #fff;">
+                 <h2 style="margin:8px;">报价管理中心</h2>
         </div>
-        <!-- 产品end -->
+			  <div class="bjls">
+             <div class="bjls-1">
+                 <h3 >已报价列表</h3>
+             </div>
+             <!-- <div class="bjls-2">
+                <input type="search" name="" placeholder="请输入关键字">
+                <button type="submit">搜索</button>
+             </div> -->
+             <div class="bjls-2">
+                 <form action="<?php echo U('offer');?>" method="get">
+                    <input type="search" name="search" placeholder="请输入关键字">
+                    <button type="submit">搜索</button>
+                 </form>
+             </div>
+             <div class="bjls-3">
+                <a href="<?php echo U('addOffer');?>"><button type="submit">新增报价</button></a>
+             </div>
+        </div>
+        <div>
+             <form action="" method="post">
+                    <table class="shop_table shop_table_responsive cart" cellspacing="0" style="width:100%;">
+                      <thead>
+                        <tr>
+                          <th class="product-thumbnail">图片</th>
+                          <th class="product-name">产品</th>
+                          <th class="product-price">型号</th>
+                          <th class="product-price">已报价格</th>
+                          <th class="product-price">供货优势</th>
+                          <th class="product-subtotal">操作</th>
+                        </tr>
+                      </thead>
+                      
+                      <tbody>
+                      <?php if(is_array($data)): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><tr class="cart_item cart-table shanchu1">
+                          <td class="product-thumbnail" style="text-align: center;border: 1px solid #ccc;">
+                            <a href="simple_product.html">
+                              <img width="180" height="180" src="<?php echo ($row["pic1"]); ?>" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
+                            </a>
+                          </td>
+                          <td class="product-price" data-title="Product" style="text-align: center;border: 1px solid #ccc;">
+                            <span><?php echo ($row["name"]); ?></span>
+                          </td>
+                          <td class="product-quantity" data-title="Quantity" style="text-align: center;border: 1px solid #ccc;">
+                            <div class="">
+                             <span><?php echo ($row["type"]); ?></span><br>
+                            </div>
+                          </td>
+                          <td class="product-price" data-title="Price" style="text-align: center;border: 1px solid #ccc;">
+                            <span class="woocommerce-Price-currencySymbol" style="color:#ff5e00;font-size:16px;">￥<?php echo ($row["price"]); ?></span>
+                          </td>
+                          <td class="product-price" data-title="Product" style="text-align: center;border: 1px solid #ccc;">
+                            <span><?php echo ($row["info"]); ?></span>
+                          </td>
+                          <td class="product-subtotal" data-title="Total" style="text-align: center;border: 1px solid #ccc;">
+                            <!--<a onclick="edit('<?php echo ($row["id"]); ?>',this)"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:16px"></i></a>-->
+                            <a onclick="del('<?php echo ($row["id"]); ?>',this)" style="margin-left:20px;"><i class="fa fa-trash fa-trash1" aria-hidden="true"></i></a>
+                          </td>
+                        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+                      </tbody>
+                    </table>
+                  </form>
+        </div>
 
-      </div>
-    </div>
-    <!-- //Main Container -->
-   </div>
+		</div>
+	</div>
+	</div>
+		<!-- //Main Container -->
+	 </div> 
 
 
     <!-- Footer Container -->
-    <footer class="footer-container typefooter-1">
+        <footer class="footer-container typefooter-1">
     <!-- Footer Top Container -->
 
     <div class="container">
@@ -503,7 +534,6 @@
 </footer>
     <!-- //end Footer Container -->
 
-
 </div>
    
 
@@ -528,7 +558,25 @@
 <script type="text/javascript" src="/Public/Home/js/themejs/addtocart.js"></script>
 
 
-
+<script>
+    function del(id,obj){
+        if(confirm('确定要删除这条报价')){
+            $.post('<?php echo U("delOffer");?>',{id:id},function (rs) {
+                if(rs){
+                    rs = JSON.parse(rs);
+                    if(rs['errno'] == 1){
+                        alert('删除成功')
+                        $(obj).parents('tr').remove();
+                    }else {
+                        alert(rs['msg']);
+                    }
+                }else {
+                    alert('删除失败');
+                }
+            })
+        }
+    }
+</script>
 
 </body>
 </html>

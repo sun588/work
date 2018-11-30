@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="/Public/Home/css/main.css">
     <link rel="stylesheet" href="/Public/Home/css/style.css">
     <link rel="stylesheet" href="/Public/Home/css/app-orange.css" id="theme_color" />
-    <link href="/Public/Home/css/theme.css" rel="stylesheet">
     <!-- end -->
    
     <!-- Libs CSS
@@ -66,8 +65,6 @@
 
     <div id="wrapper" class="wrapper-fluid">
    <!-- Header Container  -->
-
-        <!-- //Header center -->
         <header id="header" class=" typeheader-1" style="background-color:#fff;">
     <!-- Header Top -->
     <div class="top-bar" style="background-color:#222;">
@@ -291,73 +288,102 @@
 </header>
     <!-- //Header Container  -->
 
-  <!-- Main Container  -->
-  <div class="main-container container">
-    
-    <div class="container">
-      <div class="row">
+	<!-- Main Container  -->
+	<div class="main-container container">
+		
+		<div class="container">
+			<div class="row">
 
-          <!--左侧导航栏-->
-          <div id="contents" role="main" class="main-page col-lg-2 hy-list">
-    <div class="huiyuan">
-        <span>会员中心</span>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="cart.html" bank><i class="fa fa-pencil-square-o" style="font-size: 16px;margin-right: 4px;"></i>我的订单<span class="sign-10">(20)</span></a></li>
-            <li><a href="cart.html" bank><i class="fa fa-shopping-cart" style="font-size: 16px;margin-right: 4px;"></i>我的购物车<span class="sign-10">(<?php echo ($cartCount); ?>)</span></a></li>
-            <li><a href="<?php echo U('wishlist');?>" bank><i class="fa fa-heart-o" style="font-size: 16px;margin-right: 4px;"></i>我的收藏<span class="sign-10">(<?php echo ($wishlistCount); ?>)</span></a></li>
-            <li><a href="cart.html" bank><i class="fa fa-star-o" style="font-size: 16px;margin-right: 4px;"></i>评价管理<span class="sign-10">(10)</span></a></li>
-            <li><a href="<?php echo U('address');?>" bank><i class="fa fa-map-marker" style="font-size: 16px;margin-right: 4px;"></i>收货地址</a></li>
-            <li><a href="cart.html" bank><i class="fa fa-cog" style="font-size: 16px;margin-right: 4px;"></i>账号设置</a></li>
-            <li><a href="<?php echo U('Register/logout');?>" bank><i class="fa fa-sign-out" style="font-size: 16px;margin-right: 4px;"></i>退出登录</a></li>
-        </ul>
-    </nav>
-</div>
-          <!--左侧导航栏-->
-
-        <div id="contents" role="main" class="main-page col-lg-10 col-md-12 col-sm-12 col-xs-12 ">
-            <div class="shoucang">
-                <span>收藏的商品</span>
-            </div>
-              <!--changed listings-->
-              <div class="products-list row nopadding-xs so-filter-gird">
-                <?php if(is_array($product)): $i = 0; $__LIST__ = $product;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            
-                            <div class="product-image-container second_img">
-                                <a href="<?php echo U('Product/productDetail',array('id'=>$row['id']));?>" target="_self" title="Lastrami bacon">
-                                    <img src="<?php echo ($row["pic1"]); ?>" class="img-1 img-responsive">
-                                    <img src="<?php echo ($row["pic2"]); ?>" class="img-2 img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="right-block"> 
-                            <div class="caption hide-cont element1">
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self"><?php echo ($row["name"]); ?></a></h4>
-                            </div>
-                            <p class="price">
-                              <span class="price-new">型号:<?php echo ($row["type"]); ?></span>
-                            </p>
-                        </div>
-                    </div>
-                </div><?php endforeach; endif; else: echo "" ;endif; ?>
-            </div>
-
-            <div><?php echo ($page); ?></div>
-
+        <div class="col-lg-12" style="    font-size: 18px;">
+           <span>全部商品</span>
         </div>
-        <!-- 产品end -->
 
-      </div>
-    </div>
-    <!-- //Main Container -->
-   </div>
+				<div id="contents" role="main" class="main-page col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="page type-page status-publish hentry">
+						<div class="entry-content">
+							<div class="entry-summary">
+								<div class="woocommerce">
+									<form action="" method="post">
+										<table class="shop_table shop_table_responsive cart" cellspacing="0" style="width:100%;" id="tab">
+											<thead>
+												<tr>
+													<th class="product-remove">&nbsp;</th>
+													<th class="product-thumbnail">图片</th>
+													<th class="product-name">产品</th>
+                                                    <th class="product-price">价格</th>
+													<th class="product-quantity">数量</th>
+													<th class="product-subtotal">操作</th>
+												</tr>
+											</thead>
+											
+											<tbody >
+                                            <?php if(is_array($product)): $i = 0; $__LIST__ = $product;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><tr class="cart_item cart-table shanchu2">
+                                                  <td class="product-remove" style=" text-align: center;">
+                                                    <input type="checkbox" name="check" >
+                                                  </td>
+
+                                                  <td class="product-thumbnail" style="text-align: center;    border: 1px solid #ccc;">
+                                                    <a href="simple_product.html">
+                                                      <img width="180" height="180" src="<?php echo ($row["pic1"]); ?>" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
+                                                    </a>
+                                                  </td>
+
+                                                  <td class="product-name" data-title="Product" style="text-align: center;border: 1px solid #ccc;">
+                                                    <a href="simple_product.html"><?php echo ($row["name"]); ?></a>
+                                                  </td>
+
+                                                  <td class="product-price" data-title="Price" style="text-align: center;border: 1px solid #ccc;">
+                                                    <span class="woocommerce-Price-amount amount">￥<span class="woocommerce-Price-currencySymbol price"><?php echo ($row["price"]); ?></span></span>
+                                                  </td>
+
+                                                  <td class="product-quantity" data-title="Quantity" style="text-align: center;border: 1px solid #ccc;">
+                                                    <div class="" >
+                                                      <span style="font-size:22px;" class="min">－</span>
+                                                      <input type="number" value="<?php echo ($row["num"]); ?>" class="text_box"  inputmode="numeric" style="width: 60px;text-align: center;">
+                                                      <span style="font-size:22px;" class="add">＋</span>
+                                                    </div>
+                                                  </td>
+                                                  <td class="product-subtotal" data-title="Total" style="text-align: center;border: 1px solid #ccc;">
+                                                    <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');">
+                                                         <span>移入收藏夹</span>
+                                                    </button>
+                                                    <a href="#" class="remove" title="Remove this item" style="margin-left:20px;"><i class="fa fa-times fa-times2" aria-hidden="true"></i></a>
+                                                  </td>
+                                                </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+												<tr style="position: sticky;bottom:0px;background-color: #fff;z-index: 99999;">
+													<td colspan="7" class="actions" style="text-align: center;border: 1px solid #ccc;">
+														<div class="coupon">
+                                                            <input type="checkbox" name="" id="allChecks" onclick="ckAll()" style="vertical-align: middle;">
+                                                            <label for="coupon_code">全选:</label>
+                                                            <span style="margin-left: 20px;border-radius: 2px;background-color: #eaeaea; margin-left: 20px;padding: 2px 6px;"><span class="allshanchu">全部删除</span></span>
+                                                            <a href="" style="margin-left: 20px;border-radius: 2px;background-color: #eaeaea; margin-left: 20px;padding: 2px 6px;"><span>移入收藏夹</span></a>
+                                                        </div>
+                                                        <div style="width:50%;float:right;    text-align: right;">
+                                                            <span>合计：<span style="font-size:18px;color:#ff5e00;"><label id="total"></label></span></span>
+                                                            <input type="submit" class="button" name="update_cart" value="结算" style="    width: 70px;">
+                                                        </div>
+													</td>
+												</tr>
+
+											</tbody>
+										</table>
+									</form>
+
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //Main Container -->
+	 </div> 
 
 
     <!-- Footer Container -->
-    <footer class="footer-container typefooter-1">
+        <footer class="footer-container typefooter-1">
     <!-- Footer Top Container -->
 
     <div class="container">
@@ -503,7 +529,6 @@
 </footer>
     <!-- //end Footer Container -->
 
-
 </div>
    
 
@@ -515,20 +540,69 @@
 <!-- Include Libs & Plugins
 ============================================ -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript" src="/Public/Home/js/jquery-2.2.4.min.js"></script>
-<script type="text/javascript" src="/Public/Home/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/Public/Home/js/owl-carousel/owl.carousel.js"></script>
-<script type="text/javascript" src="/Public/Home/js/slick-slider/slick.js"></script>
-<script type="text/javascript" src="/Public/Home/js/themejs/libs.js"></script>
+<script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="js/slick-slider/slick.js"></script>
+<script type="text/javascript" src="js/themejs/libs.js"></script>
 
 <!-- Theme files
 ============================================ -->
 
-<script type="text/javascript" src="/Public/Home/js/themejs/so_megamenu.js"></script>
-<script type="text/javascript" src="/Public/Home/js/themejs/addtocart.js"></script>
+<script type="text/javascript" src="js/themejs/so_megamenu.js"></script>
+<script type="text/javascript" src="js/themejs/addtocart.js"></script>  
 
 
+<script>
+$(document).ready(function(){
+  $(".fa-times1").click(function(){
+    $(".shanchu1").remove();
+  });
+   $(".fa-times2").click(function(){
+    $(".shanchu2").remove();
+  });
+   $(".allshanchu").click(function(){
+    $("tbody tr").remove();
+  });
+});
 
+//全选
+ function ckAll(){
+ var flag=document.getElementById("allChecks").checked;
+ var cks=document.getElementsByName("check");
+ for(var i=0;i<cks.length;i++){
+ cks[i].checked=flag;
+ }
+ }
+//加减
+
+$(function(){
+$(".add").click(function(){
+var t=$(this).parent().find('input[class*=text_box]');
+t.val(parseInt(t.val())+1)
+setTotal();
+})
+$(".min").click(function(){
+var t=$(this).parent().find('input[class*=text_box]');
+t.val(parseInt(t.val())-1)
+if(parseInt(t.val())<0){
+t.val(0);
+}
+setTotal();
+})
+function setTotal(){
+var s=0;
+$("#tab td").each(function(){
+s+=parseInt($(this).find('input[class*=text_box]').val())*parseFloat($(this).find('span[class*=price]').text());
+});
+$("#total").html(s.toFixed(2));
+}
+setTotal();
+
+})
+
+
+</script>
 
 </body>
 </html>

@@ -69,8 +69,12 @@
     <div class="top-bar" style="background-color:#222;">
         <div class="container" style="width:1200px;color: #fff;">
             <span style="color:#d9d7d7;line-height: 35px;">欢迎来到竞价买卖网!</span>
-            <a href="login.html"  style="color:#d9d7d7;margin-left:15px"><span>请登录</span></a>
-            <a href="reg-1.html"  style="color:#d9d7d7;margin-left:15px"><span>免费注册</span></a>
+            <?php if(empty($_SESSION['userInfo']['id'])): ?><a href="<?php echo U('Register/login');?>"  style="color:#d9d7d7;margin-left:15px"><span>请登录</span></a>
+                <a href="<?php echo U('Register/register');?>"  style="color:#d9d7d7;margin-left:15px"><span>免费注册</span></a>
+            <?php else: ?>
+                <?php if(($_SESSION['userInfo']['accountType']) == "2"): ?><a href="<?php echo U('Businessuser/businessUser');?>"  style="color:#d9d7d7;margin-left:15px"><span>欢迎你：<?php echo ($_SESSION['userInfo']['nickname']); ?></span></a>
+                <?php else: ?>
+                    <a href="<?php echo U('User/user');?>"  style="color:#d9d7d7;margin-left:15px"><span>欢迎你：<?php echo ($_SESSION['userInfo']['nickname']); ?></span></a><?php endif; endif; ?>
             <div class="right-sec" style="color:#d9d7d7;">
                 <ul style="margin-top: 3px;" class="baobei">
                     <li class=""><a href="#." style="color:#d9d7d7;">我的宝贝</a>
@@ -96,18 +100,20 @@
     <header style="padding-top:40px;">
         <div class="container" >
             <div class="logo"> <a href="index.html"><img src="/Public/Home/images/logo.png" alt="" ></a> </div>
+            <form action="index.php/Home/Product/product" method="get" id="searchProduct">
             <div class="search-cate" style="    float: left;">
-                <input type="search" placeholder="请输入您想要的商品">
-                <select style="font-size: 16px;border: 0px;margin-top: 14px;width: 60px;float: left;">
-                    <option>产品</option>
-                    <option>型号</option>
+                <input type="search" name="searchValue" placeholder="请输入您想要的商品">
+                <select style="font-size: 16px;border: 0px;margin-top: 14px;width: 60px;float: left;" name="searchType">
+                    <option value="1">产品</option>
+                    <option value="2">型号</option>
                 </select>
                 <button class="submit" type="submit">询价</button>
             </div>
+            </form>
 
             <!-- Cart Part -->
             <ul class="nav navbar-right cart-pop">
-                <li class="dropdown" style="display: inline-block;"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="itm-cont">3</span> <i class="fa fa-shopping-bag"></i> <strong>购物车</strong> <br>
+                <li class="dropdown" style="display: inline-block;"> <a href="<?php echo U('User/cart');?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="itm-cont">3</span> <i class="fa fa-shopping-bag"></i> <strong>购物车</strong> <br>
                 </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -167,7 +173,7 @@
                                                             <p class="close-menu"></p>
 
                                                                 <span>
-                                                                    <?php if(is_array($row["c2"])): $i = 0; $__LIST__ = $row["c2"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row2): $mod = ($i % 2 );++$i;?><a href="<?php echo U('Product/list',array(cid=>$row2['id']));?>"><?php echo ($row2["name"]); ?></a> |<?php endforeach; endif; else: echo "" ;endif; ?>
+                                                                    <?php if(is_array($row["c2"])): $i = 0; $__LIST__ = $row["c2"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row2): $mod = ($i % 2 );++$i;?><a href="<?php echo U('Product/product',array(c2=>$row2['id']));?>"><?php echo ($row2["name"]); ?></a> |<?php endforeach; endif; else: echo "" ;endif; ?>
                                                                 </span>
                                                                 <a>
                                                                 <b class="fa-angle-right"></b>
@@ -183,9 +189,9 @@
                                                                                     <div class="menu title-sy">
                                                                                         <ul>
                                                                                             <?php if(is_array($row["c2"])): $i = 0; $__LIST__ = $row["c2"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row2): $mod = ($i % 2 );++$i;?><li class="">
-                                                                                                <a href="<?php echo U('Product/list',array(cid=>$row2['id']));?>"  class="main-menu"><?php echo ($row2["name"]); ?></a>
+                                                                                                <a href="<?php echo U('Product/product',array(c2=>$row2['id']));?>"  class="main-menu"><?php echo ($row2["name"]); ?></a>
                                                                                                 <ul class="erji">
-                                                                                                    <?php if(is_array($row2["c3"])): $i = 0; $__LIST__ = $row2["c3"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row3): $mod = ($i % 2 );++$i;?><li><a href="<?php echo U('Product/list',array(cid=>$row3['id']));?>"><?php echo ($row3["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+                                                                                                    <?php if(is_array($row2["c3"])): $i = 0; $__LIST__ = $row2["c3"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row3): $mod = ($i % 2 );++$i;?><li><a href="<?php echo U('Product/product',array(c3=>$row3['id']));?>"><?php echo ($row3["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
                                                                                                 </ul>
                                                                                             </li><?php endforeach; endif; else: echo "" ;endif; ?>
                                                                                         </ul>
@@ -336,7 +342,7 @@
               </div>
               <div class="" style="    margin: 10px 0px;">
 
-                <span>价格：<span class="price-new" itemprop="price" style="font-size: 18px;color: #ff5e00;">￥1140.00-4500.00</span></span>
+                <span>价格：<span class="price-new" itemprop="price" style="font-size: 18px;color: #ff5e00;">￥<?php echo ($minPrice); ?>-<?php echo ($maxPrice); ?></span></span>
               </div>
               <div>
                  <!--  <span>运费</span> -->
@@ -344,70 +350,64 @@
               <span>请选择心仪的价格：</span>
               <div class="" style="border-top:1px solid #eee;height: 200px;padding: 10px;overflow: auto;">
 				<div class="inner-box-desc">
-					<div class="price-tax">
-                       <div  class="baojia">
-                           <span style="color: #ff5e00;font-size: 20px;font-size: 1.6rem; font-weight: 600;margin-right: 30px;">￥1140.00</span> 
-                       </div>
-                       <div class="baojia2">
-                           <span style="font-size: 16px;font-size: 14px;; font-weight: 600;color:#999;">海尔电器店</span> 
-                       </div>
-                       <div class="baojia3">
-                           <span style="color: #999;font-size: 14px; font-weight: 600;">海尔冰箱智能家 冰箱智能家用风对开门冰箱冷无霜对开冷无霜对开。</span> 
-                       </div>
-                       <div class="baojia4">
-                            <div style="" class="guige-yanse">选择</div>
-                       </div>
-                  </div>
+                    <?php if(is_array($offer)): $i = 0; $__LIST__ = $offer;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><div class="price-tax">
+                           <div  class="baojia">
+                               <span style="color: #ff5e00;font-size: 20px;font-size: 1.6rem; font-weight: 600;margin-right: 30px;">￥<?php echo ($row["price"]); ?></span>
+                           </div>
+                           <div class="baojia2">
+                               <span style="font-size: 16px;font-size: 14px;; font-weight: 600;color:#999;"><?php echo ($row["nickname"]); ?></span>
+                           </div>
+                           <div class="baojia3">
+                               <span style="color: #999;font-size: 14px; font-weight: 600;"><?php echo ($row["info"]); ?></span>
+                           </div>
+                           <div class="baojia4">
+                                <div class="guige-yanse chosePrice" isChose="false" onclick="chosePrice('<?php echo ($row["id"]); ?>',this)">选择</div>
+                           </div>
+                        </div><?php endforeach; endif; else: echo "" ;endif; ?>
 				</div>
 			</div>
 
 
-							<!--<div id="product">-->
+							<div id="product">
 								<!--<h4>请选择商品规格</h4>-->
 								<!--<div class="image_option_type form-group required">-->
 									<!--<label class="control-label">颜色</label>-->
 									 <!--<div style="width:100%;" >-->
-                      <!--<div style="width:50px;float: left;" class="guige-yanse">红色</div>-->
-                      <!--<div style="width:50px;float: left;" class="guige-yanse">黑色</div>-->
-                      <!--<div style="width:50px;float: left;" class="guige-yanse">白色</div>-->
-                   <!--</div>-->
+                                        <!--<div style="width:50px;float: left;" class="guige-yanse">红色</div>-->
+                                        <!--<div style="width:50px;float: left;" class="guige-yanse">黑色</div>-->
+                                        <!--<div style="width:50px;float: left;" class="guige-yanse">白色</div>-->
+                                     <!--</div>-->
 								<!--</div>-->
-								<!---->
+
 								<!--<div class="box-checkbox form-group required">-->
 									<!--<label class="control-label">规格</label>-->
-									<!--<div style="width:100%;" >-->
-                      <!--<div style="width:200px;float: left;" class="guige-guige">8G/256G/Win10</div>-->
-                      <!--<div style="width:200px;float: left;" class="guige-guige">8G/256G/Win10</div>-->
-                      <!--<div style="width:200px;float: left;" class="guige-guige">8G/1T+128G/2G独显</div>-->
-                      <!--<div style="width:200px;float: left;" class="guige-guige">8G/1T+128G/2G独显-粉</div>-->
-                   <!--</div>-->
-								<!--</div>-->
-
-								<!--<div class="form-group box-info-product" style="margin-top:20px;">-->
-									<!--<div class="option quantity">-->
-										<!--<div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;">-->
-											<!--<label>数量</label>-->
-											<!--<input class="form-control" type="text" name="quantity"-->
-											<!--value="1">-->
-											<!--<input type="hidden" name="product_id" value="50">-->
-											<!--<span class="input-group-addon product_quantity_down">−</span>-->
-											<!--<span class="input-group-addon product_quantity_up">+</span>-->
-										<!--</div>-->
-									<!--</div>-->
-									<!--<div class="cart">-->
-										<!--<input type="button" data-toggle="tooltip" title="" value="加入购物车" data-loading-text="Loading..." id="button-cart" class="btn btn-mega btn-lg" onclick="cart.add('42', '1');" data-original-title="加入购物车" style="background-color:#c2c1c0;">-->
-									<!--</div>-->
-                                    <!--<div class="cart">-->
-                                        <!--<input type="button" data-toggle="tooltip" title="" value="立即购买" data-loading-text="Loading..." id="button-cart" class="btn btn-mega btn-lg" onclick="cart.add('42', '1');" data-original-title="立即购买">-->
+									    <!--<div style="width:100%;" >-->
+                                        <!--<div style="width:200px;float: left;" class="guige-guige">8G/256G/Win10</div>-->
+                                        <!--<div style="width:200px;float: left;" class="guige-guige">8G/256G/Win10</div>-->
+                                        <!--<div style="width:200px;float: left;" class="guige-guige">8G/1T+128G/2G独显</div>-->
+                                        <!--<div style="width:200px;float: left;" class="guige-guige">8G/1T+128G/2G独显-粉</div>-->
                                     <!--</div>-->
-                                <!---->
-								<!---->
-
 								<!--</div>-->
 
-							<!--</div>-->
-							<!-- end box info product -->
+								<div class="form-group box-info-product" style="margin-top:20px;">
+									<div class="option quantity">
+										<div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;">
+											<label>数量</label>
+											<input class="form-control" type="text" name="quantity"
+											value="1" id="num">
+											<span class="input-group-addon product_quantity_down">−</span>
+											<span class="input-group-addon product_quantity_up">+</span>
+										</div>
+									</div>
+									<div class="cart">
+										<input onclick="addCart('<?php echo ($product["id"]); ?>')" type="button" data-toggle="tooltip" title="" value="加入购物车" data-loading-text="Loading..." id="button-cart" class="btn btn-mega btn-lg" onclick="cart.add('42', '1');" data-original-title="加入购物车" style="background-color:#c2c1c0;">
+									</div>
+                                    <div class="cart">
+                                        <input onclick="buy('<?php echo ($product["id"]); ?>')" type="button" data-toggle="tooltip" title="" value="立即购买" data-loading-text="Loading..." id="button-cart" class="btn btn-mega btn-lg" onclick="cart.add('42', '1');" data-original-title="立即购买">
+                                    </div>
+								</div>
 
+							</div>
 						</div>
 				
 					</div>
@@ -758,8 +758,38 @@
 <script type="text/javascript" src="/Public/Home/js/themejs/so_megamenu.js"></script>
 <script type="text/javascript" src="/Public/Home/js/themejs/addtocart.js"></script>
 
+<script>
+    var choseID = '';
+    function chosePrice(oid,obj){
+        $('.chosePrice').each(function () {
+            $(this).css('background','#ccc');
+        })
+        $(obj).css('background','orange');
+        choseID = oid;
+    }
 
-
+    function addCart(id) {
+        if(confirm('确定要加入购物车?')){
+            var num = $('#num').val() ? $('#num').val() : 1
+            if(!choseID){
+                alert('请选择一个报价');
+                return;
+            }
+            $.post('<?php echo U("Common/addCart");?>',{id:id,oid:choseID,num:num},function (rs) {
+                if(rs){
+                    rs = JSON.parse(rs);
+                    if(rs['errno'] == 1){
+                        alert('添加到购物车成功');
+                    }else {
+                        alert(rs['msg']);
+                    }
+                }else {
+                    alert('添加购物车失败');
+                }
+            })
+        }
+    }
+</script>
 
 </body>
 </html>

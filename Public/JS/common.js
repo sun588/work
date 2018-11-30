@@ -1,6 +1,6 @@
-function addCart(id) {
+function addCart(id,oid) {
     var url = 'http://' + location.host + '/index.php/Home/Common/addCart';
-    $.post(url,{id:id},function (rs) {
+    $.post(url,{id:id,oid:oid},function (rs) {
         if(rs){
             rs = JSON.parse(rs);
             if(rs['errno'] == 1){

@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="/Public/Home/css/main.css">
     <link rel="stylesheet" href="/Public/Home/css/style.css">
     <link rel="stylesheet" href="/Public/Home/css/app-orange.css" id="theme_color" />
-    <link href="/Public/Home/css/theme.css" rel="stylesheet">
     <!-- end -->
    
     <!-- Libs CSS
@@ -66,8 +65,6 @@
 
     <div id="wrapper" class="wrapper-fluid">
    <!-- Header Container  -->
-
-        <!-- //Header center -->
         <header id="header" class=" typeheader-1" style="background-color:#fff;">
     <!-- Header Top -->
     <div class="top-bar" style="background-color:#222;">
@@ -291,73 +288,138 @@
 </header>
     <!-- //Header Container  -->
 
-  <!-- Main Container  -->
-  <div class="main-container container">
-    
-    <div class="container">
-      <div class="row">
+	<!-- Main Container  -->
+	<div class="main-container container">
+		
+		<div class="container">
+			<div class="row">
 
-          <!--左侧导航栏-->
-          <div id="contents" role="main" class="main-page col-lg-2 hy-list">
+                <!-- 商家会员中心侧边栏  -->
+                <div id="contents" role="main" class="main-page col-lg-2 hy-list">
     <div class="huiyuan">
-        <span>会员中心</span>
+        <span>商家会员中心</span>
     </div>
     <nav>
         <ul>
-            <li><a href="cart.html" bank><i class="fa fa-pencil-square-o" style="font-size: 16px;margin-right: 4px;"></i>我的订单<span class="sign-10">(20)</span></a></li>
-            <li><a href="cart.html" bank><i class="fa fa-shopping-cart" style="font-size: 16px;margin-right: 4px;"></i>我的购物车<span class="sign-10">(<?php echo ($cartCount); ?>)</span></a></li>
-            <li><a href="<?php echo U('wishlist');?>" bank><i class="fa fa-heart-o" style="font-size: 16px;margin-right: 4px;"></i>我的收藏<span class="sign-10">(<?php echo ($wishlistCount); ?>)</span></a></li>
-            <li><a href="cart.html" bank><i class="fa fa-star-o" style="font-size: 16px;margin-right: 4px;"></i>评价管理<span class="sign-10">(10)</span></a></li>
-            <li><a href="<?php echo U('address');?>" bank><i class="fa fa-map-marker" style="font-size: 16px;margin-right: 4px;"></i>收货地址</a></li>
+            <li><a href="sj-dindan.html" bank><i class="fa fa-pencil-square-o" style="font-size: 16px;margin-right: 4px;"></i>我的订单<span class="sign-10">(20)</span></a></li>
+            <li><a href="<?php echo U('offer');?>" bank><i class="fa fa-jpy" style="font-size: 16px;margin-right: 4px;"></i>报价管理<span class="sign-10">(20)</span></a></li>
+            <li><a href="tixian-ad.html" bank><i class="fa fa-credit-card" style="font-size: 16px;margin-right: 4px;"></i>提现管理</a></li>
+            <li><a href="pingjia-ad.html" bank><i class="fa fa-star-o" style="font-size: 16px;margin-right: 4px;"></i>评价管理<span class="sign-10">(10)</span></a></li>
+            <li><a href="shouhuo-ad.html" bank><i class="fa fa-cog" style="font-size: 16px;margin-right: 4px;"></i>售后管理</a></li>
             <li><a href="cart.html" bank><i class="fa fa-cog" style="font-size: 16px;margin-right: 4px;"></i>账号设置</a></li>
             <li><a href="<?php echo U('Register/logout');?>" bank><i class="fa fa-sign-out" style="font-size: 16px;margin-right: 4px;"></i>退出登录</a></li>
         </ul>
     </nav>
 </div>
-          <!--左侧导航栏-->
+                <!-- 商家会员中心侧边栏  -->
 
-        <div id="contents" role="main" class="main-page col-lg-10 col-md-12 col-sm-12 col-xs-12 ">
-            <div class="shoucang">
-                <span>收藏的商品</span>
+		<div id="contents" role="main" class="main-page col-lg-10 col-md-12 col-sm-12 col-xs-12">
+		    <div class="row adn" style="    margin: 0;">
+		       <div style="width:30%;float:left;" class="col-lg-12">
+		          <div class="lf-rg">
+		              <img src="image/hy/top.png">
+		          </div>
+		           <div class="lf-lf">
+		               <span>管理员</span><br>
+		               <span>欢迎来到竞价买卖网！</span>
+		           </div>
+		       </div>
+
+		       <div style="width:20%;float:left;">
+		       </div>
+		    </div>
+
+            <div class="row">
+
+                <div class="col-lg-6 statr-list shangjia-hy-1" style="padding:0px;margin-bottom: 16px;">
+		              <div class="shangjia-title">
+		                <h3>商品提示</h3>
+		                <span>您已经出价的商品数量</span> 
+		              </div>
+		              <div class="shangjia-list-1">
+		                <span style=" padding-left: 15px;font-size: 16px;">已出价的商品<span class="sign-lf">20</span></span>
+		              </div>
+                </div>
+	            <div class="col-lg-6 statr-list  shangjia-hy-1" style="padding:0px;margin-bottom: 16px;">
+		              <div class="shangjia-title">
+		                <h3>平台联系方式</h3> 
+		              </div>
+		              <div class="shangjia-list-1">
+		                 <span style="padding-left: 15px;font-size: 16px;" >联系电话：<span class="">1234567899</span></span>
+		                   <span style="padding-left: 15px;font-size: 16px;" >QQ：<span class="">1234567899</span></span><br>
+		                   <span style="padding-left: 15px;font-size: 16px;" >E-mail：<span class="">1234567899</span></span>
+		              </div>
+	            </div>
+	            <div class="col-lg-6 statr-list  shangjia-hy-1" style="padding:0px;margin-bottom: 16px;">
+		              <div class="shangjia-title">
+		                <h3>交易提示</h3>
+		                <span>您需要立即处理的交易订单</span> 
+		              </div>
+		              <div class="shangjia-list-1">
+		                 <ul>
+		                     <a href=""><li>待付款<span class="sign-lf">20</span></li></a>
+		                     <a href=""><li>待发货<span class="sign-lf">20</span></li></a>
+		                     <a href=""><li>售前退款<span class="sign-lf">20</span></li></a>
+		                     <a href=""><li>售后退款<span class="sign-lf">20</span></li></a>
+		                     <a href=""><li></li></a>
+		                 </ul>
+
+		              </div>
+	            </div>
+	            <div class="col-lg-6 statr-list  shangjia-hy-1" style="padding:0px;margin-bottom: 16px;">
+		              <div class="shangjia-title">
+		                <h3>销售情况统计</h3> 
+		                <span>您需要关注的店铺信息以及待处理事项</span> 
+		              </div>
+		              <div class="shangjia-list-1">
+		                <table>
+		                    <thead>
+		                       <tr>
+		                           <td>项目	</td>
+		                           <td>订单量</td>
+		                           <td>订单金额</td>
+		                       </tr>
+		                    </thead>
+		                    <tbody>
+		                       <tr>
+		                           <td>昨日销量	</td>
+		                           <td>--</td>
+		                           <td>--</td>
+		                       </tr>
+		                       <tr>
+		                           <td>月销量</td>
+		                           <td>--</td>
+		                           <td>--</td>
+		                       </tr>
+		                    </tbody>
+		                </table>
+		              </div>
+	            </div>
             </div>
-              <!--changed listings-->
-              <div class="products-list row nopadding-xs so-filter-gird">
-                <?php if(is_array($product)): $i = 0; $__LIST__ = $product;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            
-                            <div class="product-image-container second_img">
-                                <a href="<?php echo U('Product/productDetail',array('id'=>$row['id']));?>" target="_self" title="Lastrami bacon">
-                                    <img src="<?php echo ($row["pic1"]); ?>" class="img-1 img-responsive">
-                                    <img src="<?php echo ($row["pic2"]); ?>" class="img-2 img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="right-block"> 
-                            <div class="caption hide-cont element1">
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self"><?php echo ($row["name"]); ?></a></h4>
-                            </div>
-                            <p class="price">
-                              <span class="price-new">型号:<?php echo ($row["type"]); ?></span>
-                            </p>
-                        </div>
-                    </div>
-                </div><?php endforeach; endif; else: echo "" ;endif; ?>
-            </div>
 
-            <div><?php echo ($page); ?></div>
+			<div class="page type-page status-publish hentry">
+				<div class="entry-content">
+					<div class="entry-summary">
+						<div class="woocommerce">                
+							
+	        
+						</div>
+					</div>
+				</div>
+				
+				<div class="clearfix"></div>
 
-        </div>
-        <!-- 产品end -->
+					</div>
 
-      </div>
-    </div>
-    <!-- //Main Container -->
-   </div>
+				</div>
+			</div>
+		</div>
+		<!-- //Main Container -->
+	 </div> 
 
 
     <!-- Footer Container -->
-    <footer class="footer-container typefooter-1">
+        <footer class="footer-container typefooter-1">
     <!-- Footer Top Container -->
 
     <div class="container">
@@ -502,7 +564,6 @@
     <div class="back-to-top"><i class="fa fa-angle-up"></i></div>
 </footer>
     <!-- //end Footer Container -->
-
 
 </div>
    

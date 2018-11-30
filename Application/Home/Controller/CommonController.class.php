@@ -55,8 +55,14 @@ class CommonController extends Controller
     function addCart(){
         $userInfo = session('userInfo');
         $pid = I('post.id');
+        $oid = I('post.oid');
+        $num = I('post.num') ? I('post.num') : 1;
         if(!$pid){
             f_return('4001','商品不存在');
+            return;
+        }
+        if(!$oid){
+            f_return(4001,'请选择一个报价');
             return;
         }
         if(!$userInfo['id']){
@@ -67,6 +73,8 @@ class CommonController extends Controller
         $saveData = array(
             'uid' => $userInfo['id'],
             'pid' => $pid,
+            'oid' => $oid,
+            'num' => $num,
             'time' => time(),
         );
         $model = M('cart');

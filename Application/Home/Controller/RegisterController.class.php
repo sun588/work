@@ -8,13 +8,14 @@ class RegisterController extends Controller {
             $user = I('post.user');
             $password = I('post.password');
             $model = M('user');
-            $rs = $model->where("phone='$user'")->field('id,user,password,salt,nickname')->find();
+            $rs = $model->where("phone='$user'")->field('id,user,password,salt,nickname,accounttype')->find();
             if($rs['password'] == md5($password . $rs['salt'])){
                 $accessToken = md5($rs['id'] . $rs['user'] . $rs['salt']);
                 $userInfo = array(
                     'id' => $rs['id'],
                     'nickname' => $rs['nickname'],
                     'accessToken' => $accessToken,
+                    'accountType' => $rs['accounttype'],
                 );
                 session('userInfo',$userInfo);
                 $this->success('登录成功',U('Index/index'));
@@ -327,6 +328,11 @@ class RegisterController extends Controller {
         }else{
             $this->display();
         }
+    }
+
+    function logout(){
+        unset($_SESSION['userInfo']);
+        $this->success('退出成功',U('Login'));
     }
 
     function upPic(){

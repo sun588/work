@@ -1,16 +1,68 @@
 <?php
 namespace Home\Controller;
+use Think\Think;
+
 class UserController extends CommonController {
+    private $uid = '';
+    function __construct()
+    {
+        parent::__construct();
+        $this->uid = $this->isLogin();
+
+        $this->leftBarCount();
+    }
+
     function user(){
         $this->display();
     }
 
+    function leftBarCount(){
+        $model = M('wishlist');
+        $model->alias('w')->join('LEFT JOIN product p ON w.pid=p.id');
+        $wishlistCount = $model->where('p.state=1 and w.uid='.$this->uid)->count();
+        $this->assign('wishlistCount',$wishlistCount);
+
+        $model = M('cart');
+        $model->alias('c')->join('LEFT JOIN product p ON c.pid=p.id');
+        $cartCount = $model->where('p.state=1 and c.uid='.$this->uid)->count();
+        $this->assign('cartCount',$cartCount);
+    }
+
     function wishlist(){
+        $model = M('wishlist');
+        $model->alias('w')->join('LEFT JOIN product p ON w.pid=p.id');
+        $count = $model->where('p.state=1 and w.uid='.$this->uid)->count();
+
+        $Page = new \Think\Page($count,20);
+        $show = $Page->show();
+
+        $model->alias('w')->join('LEFT JOIN product p ON w.pid=p.id');
+        $model->field('p.id,p.name,p.type,p.pic1,p.pic2')->order('w.time desc');
+        $data = $model->where('p.state=1 and w.uid='.$this->uid)->limit($Page->firstRow .','. $Page->listRows)->select();
+
+        $this->assign('page',$show);
+        $this->assign('product',$data);
         $this->display();
     }
 
-    function myWishlist(){
-        $model = M('wishlist');
+    function cart(){
+        $model = M('cart');
+
+        $model->alias('c')->join('LEFT JOIN product p ON c.pid=p.id');
+        $count = $model->where('p.state=1 and c.uid='.$this->uid)->count();
+
+        $Page = new \Think\Page($count,20);
+        $show = $Page->show();
+
+        $model->alias('c')->join('LEFT JOIN product p ON c.pid=p.id');
+        $model->join('LEFT JOIN offer o ON o.id=c.oid');
+        $model->field('c.id,c.pid,c.oid,c.num,p.pic1,p.name,p.type,o.price');
+        $data = $model->where('p.state=1 and c.uid='.$this->uid)->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        //f_dump($data);exit;
+        $this->assign('page',$show);
+        $this->assign('product',$data);
+
+        $this->display();
     }
 
 

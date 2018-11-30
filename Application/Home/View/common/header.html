@@ -7,7 +7,11 @@
                 <a href="<{:U('Register/login')}>"  style="color:#d9d7d7;margin-left:15px"><span>请登录</span></a>
                 <a href="<{:U('Register/register')}>"  style="color:#d9d7d7;margin-left:15px"><span>免费注册</span></a>
             <else/>
-                <a href="<{:U('User/user')}>"  style="color:#d9d7d7;margin-left:15px"><span>欢迎你：<{$Think.session.userInfo.nickname}></span></a>
+                <eq name="Think.session.userInfo.accountType" value="2">
+                    <a href="<{:U('Businessuser/businessUser')}>"  style="color:#d9d7d7;margin-left:15px"><span>欢迎你：<{$Think.session.userInfo.nickname}></span></a>
+                <else/>
+                    <a href="<{:U('User/user')}>"  style="color:#d9d7d7;margin-left:15px"><span>欢迎你：<{$Think.session.userInfo.nickname}></span></a>
+                </eq>
             </empty>
             <div class="right-sec" style="color:#d9d7d7;">
                 <ul style="margin-top: 3px;" class="baobei">

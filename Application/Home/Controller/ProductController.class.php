@@ -90,6 +90,8 @@ class ProductController extends CommonController {
         $id = I('id');
         $model = M('product');
         $product = $model->where("id=$id")->field('id,name,type,pic1,pic2,pic3,pic4,c1,c2,c3,c4,pcontent,tcontent')->find();
+        $product['pcontent'] = htmlspecialchars_decode($product['pcontent']);
+        $product['tcontent'] = htmlspecialchars_decode($product['tcontent']);
 
         $model = D('Category');
         $navigation = array();
@@ -109,11 +111,19 @@ class ProductController extends CommonController {
         /*相关产品 同类目下的产品*/
         $likePro = $model->field('id,name,type,pic1,pic2')->where('c1='.$product['c1'])->limit(10)->select();
 
+        $model = M('offer');
+        $model->alias('o');
+        $model->join('LEFT JOIN user u ON u.id=o.uid');
+        $offer = $model->field('o.id,u.nickname,o.price,o.info')->where("o.pid=$id")->order('o.price')->select();
+
 
         $this->assign('product',$product);
         $this->assign('navigation',$navigation);
         $this->assign('commendPro',$commendPro);
         $this->assign('likePro',$likePro);
+        $this->assign('offer',$offer);
+        $this->assign('minPrice',$offer[0]['price']);
+        $this->assign('maxPrice',$offer[count($offer) - 1]['price']);
         $this->display();
     }
 }
