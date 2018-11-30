@@ -10,10 +10,37 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-11-28 21:07:54
+Date: 2018-11-30 17:00:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `address`
+-- ----------------------------
+DROP TABLE IF EXISTS `address`;
+CREATE TABLE `address` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `province` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `area` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `isdefault` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1:非默认收货地址  2默认收货地址',
+  `postcode` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `phone` varchar(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of address
+-- ----------------------------
+INSERT INTO `address` VALUES ('2', '3', '山西省', '阳泉市', '城区', '洒洒', '2', '12360', '啊啊', '2147483647');
+INSERT INTO `address` VALUES ('4', '3', '内蒙古自治区', '包头市', '青山区', '洒洒', '2', '12360', '啊啊', '2147483647');
+INSERT INTO `address` VALUES ('5', '3', '江苏省', '常州市', '戚墅堰区', 'vklihua', '1', '12360', 'ssass', '13736912195');
+INSERT INTO `address` VALUES ('9', '3', '浙江省', '湖州市', '长兴县', 'hjjjj', '1', '12360', 'ffgfg', '13736912195');
+INSERT INTO `address` VALUES ('10', '3', '北京', '北京市', '西城区', 'bjss', '1', '325020', 'bj', '13736912195');
 
 -- ----------------------------
 -- Table structure for `attrkey`
@@ -87,12 +114,14 @@ CREATE TABLE `cart` (
   `pid` int(11) NOT NULL,
   `time` int(11) DEFAULT NULL,
   `num` tinyint(4) NOT NULL DEFAULT '1' COMMENT '商品数量',
+  `oid` int(11) DEFAULT NULL COMMENT '报价ID',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cart
 -- ----------------------------
+INSERT INTO `cart` VALUES ('3', '2', '8', '1543565377', '1', '3');
 
 -- ----------------------------
 -- Table structure for `category`
@@ -121,6 +150,26 @@ INSERT INTO `category` VALUES ('30', '娱乐本', '7', '', '0', '');
 INSERT INTO `category` VALUES ('23', '大家电', '0', '', '3', '');
 INSERT INTO `category` VALUES ('25', '空调', '23', '', '0', '');
 INSERT INTO `category` VALUES ('28', '台式', '6', '', '0', '');
+
+-- ----------------------------
+-- Table structure for `offer`
+-- ----------------------------
+DROP TABLE IF EXISTS `offer`;
+CREATE TABLE `offer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `pid` int(11) DEFAULT NULL,
+  `price` decimal(10,0) DEFAULT NULL,
+  `info` varchar(255) DEFAULT NULL,
+  `time` varchar(255) DEFAULT NULL,
+  `state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '报价审核  1:未审核  2:已审核',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of offer
+-- ----------------------------
+INSERT INTO `offer` VALUES ('3', '3', '8', '9999', '最多可填写32个文字', '1543559422', '1');
 
 -- ----------------------------
 -- Table structure for `picture`
@@ -185,7 +234,7 @@ INSERT INTO `product` VALUES ('4', '测试产品3', 'test003', '1543282733', '/p
 INSERT INTO `product` VALUES ('5', '测试产品4', 'test0004', '1543282789', '/public/Img/2018-11-27/15432828462890.jpg', '', '', '', '2', '2', '4', '0', '0', '3', '', '', '1', '2', null, '2', '2', '2', '2', '2');
 INSERT INTO `product` VALUES ('6', '测试产品5', '00588', '1543282829', '/public/Img/2018-11-27/15432828246454.jpg', '', '', '', '3', '1', '10', '17', '21', '1', '&lt;p&gt;阿斯&lt;/p&gt;', '', '1', '1', '15%', '2', '1', '1', '1', '2');
 INSERT INTO `product` VALUES ('7', '数码相机微单', '14-ceute', '1543307746', '/public/Img/2018-11-27/15433077392236.jpg', '', '', '', '3', '6', '7', '0', '0', '0', '&lt;p&gt;111&lt;/p&gt;', '&lt;p&gt;333&lt;/p&gt;', '1', '1', '15%', '1', '2', '2', '2', '2');
-INSERT INTO `product` VALUES ('8', '外星人笔记本', 'wxr-c10-8g-256', '1543377427', '/public/Img/2018-11-28/15433773974789.jpg', '', '', '', '4', '6', '7', '0', '0', '0', '外星人笔记本', '8g内容 256g固态硬盘&lt;br/&gt;', '1', '1', '5%', '1', '2', '2', '2', '2');
+INSERT INTO `product` VALUES ('8', '外星人笔记本', 'wxr-c10-8g-256', '1543377427', '/public/Img/2018-11-28/15433773974789.jpg', '', '', '', '4', '6', '7', '29', '0', '0', '&lt;p&gt;外星人笔记本&lt;/p&gt;', '&lt;p&gt;8g内容 256g固态硬盘&lt;br/&gt;&lt;/p&gt;', '1', '1', '5%', '1', '2', '2', '2', '2');
 
 -- ----------------------------
 -- Table structure for `productattr`
@@ -204,7 +253,6 @@ CREATE TABLE `productattr` (
 INSERT INTO `productattr` VALUES ('7', '2', '4');
 INSERT INTO `productattr` VALUES ('9', '5', '2');
 INSERT INTO `productattr` VALUES ('10', '7', '5');
-INSERT INTO `productattr` VALUES ('11', '8', '7');
 
 -- ----------------------------
 -- Table structure for `producttag`
@@ -215,12 +263,12 @@ CREATE TABLE `producttag` (
   `pid` int(11) DEFAULT NULL COMMENT '产品ID',
   `tagValueID` int(11) DEFAULT NULL COMMENT '属性值ID',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of producttag
 -- ----------------------------
-INSERT INTO `producttag` VALUES ('17', '8', '8');
+INSERT INTO `producttag` VALUES ('18', '8', '8');
 INSERT INTO `producttag` VALUES ('16', '7', '7');
 
 -- ----------------------------
@@ -279,11 +327,15 @@ CREATE TABLE `telverify` (
   `phone` varchar(255) DEFAULT NULL,
   `endtime` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of telverify
 -- ----------------------------
+INSERT INTO `telverify` VALUES ('1', '1543454556', '127.0.0.1', '146801', '13736912195', '1543455156');
+INSERT INTO `telverify` VALUES ('2', '1543470614', '127.0.0.1', '558816', '18715092301', '1543471214');
+INSERT INTO `telverify` VALUES ('3', '1543471385', '127.0.0.1', '425579', '13736912195', '1543471985');
+INSERT INTO `telverify` VALUES ('4', '1543474935', '127.0.0.1', '634265', '13736912195', '1543475535');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -305,12 +357,20 @@ CREATE TABLE `user` (
   `businesspic` varchar(255) DEFAULT NULL,
   `accounttype` tinyint(4) NOT NULL DEFAULT '1' COMMENT '账号类型 1:普通用户  2:商家',
   `salt` varchar(255) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `ischeck` tinyint(4) NOT NULL DEFAULT '1' COMMENT '商家账号 1:未通过验证  2:通过验证',
+  `state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '账号状态 1:启用  2:停用',
+  `province` varchar(11) DEFAULT NULL,
+  `city` varchar(11) DEFAULT NULL,
+  `area` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('3', 'p1543471443425579', 'a6c552caae12c088f82eeb0410731961', '13736912195', 'ss@ss.com', '', null, 'sun comp', 'sass', null, '/Public/BusinessImg/2018-11-29/15434714361034.jpg', '/Public/BusinessImg/2018-11-29/15434714394165.jpg', '/Public/BusinessImg/2018-11-29/15434714344053.jpg', '2', '475073', '1543471443', '1', '1', '江苏省', '镇江市', '京口区');
+INSERT INTO `user` VALUES ('2', 'p1543470720558816', 'fd2ba2926b8fff44823cc3bd88c60816', '18715092301', null, '', null, null, null, null, null, null, null, '1', '440933', '1543470720', '1', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for `wishlist`
@@ -322,8 +382,11 @@ CREATE TABLE `wishlist` (
   `pid` int(11) NOT NULL,
   `time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wishlist
 -- ----------------------------
+INSERT INTO `wishlist` VALUES ('1', '3', '3', '1543475357');
+INSERT INTO `wishlist` VALUES ('2', '3', '8', '1543539021');
+INSERT INTO `wishlist` VALUES ('3', '3', '7', '1543539027');
