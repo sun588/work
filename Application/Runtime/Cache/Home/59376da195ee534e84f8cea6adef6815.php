@@ -587,7 +587,9 @@
 
 
 <script type="text/javascript">
+var bid = '';
 function getCategory2(id,obj) {
+    bid = id;
     $('#category2DIV').hide();
     $('#category3DIV').hide();
     $.post('<?php echo U("getCategory2");?>',{bid:id},function (rs) {
@@ -650,7 +652,7 @@ var proTpl = `<tr class="cart_item cart-table">
 
 function getProduct(id,obj) {
     $('#product').html('');
-    $.post('<?php echo U("getProduct");?>',{cid:id},function (rs) {
+    $.post('<?php echo U("getProduct");?>',{cid:id,bid:bid},function (rs) {
         if(rs){
             rs =JSON.parse(rs);
             var content = '';

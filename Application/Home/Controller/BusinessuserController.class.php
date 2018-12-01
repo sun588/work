@@ -128,6 +128,8 @@ class BusinessuserController extends CommonController {
 
     function getProduct(){
         $model = M('offer');
+
+        //查询出商家已经报过价格的商品ID
         $offer = $model->field('pid')->where('uid='.$this->uid)->select();
         $offerPID = array();
         foreach($offer as $v){
@@ -135,10 +137,11 @@ class BusinessuserController extends CommonController {
         }
 
         $cid = I('post.cid');
+        $bid = I('post.bid');
         $model = M('product');
-        $p = $model->field('id,name,type,pic1')->where("c3=$cid and state=1")->select();
+        $p = $model->field('id,name,type,pic1')->where("c3=$cid and brand=$bid and state=1")->select();
 
-        /*过滤已经报价的记录*/
+        /*过滤已经报过价格的商品*/
         for($i = 0; $i < count($p); $i++){
             if( in_array($p[$i]['id'],$offerPID) ){
                 unset($p[$i]);

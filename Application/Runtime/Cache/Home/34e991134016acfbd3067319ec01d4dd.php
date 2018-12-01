@@ -303,23 +303,21 @@
 						<div class="entry-content">
 							<div class="entry-summary">
 								<div class="woocommerce">
-									<form action="" method="post">
 										<table class="shop_table shop_table_responsive cart" cellspacing="0" style="width:100%;" id="tab">
 											<thead>
 												<tr>
 													<th class="product-remove">&nbsp;</th>
 													<th class="product-thumbnail">图片</th>
 													<th class="product-name">产品</th>
-                                                    <th class="product-price">价格</th>
+                                                    <th class="product-price">单价</th>
 													<th class="product-quantity">数量</th>
 													<th class="product-subtotal">操作</th>
 												</tr>
 											</thead>
-											
-											<tbody >
+											<tbody id="allProduct">
                                             <?php if(is_array($product)): $i = 0; $__LIST__ = $product;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><tr class="cart_item cart-table shanchu2">
                                                   <td class="product-remove" style=" text-align: center;">
-                                                    <input type="checkbox" name="check" >
+                                                    <input type="checkbox" value="<?php echo ($row["id"]); ?>" onclick="setTotal()" name="cid[]" class="checkedProduct" >
                                                   </td>
 
                                                   <td class="product-thumbnail" style="text-align: center;    border: 1px solid #ccc;">
@@ -338,16 +336,14 @@
 
                                                   <td class="product-quantity" data-title="Quantity" style="text-align: center;border: 1px solid #ccc;">
                                                     <div class="" >
-                                                      <span style="font-size:22px;" class="min">－</span>
-                                                      <input type="number" value="<?php echo ($row["num"]); ?>" class="text_box"  inputmode="numeric" style="width: 60px;text-align: center;">
-                                                      <span style="font-size:22px;" class="add">＋</span>
+                                                      <input type="number" name="num[]" onchange="setTotal()" min="0" value="<?php echo ($row["num"]); ?>" class="num"  inputmode="numeric" style="width: 60px;text-align: center;">
                                                     </div>
                                                   </td>
                                                   <td class="product-subtotal" data-title="Total" style="text-align: center;border: 1px solid #ccc;">
-                                                    <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');">
+                                                    <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="addWishlist('<?php echo ($row["id"]); ?>');">
                                                          <span>移入收藏夹</span>
                                                     </button>
-                                                    <a href="#" class="remove" title="Remove this item" style="margin-left:20px;"><i class="fa fa-times fa-times2" aria-hidden="true"></i></a>
+                                                    <a onclick="del('<?php echo ($row["id"]); ?>',this)" style="margin-left:20px;"><i class="fa fa-times fa-times2" aria-hidden="true"></i></a>
                                                   </td>
                                                 </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 												<tr style="position: sticky;bottom:0px;background-color: #fff;z-index: 99999;">
@@ -355,20 +351,16 @@
 														<div class="coupon">
                                                             <input type="checkbox" name="" id="allChecks" onclick="ckAll()" style="vertical-align: middle;">
                                                             <label for="coupon_code">全选:</label>
-                                                            <span style="margin-left: 20px;border-radius: 2px;background-color: #eaeaea; margin-left: 20px;padding: 2px 6px;"><span class="allshanchu">全部删除</span></span>
-                                                            <a href="" style="margin-left: 20px;border-radius: 2px;background-color: #eaeaea; margin-left: 20px;padding: 2px 6px;"><span>移入收藏夹</span></a>
                                                         </div>
                                                         <div style="width:50%;float:right;    text-align: right;">
                                                             <span>合计：<span style="font-size:18px;color:#ff5e00;"><label id="total"></label></span></span>
-                                                            <input type="submit" class="button" name="update_cart" value="结算" style="    width: 70px;">
+                                                            <input type="button" onclick="buy()"  class="button" name="update_cart" value="结算" style="    width: 70px;">
                                                         </div>
 													</td>
 												</tr>
 
 											</tbody>
 										</table>
-									</form>
-
 								</div>
 							</div>
 						</div>
@@ -540,67 +532,73 @@
 <!-- Include Libs & Plugins
 ============================================ -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/owl-carousel/owl.carousel.js"></script>
-<script type="text/javascript" src="js/slick-slider/slick.js"></script>
-<script type="text/javascript" src="js/themejs/libs.js"></script>
+<script type="text/javascript" src="/Public/Home/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="/Public/Home/js/slick-slider/slick.js"></script>
+<script type="text/javascript" src="/Public/Home/js/themejs/libs.js"></script>
 
 <!-- Theme files
 ============================================ -->
 
-<script type="text/javascript" src="js/themejs/so_megamenu.js"></script>
-<script type="text/javascript" src="js/themejs/addtocart.js"></script>  
-
+<script type="text/javascript" src="/Public/Home/js/themejs/so_megamenu.js"></script>
+<script type="text/javascript" src="/Public/Home/js/themejs/addtocart.js"></script>
+<script type="text/javascript" src="/Public/JS/common.js"></script>
 
 <script>
-$(document).ready(function(){
-  $(".fa-times1").click(function(){
-    $(".shanchu1").remove();
-  });
-   $(".fa-times2").click(function(){
-    $(".shanchu2").remove();
-  });
-   $(".allshanchu").click(function(){
-    $("tbody tr").remove();
-  });
-});
+function del(id,obj){
+    if(confirm('确定要删除')){
+        $.post('<?php echo U("common/delCart");?>',{id:id},function (rs) {
+            if(rs){
+               rs = JSON.parse(rs);
+               if(rs['errno'] == 1){
+                    alert('删除成功');
+                    $(obj).parents('tr').remove();
+               }else {
+                   alert(rs['msg']);
+               }
+            }
+        })
+    }
+}
 
 //全选
  function ckAll(){
- var flag=document.getElementById("allChecks").checked;
- var cks=document.getElementsByName("check");
- for(var i=0;i<cks.length;i++){
- cks[i].checked=flag;
- }
+     var flag=document.getElementById("allChecks").checked;
+     var cks=document.getElementsByClassName("checkedProduct");
+         for(var i=0;i<cks.length;i++){
+         cks[i].checked=flag;
+     }
+     setTotal()
  }
 //加减
 
-$(function(){
-$(".add").click(function(){
-var t=$(this).parent().find('input[class*=text_box]');
-t.val(parseInt(t.val())+1)
-setTotal();
-})
-$(".min").click(function(){
-var t=$(this).parent().find('input[class*=text_box]');
-t.val(parseInt(t.val())-1)
-if(parseInt(t.val())<0){
-t.val(0);
-}
-setTotal();
-})
+
 function setTotal(){
-var s=0;
-$("#tab td").each(function(){
-s+=parseInt($(this).find('input[class*=text_box]').val())*parseFloat($(this).find('span[class*=price]').text());
-});
-$("#total").html(s.toFixed(2));
+    var totle = 0;
+    $('.checkedProduct:checked').each(function(){
+        var price = $(this).parents('tr').find('.price').text();
+        var num = $(this).parents('tr').find('.num').val();
+        totle = totle + (num * price);
+    })
+    $('#total').text(totle.toFixed(2));
 }
 setTotal();
 
-})
-
+function buy() {
+    var data = {};
+    var index = 0;
+    $('.checkedProduct:checked').each(function(){
+        tempData = {};
+        var num = $(this).parents('tr').find('.num').val();
+        var cid = $(this).val();
+        tempData['cid'] = cid;
+        tempData['num'] = num;
+        data[index] = tempData;
+        index++;
+    })
+    httpPost('<?php echo U("Order/order");?>',data);
+}
 
 </script>
 

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-11-30 17:00:49
+Date: 2018-12-01 12:06:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -116,12 +116,13 @@ CREATE TABLE `cart` (
   `num` tinyint(4) NOT NULL DEFAULT '1' COMMENT '商品数量',
   `oid` int(11) DEFAULT NULL COMMENT '报价ID',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cart
 -- ----------------------------
-INSERT INTO `cart` VALUES ('3', '2', '8', '1543565377', '1', '3');
+INSERT INTO `cart` VALUES ('4', '2', '8', '1543625228', '2', '3');
+INSERT INTO `cart` VALUES ('5', '2', '7', '1543627655', '1', '4');
 
 -- ----------------------------
 -- Table structure for `category`
@@ -164,12 +165,13 @@ CREATE TABLE `offer` (
   `time` varchar(255) DEFAULT NULL,
   `state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '报价审核  1:未审核  2:已审核',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of offer
 -- ----------------------------
 INSERT INTO `offer` VALUES ('3', '3', '8', '9999', '最多可填写32个文字', '1543559422', '1');
+INSERT INTO `offer` VALUES ('4', '3', '7', '8888', '最多可填写32个文字', '1543627599', '1');
 
 -- ----------------------------
 -- Table structure for `picture`
@@ -233,7 +235,7 @@ INSERT INTO `product` VALUES ('3', '测试产品改', 'test002', '1543030520', '
 INSERT INTO `product` VALUES ('4', '测试产品3', 'test003', '1543282733', '/public/Img/2018-11-27/15432827207644.jpg', '', '', '', '2', '1', '10', '17', '21', '1', 'hellow', '你好啊啊', '1', '2', null, '2', '2', '2', '2', '2');
 INSERT INTO `product` VALUES ('5', '测试产品4', 'test0004', '1543282789', '/public/Img/2018-11-27/15432828462890.jpg', '', '', '', '2', '2', '4', '0', '0', '3', '', '', '1', '2', null, '2', '2', '2', '2', '2');
 INSERT INTO `product` VALUES ('6', '测试产品5', '00588', '1543282829', '/public/Img/2018-11-27/15432828246454.jpg', '', '', '', '3', '1', '10', '17', '21', '1', '&lt;p&gt;阿斯&lt;/p&gt;', '', '1', '1', '15%', '2', '1', '1', '1', '2');
-INSERT INTO `product` VALUES ('7', '数码相机微单', '14-ceute', '1543307746', '/public/Img/2018-11-27/15433077392236.jpg', '', '', '', '3', '6', '7', '0', '0', '0', '&lt;p&gt;111&lt;/p&gt;', '&lt;p&gt;333&lt;/p&gt;', '1', '1', '15%', '1', '2', '2', '2', '2');
+INSERT INTO `product` VALUES ('7', '数码相机微单', '14-ceute', '1543307746', '/public/Img/2018-11-27/15433077392236.jpg', '', '', '', '3', '6', '7', '30', '0', '0', '&lt;p&gt;111&lt;/p&gt;', '&lt;p&gt;333&lt;/p&gt;', '1', '1', '15%', '1', '2', '2', '2', '2');
 INSERT INTO `product` VALUES ('8', '外星人笔记本', 'wxr-c10-8g-256', '1543377427', '/public/Img/2018-11-28/15433773974789.jpg', '', '', '', '4', '6', '7', '29', '0', '0', '&lt;p&gt;外星人笔记本&lt;/p&gt;', '&lt;p&gt;8g内容 256g固态硬盘&lt;br/&gt;&lt;/p&gt;', '1', '1', '5%', '1', '2', '2', '2', '2');
 
 -- ----------------------------
@@ -252,7 +254,6 @@ CREATE TABLE `productattr` (
 -- ----------------------------
 INSERT INTO `productattr` VALUES ('7', '2', '4');
 INSERT INTO `productattr` VALUES ('9', '5', '2');
-INSERT INTO `productattr` VALUES ('10', '7', '5');
 
 -- ----------------------------
 -- Table structure for `producttag`
@@ -263,13 +264,13 @@ CREATE TABLE `producttag` (
   `pid` int(11) DEFAULT NULL COMMENT '产品ID',
   `tagValueID` int(11) DEFAULT NULL COMMENT '属性值ID',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of producttag
 -- ----------------------------
 INSERT INTO `producttag` VALUES ('18', '8', '8');
-INSERT INTO `producttag` VALUES ('16', '7', '7');
+INSERT INTO `producttag` VALUES ('19', '7', '7');
 
 -- ----------------------------
 -- Table structure for `tagkey`
@@ -382,7 +383,7 @@ CREATE TABLE `wishlist` (
   `pid` int(11) NOT NULL,
   `time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wishlist
@@ -390,3 +391,7 @@ CREATE TABLE `wishlist` (
 INSERT INTO `wishlist` VALUES ('1', '3', '3', '1543475357');
 INSERT INTO `wishlist` VALUES ('2', '3', '8', '1543539021');
 INSERT INTO `wishlist` VALUES ('3', '3', '7', '1543539027');
+INSERT INTO `wishlist` VALUES ('4', '2', '3', '1543623610');
+INSERT INTO `wishlist` VALUES ('5', '2', '3', '1543623629');
+INSERT INTO `wishlist` VALUES ('6', '2', '8', '1543627676');
+INSERT INTO `wishlist` VALUES ('7', '2', '4', '1543627842');

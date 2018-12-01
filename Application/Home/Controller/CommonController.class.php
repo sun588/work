@@ -86,6 +86,23 @@ class CommonController extends Controller
         }
     }
 
+    function delCart(){
+        $userInfo = session('userInfo');
+        $id = I('post.id');
+        if(!$userInfo['id']){
+            f_return('4001','请先登录');
+            return;
+        }
+
+        $model = M('cart');
+        $rs = $model->where("id=$id and uid=".$userInfo['id'])->delete();
+        if($rs){
+            f_return('1','success');
+        }else{
+            f_return('4002','删除失败');
+        }
+    }
+
     function addWishlist(){
         $userInfo = session('userInfo');
         $pid = I('post.id');
@@ -97,18 +114,39 @@ class CommonController extends Controller
             f_return('4002','请先登录');
             return;
         }
+        $model = M('wishlist');
+        if($model->where("pid=$pid and uid=".$userInfo['id'])->count() > 0 ){
+            f_return('4003','该产品你已经收藏');
+            return;
+        }
 
         $saveData = array(
             'uid' => $userInfo['id'],
             'pid' => $pid,
             'time' => time(),
         );
-        $model = M('wishlist');
         $rs = $model->add($saveData);
         if($rs){
             f_return(1,'添加成功');
         }else{
             f_return('4003','添加失败');
+        }
+    }
+
+    function delWishlist(){
+        $userInfo = session('userInfo');
+        $id = I('post.id');
+        if(!$userInfo['id']){
+            f_return('4001','请先登录');
+            return;
+        }
+
+        $model = M('wishlist');
+        $rs = $model->where("id=$id and uid=".$userInfo['id'])->delete();
+        if($rs){
+            f_return('1','success');
+        }else{
+            f_return('4002','删除失败');
         }
     }
 }
