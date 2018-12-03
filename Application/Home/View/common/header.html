@@ -51,18 +51,16 @@
 
             <!-- Cart Part -->
             <ul class="nav navbar-right cart-pop">
-                <li class="dropdown" style="display: inline-block;"> <a href="<{:U('User/cart')}>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="itm-cont">3</span> <i class="fa fa-shopping-bag"></i> <strong>购物车</strong> <br>
+                <li class="dropdown" style="display: inline-block;"> <a href="<{:U('User/cart')}>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="itm-cont"><{$headerCartCount}></span> <i class="fa fa-shopping-bag"></i> <strong>购物车</strong> <br>
                 </a>
                     <ul class="dropdown-menu">
-                        <li>
-                            <div class="media-left"> <a href="#." class="thumb"> <img src="__PUBLIC__/Home/images/item-img-1-1.jpg" class="img-responsive" alt="" > </a> </div>
-                            <div class="media-body"> <a href="#." class="tittle ">海尔 冰箱 BCD-470WDPG 470升十字对开变频静音节能干湿分储电冰箱</a> <span>250 x 1</span> </div>
-                        </li>
-                        <li class="">
-                            <div class="media-left"> <a href="#." class="thumb" > <img src="__PUBLIC__/Home/images/item-img-1-2.jpg" class="img-responsive" alt="" > </a> </div>
-                            <div class="media-body"> <a href="#." class="tittle">海尔 冰箱 BCD-470WDPG 470升十字对开变频静音节能干湿分储电冰箱</a> <span>250 x 1</span> </div>
-                        </li>
-                        <li class="btn-cart"> <a href="#." class="btn-round">查看更多</a> </li>
+                        <volist name="headerCartProduct" id="row">
+                            <li>
+                                <div class="media-left"> <a href="<{:U('User/cart')}>" class="thumb"> <img src="<{$row.pic1}>" class="img-responsive" alt="" > </a> </div>
+                                <div class="media-body"> <a href="<{:U('User/cart')}>" class="tittle "><{$row.name}></a> <span><{$row.type}></span> </div>
+                            </li>
+                        </volist>
+                        <li class="btn-cart"> <a href="<{:U('User/cart')}>" class="btn-round">查看更多</a> </li>
                     </ul>
                 </li>
             </ul>

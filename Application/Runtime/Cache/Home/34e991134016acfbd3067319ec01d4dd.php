@@ -114,18 +114,14 @@
 
             <!-- Cart Part -->
             <ul class="nav navbar-right cart-pop">
-                <li class="dropdown" style="display: inline-block;"> <a href="<?php echo U('User/cart');?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="itm-cont">3</span> <i class="fa fa-shopping-bag"></i> <strong>购物车</strong> <br>
+                <li class="dropdown" style="display: inline-block;"> <a href="<?php echo U('User/cart');?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="itm-cont"><?php echo ($headerCartCount); ?></span> <i class="fa fa-shopping-bag"></i> <strong>购物车</strong> <br>
                 </a>
                     <ul class="dropdown-menu">
-                        <li>
-                            <div class="media-left"> <a href="#." class="thumb"> <img src="/Public/Home/images/item-img-1-1.jpg" class="img-responsive" alt="" > </a> </div>
-                            <div class="media-body"> <a href="#." class="tittle ">海尔 冰箱 BCD-470WDPG 470升十字对开变频静音节能干湿分储电冰箱</a> <span>250 x 1</span> </div>
-                        </li>
-                        <li class="">
-                            <div class="media-left"> <a href="#." class="thumb" > <img src="/Public/Home/images/item-img-1-2.jpg" class="img-responsive" alt="" > </a> </div>
-                            <div class="media-body"> <a href="#." class="tittle">海尔 冰箱 BCD-470WDPG 470升十字对开变频静音节能干湿分储电冰箱</a> <span>250 x 1</span> </div>
-                        </li>
-                        <li class="btn-cart"> <a href="#." class="btn-round">查看更多</a> </li>
+                        <?php if(is_array($headerCartProduct)): $i = 0; $__LIST__ = $headerCartProduct;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><li>
+                                <div class="media-left"> <a href="<?php echo U('User/cart');?>" class="thumb"> <img src="<?php echo ($row["pic1"]); ?>" class="img-responsive" alt="" > </a> </div>
+                                <div class="media-body"> <a href="<?php echo U('User/cart');?>" class="tittle "><?php echo ($row["name"]); ?></a> <span><?php echo ($row["type"]); ?></span> </div>
+                            </li><?php endforeach; endif; else: echo "" ;endif; ?>
+                        <li class="btn-cart"> <a href="<?php echo U('User/cart');?>" class="btn-round">查看更多</a> </li>
                     </ul>
                 </li>
             </ul>
@@ -421,84 +417,19 @@
                             </li>
                         </ul>
                     </div>
-
-
                 </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
-                    <div class="box-information box-footer">
-                        <div class="module clearfix">
-                            <h3 class="modtitle">购物指南</h3>
-                            <div class="modcontent">
-                                <ul class="menu">
-                                    <li><a href="#">注册登录</a></li>
-                                    <li><a href="#">密码相关</a></li>
-                                    <li><a href="#">购物流程</a></li>
-                                    <li><a href="#">交易条款</a></li>
-                                </ul>
+                <?php if(is_array($footerPage)): $i = 0; $__LIST__ = $footerPage;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
+                        <div class="box-information box-footer">
+                            <div class="module clearfix">
+                                <h3 class="modtitle">购物指南</h3>
+                                <div class="modcontent">
+                                    <ul class="menu">
+                                        <?php if(is_array($row)): $i = 0; $__LIST__ = $row;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><li><a href="<?php echo U('Common/pageDetial',array('id'=>$row1['id']));?>"><?php echo ($row1["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
-                    <div class="box-account box-footer">
-                        <div class="module clearfix">
-                            <h3 class="modtitle">支付方式</h3>
-                            <div class="modcontent">
-                                <ul class="menu">
-                                    <li><a href="#">支付宝支付</a></li>
-                                    <li><a href="#">微信支付</a></li>
-                                    <li><a href="#">发票说明</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-clear">
-                    <div class="box-service box-footer">
-                        <div class="module clearfix">
-                            <h3 class="modtitle">售后服务</h3>
-                            <div class="modcontent">
-                                <ul class="menu">
-                                    <li><a href="#">售后服务政策</a></li>
-                                    <li><a href="#">退换货说明</a></li>
-                                    <li><a href="#">安装/维修</a></li>
-                                    <li><a href="#">咨询投诉</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
-                    <div class="box-service box-footer">
-                        <div class="module clearfix">
-                            <h3 class="modtitle">商家入驻</h3>
-                            <div class="modcontent">
-                                <ul class="menu">
-                                    <li><a href="#">入驻说明</a></li>
-                                    <li><a href="#">入驻流程</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
-                    <div class="box-service box-footer">
-                        <div class="module clearfix">
-                            <h3 class="modtitle">关于我们</h3>
-                            <div class="modcontent">
-                                <ul class="menu">
-                                    <li><a href="#">平台简介</a></li>
-                                    <li><a href="#">联系我们</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
+                    </div><?php endforeach; endif; else: echo "" ;endif; ?>
             </div>
         </div>
     </div>

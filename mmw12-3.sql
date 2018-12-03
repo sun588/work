@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-12-01 12:06:08
+Date: 2018-12-03 10:50:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -172,6 +172,24 @@ CREATE TABLE `offer` (
 -- ----------------------------
 INSERT INTO `offer` VALUES ('3', '3', '8', '9999', '最多可填写32个文字', '1543559422', '1');
 INSERT INTO `offer` VALUES ('4', '3', '7', '8888', '最多可填写32个文字', '1543627599', '1');
+
+-- ----------------------------
+-- Table structure for `page`
+-- ----------------------------
+DROP TABLE IF EXISTS `page`;
+CREATE TABLE `page` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `content` text,
+  `od` int(11) NOT NULL DEFAULT '0',
+  `type` int(11) DEFAULT NULL COMMENT '1:购物指南 2:支付方式 3:售后服务 4:商家入驻 5:关于我们',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of page
+-- ----------------------------
+INSERT INTO `page` VALUES ('1', '购物指南页面1', '&lt;p&gt;茶厂村常常225&lt;br/&gt;&lt;/p&gt;', '0', '1');
 
 -- ----------------------------
 -- Table structure for `picture`

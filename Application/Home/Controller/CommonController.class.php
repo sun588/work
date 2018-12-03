@@ -14,6 +14,8 @@ class CommonController extends Controller
     protected $headerCategory;
     function _initialize(){
         $this->headerCategory = $this->headerCategory();
+        $this->headerCart();
+        $this->footerPage();
     }
 
     function headerCategory(){
@@ -30,6 +32,42 @@ class CommonController extends Controller
             $c1[$i]['c2'] = $c2;
         }
         return $c1;
+    }
+
+    function headerCart(){
+        $userInfo = session('userInfo');
+        if($userInfo['id']){
+            $model = M('cart');
+            $headerCartCount = $model->where('uid='.$userInfo['id'])->count();
+
+            $model->alias('c');
+            $model->join('LEFT JOIN product p ON p.id=c.pid');
+            $model->field('p.id,p.name,p.type,p.pic1,c.id');
+            $data = $model->where('uid='.$userInfo['id'])->order('c.time desc')->limit(3)->select();
+
+            $this->assign('headerCartCount',$headerCartCount);
+            $this->assign('headerCartProduct',$data);
+        }else{
+
+        }
+    }
+
+    function footerPage(){
+        $model = M('page');
+        $dataArr = array();
+        for($i = 1; $i < 6; $i++){
+            $dataArr[$i] = $model->where("type=$i")->order('od desc')->limit(6)->select();
+        }
+        $this->assign('footerPage',$dataArr);
+    }
+
+    function pageDetial(){
+        $id = I('get.id');
+        $model = M('page');
+        $page = $model->where("id=$id")->field('name,content')->find();
+        $page['content'] = htmlspecialchars_decode($page['content']);
+        $this->assign('page',$page);
+        $this->display();
     }
 
     function isLogin(){
