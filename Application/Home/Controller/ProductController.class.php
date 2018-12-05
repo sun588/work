@@ -6,6 +6,7 @@ class ProductController extends CommonController {
     private $c2 = '';
     private $c3 = '';
     private $c4 = '';
+    private $attrvalue = '';
     private $bid = '';
 
 
@@ -15,9 +16,18 @@ class ProductController extends CommonController {
         $where = $this->getCondition();
         $this->assign('brand',$this->getBrand());
 
-        if($this->c1) $this->assign('category',$this->getChildCategory($this->c1));
+        if($this->c3){
+            $model = M('category');
+            $c2 = $model->where("id=$this->c3")->getField('pid');
+            $this->assign('attr',$this->getAttr($c2));
+        }else if($this->c2){
+            $this->assign('attr',$this->getAttr($this->c2));
+        }else if($this->c1){
+            $this->assign('category',$this->getChildCategory($this->c1));
+        }
 
-        $this->assign('product',$this->getProduct());
+        $data = $this->getProduct();
+        $this->assign('product',$data['product']);
         $this->display();
     }
 
@@ -49,6 +59,19 @@ class ProductController extends CommonController {
             $where .= ' and brand=' . I('bid');
             $this->assign('bid',I('bid'));
         }
+        if(I('attrvalue')){
+            $this->attrvalue = I('attrvalue');
+            $model = M('productattr');
+            $pid = $model->field('pid')->where("attrValueID=$this->attrvalue")->select();
+            $pidArr = array();
+            foreach ($pid as $v){
+                $pidArr[] = $v['pid'];
+            }
+            $pid = implode(',',$pidArr);
+            $pid = $pid ? $pid : 0;
+            $where .= " and id in($pid)";
+            $this->assign('attrvalue',I('attrvalue'));
+        }
         if(I('searchValue') && I('searchType')){
             $searchV = I('searchValue');
             if(I('searchType') == 1){
@@ -62,12 +85,19 @@ class ProductController extends CommonController {
     }
 
     function getProduct(){
-        //$page = new Think\Page();
         $model = M('product');
+
+        $count = $model->where($this->where)->count();
+        $page = new \Think\Page($count,25);
+        $show = $page->show();
+
         $model->field('id,name,pic1,pic2,type');
         $model->where($this->where);
-        $rs = $model->order('od desc')->select();
-        return $rs;
+        $rs = $model->order('od desc')->limit("$page->firstRow,$page->listRows")->select();
+
+        $returnArr['product'] = $rs;
+        $returnArr['page'] = $show;
+        return $returnArr;
     }
 
     function getBrand(){
@@ -84,6 +114,18 @@ class ProductController extends CommonController {
             $c2[$i]['c3'] = $c3;
         }
         return $c2;
+    }
+
+    function getAttr($c2){
+        $model = M('attrkey');
+        $attrkey = $model->where("cid=$c2")->order('od desc')->select();
+
+        $model = M('attrvalue');
+        for($i = 0; $i < count($attrkey); $i++){
+            $attrvalue = $model->where('keyID='.$attrkey[$i]['id'])->order('od desc')->select();
+            $attrkey[$i]['value'] = $attrvalue;
+        }
+        return $attrkey;
     }
 
     function productDetail(){

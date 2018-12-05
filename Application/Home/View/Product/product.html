@@ -114,7 +114,7 @@
                                                <div style="width:95%;float:left;">
                                                   <ul>
                                                       <volist name="row.c3" id="row1">
-                                                         <li><a href=""><{$row1.name}></a></li>
+                                                         <li><a href="<{:U('product',array('c3'=>$row1['id']))}>"><{$row1.name}></a></li>
                                                       </volist>
                                                   </ul>
                                               </div>
@@ -122,6 +122,28 @@
                                                  <!--   <a href=""><span>更多</span></a> -->
                                               </div>
                                           </div>
+                                    </div>
+                                </volist>
+                            </notempty>
+
+                            <notempty name="attr">
+                                <volist name="attr" id="row">
+                                    <div class="col-sm-12 list-top" style="padding:0px;">
+                                        <div class="list-leixing">
+                                            <h3><{$row.name}></h3>
+                                        </div>
+                                        <div class="list-leixing-list">
+                                            <div style="width:95%;float:left;">
+                                                <ul>
+                                                    <volist name="row.value" id="row1">
+                                                        <li><a href="<{:U('product',array('attrvalue'=>$row1['id']))}>"><{$row1.name}></a></li>
+                                                    </volist>
+                                                </ul>
+                                            </div>
+                                            <div class="list-pinpai-gengduo2">
+                                                <!--   <a href=""><span>更多</span></a> -->
+                                            </div>
+                                        </div>
                                     </div>
                                 </volist>
                             </notempty>

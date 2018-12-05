@@ -323,13 +323,29 @@
                                           <div class="list-leixing-list">
                                                <div style="width:95%;float:left;">
                                                   <ul>
-                                                      <?php if(is_array($row["c3"])): $i = 0; $__LIST__ = $row["c3"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><li><a href=""><?php echo ($row1["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+                                                      <?php if(is_array($row["c3"])): $i = 0; $__LIST__ = $row["c3"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><li><a href="<?php echo U('product',array('c3'=>$row1['id']));?>"><?php echo ($row1["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
                                                   </ul>
                                               </div>
                                               <div class="list-pinpai-gengduo2">
                                                  <!--   <a href=""><span>更多</span></a> -->
                                               </div>
                                           </div>
+                                    </div><?php endforeach; endif; else: echo "" ;endif; endif; ?>
+
+                            <?php if(!empty($attr)): if(is_array($attr)): $i = 0; $__LIST__ = $attr;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><div class="col-sm-12 list-top" style="padding:0px;">
+                                        <div class="list-leixing">
+                                            <h3><?php echo ($row["name"]); ?></h3>
+                                        </div>
+                                        <div class="list-leixing-list">
+                                            <div style="width:95%;float:left;">
+                                                <ul>
+                                                    <?php if(is_array($row["value"])): $i = 0; $__LIST__ = $row["value"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><li><a href="<?php echo U('product',array('attrvalue'=>$row1['id']));?>"><?php echo ($row1["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+                                                </ul>
+                                            </div>
+                                            <div class="list-pinpai-gengduo2">
+                                                <!--   <a href=""><span>更多</span></a> -->
+                                            </div>
+                                        </div>
                                     </div><?php endforeach; endif; else: echo "" ;endif; endif; ?>
 
                         </div>

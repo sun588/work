@@ -110,8 +110,8 @@
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 产品管理 <span class="c-gray en">&gt;</span> 产品分类 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <table class="table">
 	<tr>
-		<td width="100%" class="va-t"><ul id="treeDemo" class="ztree"></ul></td>
-		<!--<td class="va-t"><iframe ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO width=100%  height=390px SRC="<{:U('categoryAdd')}>"></iframe></td>-->
+		<td width="60%" class="va-t"><ul id="treeDemo" class="ztree"></ul></td>
+		<td class="va-t"><iframe ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO width=100%  height=390px SRC="<{:U('categoryAdd')}>"></iframe></td>
 	</tr>
 </table>
 <!--_footer 作为公共模版分离出去-->
@@ -179,7 +179,7 @@ function addDiyDom(treeID,treeNode){
 function formatHandle(treeNode) {
     var htmlStr = '';
     htmlStr += '<div class="icon_div"><a class="icon_edit" title="修改" href="javascript:edit(' + treeNode.id + ')">修改</a></div>';
-    if(treeNode.level < 3){
+    if(treeNode.level < 2){
         htmlStr += '<div class="icon_div"><a class="icon_add" title="添加子类" href="javascript:addChild(' + treeNode.id + ')">添加</a></div>';
 	}
     htmlStr += '<div class="icon_div"><a class="icon_del" title="删除" href="javascript:del(' + treeNode.id + ',' + treeNode.tId + ');">删除</a></div>';
