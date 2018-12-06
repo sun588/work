@@ -7,6 +7,8 @@ class IndexController extends CommonController {
         $this->assign('newProduct',$this->newProduct());
         $this->assign('discountProduct',$this->discountProduct());
         $this->assign('brandCommend',$this->brandCommend());
+        $this->assign('brandList',$this->brandList());
+
 
         $datas = array();
         $categoryID = array('6','8','23','1','2');
@@ -77,6 +79,13 @@ class IndexController extends CommonController {
             $returnArr[] = $rs;
         }
         return $returnArr;
+    }
+
+    /*页面底部的品牌列表 取前20个*/
+    function brandList(){
+        $model = M('brand');
+        $rs = $model->field('id,name,pic')->order('id desc')->limit(20)->select();
+        return $rs;
     }
 
     /*获取标签*/

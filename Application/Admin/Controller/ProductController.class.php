@@ -30,17 +30,26 @@ class ProductController extends Controller {
         $product['column4'] = isset($product['column4']) ? $product['column4'] : 2;
         $product['column5'] = isset($product['column5']) ? $product['column5'] : 2;
 
-        if( !isset($product['id']) ){
-            $product['time'] = time();
-        }
+        $product['column6'] = isset($product['column6']) ? $product['column6'] : 2;
+        $product['column7'] = isset($product['column7']) ? $product['column7'] : 2;
+        $product['column8'] = isset($product['column8']) ? $product['column8'] : 2;
+        $product['column9'] = isset($product['column9']) ? $product['column9'] : 2;
+
+        $product['time'] = time();
 
         //提取出产品标签
         $productTag = $product['tag'];
         unset($product['tag']);
 
         //提取出产品属性
-        $productAttr = $product['attr'];
-        unset($product['attr']);
+        $productAttr = array();
+        foreach ($product as $k=>$v){
+            if(strpos($k,'attr_') === 0){
+                echo strpos('attr_',$k);
+                $productAttr[] = $v;
+                unset($product[$k]);
+            }
+        }
 
         $model = D('Product');
         if($model->create($product)){
@@ -91,7 +100,7 @@ class ProductController extends Controller {
                 $this->error('保存产品失败');
             }
         }else{
-            f_return('4001',$model->getError());
+            $this->error($model->getError());
         }
     }
 

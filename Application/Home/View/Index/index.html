@@ -189,7 +189,7 @@
                     <div class="head-title">
                         <div class="modtitle">
                             <span>今日优惠</span>
-                              <a class="viewall" href="#">查看更多</a>
+                              <!--<a class="viewall" href="#">查看更多</a>-->
                         </div>    
                     </div>
                     <div class="modcontent">
@@ -579,8 +579,6 @@
                                     <div class="item-sub-cat">
                                         <ul class="ltabs-tabs cf">
                                             <li class="ltabs-tab tab-sel" data-category-id="20" data-active-content=".items-category-20"> <span class="ltabs-tab-label">热销榜</span> </li>
-                                            <li class="ltabs-tab " data-category-id="18" data-active-content=".items-category-18"> <span class="ltabs-tab-label">发现好货</span> </li>
-                                            <li class="ltabs-tab " data-category-id="25" data-active-content=".items-category-25"> <span class="ltabs-tab-label">猜你喜欢</span> </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -882,51 +880,13 @@
                 <div class="slider-brands col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="yt-content-slider contentslider" data-autoplay="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column00="7" data-items_column0="7" data-items_column1="5" data-items_column2="3" data-items_column3="2" data-items_column4="1" data-arrows="yes"
                             data-pagination="no" data-lazyload="yes" data-loop="yes">
-                        <div class="item">
-                            <a href="#">
-                                <img src="__PUBLIC__/Home/image/pinpai/1.jpg" alt="brand">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#">
-                                <img src="__PUBLIC__/Home/image/pinpai/2.jpg" alt="brand">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#">
-                                <img src="__PUBLIC__/Home/image/pinpai/1.jpg" alt="brand">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#">
-                                <img src="__PUBLIC__/Home/image/pinpai/4.jpg" alt="brand">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#">
-                                <img src="__PUBLIC__/Home/image/pinpai/5.jpg" alt="brand">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#">
-                                <img src="__PUBLIC__/Home/image/pinpai/6.jpg" alt="brand">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#">
-                                <img src="__PUBLIC__/Home/image/pinpai/7.jpg" alt="brand">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#">
-                                <img src="__PUBLIC__/Home/image/pinpai/11.jpg" alt="brand">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#">
-                                <img src="__PUBLIC__/Home/image/pinpai/22.jpg" alt="brand">
-                            </a>
-                        </div>
+                        <volist name="brandList" id="row">
+                            <div class="item">
+                                <a href="<{:U('Product/index',array('bid'=>$row['id']))}>">
+                                    <img src="<{$row.pic}>" alt="brand">
+                                </a>
+                            </div>
+                        </volist>
                     </div>
                 </div> 
                 <!-- Slider Brands -->

@@ -78,11 +78,11 @@
 	                      </ul>
 	                  </li>
 	                  <li><a href="#." style="color:#d9d7d7;">收藏夹</a></li>
-	                  <li><a href="#." style="color:#d9d7d7;"><span><img src="image/hy/sj.png" style="margin-right:5px;"></span>手机站</a></li>
-	                  <li><a href="#." style="color:#d9d7d7;"><span><img src="image/hy/wx2.png" style="margin-right:5px;"></span>微信公众号 </a></li>
+	                  <li><a href="#." style="color:#d9d7d7;"><span><img src="/Public/Home/image/hy/sj.png" style="margin-right:5px;"></span>手机站</a></li>
+	                  <li><a href="#." style="color:#d9d7d7;"><span><img src="/Public/Home/image/hy/wx2.png" style="margin-right:5px;"></span>微信公众号 </a></li>
 	                  <li><a href="#." style="color:#d9d7d7;">帮助中心 </a></li>
 	                  <li><a href="enter-1.html" style="color:#d9d7d7;">商家入驻 </a></li>
-	                  <li><a href="#." style="color:#d9d7d7;"><span><img src="image/hy/dh.png" style="margin-right:5px;"></span>网站导航</a></li>  
+	                  <li><a href="#." style="color:#d9d7d7;"><span><img src="/Public/Home/image/hy/dh.png" style="margin-right:5px;"></span>网站导航</a></li>  
 
 	                </ul>
 	               
@@ -96,7 +96,7 @@
 						<div class="col-md-3">
 							<div id="logo" class="logo" style="height: 85px;">
 								<a href="index.html" title="">
-									<img src="images/logo.png" alt="" style=" margin-top: 20px;">
+									<img src="/Public/Home/images/logo.png" alt="" style=" margin-top: 20px;">
 								</a>
 							</div><!-- /#logo -->
 						</div><!-- /.col-md-3 -->

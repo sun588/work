@@ -55,8 +55,16 @@ class CommonController extends Controller
     function footerPage(){
         $model = M('page');
         $dataArr = array();
+        $nameArr = array(
+            '1' => '购物指南',
+            '2' => '支付方式',
+            '3' => '售后服务',
+            '4' => '商家入驻',
+            '5' => '关于我们'
+        );
         for($i = 1; $i < 6; $i++){
-            $dataArr[$i] = $model->where("type=$i")->order('od desc')->limit(6)->select();
+            $dataArr[$i]['value'] = $model->where("type=$i")->order('od desc')->limit(6)->select();
+            $dataArr[$i]['name'] = $nameArr[$i];
         }
         $this->assign('footerPage',$dataArr);
     }

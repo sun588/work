@@ -59,6 +59,18 @@ class ProductController extends CommonController {
             $where .= ' and brand=' . I('bid');
             $this->assign('bid',I('bid'));
         }
+        if(I('column6')){
+            $where .= ' and column6=' . I('column6');
+        }
+        if(I('column7')){
+            $where .= ' and column7=' . I('column7');
+        }
+        if(I('column8')){
+            $where .= ' and column8=' . I('column8');
+        }
+        if(I('column9')){
+            $where .= ' and column9=' . I('column9');
+        }
         if(I('attrvalue')){
             $this->attrvalue = I('attrvalue');
             $model = M('productattr');

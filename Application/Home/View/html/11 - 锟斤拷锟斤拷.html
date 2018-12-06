@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>Template</title>
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+ 
+<script type="text/javascript"> 
+$(document).ready(function(){
+  $(".btn").click(function(){
+    var $input = $(".myInput");
+    for(var i = 0; i < $input.length; i++){
+      console.log($input[i].name + " is: " + $input[i].checked);
+    }
+  });  
+});
+</script>
+ 
+<style type="text/css">
+</style>
+ 
+</head>
+ 
+<body >
+  <input type="checkbox" class="myInput" name="input1"/><div>input1</div>
+  <input type="checkbox" class="myInput" name="input2"/><div>input2</div>
+  <input type="checkbox" class="myInput" name="input3"/><div>input3</div>
+  <input type="checkbox" class="myInput" name="input4"/><div>input4</div>
+  <button class="btn">click me</button>
+</body>
+ 
+</html>

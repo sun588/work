@@ -811,10 +811,11 @@ function getCategory(level,obj) {
                     content += '<tr>';
                     content += '<td>' + row.name + '</td>';
                     content += '<td>';
+                    var name = "attr_" + key;
                     for(var key1 in row['value']){
                         var row1 = row['value'][key1];
                         content += '<label class="checkbox-inline">';
-                        content += '<input name="attr[]" type="checkbox" value="' + row1.id + '">' + row1.name;
+                        content += '<input name="' + name + '" type="radio" value="' + row1.id + '">' + row1.name;
                         content += '</label>';
                     }
                 }
@@ -892,13 +893,14 @@ function setCategory(){
                             content += '<tr>';
                             content += '<td>' + row.name + '</td>';
                             content += '<td>';
+                            var name = "attr_" + key;
                             for(var key1 in row['value']){
                                 var row1 = row['value'][key1];
                                 content += '<label class="checkbox-inline">';
                                 if(attrIsSelected(selectAttr,row1.id)){
-                                    content += '<input checked name="attr[]" type="checkbox" value="' + row1.id + '">' + row1.name;
+                                    content += '<input checked name="' + name + '" type="radio" value="' + row1.id + '">' + row1.name;
                                 }else {
-                                    content += '<input name="attr[]" type="checkbox" value="' + row1.id + '">' + row1.name;
+                                    content += '<input name="' + name + '" type="radio" value="' + row1.id + '">' + row1.name;
                                 }
                                 content += '</label>';
                             }

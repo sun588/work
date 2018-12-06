@@ -109,11 +109,11 @@
 			<div class="container">
 			   <div style="width:100%;,margin-left:20%; ">
 			       <div style="width:50%;float:left;padding-left: 24%;text-align: center;font-size: 22px;line-height: 50px;">
-				       <a href="reg-1.html" style="padding-bottom: 10px; border-bottom: 4px solid #ff5e00;    padding: 10px 15px;"><span>用户注册</span></a>
+				       <a href="register.html" style="padding-bottom: 10px; border-bottom: 4px solid #ff5e00;    padding: 10px 15px;"><span>用户注册</span></a>
 				       <div class="arrow" style="margin-left: 45%;"></div>
 				   </div>
 				   <div style="width:50%;float:left;padding-left: 10%;font-size: 22px;line-height: 50px;">
-				       <a href="enter-1.html"  style="padding-bottom: 10px;border-bottom: 4px solid #fdf3f3;    padding: 10px 15px;"><span>商家注册</span></a>
+				       <a href="businessRegister.html"  style="padding-bottom: 10px;border-bottom: 4px solid #fdf3f3;    padding: 10px 15px;"><span>商家注册</span></a>
 				   </div>
 			   </div>
 			</div>
@@ -236,7 +236,6 @@ function register() {
             alert('注册失败');
         }
    })
-
 }
 </script>
 </html>
