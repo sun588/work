@@ -88,7 +88,7 @@
                                 <div class="list-pingpai">
                                     <h3>品牌</h3>
                                 </div>
-                                <div class="list-pingpai-list" id="brandContent" style="height:66px;">
+                                <div class="list-pingpai-list" id="brandContent" style="height:60px;">
                                     <div style="width:95%;float:left;">
                                         <ul id="brandList">
                                             <volist name="brand" id="row">
@@ -119,7 +119,7 @@
                                                   </ul>
                                               </div>
                                               <div class="list-pinpai-gengduo2">
-                                                 <!--   <a href=""><span>更多</span></a> -->
+                                                 <!--- <a href=""><span>更多</span></a> -->
                                               </div>
                                           </div>
                                     </div>
@@ -132,7 +132,7 @@
                                         <div class="list-leixing">
                                             <h3><{$row.name}></h3>
                                         </div>
-                                        <div class="list-leixing-list">
+                                        <div class="list-leixing-list attrContent">
                                             <div style="width:95%;float:left;">
                                                 <ul>
                                                     <volist name="row.value" id="row1">
@@ -141,7 +141,7 @@
                                                 </ul>
                                             </div>
                                             <div class="list-pinpai-gengduo2">
-                                                <!--   <a href=""><span>更多</span></a> -->
+                                                 <a class="attrButton"><span>更多</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -278,14 +278,28 @@
     /*头部框下拉*/
     $('#brandButton').on('click',function(){
         var state = $('#brandContent').css('height');
-        if(state == '66px'){
+        if(state == '60px'){
             $('#brandButton span').text('收起');
             $('#brandContent').css('height','auto');
         }else{
             $('#brandButton span').text('更多');
-            $('#brandContent').css('height','66px');
+            $('#brandContent').css('height','60px');
         }
     })
+	
+	$('.attrButton').on('click',function(){
+		var clickButton = $(this);
+		var clickSpan = clickButton.find('span');
+		var content = clickButton.parents('.attrContent');
+        var state = content.css('height');
+        if(state == '50px'){
+            clickSpan.text('收起');
+            content.css('height','auto');
+        }else{
+            clickSpan.text('更多');
+            content.css('height','50px');
+        }		
+	})
     </script> 
 </body>
 </html>

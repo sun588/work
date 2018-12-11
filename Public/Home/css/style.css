@@ -1696,9 +1696,7 @@ a {
 .tc {
     text-align: center;
 }
-.order_adr_choose:hover {
-    background-image: url(../image/hy/xz.png);
-}
+
 /*进度条*/
 .shop_process li {
     width: 20%;
