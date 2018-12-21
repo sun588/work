@@ -331,6 +331,9 @@ function f_fileUP($fileSize,$fileType,$filePath,$makeThumb = false){
     }
 }
 
+/**
+ * @param string 要删除的文件路径
+ */
 function f_fileDel($filePath){
     if( file_exists($filePath) ){
         unlink($filePath);

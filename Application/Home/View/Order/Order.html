@@ -135,37 +135,29 @@
 		        <div class="w1200">
 					<!-- <p class="font16 c_999 fontw order_adr_title"></p> -->
 					<ul class="order_adr_choose_box clearfix">
-						<li class="fl mr-20 cur">
-							<div class="order_adr_choose font13 c_666">
-								<p class="fontw postPople"  style="margin:0px;">陈雪君 15967368886</p>
-								<hr style="margin:0px;">
-								<span class="postAddress">浙江省 温州市 瓯海区</span><br>
-								<span class="postArea">南白象 华润万象城附近上蔡后桥旁边羿住公寓5楼8325</span>
-							</div>
-							<p class="clearfix font14 dis_none">
-								<a class="fl">设为默认</a>
-								<a class="fr ml-20 c_006bd5" onclick="del(this)">删除</a>
-								<a class="fr c_006bd5">修改</a>
-							</p>
-						</li>
-						<li class="fl mr-20">
-							<div class="order_adr_choose font13 c_666">
-								<p class="fontw" style="margin:0px;">陈雪君 15967368886</p>
-								<hr  style="margin:0px;">
-								<span>浙江省 温州市 瓯海区</span><br>
-								<span>南白象 华润万象城附近上蔡后桥旁边羿住公寓5楼8325</span>
-							</div>
-						</li>
-						<li class="fl mr-20 selectedAddress">
-							<div class="order_adr_choose font13 c_666">
-								<p class="fontw" style="margin:0px;">陈雪君 15967368886</p>
-								<hr  style="margin:0px;">
-								<span>浙江省 温州市 瓯海区</span><br>
-								<span>南白象 华润万象城附近上蔡后桥旁边羿住公寓5楼8325</span>
-							</div>
-						</li>
+						<volist name="orderInfo[0]['address']" id="row">
+							<eq name="i" value="1">
+							<li class="fl mr-20 cur" onclick="selectAddress(this)">
+							<else/>
+							<li class="fl mr-20" onclick="selectAddress(this)">
+							</eq>
+								<div class="order_adr_choose font13 c_666">
+									<p class="fontw postPople"  style="margin:0px;"><{$row.name}> <{$row.phone}></p>
+									<hr style="margin:0px;">
+									<span class="postAddress"><{$row.province}> <{$row.city}> <{$row.area}></span><br>
+									<span class="postArea"><{$row.address}></span>
+								</div>
+
+								<p class="clearfix font14 dis_none">
+									<a class="fl" onclick="setDefaultAddress('<{$row.id}>')">设为默认</a>
+									<a class="fr ml-20 c_006bd5" onclick="delAddress(this,'<{$row.id}>')">删除</a>
+									<!--<a class="fr c_006bd5" onclick="upAddress(this,'<{$row.id}>')">修改</a>-->
+								</p>
+
+							</li>
+						</volist>
 						<li class="fl">
-							<a href="#" class="order_adr_add tc">
+							<a onclick="$('#myModal').modal()" class="order_adr_add tc">
 								<span class="fontw tc">+</span>
 								<span class="font14 c_333">使用新地址</span>
 							</a>
@@ -215,7 +207,9 @@
 
 														<td class="product-quantity" data-title="Quantity" style="text-align: center;border: 1px solid #f9ecec;">
 															<div class="" >
-															  <input type="number" AUTOCOMPLETE="off" value="<{$row.product.num}>" onchange="setTotal(this,'<{$row.offer.price}>');" class="text_box" max="999" min="1"  inputmode="numeric" style="width: 60px;text-align: center;">
+															  <input type="hidden" name="offerID" value="<{$row.offer.id}>">
+															  <input type="hidden" name="productID" value="<{$row.product.id}>">
+															  <input type="number" name="productNum" AUTOCOMPLETE="off" value="<{$row.product.num}>" onchange="setTotal(this,'<{$row.offer.price}>');" class="text_box" max="999" min="1"  inputmode="numeric" style="width: 60px;text-align: center;">
 															</div>
 														</td>
 														<td class="product-subtotal" data-title="Total" style="text-align: center;border: 1px solid #f9ecec;">
@@ -246,24 +240,19 @@
 						<ul class="fl clearfix">
 							<li class="fl clearfix">
 								<label class="wx_pay order_pay_type fl">
-									<input type="radio" name="pay_type">
+									<input type="radio" name="pay_type" value="1">
 								</label>
 							</li>
 							<li class=" clearfix">
 								<label class="zfb_pay order_pay_type fl">
-									<input type="radio" name="pay_type">
-								</label>
-							</li>
-							<li class=" clearfix">
-								<label class="wgzf_pay order_pay_type fl">
-									<input type="radio" name="pay_type">
+									<input type="radio" name="pay_type" value="2">
 								</label>
 							</li>
 						</ul>
 					</div>
 					<div class="leaving_msg_box ">
 						<p class="leaving_msg">给商家留言:</p>
-						<textarea name="" id="" class="leaving_msg_content font12"></textarea>
+						<textarea id="message" class="leaving_msg_content font12"></textarea>
 					</div>
 				</div>
 				<div class="buy_msg_box col-lg-8">
@@ -272,7 +261,7 @@
 				<p class="tr"><span class="font14 c_333 fontw">收货人：</span><span class="c_666 font14" id="pople"></span></p>
 			</div>
 			<div style="width:50%;float:right;text-align: right;margin-top:8%;" class="zflj">
-                <input type="submit" class="button" name="update_cart" value="立即支付" >  
+                <input type="button" onclick="createOrder()" class="button" name="update_cart" value="立即支付" >
             </div>
 			</div>
 		</div>
@@ -285,13 +274,129 @@
 </div>
    
 
-<!-- End Color Scheme
-============================================ -->
+<!--================add address modal==================== -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">添加地址</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row" style="padding: 5px;">
+						<div class="col-sm-4">
+							<select class="form-control" id="province" name="province" onchange="setCity(this)">
+
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<select class="form-control" id="city" name="city" onchange="setArea(this)">
+								<option value="0">--市--</option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<select class="form-control" id="area" name="area">
+								<option value="0">--区--</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-horizontal">
+						<div class="form-group">
+							<label for="m_address" class="col-sm-3 control-label">详细地址</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="m_address" name="address">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="postcode" class="col-sm-3 control-label">邮编地址</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="postcode" name="postcode">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="name" class="col-sm-3 control-label">收件人姓名</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="name" name="name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="phone" class="col-sm-3 control-label">收件人号码</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="phone" name="phone">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-3 col-sm-9">
+								<label>
+									<input type="checkbox" name="isdefault"> 设为默认
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="addAddress()">保存地址</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--================add address modal==================== -->
 
 
+<!--address tpl-->
+	<div id="addressTpl" style="display: none;">
+		<li class="fl mr-20 cur" onclick="selectAddress(this)">
+			<div class="order_adr_choose font13 c_666">
+				<p class="fontw postPople"  style="margin:0px;">{[name]} {[phone]}</p>
+				<hr style="margin:0px;">
+				<span class="postAddress">{[province]} {[city]} {[area]}</span><br>
+				<span class="postArea">{[address]}</span>
+			</div>
 
-<!-- Include Libs & Plugins
-============================================ -->
+			<p class="clearfix font14 dis_none">
+				<a class="fl" onclick="setDefaultAddress('{[id]}')">设为默认</a>
+				<a class="fr ml-20 c_006bd5" onclick="delAddress(this,'{[id]}')">删除</a>
+				<!--<a class="fr c_006bd5" onclick="upAddress(this,'{[id]}')">修改</a>-->
+			</p>
+		</li>
+	</div>
+<!--address tpl-->
+
+<!--alipay post-->
+    <form action="<{:U('Order/aliPay')}>" method="post" id="outTradeNoForm">
+        <input type="hidden" name="outTradeNo">
+    </form>
+<!--alipay post-->
+
+<!--======= wx pay model-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="wxPayModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">微信付款</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="width: 50%; float: left; text-align: center;">
+                        <p>扫描右侧二维码付款</p>
+                        <p class="subject"></p>
+                        <p style="font-size: 32px; line-height: 64px; color: red">金额:<span class="total"></span></p>
+                        <p style="text-align: center;">
+                            付款完成后如页面没有跳转请到<a href="#">用户中心-我的订单</a>查看订单付款状态
+                        </p>
+                    </div>
+                    <div id="wxPayQrcode" style="text-align: center; width: 50%; float: left;"></div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--======= wx pay model-->
+
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript" src="__PUBLIC__/Home/js/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
@@ -304,7 +409,8 @@
 
 <script type="text/javascript" src="__PUBLIC__/Home/js/themejs/so_megamenu.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Home/js/themejs/addtocart.js"></script>
-
+<script type="text/javascript" src="__PUBLIC__/JS/area.js"></script>
+<script type="text/javascript" src="__PUBLIC__/JS/QRCode.js"></script>
 
 <script type="text/javascript">
     function init() {
@@ -339,21 +445,191 @@
 		$('#Total').text(Total);
 	}
 
-
-	$('.order_adr_choose_box li').on('click',function () {
-		$('.order_adr_choose_box li').each(function () {
-			$(this).removeClass('cur');
-		})
-		$(this).addClass('cur');
-        var pople = $(this).find('.postPople').text();
-        var address = $(this).find('.postAddress').text();
-        var area = $(this).find('.postArea').text();
+    function selectAddress(obj){
+        $('.order_adr_choose_box li').each(function () {
+            $(this).removeClass('cur');
+        })
+        $(obj).addClass('cur');
+        var pople = $(obj).find('.postPople').text();
+        var address = $(obj).find('.postAddress').text();
+        var area = $(obj).find('.postArea').text();
         $('#pople').text(pople);
         $('#Address').text(address + ' ' +area);
-	})
+	}
+	// $('.order_adr_choose_box li').on('click',function () {
+	// 	$('.order_adr_choose_box li').each(function () {
+	// 		$(this).removeClass('cur');
+	// 	})
+	// 	$(this).addClass('cur');
+     //    var pople = $(this).find('.postPople').text();
+     //    var address = $(this).find('.postAddress').text();
+     //    var area = $(this).find('.postArea').text();
+     //    $('#pople').text(pople);
+     //    $('#Address').text(address + ' ' +area);
+	// })
 
+	function delAddress(obj,id) {
+        if(confirm('确定要删除?')){
+            $.ajax({
+                url:'<{:U("User/delAddress")}>',
+                data:{id:id},
+                type:'post',
+				dataType:'json',
+                success:function (rs) {
+                    if(rs && rs['errno'] == 1){
+                        alert('删除成功');
+                        $(obj).parents('li').remove();
+					}else {
+                        alert('删除失败');
+					}
+                }
+            })
+		}
+    }
+
+    function setDefaultAddress(id) {
+		if(confirm('确定要将该地址设为默认？')){
+		    $.ajax({
+				url:'<{:U("User/setDefaultAddress")}>',
+				data:{id:id},
+				type:'post',
+				dataType:'json',
+				success:function (rs) {
+					if(rs && rs['errno'] == 1){
+					    alert('设置默认收货地址成功');
+					}else {
+					    alert('设置默认收货地址失败');
+					}
+                }
+			})
+		}
+    }
+
+    function addAddress() {
+        if($('#province').find('option:selected').val() == 0 || $('#city').find('option:selected').val() == 0 || $('#area').find('option:selected').val() == 0 || $('#m_address').val() == '' ){
+            alert('请选择收货地址');
+            return false;
+        }
+        if(!$('#name').val()){
+            alert('请填写收件人姓名');
+            return false;
+        }
+        if(!$('#postcode').val()){
+            alert('请填写邮编');
+            return false;
+        }
+        if(!$('#phone').val()){
+            alert('请填写手机号');
+            return false;
+        }
+
+        var province = $('#province').find('option:selected').text();
+        var city = $('#city').find('option:selected').text();
+        var area = $('#area').find('option:selected').text();
+        var address = $('#m_address').val();
+        var name = $('#name').val();
+        var postcode = $('#postcode').val();
+        var phone = $('#phone').val();
+        var isdefault = $('#isdefault').is(':checked') ? 1 : 0;
+
+        var data = {province:province,city:city,area:area,address:address,name:name,postcode:postcode,phone:phone,isdefault:isdefault};
+
+        $.post('<{:U("User/addAddress")}>',data,function (rs) {
+            if(rs){
+                rs = JSON.parse(rs);
+                if(rs['errno'] == 1){
+                    data['id'] = rs['data'];
+					var tpl = $('#addressTpl').html();
+                    for(var key in data){
+                        var reg = '\\{\\[' + key + '\\]\\}';
+                        tpl = tpl.replace(new RegExp(reg,'g'),data[key]);
+                    }
+                    $('.order_adr_choose_box').prepend(tpl);
+                    selectAddress($('.order_adr_choose_box li')[0]);
+                }else {
+                    alert(rs['msg']);
+                }
+            }else {
+                alert('保存收货地址失败');
+            }
+        })
+        return false;
+    }
+
+    function upAddress(obj,id) {
+
+    }
 </script>
 
+<script type="text/javascript">
+	/*生成支付订单进行支付*/
+	function createOrder() {
+	    var allOrder = {};
+	    var product = {};
+	    var i = 0;
+		$('#productItem tr').each(function () {
+			var singlerOrder = {};
+			singlerOrder['productID'] = $(this).find('input[name="productID"]').val();
+            singlerOrder['productNum'] = $(this).find('input[name="productNum"]').val();
+            singlerOrder['offerID'] = $(this).find('input[name="offerID"]').val();
+            singlerOrder['minTotal'] = $(this).find('.minTotal').text();
+            product[i] = singlerOrder;
+            i++;
+        })
+		allOrder['product'] = product;
+		allOrder['payType'] = $('input[name="pay_type"]:checked').val();
+		allOrder['message'] = $('#message').val();
+		allOrder['total'] = $('#Total').text();
+		allOrder['address'] = $('#Address').text();
+		allOrder['pople'] = $('#pople').text();
+		
+		$.ajax({
+			url:'<{:U("Order/createOrder")}>',
+			data:allOrder,
+			type:'post',
+			dataType:'json',
+			success:function (rs) {
+			    if(rs && rs['errno'] == 1){
+			        var outTradeInfo = rs['data'];
+                    if(outTradeInfo['payType'] == 1){
+                        //微信支付
+                        wxPay(outTradeInfo['order']);
+                    }
+                    if(outTradeInfo['payType'] == 2){
+                        //支付宝支付
+                        $('#outTradeNoForm input[name="outTradeNo"]').val(outTradeInfo['order']);
+                        $('#outTradeNoForm').submit();
+                    }
+				}else {
+			        alert('创建订单失败!');
+                }
+            }
+		})
+    }
+
+    function wxPay(outTradNo) {
+        $.ajax({
+            url:'<{:U("Order/wxPay")}>',
+            data:{outTradNo:outTradNo},
+            type:'post',
+            dataType:'json',
+            success:function (rs) {
+                if(rs && rs['errno'] == 1){
+                    var qrcode = new QRCode(document.getElementById("wxPayQrcode"),{
+                        width:150,
+                        height:150,
+                    });
+                    qrcode.makeCode(rs['data']['payUrl']);
+                    $("#wxPayModal .subject").text(rs['data']['title']);
+                    $("#wxPayModal .total").text(rs['data']['total']);
+                    $('#wxPayModal').modal();
+                }else {
+                    alert('支付失败!');
+                }
+            }
+        })
+    }
+</script>
 </body>
 </html>
 

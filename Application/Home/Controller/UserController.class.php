@@ -107,11 +107,11 @@ class UserController extends CommonController {
             $rs = $model->save();
         }else{
             $model->uid = $uid;
-            $model->isdefault = empty($model->isdefault) ? 1 : $model->isdefault;
+            $model->isdefault = empty($model->isdefault) ? 1 : time();
             $rs = $model->add();
         }
         if($rs){
-            f_return(1,'success');
+            f_return(1,'success',$rs);
         }else{
             f_return(4006,'保存收货地址失败');
         }
@@ -136,6 +136,30 @@ class UserController extends CommonController {
             f_return(1,'success',$rs);
         }else{
             f_return(4001,'数据不存在');
+        }
+    }
+
+    function setDefaultAddress(){
+        $id = I('post.id');
+        $model = M('address');
+        $saveData = array(
+            'isdefault' => time(),
+        );
+        $rs = $model->where("id=$id")->save($saveData);
+        if($rs){
+            if(IS_AJAX){
+                f_return('1','设置成功');
+                return;
+            }else{
+                return true;
+            }
+        }else{
+            if(IS_AJAX){
+                f_return('4001','设置失败');
+                return;
+            }else{
+                return false;
+            }
         }
     }
     /********************   用户地址管理   ************************/

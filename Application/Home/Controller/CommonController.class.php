@@ -78,10 +78,12 @@ class CommonController extends Controller
         $this->display();
     }
 
-    function isLogin(){
+    function isLogin($jump = true){
         $userInfo = session('userInfo');
         if(!$userInfo || empty($userInfo['id'])){
-            $this->error('你还未登录 请先登录',U('Index/index'));
+            if($jump){
+                $this->error('你还未登录 请先登录',U('Register/login'));
+            }
             return false;
         }else{
             return $userInfo['id'];

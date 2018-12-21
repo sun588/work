@@ -276,7 +276,7 @@ function addAddress() {
     var name = $('#name').val();
     var postcode = $('#postcode').val();
     var phone = $('#phone').val();
-    var isdefault = $('#isdefault').is(':checked') ? 2 : 1;
+    var isdefault = $('#isdefault').is(':checked') ? 1 : 0;
     var id = $('#addressID').val();
 
     var data = {province:province,city:city,area:area,address:address,name:name,postcode:postcode,phone:phone,isdefault:isdefault};
