@@ -11,9 +11,8 @@ use Think\Controller;
 
 class CommonController extends Controller
 {
-    protected $headerCategory;
     function _initialize(){
-        $this->headerCategory = $this->headerCategory();
+        $this->headerCategory();
         $this->headerCart();
         $this->footerPage();
     }
@@ -31,7 +30,7 @@ class CommonController extends Controller
             }
             $c1[$i]['c2'] = $c2;
         }
-        return $c1;
+        $this->assign('headerCategory',$c1);
     }
 
     function headerCart(){

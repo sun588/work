@@ -607,10 +607,10 @@
 		})
     }
 
-    function wxPay(outTradNo) {
+    function wxPay(outTradeNo) {
         $.ajax({
             url:'<{:U("Order/wxPay")}>',
-            data:{outTradNo:outTradNo},
+            data:{outTradeNo:outTradeNo},
             type:'post',
             dataType:'json',
             success:function (rs) {

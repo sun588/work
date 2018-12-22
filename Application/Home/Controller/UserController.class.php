@@ -17,15 +17,22 @@ class UserController extends CommonController {
     }
 
     function leftBarCount(){
+        //收藏夹
         $model = M('wishlist');
         $model->alias('w')->join('LEFT JOIN product p ON w.pid=p.id');
         $wishlistCount = $model->where('p.state=1 and w.uid='.$this->uid)->count();
         $this->assign('wishlistCount',$wishlistCount);
 
+        //购物车
         $model = M('cart');
         $model->alias('c')->join('LEFT JOIN product p ON c.pid=p.id');
         $cartCount = $model->where('p.state=1 and c.uid='.$this->uid)->count();
         $this->assign('cartCount',$cartCount);
+
+        //买方订单
+        $model = M('orders');
+        $buyOrderCount = $model->where("buyID=$this->uid")->count();
+        $this->assign('buyOrderCount',$buyOrderCount);
     }
 
     function wishlist(){
@@ -163,4 +170,15 @@ class UserController extends CommonController {
         }
     }
     /********************   用户地址管理   ************************/
+
+
+    /********************   买方订单   ************************/
+    function buyerOrder(){
+        $uid = $this->isLogin();
+
+        $model = M();
+
+        $this->display();
+    }
+    /********************   买方订单   ************************/
 }

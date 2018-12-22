@@ -194,7 +194,7 @@ class OrderController extends CommonController {
         $out_trade_no = $outTradeNo;
         $total_amount = 0;
         $subject = '';
-        $body = '';
+        //$body = '';
 
         foreach($outTradeInfo as $v){
             $total_amount += $v['total'];
@@ -207,8 +207,9 @@ class OrderController extends CommonController {
 
         $notify_url = 'http://www.jingjiamm.com/index.php/Home/Pay/wx_notify';
         $trade_type = 'NATIVE';
+        $wx_key = '';
         $wxPay = new PayController();
-        $payUrl = $wxPay->wx_pay($out_trade_no,$total_amount * 1000,$subject,$notify_url,$trade_type);
+        $payUrl = $wxPay->wx_pay($out_trade_no,$total_amount * 1000,$subject,$notify_url,$trade_type,$wx_key);
 
         $payInfo = array(
             'payUrl' => $payUrl,
@@ -230,5 +231,4 @@ class OrderController extends CommonController {
             return;
         }
     }
-
 }

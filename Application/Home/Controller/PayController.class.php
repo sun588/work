@@ -214,7 +214,7 @@ class PayController extends Controller {
     }
 
     /*生存签名*/
-    private function getSign($params) {
+    private function getSign($params,$wx_key) {
         ksort($params); //将参数数组按照参数名ASCII码从小到大排序
         foreach ($params as $key => $item) {
             if (!empty($item)) { //剔除参数值为空的参数
@@ -222,16 +222,25 @@ class PayController extends Controller {
             }
         }
         $stringA = implode("&", $newArr); //使用 & 符号连接参数
-        $stringSignTemp = $stringA."&key=". C('WX_KEY'); //拼接key // key是在商户平台API安全里自己设置的
+        $stringSignTemp = $stringA."&key=". $wx_key; //拼接key // key是在商户平台API安全里自己设置的
         $stringSignTemp = MD5($stringSignTemp); //将字符串进行MD5加密
         $sign = strtoupper($stringSignTemp); //将所有字符转换为大写
         return $sign;
     }
 
-    public function wx_pay($out_trade_no,$total_fee,$body,$notify_url,$trade_type = 'APP') {
+    /**
+     * @param $out_trade_no 订单号
+     * @param $total_fee 付款金额 （分单位）
+     * @param $body  付款信息
+     * @param $notify_url 回调地址
+     * @param string $trade_type 交易类型
+     * @param string $wx_key 微信安全密钥
+     * @return string
+     */
+    public function wx_pay($out_trade_no,$total_fee,$body,$notify_url,$trade_type,$wx_key) {
         $nonce_str = $this->rand_code(); //调用随机字符串生成方法获取随机字符串
-        $data['appid'] =C('APP_ID'); //appid
-        $data['mch_id'] = C('MCH_ID') ; //商户号
+        $data['appid'] ='wx9b731f33d61b904c'; //appid
+        $data['mch_id'] = '1517042261' ; //商户号
         $data['body'] = $body;
         $data['spbill_create_ip'] = get_client_ip(); //ip地址
         $data['total_fee'] = $total_fee; //金额
@@ -239,9 +248,9 @@ class PayController extends Controller {
         $data['nonce_str'] = $nonce_str; //随机字符串
         $data['notify_url'] = $notify_url;//'http://huoxingren.user.wzsite.com/index.php/Pay/wx_notify'; //回调地址,用户接收支付后的通知,必须为能直接访问的网址,不能跟参数
         $data['trade_type'] = $trade_type; //支付方式 注意：以上几个参数是追加到$data中的，$data中应该同时包含开发文档中要求必填的剔除sign以外的所有数据
-        $data['sign'] = $this->getSign($data); //获取签名
+        $data['sign'] = $this->getSign($data,$wx_key); //获取签名
         $xml = $this->ToXml($data); //数组转xml //curl 传递给微信方
-        //f_dump($xml);exit;
+        //f_dump($data);exit;
         $url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
         $data = curlPost($url,$xml,false);
         //f_dump($data);exit;
