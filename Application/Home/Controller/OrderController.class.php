@@ -122,7 +122,7 @@ class OrderController extends CommonController {
                 'buyID' => $uid,
                 'supplierID' => $offerInfo['uid'],
                 'time' => $time,
-                'order' => $orderNo,
+                'orderNo' => $orderNo,
                 'outTradeNo' => $outTradeNo,
                 'address' => $data['address'],
                 'buyuser' => $data['pople'],

@@ -70,8 +70,10 @@
 	<div class="main-container container">
 		<ul class="breadcrumb">
 			<li><a href="<{:U('Index/index')}>"><i class="fa fa-home"></i>首页</a></li>
-			<li><a href="category-one.html">大家电</a></li>
-            <li><input type="" name=""><i class="fa fa-search" style="margin-left: -20px;"></i></li>
+            <volist name="navigation" id="row">
+			    <li><a href="<{$row.url}>"><{$row.name}></a></li>
+            </volist>
+            <!--<li><input type="" name=""><i class="fa fa-search" style="margin-left: -20px;"></i></li>-->
 		</ul>
 		
 		<div class="row">
@@ -157,11 +159,11 @@
                        <li><a href="">综合<span ><img src="__PUBLIC__/Home/image/hy/do.png"></span></a></li>
                        <li><a href="">人气新品<span ><img src="__PUBLIC__/Home/image/hy/do.png"></span></a></li>
                        <li><a href="">销量<span ><img src="__PUBLIC__/Home/image/hy/do.png"></span></a></li>
-                       <li style="width:150px;float: right;">
-                            <span style="margin-right:10px;">1/20</span>
-                            <button><i class="fa fa-angle-left"></i></button>
-                            <button><i class="fa fa-angle-right"></i></button>
-                       </li>
+                       <!--<li style="width:150px;float: right;">-->
+                            <!--<span style="margin-right:10px;">1/20</span>-->
+                            <!--<button><i class="fa fa-angle-left"></i></button>-->
+                            <!--<button><i class="fa fa-angle-right"></i></button>-->
+                       <!--</li>-->
                    </ul>
               </div>
               <!-- //end Filters -->
@@ -212,9 +214,8 @@
         			<!--// End Changed listings-->
         			<!-- Filters -->
         			<div class="product-filter product-filter-bottom filters-panel">
-                        <div class="row">
-                            <div class="col-sm-6 text-left"></div>
-                           <!--  <div class="col-sm-6 text-right">Showing 1 to 15 of 15 (1 Pages)</div> -->
+                        <div class="row" style="text-align: center;font-size: 18px;">
+                           <{$page}>
                         </div>
                     </div>
         			<!-- //end Filters -->

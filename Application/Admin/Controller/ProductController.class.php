@@ -283,4 +283,88 @@ class ProductController extends Controller {
             return $returnArr;
         }
     }
+
+
+    //==================================================================================
+                                    //商品报价管理
+    //==================================================================================
+
+    function offer(){
+        $this->display();
+    }
+
+    function getOffer(){
+        if(IS_AJAX){
+            //获取数据
+            $data = $_POST;
+            $draw = empty($data['draw']) ? '' : $data['draw'];
+            $start = $data['start'];
+            $length = empty($data['length']) ? '' : $data['length'];
+            $search = empty($data['search']['value']) ? '' : $data['search']['value'];
+            $order = empty($data['order']) ? '' : $data['order'];
+
+            //拼接查询条件
+            $where = " 1=1 ";
+            if($search){
+                $where .= " and p.name like '%$search%' ";
+            }
+
+            if(I('post.state')){
+                $where .= " and o.state=" . I('post.state');
+            }
+
+            $model = D('offer');
+
+            //查总记录数
+            $model->alias('o');
+            $recordsTotal = $model->where($where)->count('id');
+
+            //查数据
+            $model->alias('o');
+            $model->join('left join product p ON p.id=o.pid')->join('left join user u ON o.uid=u.id');
+            $model->field('o.id,o.state,o.price,o.time,p.pic1,p.name,p.type,u.shopName,u.user');
+            $rs = $model->where($where)->order("o.time desc")->limit("{$start},{$length}")->select();
+
+            //循环处理数据
+            for($i = 0; $i < count($rs); $i++){
+                $rs[$i]['time'] = date('Y-m-d');
+                $rs[$i]['pic'] = $this->getThumpPic($rs[$i]['pic1']);
+            }
+
+            //组装返回数据
+            $returnData = array();
+            $returnData['draw'] = $draw;
+            $returnData['recordsTotal'] = $recordsTotal;
+            $returnData['recordsFiltered'] = $recordsTotal;
+            $returnData['data'] = $rs ? $rs : '';
+            echo json_encode($returnData);
+        }
+    }
+
+    function changeOfferState(){
+        $model = M('offer');
+        $state = I('post.state');
+        if($state != 1 && $state != 2){
+            f_return('4001','未知的状态');
+            return;
+        }
+        $saveData = array(
+            'state' => $state,
+        );
+        if( $model->where('id='.I('post.id'))->save($saveData) ){
+            f_return(1,'success');
+        }else{
+            f_return(4002,'改变失败');
+        }
+    }
+
+    function delOffer(){
+        $id = I('post.id');
+        $model = M('offer');
+        if($model->delete($id)){
+            f_return(1,'success');
+        }else{
+            f_return(4001,'删除失败');
+        }
+    }
 }

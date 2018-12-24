@@ -60,15 +60,6 @@
          .content-top .entry-summary table thead tr th, .entry-content .entry-summary table thead tr th, .commentlist .entry-summary table thead tr th {
     border-right: 0px;
 }
-         .pingjia_img ul li{  height: 92px;
-             border: 1px dashed #999;
-             display: inline-block;
-             width: 22%;
-             margin-right: 20px;    text-align: center;}
-         .pingjia_img ul li img{margin-top: 14%;max-width: 100%;max-height: 100%}
-         .pingjia_img ul li label{width:100%;height: 92px;}
-         .pingjia_miaosu {border:1px solid #999;margin: 30px 0px;width:100%;min-height: 150px;}
-
     </style>
 
 </head>
@@ -86,7 +77,7 @@
 		<div class="container">
 			<div class="row">
 
-                <include file="common:userLeftBar"/>
+                <include file="common:businessUserLeftBar"/>
 
                 <div id="contents" role="main" class="main-page col-lg-10 col-md-12 col-sm-12 col-xs-12">
                    <div class="col-lg-12 statr-list" style="padding:0px;margin-bottom: 16px;">
@@ -125,7 +116,7 @@
 											<tbody>
 
                                                 <volist name="data" id="row">
-                                                    <tr style="position: sticky;bottom:0px;background-color: #fff;z-index:999;">
+                                                    <tr style="position: sticky;bottom:0px;background-color: #fff;z-index: 99999;">
                                                       <td colspan="7" class="actions" style="text-align: center;border: 1px solid #ccc;padding:4px 10px;background-color: rgba(244, 242, 242, 0.43);">
                                                         <div class="coupon">
                                                             <!--<input type="checkbox" name="" style=" vertical-align: middle;">-->
@@ -166,15 +157,9 @@
                                                         </td>
                                                         <td class="product-subtotal" data-title="Total" style="text-align: center;">
 
-                                                            <eq name="row.send" value="3">
-                                                                <button type="button" class="wishlist btn-button" onclick="pingjia(this,'<{$row.id}>')">
-                                                                     <span>评价</span>
-                                                                </button>
-                                                            </eq>
-
-                                                            <eq name="row.send" value="2">
-                                                                <button type="button" class="wishlist btn-button" onclick="check(this,'<{$row.id}>')">
-                                                                    <span>确认收货</span>
+                                                            <eq name="row.send" value="1">
+                                                                <button type="button" class="wishlist btn-button" onclick="showSendGoodsModel(this,'<{$row.id}>')">
+                                                                    <span>发货</span>
                                                                 </button>
                                                             </eq>
 
@@ -206,43 +191,32 @@
     <!-- //end Footer Container -->
 
 </div>
-   
 
-<!-- End Color Scheme
-============================================ -->
-
-    <div class="modal fade" tabindex="-1" role="dialog" id="m_pingjia">
-        <div class="modal-dialog" role="document">
-            <form id="pingjiaForm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" style="text-align:center;">填写评价</h4>
+<!--======= send goods model-->
+<div class="modal fade" tabindex="-1" role="dialog" id="sendGoodsModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">发货</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="m_sendNo" class="col-sm-3 control-label">发货单号</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="m_sendNo" name="sendNo">
                     </div>
-                    <div class="modal-body">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="sendGoods()">保存地址</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--======= send goods model-->
 
-                        <div class="pingjia_img">
-                            <ul>
-                                <li><label style=" height: 130px;"><img src="__PUBLIC__/Home/image/tu/add.png"><input type="file" name="" onchange="upPic(this)" style="display: none;"></label><input type="hidden" class="pic" value="" name="pic1" /></li>
-                                <li><label style=" height: 130px;"><img src="__PUBLIC__/Home/image/tu/add.png"><input type="file" name="" onchange="upPic(this)" style="display: none;"></label><input type="hidden" class="pic" value="" name="pic2" /></li>
-                                <li><label style=" height: 130px;"><img src="__PUBLIC__/Home/image/tu/add.png"><input type="file" name="" onchange="upPic(this)" style="display: none;"></label><input type="hidden" class="pic" value="" name="pic3" /></li>
-                            </ul>
-                            <textarea class="pingjia_miaosu" placeholder="评价内容" name="content"></textarea>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="orderID">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" onclick="savePingjia(this)" class="btn btn-primary">保存</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </form>
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-    <!-- Include Libs & Plugins
-    ============================================ -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript" src="__PUBLIC__/Home/js/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
@@ -255,63 +229,38 @@
 
 <script type="text/javascript" src="__PUBLIC__/Home/js/themejs/so_megamenu.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Home/js/themejs/addtocart.js"></script>
-<script type="text/javascript" src="__PUBLIC__/JS/common.js"></script>
+
 <script type="text/javascript">
     /*确认收货*/
-    function check(obj,id) {
-        if(confirm("确认已经收到货物?")){
+    var orderID;
+    var sendObj;
+    function sendGoods() {
+        var sendNo = $('#m_sendNo').val();
+
+        if(sendNo){
             $.ajax({
-                url:'<{:U("User/checkGoods")}>',
-                data:{id:id},
+                url:'<{:U("Businessuser/checkSendGoods")}>',
+                data:{id:orderID,sendNo:sendNo},
                 type:'post',
                 dataType:'json',
                 success:function (rs) {
                     if(rs && rs['errno'] ==1){
-                        alert('确认收货成功');
-                        $(this).remove();
+                        alert('发货成功');
+                        $(sendObj).remove();
                     }else {
-                        alert("确认收货失败");
+                        alert("发货失败");
                     }
                 }
             })
+        }else {
+            alert('请填写运单号');
         }
     }
     
-    //评价
-    function pingjia(obj,id) {
-        $('input[name="orderID"]').val(id);
-        $('#m_pingjia').modal();
-    }
-
-    function savePingjia() {
-        var data = $('#pingjiaForm').serialize();
-        $.ajax({
-            url:'<{:U("User/saveEvaluate")}>',
-            data:data,
-            type:'post',
-            dataType:'json',
-            success:function (rs) {
-                if(rs && rs['errno'] == 1){
-                    alert('评价成功');
-                    $('#m_pingjia').modal('hide');
-                }else {
-                    alert(rs['msg']);
-                }
-            }
-        })
-    }
-
-    //图片上传
-    function upPic(obj){
-        fileAjaxUP(obj,'<{:U("User/picUp")}>',function (rs) {
-            if(rs){
-               rs = JSON.parse(rs);
-               if(rs['errno'] == 1){
-                   $(obj).parents('li').find('img').attr('src',rs['data']['url']);
-                   $(obj).parents('li').find('.pic').val(rs['data']['url']);
-               }
-            }
-        })
+    function showSendGoodsModel(obj,id) {
+        orderID = id;
+        sendObj = obj;
+        $('#sendGoodsModal').modal();
     }
 </script>
 

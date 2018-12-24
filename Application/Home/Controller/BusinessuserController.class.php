@@ -24,6 +24,11 @@ class BusinessuserController extends CommonController {
         $model = M('offer');
         $offerCount = $model->where('uid='.$this->uid)->count();
         $this->assign('offerCount',$offerCount);
+
+        //卖家订单数量
+        $model = M('orders');
+        $supplierOrdercount = $model->where("supplierID=$this->uid and paystate=2")->count();
+        $this->assign('supplierOrdercount',$supplierOrdercount);
     }
 
 
@@ -166,5 +171,79 @@ class BusinessuserController extends CommonController {
         }
     }
     /********************* 商家报价模块  ******************/
+
+    /********************   商家订单   ************************/
+    function supplierOrder(){
+        $uid = $this->isLogin();
+        $this->supplierOrderCount();
+
+        $model = M('orders');
+        $where = " supplierID=$this->uid and paystate=2";
+
+        if(I('get.send')){
+            $where .= " and send=" . I('get.send');
+        }
+
+        $count = $model->where($where)->count();
+        $Page = new \Think\Page($count,10);
+        if(I('get.send')){
+            $Page->parameter['send'] = I('get.send');
+        }
+        $show = $Page->show();
+        $model->alias('o')->field('o.id,o.pid,o.orderNo,o.outTradeNo,o.price,o.num,p.name,p.type,p.pic1,u.shopName');
+        $model->join('LEFT JOIN product p ON o.pid=p.id')->join("LEFT JOIN user u ON o.supplierID=u.id");
+        $data = $model->where($where)->order('o.time desc')->limit("$Page->firstRow,$Page->listRows")->select();
+
+        //f_dump($data);exit;
+        $this->assign('page',$show);
+        $this->assign('data',$data);
+
+        $this->display();
+    }
+
+    function supplierOrderCount(){
+        $uid = $this->isLogin();
+
+        $model = M('orders');
+
+        //全部订单
+        $count1 = $model->where("supplierID=$uid and paystate=2")->count();
+        $this->assign('count1',$count1);
+
+        //待付款订单
+        $count2 = $model->where("supplierID=$uid and paystate=2")->count;
+        $this->assign('count2',$count2);
+
+        //待发货
+        $count3 = $model->where("supplierID=$uid and paystate=2 and send=1")->count();
+        $this->assign('count3',$count3);
+
+        //待收货
+        $count4 = $model->where("supplierID=$uid and paystate=2 and send=2")->count();
+        $this->assign('count4',$count4);
+
+        //待评价订单
+        $count5 = $model->where("supplierID=$uid and paystate=2 and send=3")->count();
+        $this->assign('count5',$count5);
+
+        //完成订单
+        $count6 = $model->where("supplierID=$uid and paystate=2 and send=4")->count();
+        $this->assign('count6',$count6);
+    }
+
+    //确认发货
+    function checkSendGoods(){
+        $uid = $this->isLogin(false);
+        $id = I('post.id');
+        $sendNo = I('post.sendNo');
+        $model = M('orders');
+        $rs = $model->where("supplierID=$uid and id=$id")->setField(array('send'=>2,'sendNo'=>$sendNo));
+        if($rs){
+            f_return(1,'发货成功');
+        }else{
+            f_return(4001,'发货失败');
+        }
+    }
+    /********************   商家订单   ************************/
 
 }

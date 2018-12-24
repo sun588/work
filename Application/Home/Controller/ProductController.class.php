@@ -8,13 +8,21 @@ class ProductController extends CommonController {
     private $c4 = '';
     private $attrvalue = '';
     private $bid = '';
+    private $column1 = '';
+    private $column2 = '';
+    private $column3 = '';
+    private $column4 = '';
+    private $column5 = '';
+    private $column6 = '';
+    private $column7 = '';
+    private $column8 = '';
+    private $column9 = '';
 
 
     function product(){
         $this->assign('headerCategory',$this->headerCategory);
 
-        $where = $this->getCondition();
-        $this->assign('brand',$this->getBrand());
+        $this->getCondition();
 
         if($this->c3){
             $model = M('category');
@@ -26,8 +34,19 @@ class ProductController extends CommonController {
             $this->assign('category',$this->getChildCategory($this->c1));
         }
 
+        //产品数据 已经分页数据
         $data = $this->getProduct();
         $this->assign('product',$data['product']);
+        $this->assign('page',$data['page']);
+
+        //产品所拥有的品牌
+        if(I('column6') != 1 && I('column7') != 1 && !I('bid')){
+            $this->assign('brand',$data['brand']);
+        }
+
+        //导航条数据
+        $this->getNavigation();
+
         $this->display();
     }
 
@@ -36,40 +55,44 @@ class ProductController extends CommonController {
         $where = '1=1';
         if(I('c1')){
             $this->c1 = I('c1');
-            $where .= ' and c1=' . I('c1');
+            $where .= ' and p.c1=' . I('c1');
             $this->assign('c1',I('c1'));
         }
         if(I('c2')){
             $this->c2 = I('c2');
-            $where .= ' and c2=' . I('c2');
+            $where .= ' and p.c2=' . I('c2');
             $this->assign('c2',I('c2'));
         }
         if(I('c3')){
             $this->c3 = I('c3');
-            $where .= ' and c3=' . I('c3');
+            $where .= ' and p.c3=' . I('c3');
             $this->assign('c3',I('c3'));
         }
         if(I('c4')){
             $this->c4 = I('c4');
-            $where .= ' and c4=' . I('c4');
+            $where .= ' and p.c4=' . I('c4');
             $this->assign('c4',I('c4'));
         }
         if(I('bid')){
             $this->bid = I('bid');
-            $where .= ' and brand=' . I('bid');
+            $where .= ' and p.brand=' . I('bid');
             $this->assign('bid',I('bid'));
         }
         if(I('column6')){
-            $where .= ' and column6=' . I('column6');
+            $where .= ' and p.column6=' . I('column6');
+            $this->column6 = I('column6');
         }
         if(I('column7')){
-            $where .= ' and column7=' . I('column7');
+            $where .= ' and p.column7=' . I('column7');
+            $this->column7 = I('column7');
         }
         if(I('column8')){
-            $where .= ' and column8=' . I('column8');
+            $where .= ' and p.column8=' . I('column8');
+            $this->column8 = I('column8');
         }
         if(I('column9')){
-            $where .= ' and column9=' . I('column9');
+            $where .= ' and p.column9=' . I('column9');
+            $this->column9 = I('column9');
         }
         if(I('attrvalue')){
             $this->attrvalue = I('attrvalue');
@@ -81,15 +104,15 @@ class ProductController extends CommonController {
             }
             $pid = implode(',',$pidArr);
             $pid = $pid ? $pid : 0;
-            $where .= " and id in($pid)";
+            $where .= " and p.id in($pid)";
             $this->assign('attrvalue',I('attrvalue'));
         }
         if(I('searchValue') && I('searchType')){
             $searchV = I('searchValue');
             if(I('searchType') == 1){
-                $where .= " and name like '%$searchV%'";
+                $where .= " and p.name like '%$searchV%'";
             }else{
-                $where .= " and type like '%$searchV%'";
+                $where .= " and p.type like '%$searchV%'";
             }
         }
         $this->where = $where;
@@ -99,17 +122,109 @@ class ProductController extends CommonController {
     function getProduct(){
         $model = M('product');
 
+        $model->alias('p');
         $count = $model->where($this->where)->count();
         $page = new \Think\Page($count,25);
         $show = $page->show();
 
+        $model->alias('p');
         $model->field('id,name,pic1,pic2,type');
         $model->where($this->where);
         $rs = $model->order('od desc')->limit("$page->firstRow,$page->listRows")->select();
 
+        //获取产品的品牌
+        $model->alias('p');
+        $model->field('b.name,b.id');
+        $model->join('left join brand b ON p.brand=b.id');
+        $brand = $model->where($this->where)->order('p.od desc')->group('p.brand')->select();
+
+        $returnArr['brand'] = $brand;
         $returnArr['product'] = $rs;
         $returnArr['page'] = $show;
         return $returnArr;
+    }
+
+    function getNavigation(){
+        $returnArr = array();
+
+        if($this->c1){
+            $model = M('category');
+            $rs = $model->where("id=$this->c1")->field('id,name')->find();
+            $c1['url'] = U('Product/product',array('c1'=>$c1['id']));
+            $returnArr[] = $rs;
+        }
+        if($this->c2){
+            $model = M('category');
+            $c2 = $model->where("id=$this->c2")->field('id,name,pid')->find();
+            $c2['url'] = U('Product/product',array('c2'=>$c2['id']));
+            $c1 = $model->where("id=".$c2['pid'])->field('id,name')->find();
+            $c1['url'] = U('Product/product',array('c1'=>$c1['id']));
+            $returnArr[] = $c1;
+            $returnArr[] = $c2;
+        }
+        if($this->c3){
+            $model = M('category');
+            $c3 = $model->where("id=$this->c3")->field('id,name,pid')->find();
+            $c3['url'] = U('Product/product',array('c3'=>$c3['id']));
+            $c2 = $model->where("id=".$c3['pid'])->field('id,name,pid')->find();
+            $c2['url'] = U('Product/product',array('c2'=>$c2['id']));
+            $c1 = $model->where("id=".$c2['pid'])->field('id,name')->find();
+            $c1['url'] = U('Product/product',array('c1'=>$c1['id']));
+            $returnArr[] = $c1;
+            $returnArr[] = $c2;
+            $returnArr[] = $c3;
+        }
+        if($this->c4){
+            $model = M('category');
+            $c4 = $model->where("id=$this->c4")->field('id,name,pid')->find();
+            $c4['url'] = U('Product/product',array('c4'=>$c4['id']));
+            $c3 = $model->where("id=".$c4['pid'])->field('id,name,pid')->find();
+            $c3['url'] = U('Product/product',array('c3'=>$c3['id']));
+            $c2 = $model->where("id=".$c3['pid'])->field('id,name,pid')->find();
+            $c2['url'] = U('Product/product',array('c2'=>$c2['id']));
+            $c1 = $model->where("id=".$c2['pid'])->field('id,name')->find();
+            $c1['url'] = U('Product/product',array('c1'=>$c1['id']));
+            $returnArr[] = $c1;
+            $returnArr[] = $c2;
+            $returnArr[] = $c3;
+            $returnArr[] = $c4;
+        }
+
+        if($this->attrvalue){
+            $model = M('attrvalue');
+            $rs = $model->where("id=$this->attrvalue")->field('id,name')->find();
+            $tempArr['name'] = $rs['name'];
+            $tempArr['url'] = U('Product/product',array('bid'=>$rs['id']));
+            $returnArr[] = $tempArr;
+        }
+        if($this->bid){
+            $model = M('brand');
+            $rs = $model->where("id=$this->bid")->field('id,name')->find();
+            $tempArr['name'] = $rs['name'];
+            $tempArr['url'] = U('Product/product',array('bid'=>$rs['id']));
+            $returnArr[] = $tempArr;
+        }
+        if($this->column6 == 1){
+            $tempArr['name'] = '精品推荐';
+            $tempArr['url'] = U('Product/product',array('column6'=>1));
+            $returnArr[] = $tempArr;
+        }
+        if($this->column7 == 1){
+            $tempArr['name'] = '智能潮货';
+            $tempArr['url'] = U('Product/product',array('column7'=>1));
+            $returnArr[] = $tempArr;
+        }
+        if($this->column8 == 1){
+            $tempArr['name'] = '家用电器';
+            $tempArr['url'] = U('Product/product',array('column8'=>1));
+            $returnArr[] = $tempArr;
+        }
+        if($this->column9 == 1){
+            $tempArr['name'] = '品牌汽车';
+            $tempArr['url'] = U('Product/product',array('column9'=>1));
+            $returnArr[] = $tempArr;
+        }
+        $this->assign('navigation',$returnArr);
     }
 
     function getBrand(){
