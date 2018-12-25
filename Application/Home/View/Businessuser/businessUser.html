@@ -82,10 +82,14 @@
 		    <div class="row adn" style="    margin: 0;">
 		       <div style="width:30%;float:left;" class="col-lg-12">
 		          <div class="lf-rg">
-		              <img src="image/hy/top.png">
+					  <empty name="userInfo">
+		              	  <img src="__PUBLIC__/Home/image/hy/top.png">
+					  <else/>
+						  <img src="<{$userInfo.headpic}>">
+					  </empty>
 		          </div>
 		           <div class="lf-lf">
-		               <span>管理员</span><br>
+		               <span><{$userInfo.shopName}></span><br>
 		               <span>欢迎来到竞价买卖网！</span>
 		           </div>
 		       </div>
@@ -102,7 +106,7 @@
 		                <span>您已经出价的商品数量</span> 
 		              </div>
 		              <div class="shangjia-list-1">
-		                <span style=" padding-left: 15px;font-size: 16px;">已出价的商品<span class="sign-lf">20</span></span>
+		                <span style=" padding-left: 15px;font-size: 16px;">已出价的商品<span class="sign-lf"><{$offerCount}></span></span>
 		              </div>
                 </div>
 	            <div class="col-lg-6 statr-list  shangjia-hy-1" style="padding:0px;margin-bottom: 16px;">
@@ -122,11 +126,10 @@
 		              </div>
 		              <div class="shangjia-list-1">
 		                 <ul>
-		                     <a href=""><li>待付款<span class="sign-lf">20</span></li></a>
-		                     <a href=""><li>待发货<span class="sign-lf">20</span></li></a>
-		                     <a href=""><li>售前退款<span class="sign-lf">20</span></li></a>
+		                     <a href="<{:U('supplierOrder',array('send'=>1))}>"><li>待发货<span class="sign-lf"><{$count3}></span></li></a>
+		                     <a href="<{:U('supplierOrder',array('send'=>2))}>"><li>待收货<span class="sign-lf"><{$count4}></span></li></a>
+							 <a href="<{:U('supplierOrder',array('send'=>3))}>"><li>待评价<span class="sign-lf"><{$count5}></span></li></a>
 		                     <a href=""><li>售后退款<span class="sign-lf">20</span></li></a>
-		                     <a href=""><li></li></a>
 		                 </ul>
 
 		              </div>
@@ -148,13 +151,13 @@
 		                    <tbody>
 		                       <tr>
 		                           <td>昨日销量	</td>
-		                           <td>--</td>
-		                           <td>--</td>
+		                           <td>-<{$dayOrderNum}>-</td>
+		                           <td>-<{$dayOrderMoney}>-</td>
 		                       </tr>
 		                       <tr>
 		                           <td>月销量</td>
-		                           <td>--</td>
-		                           <td>--</td>
+		                           <td>-<{$monthOrderNum}>-</td>
+		                           <td>-<{$monthOrderMoney}>-</td>
 		                       </tr>
 		                    </tbody>
 		                </table>

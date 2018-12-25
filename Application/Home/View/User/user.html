@@ -78,36 +78,39 @@
                 <include file="common:userLeftBar" />
                 <!--左侧导航栏-->
 
-				<div id="contents" role="main" class="main-page col-lg-10 col-md-12 col-sm-12 col-xs-12">
+				<div role="main" class="main-page col-lg-10 col-md-12 col-sm-12 col-xs-12">
 				    <div class="row adn" style="    margin: 0;">
 				       <div style="width:30%;float:left;" class="col-lg-12">
 				          <div class="lf-rg">
-				              <img src="__PUBLIC__/Home/image/hy/top.png">
+                              <empty name="userInfo.headpic">
+				                  <img src="__PUBLIC__/Home/image/hy/top.png">
+                              <else/>
+                                  <img src="<{$userInfo.headpic}>">
+                              </empty>
 				          </div>
 				           <div class="lf-lf">
-				               <span>管理员</span><br>
+				               <span><{$userInfo.nickname}></span><br>
 				               <span>欢迎来到竞价买卖网！</span>
 				           </div>
 				       </div>
 				       <div style="width:20%;float:left;text-align: center;">
-				           <a href=""><span>我的收货地址</span></a>
+				           <!--<a href=""><span>我的收货地址</span></a>-->
 				       </div>
 				       <div style="width:20%;float:left;">
 				       </div>
 				    </div>
                    <div class="col-lg-12 statr-list" style="padding:0px;margin-bottom: 16px;">
                       <div class="dindan-title">
-                        <h3>我的订单<a href=""><span>查看全部<i class="fa fa-angle-right lf-10" aria-hidden="true"></i></span></a></h3>
+                        <h3>我的订单<a href="<{:U('User/buyerOrder')}>"><span>查看全部<i class="fa fa-angle-right lf-10" aria-hidden="true"></i></span></a></h3>
                       </div>
                       <div class="dindan-list">
                         <ul>
-                           <a href="dindan.html"><li>全部<span>20</span></li></a>
-                           <a href=""><li><i class="fa fa-credit-card-alt" aria-hidden="true"></i>待付款<span>2</span></li></a>
-                           <a href=""><li><i class="fa fa-truck" aria-hidden="true"></i>待发货<span>10</span></li></a>
-                           <a href=""><li><i class="fa fa-gift" aria-hidden="true"></i>待收货<span>2</span></li></a>
-                           <a href=""><li><i class="fa fa-star-o" aria-hidden="true"></i>待评价<span>1</span></li></a>
-                           <a href=""><li><i class="fa fa-check" aria-hidden="true"></i>已完成<span>0</span></li></a>
-                           <a href=""><li><span></span></li></a>
+                            <a href="<{:U('User/buyerOrder')}>"><li  style="color:#ff5e00;border-bottom: 4px solid #ff5e00;">全部<span><{$count1}></span></li></a>
+                            <!--<a href="daifu.html"><li><i class="fa fa-credit-card-alt" aria-hidden="true"></i>待付款<span>2</span></li></a>-->
+                            <a href="<{:U('User/buyerOrder',array('send'=>1))}>"><li><i class="fa fa-truck" aria-hidden="true"></i>待发货<span><{$count3}></span></li></a>
+                            <a href="<{:U('User/buyerOrder',array('send'=>2))}>"><li><i class="fa fa-gift" aria-hidden="true"></i>待收货<span><{$count4}></span></li></a>
+                            <a href="<{:U('User/buyerOrder',array('send'=>3))}>"><li><i class="fa fa-star-o" aria-hidden="true"></i>待评价<span><{$count5}></span></li></a>
+                            <a href="<{:U('User/buyerOrder',array('send'=>4))}>"><li><i class="fa fa-check" aria-hidden="true"></i>已完成<span><{$count6}></span></li></a>
                         </ul>
                       </div>
                    </div>
@@ -125,521 +128,72 @@
 						<div class="clearfix"></div>
             <div class="col-lg-12 statr-list row" style="padding:0px;margin-bottom: 16px;">
               <div class="dindan-title">
-                <h3 style="    padding-left: 10px;">我的收藏<a href="collection.html"><span>查看更多<i class="fa fa-angle-right lf-10" aria-hidden="true"></i></span></a></h3> 
+                <h3 style="    padding-left: 10px;">我的收藏<a href="<{:U('wishlist')}>"><span>查看更多<i class="fa fa-angle-right lf-10" aria-hidden="true"></i></span></a></h3>
 
               </div>
               <div class="dindan-list">
-                 <div class="shangpin">
-                      <span>你还没有收藏的商品<a href="index.html">前去逛逛吧！</a></span>
+                 <div class="main-page col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                     <volist name="wishlist" id="row" empty="$empty">
+                         <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
+                             <div class="product-item-container">
+                                 <div class="left-block left-b">
+
+                                     <div class="product-image-container second_img">
+                                         <a href="<{:U('Product/productDetial',array('id'=>$row.id))}>" target="_self">
+                                             <img src="<{$row.pic1}>" class="img-1 img-responsive">
+                                             <!--<img src="<{$row.pic2}>" class="img-2 img-responsive">-->
+                                         </a>
+                                     </div>
+                                 </div>
+                                 <div class="right-block">
+                                     <div class="caption hide-cont element1">
+                                         <h4><a href="<{:U('Product/productDetial',array('id'=>$row.id))}>" title="Pastrami bacon" target="_self"><{$row.name}></a></h4>
+                                     </div>
+                                     <p class="price">
+                                         <span class="price-new"><{$row.type}></span>
+                                     </p>
+                                 </div>
+                             </div>
+                         </div>
+                     </volist>
                  </div>
               </div>
            </div>
            <!-- 人气商品 -->
            <div class="col-lg-12 statr-list" style="padding:0px;margin-bottom: 16px;">
               <div class="dindan-title">
-                <h3>人气商品<a href=""><span>查看更多</span></a></h3> 
-
+                <h3>人气商品<a href=""><span></span></a></h3>
               </div>
               <div id="contents" role="main" class="main-page col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
               <!--changed listings-->
-              <div class="products-list row nopadding-xs so-filter-gird">
-              
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Lastrami bacon">
-                                    <img src="image/catalog/demo/product/270/e1.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/e10.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
+                  <div class="products-list row nopadding-xs so-filter-gird">
+
+                      <volist name="product" id="row">
+                        <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
+                            <div class="product-item-container">
+                                <div class="left-block left-b">
+
+                                    <div class="product-image-container second_img">
+                                        <a href="<{:U('Product/productDetial',array('id'=>$row.id))}>" target="_self">
+                                            <img src="<{$row.pic1}>" class="img-1 img-responsive">
+                                            <img src="<{$row.pic2}>" class="img-2 img-responsive">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="right-block">
+                                    <div class="caption hide-cont element1">
+                                        <h4><a href="<{:U('Product/productDetial',array('id'=>$row.id))}>" title="Pastrami bacon" target="_self"><{$row.name}></a></h4>
+                                    </div>
+                                    <p class="price">
+                                      <span class="price-new"><{$row.type}></span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        <div class="right-block"> 
-                            <div class="caption hide-cont element1">
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                            </div>
-                            <p class="price">
-                              <span class="price-new">￥80.00</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                      </volist>
 
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            <div class="box-label">
-                                <span class="label-product label-sale">-15%</span>
-                            </div>
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Exceeur sint occaecat">
-                                    <img src="image/catalog/demo/product/270/e2.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/e9.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">
-                              <span class="price-new">￥50.00</span>
-                             
-                            </p>
-                           
-                            
-                            
-                        </div>                                                
-                    </div>
-                </div>
-            
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Mapicola incidid">
-                                    <img src="image/catalog/demo/product/270/e3.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/e8.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">
-                              <span class="price-new">￥60.00</span>          
-                            </p>
-                           
-                            
-                            
-                        </div>                                            
-                    </div>
-                </div>
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            <div class="box-label">
-                                <span class="label-product label-new">New</span>
-                            </div>
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Duis aute irure ">
-                                    <img src="image/catalog/demo/product/270/e4.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/e7.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">
-                              <span class="price-new">￥48.00</span>              
-                            </p>
-
-                           
-                            
-                            
-                        </div>                                        
-                    </div>
-                </div>
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Excepteur sint occ">
-                                    <img src="image/catalog/demo/product/270/e5.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/e6.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">
-                              <span class="price-new">￥90.00</span>                            
-                            </p>
-
-                           
-                            
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                           
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="PCenison meatloa">
-                                    <img src="image/catalog/demo/product/270/e6.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/e2.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">￥42.00</p>
-                           
-                            
-                            
-                        </div>
-                       
-                    </div>
-                </div>
-
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            <div class="box-label">
-                                <span class="label-product label-new">New</span>
-                            </div>
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Sunt inculpa qui">
-                                    <img src="image/catalog/demo/product/270/fu1.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/fu10.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">
-                              <span class="price-new">￥60.00</span>                                      
-                            </p>
-
-                           
-                            
-                            
-                        </div>
-
-                    </div>
-                </div>
-                    
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Chicken swinesha">
-                                    <img src="image/catalog/demo/product/270/fu2.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/fu9.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">
-                              <span class="price-new">￥55.00</span>                            
-                            </p>
-
-                           
-                            
-                            
-                        </div> 
-                    </div>
-                </div>
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            <div class="box-label">
-                                <span class="label-product label-sale">-10%</span>
-                            </div>
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Mapicola incidid">
-                                    <img src="image/catalog/demo/product/270/fu3.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/fu8.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">
-                              <span class="price-new">￥90.00</span>
-                            </p>
-                        </div>                                        
-                    </div>
-                </div>
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Dormd dea irure">
-                                    <img src="image/catalog/demo/product/270/fu4.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/fu7.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">
-                              <span class="price-new">￥48.00</span>              
-                            </p>
-
-                           
-                            
-                            
-                        </div>                                        
-                    </div>
-                </div>
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Mecepteur sint rew">
-                                    <img src="image/catalog/demo/product/270/fu5.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/fu6.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">
-                              <span class="price-new">￥90.00</span>                            
-                            </p>
-                           
-                            
-                            
-                        </div>
-
-                    </div>
-                </div>
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                           
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Sed ut perspicia">
-                                    <img src="image/catalog/demo/product/270/fu6.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/fu2.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">￥42.00</p>
-                           
-                            
-                            
-                        </div>                                               
-                    </div>
-                </div>
-                
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Dormd dea irure">
-                                    <img src="image/catalog/demo/product/270/f4.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/f7.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">
-                              <span class="price-new">￥48.00</span>              
-                            </p>  
-                        </div>                                        
-                    </div>
-                </div>
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                            
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Mecepteur sint rew">
-                                    <img src="image/catalog/demo/product/270/f5.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/f6.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">
-                              <span class="price-new">￥90.00</span>                            
-                            </p>
-
-                           
-                            
-                            
-                        </div>
-
-                    </div>
-                </div>
-                <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                    <div class="product-item-container">
-                        <div class="left-block left-b">
-                           
-                            <div class="product-image-container second_img">
-                                <a href="product.html" target="_self" title="Sed ut perspicia">
-                                    <img src="image/catalog/demo/product/270/f6.jpg" class="img-1 img-responsive" alt="image1">
-                                    <img src="image/catalog/demo/product/270/f2.jpg" class="img-2 img-responsive" alt="image2">
-                                </a>
-                            </div>
-                            <!--quickview-->                                                      
-                            <!--end quickview-->
-
-                            
-                        </div>
-                        <div class="right-block">
-                            <div class="button-group so-quickview cartinfo--left">
-                                
-                            </div>
-                            <div class="caption hide-cont element1">
-                                
-                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Haier/海尔 洗烘一体 EG8</a></h4>
-                                
-                            </div>
-                            <p class="price">￥42.00</p>
-                        </div>                                               
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
+                  </div>
+              </div>
            </div>
            <!-- 人气商品 -->
 					</div>

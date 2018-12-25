@@ -18,12 +18,14 @@
     
     <!-- Favicon
     ============================================ -->
-    <link rel="shortcut icon" type="image/png" href="/Public/Home/ico/favicon-16x16.png">
-  
+    <link rel="shortcut icon" type="image/png" href="ico/favicon-16x16.png">
+    
     <!-- 新引入 -->
     <link rel="stylesheet" href="/Public/Home/css/main.css">
     <link rel="stylesheet" href="/Public/Home/css/style.css">
+    <link rel="stylesheet" href="/Public/Home/css/app-orange.css" id="theme_color" />
     <!-- end -->
+   
     <!-- Libs CSS
     ============================================ -->
     <link rel="stylesheet" href="/Public/Home/css/bootstrap/css/bootstrap.min.css">
@@ -31,9 +33,7 @@
     <link href="/Public/Home/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="/Public/Home/js/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link href="/Public/Home/css/themecss/lib.css" rel="stylesheet">
-    <link href="/Public/Home/js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
-    <link href="/Public/Home/js/minicolors/miniColors.css" rel="stylesheet">
-    
+
     <!-- Theme CSS
     ============================================ -->
     <link href="/Public/Home/css/themecss/so_searchpro.css" rel="stylesheet">
@@ -49,20 +49,26 @@
     <link href="/Public/Home/css/responsive.css" rel="stylesheet">
 
      <!-- Google web fonts
+
     ============================================ -->
     <link href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' rel='stylesheet' type='text/css'>     
     <style type="text/css">
          body{font-family:'Poppins', sans-serif;}
+         .cart_item td{
+          text-align: center;
+         }
+         .content-top .entry-summary table thead tr th, .entry-content .entry-summary table thead tr th, .commentlist .entry-summary table thead tr th {
+    border-right: 0px;
+}
     </style>
 
 </head>
 
-<body class="res layout-1 listing-page">
+<body class="res layout-subpage layout-1 banners-effect-5">
 
-    
-    <div id="wrapper" class="wrapper-fluid banners-effect-5">
-     <!-- Header Container  -->
-        <header id="header" class=" typeheader-1" style="background-color:#fff;">
+    <div id="wrapper" class="wrapper-fluid">
+   <!-- Header Container  -->
+       <header id="header" class=" typeheader-1" style="background-color:#fff;">
     <!-- Header Top -->
     <div class="top-bar" style="background-color:#222;">
         <div class="container" style="width:1200px;color: #fff;">
@@ -281,154 +287,176 @@
 </header>
     <!-- //Header Container  -->
 
- 
 	<!-- Main Container  -->
 	<div class="main-container container">
-		<ul class="breadcrumb">
-			<li><a href="<?php echo U('Index/index');?>"><i class="fa fa-home"></i>首页</a></li>
-            <?php if(is_array($navigation)): $i = 0; $__LIST__ = $navigation;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><li><a href="<?php echo ($row["url"]); ?>"><?php echo ($row["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
-            <!--<li><input type="" name=""><i class="fa fa-search" style="margin-left: -20px;"></i></li>-->
-		</ul>
 		
-		<div class="row">
-        	<!--Middle Part Start-->
-        	<div id="content" class="col-md-12 col-sm-8">
-        		<div class="products-category">
-                   <!--  <h3 class="title-category ">Accessories</h3> -->
-        			<div class="category-desc">
-        				<div class="row">
+		<div class="container">
+			<div class="row">
 
-                            <!--品牌类目-->
-                            <?php if(!empty($brand)): ?><div class="col-sm-12 list-top" style="padding:0px;">
-                                <div class="list-pingpai">
-                                    <h3>品牌</h3>
-                                </div>
-                                <div class="list-pingpai-list" id="brandContent" style="height:60px;">
-                                    <div style="width:95%;float:left;">
-                                        <ul id="brandList">
-                                            <?php if(is_array($brand)): $i = 0; $__LIST__ = $brand;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><li class="yy"><a href="<?php echo U('product',array('bid'=>$row['id'],'c1'=>$c1));?>"><?php echo ($row["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
-                                        </ul>
-                                    </div>
-                                    <div class="list-pinpai-gengduo">
-                                         <a id="brandButton"><span>更多</span></a>
-                                    </div>
-                                </div>
-                            </div><?php endif; ?>
-                            <!--品牌类目-->
-
-                            <?php if(!empty($category)): if(is_array($category)): $i = 0; $__LIST__ = $category;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><div class="col-sm-12 list-top" style="padding:0px;">
-                                          <div class="list-leixing">
-                                                <h3><?php echo ($row["name"]); ?></h3>
-                                          </div>
-                                          <div class="list-leixing-list">
-                                               <div style="width:95%;float:left;">
-                                                  <ul>
-                                                      <?php if(is_array($row["c3"])): $i = 0; $__LIST__ = $row["c3"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><li><a href="<?php echo U('product',array('c3'=>$row1['id']));?>"><?php echo ($row1["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
-                                                  </ul>
-                                              </div>
-                                              <div class="list-pinpai-gengduo2">
-                                                 <!--- <a href=""><span>更多</span></a> -->
-                                              </div>
-                                          </div>
-                                    </div><?php endforeach; endif; else: echo "" ;endif; endif; ?>
-
-                            <?php if(!empty($attr)): if(is_array($attr)): $i = 0; $__LIST__ = $attr;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><div class="col-sm-12 list-top" style="padding:0px;">
-                                        <div class="list-leixing">
-                                            <h3><?php echo ($row["name"]); ?></h3>
-                                        </div>
-                                        <div class="list-leixing-list attrContent">
-                                            <div style="width:95%;float:left;">
-                                                <ul>
-                                                    <?php if(is_array($row["value"])): $i = 0; $__LIST__ = $row["value"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row1): $mod = ($i % 2 );++$i;?><li><a href="<?php echo U('product',array('attrvalue'=>$row1['id']));?>"><?php echo ($row1["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
-                                                </ul>
-                                            </div>
-                                            <div class="list-pinpai-gengduo2">
-                                                 <a class="attrButton"><span>更多</span></a>
-                                            </div>
-                                        </div>
-                                    </div><?php endforeach; endif; else: echo "" ;endif; endif; ?>
-
-                        </div>
-        			</div>
-        		</div>
-        			<!-- Filters -->
-              <div class="product-filter product-filter-top filters-panel sort" style="margin-top:50px;">
-                   <ul>
-                       <li><a href="">综合<span ><img src="/Public/Home/image/hy/do.png"></span></a></li>
-                       <li><a href="">人气新品<span ><img src="/Public/Home/image/hy/do.png"></span></a></li>
-                       <li><a href="">销量<span ><img src="/Public/Home/image/hy/do.png"></span></a></li>
-                       <!--<li style="width:150px;float: right;">-->
-                            <!--<span style="margin-right:10px;">1/20</span>-->
-                            <!--<button><i class="fa fa-angle-left"></i></button>-->
-                            <!--<button><i class="fa fa-angle-right"></i></button>-->
-                       <!--</li>-->
-                   </ul>
-              </div>
-              <!-- //end Filters -->
-
-        			<!--changed listings-->
-              <div class="products-list row nopadding-xs so-filter-gird">
-                  <?php if(is_array($product)): $i = 0; $__LIST__ = $product;if( count($__LIST__)==0 ) : echo "没有产品" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                            <div class="product-item-container">
-                                <div class="left-block left-b">
-                                    <div class="product-image-container second_img">
-                                        <a href="<?php echo U('productDetail',array('id'=>$row['id']));?>" target="_self" title="Lastrami bacon">
-                                            <img src="<?php echo ($row["pic1"]); ?>" class="img-1 img-responsive" alt="image1">
-                                            <img src="<?php echo ($row["pic2"]); ?>" class="img-2 img-responsive" alt="image2">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="right-block">
-                                    <div class="button-group so-quickview cartinfo--left">
-                                        <button type="button" class="addToCart" title="加入购物车" onclick="addCart('<?php echo ($row["id"]); ?>')">
-                                            <span>加入购物车</span>   
-                                        </button>
-                                        <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="addWishlist('<?php echo ($row["id"]); ?>')">
-                                            <i class="fa fa-heart-o"></i>
-                                            <span>收藏</span>
-                                        </button>
-                                    </div>
-                                    <div class="caption hide-cont element1">
-                                        
-                                        <h4><a href="product.html" title="Pastrami bacon" target="_self"><?php echo ($row["name"]); ?></a></h4>
-                                        
-                                    </div>
-                                    <p class="price">
-                                      <span class="price-new">型号:<?php echo ($row["type"]); ?></span>
-                                    </p>
-                                    <div class="list-block">
-                                        <button class="addToCart btn-button" type="button" title="加入购物车" onclick="cart.add('101', '1');"><i class="fa fa-shopping-basket"></i>
-                                        </button>
-                                        <button type="button" class="wishlist btn-button" title="添加收藏" onclick="wishlist.add('60');">
-                                            <i class="fa fa-heart-o"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><?php endforeach; endif; else: echo "没有产品" ;endif; ?>
-              </div>
-        			<!--// End Changed listings-->
-        			<!-- Filters -->
-        			<div class="product-filter product-filter-bottom filters-panel">
-                        <div class="row" style="text-align: center;font-size: 18px;">
-                           <?php echo ($page); ?>
-                        </div>
-                    </div>
-        			<!-- //end Filters -->
-        			
-        		</div>
-        		
-        	</div>
-        	
-
-        	<!--Middle Part End-->
-        </div>
+                <div id="contents" role="main" class="main-page col-lg-2 hy-list">
+    <div class="huiyuan">
+        <span>会员中心</span>
     </div>
-	<!-- //Main Container -->
-	
+    <nav>
+        <ul>
+            <li><a href="cart.html" bank><i class="fa fa-pencil-square-o" style="font-size: 16px;margin-right: 4px;"></i>我的订单<span class="sign-10">(20)</span></a></li>
+            <li><a href="cart.html" bank><i class="fa fa-shopping-cart" style="font-size: 16px;margin-right: 4px;"></i>我的购物车<span class="sign-10">(<?php echo ($cartCount); ?>)</span></a></li>
+            <li><a href="<?php echo U('wishlist');?>" bank><i class="fa fa-heart-o" style="font-size: 16px;margin-right: 4px;"></i>我的收藏<span class="sign-10">(<?php echo ($wishlistCount); ?>)</span></a></li>
+            <li><a href="cart.html" bank><i class="fa fa-star-o" style="font-size: 16px;margin-right: 4px;"></i>评价管理<span class="sign-10">(10)</span></a></li>
+            <li><a href="<?php echo U('address');?>" bank><i class="fa fa-map-marker" style="font-size: 16px;margin-right: 4px;"></i>收货地址</a></li>
+            <li><a href="cart.html" bank><i class="fa fa-cog" style="font-size: 16px;margin-right: 4px;"></i>账号设置</a></li>
+            <li><a href="<?php echo U('Register/logout');?>" bank><i class="fa fa-sign-out" style="font-size: 16px;margin-right: 4px;"></i>退出登录</a></li>
+        </ul>
+    </nav>
+</div>
 
-	<!-- Footer Container -->
-    <footer class="footer-container typefooter-1">
+                <div id="contents" role="main" class="main-page col-lg-10 col-md-12 col-sm-12 col-xs-12">
+                   <div class="col-lg-12 statr-list" style="padding:0px;margin-bottom: 16px;">
+                      <div class="dindan-title">
+                        <h3>我的订单</h3>
+                      </div>
+                      <div class="dindan-list">
+                        <ul>
+                           <a href="dindan.html"><li  style="color:#ff5e00;border-bottom: 4px solid #ff5e00;">全部<span>20</span></li></a>
+                           <a href="daifu.html"><li><i class="fa fa-credit-card-alt" aria-hidden="true"></i>待付款<span>2</span></li></a>
+                           <a href=""><li><i class="fa fa-truck" aria-hidden="true"></i>待发货<span>10</span></li></a>
+                           <a href=""><li><i class="fa fa-gift" aria-hidden="true"></i>待收货<span>2</span></li></a>
+                           <a href=""><li><i class="fa fa-star-o" aria-hidden="true"></i>待评价<span>1</span></li></a>
+                           <a href=""><li><i class="fa fa-check" aria-hidden="true"></i>已完成<span>0</span></li></a>
+                           <a href=""><li><span></span></li></a>
+                        </ul>
+                      </div>
+                   </div>
+
+					<div class="page type-page status-publish hentry">
+						<div class="entry-content">
+							<div class="entry-summary">
+								<div class="woocommerce">                
+									<form action="" method="post">
+										<table class="shop_table shop_table_responsive cart" cellspacing="0" style="width:100%;">
+											<thead>
+												<tr>
+													<th class="">&nbsp;</th>
+													<th class="">图片</th>
+													<th class="">产品</th>
+													<th class="">规格</th>
+                                                    <th class="">价格</th>
+													<th class="">数量</th>
+													<th class="">操作</th>
+												</tr>
+											</thead>
+											<tbody>
+                                                <tr style="position: sticky;bottom:0px;background-color: #fff;z-index: 99999;">
+                                                  <td colspan="7" class="actions" style="text-align: center;border: 1px solid #ccc;padding:4px 10px;background-color: rgba(244, 242, 242, 0.43);">
+                                                    <div class="coupon">
+                                                        <input type="checkbox" name="" style=" vertical-align: middle;">
+                                                        <span style="font-size:12px;margin-left:10px;">订单号：243936291533058537</span>
+                                                    </div>
+                                                    <div style="width:50%;float:right;    text-align: right;">
+                                                        <a href=""><span>删除</span></a>
+                                                    </div>
+                                                  </td>
+                                                </tr>
+												<tr class="cart_item cart-table">
+													<td class="product-remove">
+		
+													</td>			
+													<td class="product-thumbnail" style="text-align: center;">
+														<a href="simple_product.html">
+															<img width="180" height="180" src="images/1903/56-180x180.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" srcset="images/1903/56-180x180.jpg 180w, images/1903/56-150x150.jpg 150w, images/1903/56-300x300.jpg 300w, images/1903/56.jpg 600w" sizes="(max-width: 180px) 100vw, 180px">
+														</a>
+													</td>
+													<td class="product-name" data-title="Product" style="text-align: center;">
+														<a href="simple_product.html">智能相机</a>					
+													</td>
+													<td class="product-quantity" data-title="Quantity" style="text-align: center;">
+                                                        <div class="">
+                                                             <span>店铺：海尔电器店</span><br>
+                                                             <span>颜色分类：红色</span><br>
+                                                             <span>8G/256G/Win10</span>
+                                                        </div>
+                                                    </td>
+													<td class="product-price" data-title="Price" style="text-align: center;">
+														<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>300.00</span>					
+													</td>
+													<td class="product-quantity" data-title="Quantity" style="text-align: center;">
+                                                        <div class="">
+                                                            <span>1</span>
+                                                        </div>
+                                                    </td>
+													<td class="product-subtotal" data-title="Total" style="text-align: center;">
+                                                        <button type="button" class="wishlist btn-button">
+                                                             <span>评价</span>
+                                                        </button>
+													</td>
+												</tr>
+                        
+                                                <tr style="position: sticky;bottom:0px;background-color: #fff;z-index: 99999;">
+                                                  <td colspan="7" class="actions" style="text-align: center;border: 1px solid #ccc;padding:4px 10px;background-color: rgba(244, 242, 242, 0.43);">
+                                                    <div class="coupon">
+                                                        <input type="checkbox" name="" style=" vertical-align: middle;">
+                                                        <span style="font-size:12px;margin-left:10px;">订单号：243936291533058537</span>
+                                                    </div>
+                                                    <div style="width:50%;float:right;    text-align: right;">
+                                                        <a href=""><span>删除</span></a>
+                                                    </div>
+                                                  </td>
+                                                </tr>
+                                                <tr class="cart_item cart-table">
+                                                  <td class="product-remove">
+
+                                                  </td>
+                                                  <td class="product-thumbnail" style="text-align: center;">
+                                                    <a href="simple_product.html">
+                                                      <img width="180" height="180" src="images/1903/56-180x180.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" srcset="images/1903/56-180x180.jpg 180w, images/1903/56-150x150.jpg 150w, images/1903/56-300x300.jpg 300w, images/1903/56.jpg 600w" sizes="(max-width: 180px) 100vw, 180px">
+                                                    </a>
+                                                  </td>
+                                                  <td class="product-name" data-title="Product" style="text-align: center;">
+                                                    <a href="simple_product.html">智能相机</a>
+                                                  </td>
+                                                  <td class="product-quantity" data-title="Quantity" style="text-align: center;">
+                                                    <div class="">
+                                                     <span>店铺：海尔电器店</span><br>
+                                                     <span>颜色分类：红色</span><br>
+                                                     <span>8G/256G/Win10</span>
+                                                    </div>
+                                                  </td>
+                                                  <td class="product-price" data-title="Price" style="text-align: center;">
+                                                    <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>300.00</span>
+                                                  </td>
+                                                  <td class="product-quantity" data-title="Quantity" style="text-align: center;">
+                                                    <div class="">
+                                                        <span>1</span>
+                                                    </div>
+                                                  </td>
+                                                  <td class="product-subtotal" data-title="Total" style="text-align: center;">
+                                                      <button type="button" class="wishlist btn-button">
+                                                           <span>评价</span>
+                                                      </button>
+                                                  </td>
+                                                </tr>
+
+											</tbody>
+										</table>
+									</form>
+                    
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix"></div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- //Main Container -->
+	 </div> 
+
+
+    <!-- Footer Container -->
+        <footer class="footer-container typefooter-1">
     <!-- Footer Top Container -->
 
     <div class="container">
@@ -509,72 +537,31 @@
 </footer>
     <!-- //end Footer Container -->
 
-    </div>
-	
-	
-	<!-- Cpanel Block -->
-	<div id="sp-cpanel_btn" class="isDown visible-lg">
-	<i class="fa fa-cog"></i>
-</div>		
+</div>
+   
+
+<!-- End Color Scheme
+============================================ -->
+
+
 
 <!-- Include Libs & Plugins
-	============================================ -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="/Public/Home/js/jquery-2.2.4.min.js"></script>
-    <script type="text/javascript" src="/Public/Home/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/Public/Home/js/owl-carousel/owl.carousel.js"></script>
+============================================ -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="/Public/Home/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/owl-carousel/owl.carousel.js"></script>
 <script type="text/javascript" src="/Public/Home/js/slick-slider/slick.js"></script>
-	<script type="text/javascript" src="/Public/Home/js/themejs/libs.js"></script>
-	<script type="text/javascript" src="/Public/Home/js/unveil/jquery.unveil.js"></script>
-	<script type="text/javascript" src="/Public/Home/js/countdown/jquery.countdown.min.js"></script>
-	<script type="text/javascript" src="/Public/Home/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"></script>
-	<script type="text/javascript" src="/Public/Home/js/datetimepicker/moment.js"></script>
-	<script type="text/javascript" src="/Public/Home/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
-	<script type="text/javascript" src="/Public/Home/js/jquery-ui/jquery-ui.min.js"></script>
-	
-	
-	<!-- Theme files
-	============================================ -->
-	
-	
-	<script type="text/javascript" src="/Public/Home/js/themejs/so_megamenu.js"></script>
-	<script type="text/javascript" src="/Public/Home/js/themejs/addtocart.js"></script>
-	<script type="text/javascript" src="/Public/Home/js/themejs/application.js"></script>
-    <script type="text/javascript" src="/Public/JS/common.js"></script>
+<script type="text/javascript" src="/Public/Home/js/themejs/libs.js"></script>
 
-	<script type="text/javascript">
-    // Check if Cookie exists
-    if($.cookie('display')){
-        view = $.cookie('display');
-    }else{
-        view = 'grid';
-    }
-    if(view) display(view);
-    /*头部框下拉*/
-    $('#brandButton').on('click',function(){
-        var state = $('#brandContent').css('height');
-        if(state == '60px'){
-            $('#brandButton span').text('收起');
-            $('#brandContent').css('height','auto');
-        }else{
-            $('#brandButton span').text('更多');
-            $('#brandContent').css('height','60px');
-        }
-    })
-	
-	$('.attrButton').on('click',function(){
-		var clickButton = $(this);
-		var clickSpan = clickButton.find('span');
-		var content = clickButton.parents('.attrContent');
-        var state = content.css('height');
-        if(state == '50px'){
-            clickSpan.text('收起');
-            content.css('height','auto');
-        }else{
-            clickSpan.text('更多');
-            content.css('height','50px');
-        }		
-	})
-    </script> 
+<!-- Theme files
+============================================ -->
+
+<script type="text/javascript" src="/Public/Home/js/themejs/so_megamenu.js"></script>
+<script type="text/javascript" src="/Public/Home/js/themejs/addtocart.js"></script>
+
+
+
+
 </body>
 </html>

@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Basic page needs
+    ============================================ -->
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="Magentech">
+    <meta name="robots" content="index, follow" />
+   
+    <!-- Mobile specific metas
+    ============================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Favicon
+    ============================================ -->
+    <link rel="shortcut icon" type="image/png" href="ico/favicon-16x16.png">
+    
+    <!-- 新引入 -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/main.css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/app-orange.css" id="theme_color" />
+    <!-- end -->
+   
+    <!-- Libs CSS
+    ============================================ -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap/css/bootstrap.min.css">
+    <link href="__PUBLIC__/Home/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/lib.css" rel="stylesheet">
+
+    <!-- Theme CSS
+    ============================================ -->
+    <link href="__PUBLIC__/Home/css/themecss/so_searchpro.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so_megamenu.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-categories.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-listing-tabs.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-category-slider.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-newletter-popup.css" rel="stylesheet">
+
+    <link href="__PUBLIC__/Home/css/footer/footer1.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/header/header1.css" rel="stylesheet">
+    <link id="color_scheme" href="__PUBLIC__/Home/css/theme.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/responsive.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/dataTable/dataTable.min.css" rel="stylesheet">
+
+     <!-- Google web fonts
+
+    ============================================ -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' rel='stylesheet' type='text/css'>     
+    <style type="text/css">
+         body{font-family:'Poppins', sans-serif;}
+         .cart_item td{
+          text-align: center;
+         }
+         .content-top .entry-summary table thead tr th, .entry-content .entry-summary table thead tr th, .commentlist .entry-summary table thead tr th {
+    border-right: 0px;
+}
+    </style>
+
+</head>
+
+<body class="res layout-subpage layout-1 banners-effect-5">
+
+    <div id="wrapper" class="wrapper-fluid">
+   <!-- Header Container  -->
+       <include file="common:header" />
+    <!-- //Header Container  -->
+
+	<!-- Main Container  -->
+	<div class="main-container container">
+		
+		<div class="container">
+			<div class="row">
+
+                <include file="common:businessUserLeftBar"/>
+
+                <div id="contents" role="main" class="main-page col-lg-10 col-md-12 col-sm-12 col-xs-12">
+
+					<div class="page type-page status-publish hentry">
+						<div class="entry-content">
+							<div class="entry-summary">
+								<div class="woocommerce">
+                                    <table id="evaluateContent" class="display">
+                                        <thead>
+                                            <tr>
+                                                <th>图片</th>
+                                                <th>产品</th>
+                                                <th>评价</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix"></div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- //Main Container -->
+	 </div> 
+
+
+    <!-- Footer Container -->
+        <include file="common:footer" />
+    <!-- //end Footer Container -->
+
+</div>
+
+<!--======= send goods model-->
+<div class="modal fade" tabindex="-1" role="dialog" id="sendGoodsModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">发货</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="m_sendNo" class="col-sm-3 control-label">发货单号</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="m_sendNo" name="sendNo">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="sendGoods()">保存地址</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--======= send goods model-->
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/slick-slider/slick.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/libs.js"></script>
+
+<!-- Theme files
+============================================ -->
+
+<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/so_megamenu.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/addtocart.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/dataTable/dataTable.min.js"></script>
+
+<script type="text/javascript">
+
+    var dataTableObj = $('#evaluateContent').DataTable({
+        language:{
+            loadingRecords:"请等待，数据正在加载中......",
+            emptyTable:"还没有任何评价",
+            infoEmpty:"0条记录",
+            lengthMenu: "显示 _MENU_ 条记录",
+            info: "第_PAGE_页(共_PAGES_页）",
+            paginate:{first:'第一页',last:"最后一页",previous:"上一页",next:"下一页"},
+            search: "过滤记录:",
+        },
+        serverSide:true,
+        ajax:{
+            url:'<{:U("Businessuser/evaluate")}>',
+            type:'post',
+            dataType:'json',
+            data:{},
+            dataSrc:function (data) {
+                return data;
+            }
+        },
+        columnDefs:[
+            {"targets":0,"data":"pic1"},
+            {"targets":0,"data":"name"},
+            {"targets":0,"data":"content"},
+        ],
+    })
+
+</script>
+
+
+</body>
+</html>
+
+

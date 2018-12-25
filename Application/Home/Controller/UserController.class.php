@@ -13,6 +13,27 @@ class UserController extends CommonController {
     }
 
     function user(){
+        $model = M('user');
+        $userInfo = $model->where("id=$this->uid")->field('nickname,headpic')->find();
+        $this->assign('userInfo',$userInfo);
+
+        $this->buyerOrderCount();
+
+        //人气产品
+        $model = M('product');
+        $product = $model->field('id,type,name,pic1,pic2')->order('clicknum desc')->limit(5)->select();
+        $this->assign('product',$product);
+
+        //我的收藏
+        $model = M('wishlist');
+        $model->alias('w');
+        $model->join('LEFT JOIN product p ON w.pid=p.id');
+        $model->field('p.id,p.type,p.name,p.pic1,p.pic2');
+        $wishlist = $model->where("w.uid=$this->uid")->order('w.time desc')->limit(5)->select();
+        $this->assign('wishlist',$wishlist);
+
+        $this->assign('empty',"<div style='text-align: center;'>你还没有收藏的商品<a href='" . U('Index/index') . "'>前去逛逛吧！</a></div>");
+
         $this->display();
     }
 
@@ -34,6 +55,7 @@ class UserController extends CommonController {
         $buyOrderCount = $model->where("buyID=$this->uid and payState=2")->count();
         $this->assign('buyOrderCount',$buyOrderCount);
 
+        //评价
         $model = M('evaluate');
         $evaluateCount = $model->where("buyerID=$this->uid")->count();
         $this->assign('evaluateCount',$evaluateCount);
@@ -80,8 +102,6 @@ class UserController extends CommonController {
         $rs = f_fileUP(C('MAX_FILE_UPLOAD_SIZE'),C('FILE_UPLOAD_TYPE'),C('IMG_SAVE_PATE'));
         exit($rs);
     }
-
-
 
     /********************   用户地址管理   ************************/
     function address(){
@@ -254,6 +274,34 @@ class UserController extends CommonController {
         }
     }
 
+    /********************   买方订单   ************************/
+
+    /********************   账户设置   ************************/
+
+    function setting(){
+        $model = M('user');
+        $model->field('nickname,headpic');
+        $userInfo = $model->where("id=$this->uid")->find();
+        $this->assign('userInfo',$userInfo);
+        $this->display();
+    }
+
+    function saveSetting(){
+        $model = M('user');
+        $model->create();
+        $model->id = $this->uid;
+        $rs = $model->save();
+        if($rs){
+            f_return(1,'设置成功');
+        }else{
+            f_return(4001,'设置失败');
+        }
+    }
+
+    /********************   账户设置   ************************/
+
+
+    /********************   评价管理   ************************/
     //订单评价
     function saveEvaluate(){
         $data = I('post');
@@ -282,5 +330,53 @@ class UserController extends CommonController {
             f_return(4001,'评价失败');
         }
     }
-    /********************   买方订单   ************************/
+
+    function evaluate(){
+        if(IS_AJAX){
+            $draw = I('post.draw');
+            $start = I('post.start');
+            $length = I('post.length');
+            $search = I('post.search'); //数组 搜索值：search[value]   是否启用正则处理：search[regex]
+            $order = I('post.order'); //数组 排序列order[i][column]  排序方式order[i][dir]
+            $columns = I('post.columns');//数组
+            // columns[i][data]          columns 绑定的数据源
+            // columns[i][name]          columns 的名字
+            // columns[i][searchable]    标记列是否能被搜索
+            // columns[i][orderable]     标记列是否能排序
+            //columns[i][search][value]  标记具体列的搜索条件
+            //columns[i][search][regex]  是否启用正则
+
+            $where = "e.buyerID=$this->uid";
+            $model = M('evaluate');
+            $model->alias('e');
+            $total = $model->where($where)->count();
+
+            $model->alias('e');
+            $model->join('LEFT JOIN product p ON p.id=e.productID');
+            $model->field('e.id,e.content,e.time,p.name,p.pic1');
+            $data = $model->where($where)->limit("$start,$length")->select();
+
+            //数据绑定
+            //DT_RowId //每个tr上绑定id
+            //DT_RowClass //每个tr上绑定class
+            //DT_RowAttr 调用jquery.attr()
+            for($i = 0; $i <count($data); $i++){
+                $data[$i]['time'] = date('Y-m-d',$data[$i]['time']);
+                $data[$i]['DT_RowId'] = $data[$i]['id'];
+            }
+
+            $returnData = array(
+                'draw' => $draw,
+                'recordsTotal' => $total,      //数据库数据总记录数
+                'recordsFiltered' => $total,   //过滤后的数据总记录数
+                'data' => $data,              //数据
+                //'error' => '获取数据失败',     //错误提示
+            );
+
+            exit( json_encode($returnData) );
+        }else{
+            $this->display();
+        }
+    }
+    /********************   评价管理   ************************/
 }

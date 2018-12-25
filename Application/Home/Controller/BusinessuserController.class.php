@@ -17,6 +17,29 @@ class BusinessuserController extends CommonController {
     }
 
     function businessUser(){
+        //获取商户信息
+        $model = M('user');
+        $userInfo = $model->where("id=$this->uid")->field('shopName,headpic')->find();
+        $this->assign('userInfo',$userInfo);
+
+        //获取销售量和销售金额
+        $today = strtotime(date('Y-m-d'));
+        $lastDay = $today - (3600 * 24);
+        $model = M('orders');
+        $dayOrderNum = $model->where("supplierID=$this->uid and time > $lastDay and time < $today")->count();
+        $dayOrderMoney = $model->where("supplierID=$this->uid and time > $lastDay and time < $today")->sum('total');
+        $this->assign('dayOrderNum',$dayOrderNum);
+        $this->assign('dayOrderMoney',$dayOrderMoney);
+
+        $month = strtotime(date('Y-m'));
+        $now = time();
+        $monthOrderNum = $model->where("supplierID=$this->uid and time > $month and time < $now")->count();
+        $monthOrderMoney = $model->where("supplierID=$this->uid and time > $month and time < $now")->sum('total');
+        $this->assign('monthOrderNum',$monthOrderNum);
+        $this->assign('monthOrderMoney',$monthOrderMoney);
+
+        $this->supplierOrderCount();
+
         $this->display();
     }
 
@@ -29,6 +52,12 @@ class BusinessuserController extends CommonController {
         $model = M('orders');
         $supplierOrdercount = $model->where("supplierID=$this->uid and paystate=2")->count();
         $this->assign('supplierOrdercount',$supplierOrdercount);
+
+        //评价
+        //评价
+        $model = M('evaluate');
+        $evaluateCount = $model->where("supplierID=$this->uid")->count();
+        $this->assign('evaluateCount',$evaluateCount);
     }
 
 
@@ -246,4 +275,74 @@ class BusinessuserController extends CommonController {
     }
     /********************   商家订单   ************************/
 
+
+    /********************   商家账户设置   ************************/
+
+    function setting(){
+        $model = M('user');
+        $model->field('nickname,headpic,shopName');
+        $userInfo = $model->where("id=$this->uid")->find();
+        $this->assign('userInfo',$userInfo);
+        $this->display();
+    }
+
+    /********************   商家账户设置   ************************/
+
+    /********************   评价   ************************/
+    function evaluate(){
+        if(IS_AJAX){
+            $draw = I('post.draw');
+            $start = I('post.start');
+            $length = I('post.length');
+            $search = I('post.search'); //数组 搜索值：search[value]   是否启用正则处理：search[regex]
+            $order = I('post.order'); //数组 排序列order[i][column]  排序方式order[i][dir]
+            $columns = I('post.columns');//数组
+            // columns[i][data]          columns 绑定的数据源
+            // columns[i][name]          columns 的名字
+            // columns[i][searchable]    标记列是否能被搜索
+            // columns[i][orderable]     标记列是否能排序
+            //columns[i][search][value]  标记具体列的搜索条件
+            //columns[i][search][regex]  是否启用正则
+
+            $where = "e.supplierID=$this->uid";
+            $model = M('evaluate');
+            $model->alias('e');
+            $total = $model->where($where)->count();
+
+            $model->alias('e');
+            $model->join('LEFT JOIN product p ON p.id=e.productID');
+            $model->field('e.id,e.content,e.time,p.name,p.pic1');
+            $data = $model->where($where)->limit("$start,$length")->select();
+
+            //数据绑定
+            //DT_RowId //每个tr上绑定id
+            //DT_RowClass //每个tr上绑定class
+            //DT_RowAttr 调用jquery.attr()
+            for($i = 0; $i <count($data); $i++){
+                $data[$i]['time'] = date('Y-m-d',$data[$i]['time']);
+                $data[$i]['DT_RowId'] = $data[$i]['id'];
+            }
+
+            $returnData = array(
+                'draw' => $draw,
+                'recordsTotal' => $total,      //数据库数据总记录数
+                'recordsFiltered' => $total,   //过滤后的数据总记录数
+                'data' => $data,              //数据
+                //'error' => '获取数据失败',     //错误提示
+            );
+
+            exit( json_encode($returnData) );
+        }else{
+            $this->display();
+        }
+    }
+    /********************   评价   ************************/
+
+    /********************   提现   ************************/
+    function tixian(){
+        $model = M('orders');
+
+        $this->display();
+    }
+    /********************   提现   ************************/
 }

@@ -258,10 +258,16 @@ class ProductController extends CommonController {
     function productDetail(){
         $id = I('id');
         $model = M('product');
+
+        //点击量加1
+        $model->where("id=$id")->setInc('clicknum');
+
+        //获取商品详情
         $product = $model->where("id=$id")->field('id,name,type,pic1,pic2,pic3,pic4,c1,c2,c3,c4,pcontent,tcontent')->find();
         $product['pcontent'] = htmlspecialchars_decode($product['pcontent']);
         $product['tcontent'] = htmlspecialchars_decode($product['tcontent']);
 
+        //获取商品类目
         $model = D('Category');
         $navigation = array();
         $c1 = empty($product['c1']) ? '' : $model->getCategoryByID($product['c1']);
@@ -280,6 +286,7 @@ class ProductController extends CommonController {
         /*相关产品 同类目下的产品*/
         $likePro = $model->field('id,name,type,pic1,pic2')->where('c1='.$product['c1'])->limit(10)->select();
 
+        //获取商品报价
         $model = M('offer');
         $model->alias('o');
         $model->join('LEFT JOIN user u ON u.id=o.uid');
