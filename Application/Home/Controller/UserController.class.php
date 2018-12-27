@@ -220,7 +220,7 @@ class UserController extends CommonController {
             $Page->parameter['send'] = I('get.send');
         }
         $show = $Page->show();
-        $model->alias('o')->field('o.id,o.pid,o.orderNo,o.outTradeNo,o.price,o.num,p.name,p.type,p.pic1,u.shopName');
+        $model->alias('o')->field('o.id,o.pid,o.orderNo,o.outTradeNo,o.price,o.num,o.send,o.sendNo,p.name,p.type,p.pic1,u.shopName');
         $model->join('LEFT JOIN product p ON o.pid=p.id')->join("LEFT JOIN user u ON o.supplierID=u.id");
         $data = $model->where($where)->order('o.time desc')->limit("$Page->firstRow,$Page->listRows")->select();
 
@@ -304,7 +304,7 @@ class UserController extends CommonController {
     /********************   评价管理   ************************/
     //订单评价
     function saveEvaluate(){
-        $data = I('post');
+        $data = I();
         if(!$data['orderID']){
             f_return(4001,'订单不存在');
             return;
@@ -313,19 +313,30 @@ class UserController extends CommonController {
             f_return(4001,'评价内容不能为空');
             return;
         }
+        $model = M('evaluate');
+        if($model->where('orderID='.$data['orderID'])->count() > 0){
+            f_dump(4001,'你已对该订单发布过评价');
+            return;
+        }
 
         $model = M('orders');
         $order = $model->where('id='.$data['orderID'])->field('pid,supplierID')->find();
 
         $data['buyerID'] = $this->uid;
-        $data['supplierID'] = $order['supplierID'];
+        $data['supplierID'] = $order['supplierid'];
         $data['productID'] = $order['pid'];
         $data['time'] = time();
 
         $model = M('evaluate');
         $rs = $model->add($data);
         if($rs){
-            f_return(1,'评价成功');
+            $model = M('orders');
+            $rs = $model->where('id='.$data['orderID'])->setField('send',4);
+            if($rs){
+                f_return(1,'评价成功');
+            }else{
+                f_return(4001,'评价失败');
+            }
         }else{
             f_return(4001,'评价失败');
         }
@@ -379,4 +390,75 @@ class UserController extends CommonController {
         }
     }
     /********************   评价管理   ************************/
+
+    /********************售后********************************/
+    function shouhou(){
+        $this->assign('id',I('get.id'));
+        $this->display();
+    }
+
+    //保存售后服务
+    function saveCustomerService(){
+        $model = M('orders');
+        $orderID = I('post.orderID');
+        if($model->where("id=$orderID and buyID=$this->uid")->count() < 1){
+            $this->error('请求提交失败,请稍后再试');
+            return;
+        }
+
+        $model = M('customerservice');
+        $model->create();
+        $model->sendTime = time();
+        if($model->add()){
+            $this->success('提交成功,等待商家处理');
+        }else{
+            $this->error('请求提交失败,请稍后再试');
+        }
+    }
+
+    function customerList(){
+        $where = "o.buyID=$this->uid";
+
+        if(I('orderNo')){
+            $where .= " and o.orderNo=" . I('orderNo');
+        }
+
+        $model = M('customerservice');
+        $model->alias('c');
+        $model->join('left join orders o ON c.orderID=o.id');
+        $count = $model->where($where)->count();
+
+        $Page = new \Think\Page($count,10);
+        $show = $Page->show();
+
+        $model->alias('c');
+        $model->join('left join orders o ON c.orderID=o.id')->join('left join product p on o.pid=p.id');
+        $model->field('p.name pname,p.type,o.num,o.orderNo,o.address,o.total,c.name,c.phone,c.serviceType,c.id,c.state');
+        $data = $model->where($where)->order('sendTime desc')->limit("$Page->firstRow,$Page->listRows")->select();
+
+        for($i = 0; $i < count($data); $i++){
+            if($data[$i]['servicetype'] == 1) $data[$i]['servicetype'] = '其他';
+            if($data[$i]['servicetype'] == 2) $data[$i]['servicetype'] = '退货/退款';
+            if($data[$i]['servicetype'] == 3) $data[$i]['servicetype'] = '换货';
+        }
+
+        $this->assign('page',$show);
+        $this->assign('data',$data);
+
+        //f_dump($data);exit;
+
+        $this->display();
+    }
+
+    function customerResult(){
+        $id = I('get.id');
+
+        $model = M('customerservice');
+        $rs = $model->where("id=$id")->field('state,reviewTime,supplierContent,buyerContent')->find();
+
+        $this->assign('result',$rs);
+
+        $this->display();
+    }
+    /********************售后********************************/
 }

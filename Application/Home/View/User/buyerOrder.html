@@ -152,7 +152,7 @@
                                                         </td>
                                                         <td class="product-quantity" data-title="Quantity" style="text-align: center;">
                                                             <div class="">
-                                                                 <span>店铺：<{$row.shopName}></span><br>
+                                                                 <span>店铺：<{$row.shopname}></span><br>
                                                                  <span>型号：<{$row.type}></span><br>
                                                             </div>
                                                         </td>
@@ -170,6 +170,19 @@
                                                                 <button type="button" class="wishlist btn-button" onclick="pingjia(this,'<{$row.id}>')">
                                                                      <span>评价</span>
                                                                 </button>
+                                                                <a href="<{:U('shouhou',array('id'=>$row['id']))}>">
+                                                                    <button type="button" class="wishlist btn-button">
+                                                                        <span>售后申请</span>
+                                                                    </button>
+                                                                </a>
+                                                            </eq>
+
+                                                            <eq name="row.send" value="4">
+                                                                <a href="<{:U('shouhou',array('id'=>$row['id']))}>">
+                                                                    <button type="button" class="wishlist btn-button">
+                                                                        <span>售后申请</span>
+                                                                    </button>
+                                                                </a>
                                                             </eq>
 
                                                             <eq name="row.send" value="2">
@@ -312,6 +325,11 @@
                }
             }
         })
+    }
+    
+    //申请售后
+    function shouhou() {
+
     }
 </script>
 

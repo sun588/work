@@ -215,8 +215,11 @@
                                                         <button type="button" class="addToCart" title="加入购物车" onclick="addCart('<{$row.id}>');">
                                                             <span>加入购物车 </span>
                                                         </button>
-                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="addWishlist('<{$row.id}>');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                        </button>
+                                                        <a href="<{:U('Product/productDetail2',array('id'=>$row['id']))}>">
+                                                            <button type="button" class="wishlist btn-button" title="询价">
+                                                                <i class="fa fa-heart-o"></i><span>询价</span>
+                                                            </button>
+                                                        </a>
                                                     </div>
                                                     <div class="caption hide-cont element1" >
                                                         <h4 style="margin:0;"><a href="<{:U('Product/productDetail',array('id'=>$row1['id']))}>" title="Pastrami bacon" target="_self"><{$row.name}></a></h4>
@@ -366,8 +369,11 @@
                                                         <button type="button" class="addToCart" title="加入购物车" onclick="addCart('<{$row.id}>');">
                                                             <span>加入购物车 </span>
                                                         </button>
-                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="addWishlist('<{$row.id}>');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                        </button>
+                                                        <a href="<{:U('Product/productDetail2',array('id'=>$row['id']))}>">
+                                                            <button type="button" class="wishlist btn-button" title="询价">
+                                                                <i class="fa fa-heart-o"></i><span>询价</span>
+                                                            </button>
+                                                        </a>
                                                     </div>
                                                     <div class="caption hide-cont element1">
                                                         <h4 style="margin:0;"><a href="<{:U('Product/productDetail',array('id'=>$row1['id']))}>" title="Pastrami bacon" target="_self"><{$row.name}></a></h4>
@@ -531,8 +537,11 @@
                                                         <button type="button" class="addToCart" title="加入购物车" onclick="addCart('<{$row.id}>');">
                                                             <span>加入购物车 </span>
                                                         </button>
-                                                        <button type="button" class="wishlist btn-button" title="收藏" onclick="addWishlist('<{$row.id}>');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                        </button>
+                                                        <a href="<{:U('Product/productDetail2',array('id'=>$row['id']))}>">
+                                                            <button type="button" class="wishlist btn-button" title="询价">
+                                                                <i class="fa fa-heart-o"></i><span>询价</span>
+                                                            </button>
+                                                        </a>
                                                     </div>
                                                     <div class="caption hide-cont element1">
                                                         <h4 style="margin:0;"><a href="<{:U('Product/productDetail',array('id'=>$row['id']))}>" target="_self"><{$row.name}></a></h4>
@@ -589,277 +598,45 @@
                                 <!--Begin Items-->
                                 <div class="ltabs-items ltabs-items-selected items-category-20" data-total="16">
                                     <div class="ltabs-items-inner ltabs-slider">
-                                        <div class="item">         
-                                            <div class="item-inner product-layout transition product-grid">
-                                                <div class="product-item-container">
-                                                    <div class="left-block left-b">
-                                                        
-                                                        <div class="product-image-container second_img">
-                                                            <a href="product.html" target="_self" title="Ullamco occaeca">
-                                                                <img src="__PUBLIC__/Home/image/catalog/demo/product/270/1.jpg" class="img-1 img-responsive" alt="image1">
-                                                                <img src="__PUBLIC__/Home/image/catalog/demo/product/270/1.jpg" class="img-2 img-responsive" alt="image2">
-                                                            </a>
-                                                        </div>
-                                                        <!--quickview--> 
-                                                        <div class="so-quickview">
-                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                        </div>                                                     
-                                                        <!--end quickview-->
 
-                                                        
-                                                    </div>
-                                                    <div class="right-block">
-                                                        <div class="button-group so-quickview cartinfo--left">
-                                                            <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                                <span>加入购物车 </span>   
-                                                            </button>
-                                                            <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                            </button>
-                                                            <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
-                                                            </button>
-                                                            
+                                        <volist name="hotProduct" id="row">
+                                            <div class="item">
+                                                <div class="item-inner product-layout transition product-grid">
+                                                    <div class="product-item-container">
+                                                        <div class="left-block left-b">
+                                                            <div class="product-image-container second_img">
+                                                                <a href="<{:U('Product/productDetail',array('id'=>$row['id']))}>" target="_self" title="Ullamco occaeca">
+                                                                    <img src="<{$row.pic1}>" class="img-1 img-responsive" alt="image1">
+                                                                    <img src="<{$row.pic2}>" class="img-2 img-responsive" alt="image2">
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                        <div class="caption hide-cont element1">
-                                                            
-                                                            <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">冰箱 BCD-629WDSTU1 629升十字对</a></h4>
-                                                            
+                                                        <div class="right-block">
+                                                            <div class="button-group so-quickview cartinfo--left">
+                                                                <button type="button" class="addToCart" title="加入购物车" onclick="addCart('<{$row.id}>');">
+                                                                    <span>加入购物车 </span>
+                                                                </button>
+                                                                <a href="<{:U('Product/productDetail2',array('id'=>$row['id']))}>">
+                                                                    <button type="button" class="wishlist btn-button" title="询价">
+                                                                        <i class="fa fa-heart-o"></i><span>询价</span>
+                                                                    </button>
+                                                                </a>
+                                                                <!--<button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>-->
+                                                                <!--</button>-->
+                                                            </div>
+                                                            <div class="caption hide-cont element1">
+                                                                <h4 style="margin:0;"><a href="<{:U('Product/productDetail',array('id'=>$row['id']))}>" title="Pastrami bacon" target="_self"><{$row.name}></a></h4>
+                                                            </div>
+                                                            <p class="price">
+                                                                <p class="price"><span style="color: #666;">型号：</span><{$row.type}></p>
+                                                            </p>
                                                         </div>
-                                                        <p class="price">
-                                                         <p class="price"><span style="color: #666;">型号：</span>14-ce0016TU</p>
-                                                          
-                                                        </p>
                                                     </div>
-
                                                 </div>
-                                            </div>      
-                                        </div>
-                                        
-                                        <div class="item">         
-                                            <div class="item-inner product-layout transition product-grid">
-                                                <div class="product-item-container">
-                                                    <div class="left-block left-b">
-                                                        
-                                                        <div class="product-image-container second_img">
-                                                            <a href="product.html" target="_self" title="Eiusmod tempor incid">
-                                                                <img src="__PUBLIC__/Home/image/catalog/demo/product/270/e3.jpg" class="img-1 img-responsive" alt="image1">
-                                                                <img src="__PUBLIC__/Home/image/catalog/demo/product/270/e8.jpg" class="img-2 img-responsive" alt="image2">
-                                                            </a>
-                                                        </div>
-                                                        <!--quickview--> 
-                                                        <div class="so-quickview">
-                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                        </div>                                                     
-                                                        <!--end quickview-->
+                                            </div>
+                                        </volist>
 
-                                                        
-                                                    </div>
-                                                    <div class="right-block">
-                                                        <div class="button-group so-quickview cartinfo--left">
-                                                            <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                                <span>加入购物车 </span>   
-                                                            </button>
-                                                            <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                            </button>
-                                                            <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
-                                                            </button>
-                                                            
-                                                        </div>
-                                                        <div class="caption hide-cont element1">
-                                                            
-                                                            <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">冰箱 BCD-629WDSTU1 629升十字对</a></h4>
-                                                            
-                                                        </div>
-                                                        <p class="price">
-                                                         <p class="price"><span style="color: #666;">型号：</span>14-ce0016TU</p>
-                              
-                                                        </p>
-                                                    </div>
-
-                                                   
-                                                </div>
-                                            </div>      
-                                        </div>
-
-                                        <div class="item">         
-                                            <div class="item-inner product-layout transition product-grid">
-                                                <div class="product-item-container">
-                                                    <div class="left-block left-b">
-                                                        
-                                                        <div class="product-image-container second_img">
-                                                            <a href="product.html" target="_self" title="Duis aute irure ">
-                                                                <img src="__PUBLIC__/Home/image/catalog/demo/product/270/e4.jpg" class="img-1 img-responsive" alt="image1">
-                                                                <img src="__PUBLIC__/Home/image/catalog/demo/product/270/e7.jpg" class="img-2 img-responsive" alt="image2">
-                                                            </a>
-                                                        </div>
-                                                        <!--quickview--> 
-                                                        <div class="so-quickview">
-                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                        </div>                                                     
-                                                        <!--end quickview-->
-
-                                                        
-                                                    </div>
-                                                    <div class="right-block">
-                                                        <div class="button-group so-quickview cartinfo--left">
-                                                            <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                                <span>加入购物车 </span>   
-                                                            </button>
-                                                            <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                            </button>
-                                                            <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
-                                                            </button>
-                                                            
-                                                        </div>
-                                                        <div class="caption hide-cont element1">
-                                                            
-                                                            <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">冰箱 BCD-629WDSTU1 629升十字对</a></h4>
-                                                            
-                                                        </div>
-                                                        <p class="price">
-                                                         <p class="price"><span style="color: #666;">型号：</span>14-ce0016TU</p>
-                                  
-                                                        </p>
-                                                    </div>
-
-                                                    
-                                                </div>
-                                            </div>      
-                                        </div>
-
-                                        <div class="item">         
-                                            <div class="item-inner product-layout transition product-grid">
-                                                <div class="product-item-container">
-                                                    <div class="left-block left-b">
-                                                        
-                                                        <div class="product-image-container second_img">
-                                                            <a href="product.html" target="_self" title="Excepteur sint occ">
-                                                                <img src="__PUBLIC__/Home/image/catalog/demo/product/270/fu5.jpg" class="img-1 img-responsive" alt="image1">
-                                                                <img src="__PUBLIC__/Home/image/catalog/demo/product/270/fu6.jpg" class="img-2 img-responsive" alt="image2">
-                                                            </a>
-                                                        </div>
-                                                        <!--quickview--> 
-                                                        <div class="so-quickview">
-                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                        </div>                                                     
-                                                        <!--end quickview-->
-
-                                                        
-                                                    </div>
-                                                    <div class="right-block">
-                                                        <div class="button-group so-quickview cartinfo--left">
-                                                            <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                                <span>加入购物车 </span>   
-                                                            </button>
-                                                            <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                            </button>
-                                                            <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
-                                                            </button>
-                                                            
-                                                        </div>
-                                                        <div class="caption hide-cont element1">
-                                                            
-                                                            <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">冰箱 BCD-629WDSTU1 629升十字对</a></h4>
-                                                            
-                                                        </div>
-                                                        <p class="price">
-                                                          <span class="price-new">￥55.00-99.00</span>
-                                                
-                                                        </p>
-                                                    </div>
-
-                                                </div>
-                                            </div>      
-                                        </div>
-
-                                        <div class="item">         
-                                            <div class="item-inner product-layout transition product-grid">
-                                                <div class="product-item-container">
-                                                    <div class="left-block left-b">
-                                                       
-                                                        <div class="product-image-container second_img">
-                                                            <a href="product.html" target="_self">
-                                                                <img src="__PUBLIC__/Home/image/catalog/demo/product/270/f6.jpg" class="img-1 img-responsive" alt="image1">
-                                                                <img src="__PUBLIC__/Home/image/catalog/demo/product/270/f2.jpg" class="img-2 img-responsive" alt="image2">
-                                                            </a>
-                                                        </div>
-                                                        <!--quickview--> 
-                                                        <div class="so-quickview">
-                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                        </div>                                                     
-                                                        <!--end quickview-->
-
-                                                        
-                                                    </div>
-                                                    <div class="right-block">
-                                                        <div class="button-group so-quickview cartinfo--left">
-                                                            <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                                <span>加入购物车 </span>   
-                                                            </button>
-                                                            <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                            </button>
-                                                            <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
-                                                            </button>
-                                                            
-                                                        </div>
-                                                        <div class="caption hide-cont element1">
-                                                            
-                                                            <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">冰箱 BCD-629WDSTU1 629升十字对</a></h4>
-                                                            
-                                                        </div>
-                                                       <p class="price"><span style="color: #666;">型号：</span>14-ce0016TU</p>
-                                                    </div>
-                                                   
-                                                </div>
-                                            </div>      
-                                        </div>
-                                        <div class="item">         
-                                            <div class="item-inner product-layout transition product-grid">
-                                                <div class="product-item-container">
-                                                    <div class="left-block left-b">
-                                                        <div class="box-label">
-                                                            <span class="label-product label-sale">-10%</span>
-                                                        </div>
-                                                        <div class="product-image-container second_img">
-                                                            <a href="product.html" target="_self" title="Quis nostrud exercita">
-                                                                <img src="__PUBLIC__/Home/image/catalog/demo/product/270/f2.jpg" class="img-1 img-responsive" alt="image1">
-                                                                <img src="__PUBLIC__/Home/image/catalog/demo/product/270/f4.jpg" class="img-2 img-responsive" alt="image2">
-                                                            </a>
-                                                        </div>
-                                                        <!--quickview--> 
-                                                        <div class="so-quickview">
-                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="查看详情" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>查看详情</span></a>
-                                                        </div>                                                     
-                                                        <!--end quickview-->
-                                                        
-                                                    </div>
-                                                    <div class="right-block">
-                                                        <div class="button-group so-quickview cartinfo--left">
-                                                            <button type="button" class="addToCart" title="加入购物车" onclick="cart.add('60 ');">
-                                                                <span>加入购物车 </span>   
-                                                            </button>
-                                                            <button type="button" class="wishlist btn-button" title="收藏" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏</span>
-                                                            </button>
-                                                            <button type="button" class="compare btn-button" title="询价 " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>询价</span>
-                                                            </button>
-                                                            
-                                                        </div>
-                                                       <div class="caption hide-cont element1">
-                                                            
-                                                            <h4 style="margin:0;"><a href="product.html" title="Pastrami bacon" target="_self">冰箱 BCD-629WDSTU1 629升十字对</a></h4>
-                                                            
-                                                        </div>
-                                                        <p class="price">
-                                                         <p class="price"><span style="color: #666;">型号：</span>14-ce0016TU</p>
-                                                          
-                                                        </p>
-                                                    </div>
-
-                                                    
-                                                </div>
-                                            </div>      
-                                        </div>
                                     </div>
-                                    
                                 </div>
                                 <div class="ltabs-items items-category-18 grid" data-total="16">
                                     <div class="ltabs-loading"></div>

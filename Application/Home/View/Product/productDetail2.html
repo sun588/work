@@ -1,0 +1,313 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Basic page needs
+    ============================================ -->
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="Magentech">
+    <meta name="robots" content="index, follow" />
+   
+    <!-- Mobile specific metas
+    ============================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Favicon
+    ============================================ -->
+    <link rel="shortcut icon" type="image/png" href="__PUBLIC__/Home/ico/favicon-16x16.png">
+    
+    <!-- 新引入 -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/main.css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
+    <!-- end -->
+   
+    <!-- Libs CSS
+    ============================================ -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap/css/bootstrap.min.css">
+    <link href="__PUBLIC__/Home/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/lib.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/js/minicolors/miniColors.css" rel="stylesheet">
+    
+    <!-- Theme CSS
+    ============================================ -->
+    <link href="__PUBLIC__/Home/css/themecss/so_searchpro.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so_megamenu.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-categories.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-listing-tabs.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-category-slider.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-newletter-popup.css" rel="stylesheet">
+
+    <link href="__PUBLIC__/Home/css/footer/footer1.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/header/header1.css" rel="stylesheet">
+    <link id="color_scheme" href="__PUBLIC__/Home/css/theme.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/responsive.css" rel="stylesheet">
+
+     <!-- Google web fonts
+
+    ============================================ -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' rel='stylesheet' type='text/css'>     
+    <style type="text/css">
+         body{font-family:'Poppins', sans-serif;}
+    </style>
+
+</head>
+
+<body class="res layout-subpage layout-1 banners-effect-5">
+
+    <div id="wrapper" class="wrapper-fluid">
+
+        <!-- Header Container  -->
+        <include file="common:header" />
+        <!-- //Header Container  -->
+
+	<!-- Main Container  -->
+	<div class="main-container container">
+		<ul class="breadcrumb">
+			<li><a href="<{:U('Index/index')}>"><i class="fa fa-home"></i></a></li>
+            <li><a href="<{:U('Index/index')}>">首页</a></li>
+            <volist name="navigation" id="row">
+                <li><a href="<{:U('product',array('c'.$i=>$row['id']))}>"><{$row.name}></a></li>
+            </volist>
+		</ul>
+		
+		<div class="row">
+
+			<!--Middle Part Start-->
+			<div id="content" class="col-md-12 col-sm-8">
+				
+				<div class="product-view row">
+					<div class="left-content-product">
+				
+						<div class="content-product-left class-honizol col-md-5 col-sm-12 col-xs-12">
+							<div class="large-image  ">
+								<img itemprop="image" class="product-image-zoom" src="<{$product.pic1}>"  title="Chicken swinesha" alt="Chicken swinesha">
+							</div>
+							<a class="thumb-video pull-left" href="https://www.youtube.com/watch?v=HhabgvIIXik"><i class="fa fa-youtube-play"></i></a>
+							
+							<div id="thumb-slider" class="yt-content-slider full_slider owl-drag" data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="10" data-items_column00="4" data-items_column0="4" data-items_column1="3" data-items_column2="4"  data-items_column3="1" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
+                                <a data-index="0" class="img thumbnail " data-image="image/catalog/demo/product/fashion/1.jpg" title="Chicken swinesha">
+									<img src="<{$product.pic1}>" title="Chicken swinesha" alt="Chicken swinesha">
+								</a>
+                                <notempty name="product.pic2">
+								<a data-index="1" class="img thumbnail " data-image="image/catalog/demo/product/fashion/2.jpg" title="Chicken swinesha">
+									<img src="<{$product.pic2}>" title="Chicken swinesha" alt="Chicken swinesha">
+								</a>
+                                </notempty>
+                                <notempty name="product.pic3">
+								<a data-index="2" class="img thumbnail " data-image="image/catalog/demo/product/fashion/3.jpg" title="Chicken swinesha">
+									<img src="<{$product.pic3}>" title="Chicken swinesha" alt="Chicken swinesha">
+								</a>
+                                </notempty>
+                                <notempty name="product.pic4">
+								<a data-index="3" class="img thumbnail " data-image="image/catalog/demo/product/fashion/4.jpg" title="Chicken swinesha">
+									<img src="<{$product.pic4}>" title="Chicken swinesha" alt="Chicken swinesha">
+								</a>
+                                </notempty>
+							</div>
+							
+						</div>
+
+						<div class="content-product-right col-md-7 col-sm-12 col-xs-12">
+							<div class="title-product">
+								<h1><{$product.name}></h1>
+							</div>
+							<!-- Review ---->
+							<div class="box-review form-group">
+								<a class="reviews_button" href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">0评论 </a>	| 
+								<a class="write_review_button" href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;"> 写评论</a>
+							</div>
+                            <div class="">
+                                <span>型号：<span class="price-new" itemprop="price" style="font-size: 14px;color: #ff5e00;"><{$product.type}></span></span>
+                            </div>
+                            <div class="" style="    margin: 10px 0px;">
+                                <span>价格：<span class="price-new" itemprop="price" style="font-size: 18px;color: #ff5e00;">￥<{$minPrice}>-<{$maxPrice}></span></span>
+                            </div>
+                            <form action="<{:U('Order/order1')}>" method="post">
+                                <span>请选择心仪的价格：</span>
+                                <div class="" style="border-top:1px solid #eee;height: 200px;padding: 10px;overflow: auto;">
+                                    <div class="inner-box-desc">
+                                        <volist name="offer" id="row">
+                                            <div class="price-tax">
+                                               <div  class="baojia">
+                                                   <span style="color: #ff5e00;font-size: 20px;font-size: 1.6rem; font-weight: 600;margin-right: 30px;">￥<{$row.price}></span>
+                                               </div>
+                                               <div class="baojia2">
+                                                   <span style="font-size: 16px;font-size: 14px;; font-weight: 600;color:#999;"><{$row.nickname}></span>
+                                               </div>
+                                               <div class="baojia3">
+                                                   <span style="color: #999;font-size: 14px; font-weight: 600;"><{$row.info}></span>
+                                               </div>
+                                               <div class="baojia4">
+                                                    <label class="guige-yanse chosePrice"   isChose="false" onclick="chosePrice('<{$row.id}>',this)">
+                                                        选择
+                                                        <input style="display: none;" type="radio" AUTOCOMPLETE="off" name="oid" value="<{$row.id}>">
+                                                    </label>
+                                               </div>
+                                            </div>
+                                        </volist>
+                                    </div>
+                                </div>
+
+
+                                <div id="product">
+                                    <!--<h4>请选择商品规格</h4>-->
+                                    <!--<div class="image_option_type form-group required">-->
+                                        <!--<label class="control-label">颜色</label>-->
+                                         <!--<div style="width:100%;" >-->
+                                            <!--<div style="width:50px;float: left;" class="guige-yanse">红色</div>-->
+                                            <!--<div style="width:50px;float: left;" class="guige-yanse">黑色</div>-->
+                                            <!--<div style="width:50px;float: left;" class="guige-yanse">白色</div>-->
+                                         <!--</div>-->
+                                    <!--</div>-->
+
+                                    <!--<div class="box-checkbox form-group required">-->
+                                        <!--<label class="control-label">规格</label>-->
+                                            <!--<div style="width:100%;" >-->
+                                            <!--<div style="width:200px;float: left;" class="guige-guige">8G/256G/Win10</div>-->
+                                            <!--<div style="width:200px;float: left;" class="guige-guige">8G/256G/Win10</div>-->
+                                            <!--<div style="width:200px;float: left;" class="guige-guige">8G/1T+128G/2G独显</div>-->
+                                            <!--<div style="width:200px;float: left;" class="guige-guige">8G/1T+128G/2G独显-粉</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+                                    <div class="form-group box-info-product" style="margin-top:20px;">
+                                        <div class="option quantity">
+                                            <div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;">
+                                                <label>数量</label>
+                                                <input class="form-control" type="text" name="quantity"
+                                                value="1" id="num">
+                                                <span class="input-group-addon product_quantity_down">−</span>
+                                                <span class="input-group-addon product_quantity_up">+</span>
+                                            </div>
+                                        </div>
+                                        <div class="cart">
+                                            <input onclick="addCart('<{$product.id}>')" type="button" data-toggle="tooltip" title="" value="加入购物车" data-loading-text="Loading..." id="button-cart" class="btn btn-mega btn-lg"  data-original-title="加入购物车" style="background-color:#c2c1c0;">
+                                        </div>
+                                        <div class="cart">
+                                            <input type="hidden" value="<{$product.id}>" name="pid">
+                                            <input onclick="buy(this)" type="button" data-toggle="tooltip" title="" value="立即购买" data-loading-text="Loading..." id="button-buy" class="btn btn-mega btn-lg" data-original-title="立即购买">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+						</div>
+				
+					</div>
+				</div>
+				<!-- Product Tabs -->
+
+				<!-- //Product Tabs -->
+
+				<!-- Related Products -->
+
+    			<!-- end Related  Products-->
+			</div>
+				
+				
+				
+			
+			
+				
+			</div>
+			
+			
+		</div>
+		<!--Middle Part End-->
+	</div>
+	<!-- //Main Container -->
+	
+
+	  
+
+    <!-- Footer Container -->
+    <include file="common:footer" />
+    <!-- //end Footer Container -->
+
+    </div>
+   
+
+<!-- End Color Scheme
+============================================ -->
+
+
+
+<!-- Include Libs & Plugins
+============================================ -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/slick-slider/slick.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/libs.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/unveil/jquery.unveil.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/countdown/jquery.countdown.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/datetimepicker/moment.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/modernizr/modernizr-2.6.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/minicolors/jquery.miniColors.min.js"></script>
+
+<!-- Theme files
+============================================ -->
+
+<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/application.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/homepage.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/toppanel.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/so_megamenu.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/addtocart.js"></script>
+
+<script>
+    var choseID = '';
+    function chosePrice(oid,obj){
+        $('.chosePrice').each(function () {
+            $(this).css('background','#ccc');
+        })
+        $(obj).css('background','orange');
+        choseID = oid;
+    }
+
+    function addCart(id) {
+        if(confirm('确定要加入购物车?')){
+            var num = $('#num').val() ? $('#num').val() : 1
+            if(!choseID){
+                alert('请选择一个报价');
+                return;
+            }
+            $.post('<{:U("Common/addCart")}>',{id:id,oid:choseID,num:num},function (rs) {
+                if(rs){
+                    rs = JSON.parse(rs);
+                    if(rs['errno'] == 1){
+                        alert('添加到购物车成功');
+                    }else {
+                        alert(rs['msg']);
+                    }
+                }else {
+                    alert('添加购物车失败');
+                }
+            })
+        }
+    }
+    
+    function buy(obj) {
+        if( $('input[name="oid"]:checked').val() ){
+            $(obj).parents('form').submit();
+        }else {
+            alert('请选择一个报价');
+        }
+    }
+</script>
+
+</body>
+</html>
+
+

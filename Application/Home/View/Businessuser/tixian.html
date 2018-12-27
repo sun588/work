@@ -87,14 +87,18 @@
                  <h3 style="line-height: 35px;margin-left: 20px;">提现管理</h3>
             </div>
             <div class="tixian_ad">
-              <p>10000.00</p>
+              <p><{$countMoney}></p>
               <div class="tixian_text">
                 <span>可提现余额</span>
-                <p><button type="button" data-toggle="modal" data-target="#tixian_anniu1">提现</button></p>
+                <p><button type="button" onclick="showInfo()">提现全部订单</button></p>
               </div>
             </div>
             <div class="tixian_list">
-              <h3><span class="tixian_show"><a href="#">可提现订单</a></span> <span class="" style="margin-left:20px;"><a href="#">已提现订单</a></span></h3>
+              <h3>
+                  <span><a href="<{:U('Businessuser/tixian')}>">可提现订单</a></span>
+                  <span class="" style="margin-left:20px;"><a href="<{:U('Businessuser/tixian',array('finshed'=>2))}>">申请提现订单</a></span>
+                  <span class="" style="margin-left:20px;"><a href="<{:U('Businessuser/tixian',array('finshed'=>3))}>">提现完成订单</a></span>
+              </h3>
               <div class="page type-page status-publish hentry">
             <div class="entry-content">
               <div class="entry-summary">
@@ -106,21 +110,22 @@
                           <th class="">&nbsp;</th>
                           <th class="">图片</th>
                           <th class="">产品</th>
-                          <th class="">规格</th>
-                          <th class="">价格</th>
+                          <th class="">单价</th>
                           <th class="">数量</th>
+                          <th class="">总价</th>
                           <th class="">状态</th>
                         </tr>
                       </thead>
                       <tbody>
+
+                      <volist name="orders" id="row">
                         <tr style="position: sticky;bottom:0px;background-color: #fff;">
                           <td colspan="7" class="actions" style="text-align: center;border: 1px solid #ccc;padding:4px 10px;background-color: rgba(244, 242, 242, 0.43);">
                             <div class="coupon">
-                                
-                                <span style="font-size:12px;margin-left:10px;">订单号：243936291533058537</span>  
+                                <span style="font-size:12px;margin-left:10px;">交易订单号：<{$row.outtradeno}></span>
+                                <span style="font-size:12px;margin-left:10px;">商品单号：<{$row.orderno}></span>
                             </div>
                             <div style="width:50%;float:right;    text-align: right;">
-                               
                             </div> 
                           </td>
                         </tr>
@@ -130,78 +135,30 @@
                           </td>     
                           <td class="product-thumbnail" style="text-align: center;">
                             <a href="simple_product.html">
-                              <img width="180" height="180" src="images/1903/56-180x180.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" srcset="images/1903/56-180x180.jpg 180w, images/1903/56-150x150.jpg 150w, images/1903/56-300x300.jpg 300w, images/1903/56.jpg 600w" sizes="(max-width: 180px) 100vw, 180px">
+                              <img width="180" height="180" src="<{$row.pic1}>" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
                             </a>
                           </td>
                           <td class="product-name" data-title="Product" style="text-align: center;">
-                            <a href="simple_product.html">智能相机</a>          
+                            <a href="simple_product.html"><{$row.name}></a>
                           </td>
                           <td class="product-quantity" data-title="Quantity" style="text-align: center;">
-                            <div class="">
-                             <span>店铺：海尔电器店</span><br>
-                             <span>颜色分类：红色</span><br>
-                             <span>8G/256G/Win10</span>
-                            </div>
+                              <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span><{$row.price}></span>
                           </td>
                           <td class="product-price" data-title="Price" style="text-align: center;">
-                            <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>300.00</span>          
+                              <span><{$row.num}></span>
                           </td>
                           <td class="product-quantity" data-title="Quantity" style="text-align: center;">
-                            <div class="">
-                                <span>1</span>
-                            </div>
+                              <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span><{$row.total}></span>
                           </td>
                           <td class="product-subtotal" data-title="Total" style="text-align: center;">
-                              <button type="button" class="wishlist btn-button">
-                                   <span>提现</span>
-                              </button>       
+                              <eq name="row.finshed" value="1">
+                                  <!--<button type="button" class="wishlist btn-button">-->
+                                       <!--<span>提现</span>-->
+                                  <!--</button>-->
+                              </eq>
                           </td>
                         </tr>
-                        
-                        <tr style="position: sticky;bottom:0px;background-color: #fff;">
-                          <td colspan="7" class="actions" style="text-align: center;border: 1px solid #ccc;padding:4px 10px;background-color: rgba(244, 242, 242, 0.43);">
-                            <div class="coupon">
-                               
-                                <span style="font-size:12px;margin-left:10px;">订单号：243936291533058537</span>  
-                            </div>
-                            <div style="width:50%;float:right;    text-align: right;">
-                               
-                            </div> 
-                          </td>
-                        </tr>
-                        <tr class="cart_item cart-table">
-                          <td class="product-remove">
-    
-                          </td>     
-                          <td class="product-thumbnail" style="text-align: center;">
-                            <a href="simple_product.html">
-                              <img width="180" height="180" src="images/1903/56-180x180.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" srcset="images/1903/56-180x180.jpg 180w, images/1903/56-150x150.jpg 150w, images/1903/56-300x300.jpg 300w, images/1903/56.jpg 600w" sizes="(max-width: 180px) 100vw, 180px">
-                            </a>
-                          </td>
-                          <td class="product-name" data-title="Product" style="text-align: center;">
-                            <a href="simple_product.html">智能相机</a>          
-                          </td>
-                          <td class="product-quantity" data-title="Quantity" style="text-align: center;">
-                            <div class="">
-                             <span>店铺：海尔电器店</span><br>
-                             <span>颜色分类：红色</span><br>
-                             <span>8G/256G/Win10</span>
-                            </div>
-                          </td>
-                          <td class="product-price" data-title="Price" style="text-align: center;">
-                            <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>300.00</span>          
-                          </td>
-                          <td class="product-quantity" data-title="Quantity" style="text-align: center;">
-                            <div class="">
-                                <span>1</span>
-                            </div>
-                          </td>
-                          <td class="product-subtotal" data-title="Total" style="text-align: center;">
-                              <button type="button" class="wishlist btn-button">
-                                   <span>提现</span>
-                              </button>       
-                          </td>
-                        </tr>
+                      </volist>
 
                       </tbody>
                     </table>
@@ -234,33 +191,32 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h3 style="    color: #ff5e00;font-weight: bold;">提现金额</h3>
-        <p style="font-size:20px;padding-top:20px; ">￥1000.00</p>
+          <p style="font-size:20px;padding-top:20px; ">￥<span id="totalMoney">0</span></p>
       </div>
       <div class="modal-body">
-        <div class="clearfix order_pay_type_box">
-            <h3 style="    color: #ff5e00;font-weight: bold;">提现方式</h3>
-            <ul class="fl clearfix">
-              <li class="fl clearfix">
-                <label class="wx_pay order_pay_type fl">
-                  <input type="radio" name="pay_type">
-                </label>
-              </li>
-              <li class=" clearfix">
-                <label class="zfb_pay order_pay_type fl">
-                  <input type="radio" name="pay_type">
-                </label>
-              </li>
-              <li class=" clearfix">
-                <label class="wgzf_pay order_pay_type fl">
-                  <input type="radio" name="pay_type">
-                </label>
-              </li>
-            </ul>
-          </div>
+        <form method="post" action="<{:U('Businessuser/applyTixianAll')}>" id="applyTixian">
+            <div class="clearfix order_pay_type_box">
+                <ul class="fl clearfix">
+                    <li class="fl clearfix" style="font-size: 24px;">
+                      <h3 style="    color: #ff5e00;font-weight: bold;">提现订单数</h3>
+                      <h3 id="orderCount"></h3>
+                    </li>
+                    <li class="fl clearfix" style="font-size: 24px;">
+                        <h3 style="    color: #ff5e00;font-weight: bold;">提现人姓名</h3>
+                        <h3 id="alipayname"></h3>
+                    </li>
+                    <li class="fl clearfix" style="font-size: 24px;">
+                        <h3 style="    color: #ff5e00;font-weight: bold;">提现账号</h3>
+                        <h3 id="alipay"></h3>
+                    </li>
+                </ul>
+                <p style="color: red;">*实际金额将在提现金额上扣除3%手续费</p>
+            </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary">提交</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-primary" onclick="$('#applyTixian').submit();">提交</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -285,10 +241,26 @@
 
 <script type="text/javascript" src="__PUBLIC__/Home/js/themejs/so_megamenu.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Home/js/themejs/addtocart.js"></script>
-
-
-
-
+<script type="text/javascript">
+    function showInfo(){
+        $.ajax({
+            url:'<{:U("Businessuser/tixianCheck")}>',
+            type:'post',
+            dataType:'json',
+            success:function(rs){
+                if(rs['orderCount'] < 1){
+                    alert('当前没有可提现订单');
+                    return false;
+                }
+                $('#totalMoney').text(rs['totalMoney']);
+                $('#orderCount').text(rs['orderCount']);
+                $('#alipayname').text(rs['alipayname']);
+                $('#alipay').text(rs['alipay']);
+                $('#tixian_anniu1').modal();
+            }
+        })
+    }
+</script>
 </body>
 </html>
 

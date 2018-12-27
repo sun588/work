@@ -302,4 +302,52 @@ class ProductController extends CommonController {
         $this->assign('maxPrice',$offer[count($offer) - 1]['price']);
         $this->display();
     }
+
+    function productDetail2(){
+        $id = I('id');
+        $model = M('product');
+
+        //点击量加1
+        //$model->where("id=$id")->setInc('clicknum');
+
+        //获取商品详情
+        $product = $model->where("id=$id")->field('id,name,type,pic1,pic2,pic3,pic4,c1,c2,c3,c4,pcontent,tcontent')->find();
+        $product['pcontent'] = htmlspecialchars_decode($product['pcontent']);
+        $product['tcontent'] = htmlspecialchars_decode($product['tcontent']);
+
+        //获取商品类目
+//        $model = D('Category');
+//        $navigation = array();
+//        $c1 = empty($product['c1']) ? '' : $model->getCategoryByID($product['c1']);
+//        $c2 = empty($product['c2']) ? '' : $model->getCategoryByID($product['c2']);
+//        $c3 = empty($product['c3']) ? '' : $model->getCategoryByID($product['c3']);
+//        $c4 = empty($product['c4']) ? '' : $model->getCategoryByID($product['c4']);
+//        if($c1) $navigation[] = $c1;
+//        if($c2) $navigation[] = $c2;
+//        if($c3) $navigation[] = $c3;
+//        if($c4) $navigation[] = $c4;
+
+        /*推荐产品 取最新的4个产品*/
+//        $model = M('product');
+//        $commendPro = $model->field('id,name,type,pic1')->order('time desc')->limit(4)->select();
+
+        /*相关产品 同类目下的产品*/
+//        $likePro = $model->field('id,name,type,pic1,pic2')->where('c1='.$product['c1'])->limit(10)->select();
+
+        //获取商品报价
+        $model = M('offer');
+        $model->alias('o');
+        $model->join('LEFT JOIN user u ON u.id=o.uid');
+        $offer = $model->field('o.id,u.nickname,o.price,o.info')->where("o.pid=$id")->order('o.price')->select();
+
+
+        $this->assign('product',$product);
+//        $this->assign('navigation',$navigation);
+//        $this->assign('commendPro',$commendPro);
+//        $this->assign('likePro',$likePro);
+        $this->assign('offer',$offer);
+        $this->assign('minPrice',$offer[0]['price']);
+        $this->assign('maxPrice',$offer[count($offer) - 1]['price']);
+        $this->display();
+    }
 }

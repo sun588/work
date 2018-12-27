@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Basic page needs
+    ============================================ -->
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="Magentech">
+    <meta name="robots" content="index, follow" />
+   
+    <!-- Mobile specific metas
+    ============================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Favicon
+    ============================================ -->
+    <link rel="shortcut icon" type="image/png" href="__PUBLIC__/Home/ico/favicon-16x16.png">
+    
+    <!-- 新引入 -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/main.css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/app-orange.css" id="theme_color" />
+    <!-- end -->
+   
+    <!-- Libs CSS
+    ============================================ -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap/css/bootstrap.min.css">
+    <link href="__PUBLIC__/Home/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/lib.css" rel="stylesheet">
+
+    <!-- Theme CSS
+    ============================================ -->
+    <link href="__PUBLIC__/Home/css/themecss/so_searchpro.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so_megamenu.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-categories.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-listing-tabs.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-category-slider.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/themecss/so-newletter-popup.css" rel="stylesheet">
+
+    <link href="__PUBLIC__/Home/css/footer/footer1.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/header/header1.css" rel="stylesheet">
+    <link id="color_scheme" href="__PUBLIC__/Home/css/theme.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/responsive.css" rel="stylesheet">
+
+     <!-- Google web fonts
+
+    ============================================ -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' rel='stylesheet' type='text/css'>     
+<style type="text/css">
+body{font-family:'Poppins', sans-serif;
+}
+.cart_item td{
+          text-align: center;
+         }
+.content-top .entry-summary table thead tr th, .entry-content .entry-summary table thead tr th, .commentlist .entry-summary table thead tr th {
+           border-right: 0px;
+}
+.Max_msg {
+    margin-left: -7%;
+    bottom: 36%;
+    position: absolute;
+}
+
+.tuihuo-three{
+    background-color: #c4c2c2;
+}
+.tuihuo-three .nubme{
+	color:#c4c2c2;
+	}
+</style>
+
+
+</head>
+
+<body class="res layout-subpage layout-1 banners-effect-5">
+
+    <div id="wrapper" class="wrapper-fluid">
+   <!-- Header Container  -->
+        <include file="common:header" />
+    <!-- //Header Container  -->
+
+	<!-- Main Container  -->
+	<div class="main-container container">
+		
+		<div class="container">
+			<div class="row">
+                <include file="common:userLeftBar" />
+		<div role="main" class="main-page col-lg-10 col-md-12 col-sm-12 col-xs-12">
+           <!-- <div class="col-lg-12 statr-list" style="padding:0px;margin-bottom: 16px;">
+              <div class="dindan-title">
+                <h3>申请退款</h3> 
+              </div>
+           </div> -->
+           
+           <div class="fuwu-num">
+                <div class="tuihuo-one">
+        			<span class="nubme">1</span><span>买家申请售后</span>
+        		</div>
+                <div class="tuihuo-two">
+                    <span class="nubme">2</span><span>卖家售后处理结果</span>
+                </div>
+            </div>
+
+			<div class="page type-page status-publish hentry">
+			<div class="entry-content">
+
+                <div class="chuli">
+                    <eq name="result.state" value="2">
+                        <h3 style="font-weight:bold;">商家已同意你的售后申请</h3>
+                    </eq>
+                    <eq name="result.state" value="3">
+                        <h3 style="font-weight:bold;">商家已拒绝你的售后申请</h3>
+                    </eq>
+                    <span>申请说明：<{$result.buyercontent}></span><br>
+                    <span>商家说明：<{$result.suppliercontent}></span><br>
+                </div>
+
+                <form action="#" method="get" id="form-login" accept-charset="utf-8">
+                  <div class="form-box buzou fuwu-1">
+                    <!--<input id="load" value="修改申请" type="button"  style="border-radius: 20px;background-color: #ff5e00;color:#fff;"/>-->
+                  </div><!-- /.form-box -->
+                </form><!-- /#form-login -->
+				
+			</div>
+
+            <div class="clearfix"></div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- //Main Container -->
+</div> 
+
+
+    <!-- Footer Container -->
+        <include file="common:footer" />
+    <!-- //end Footer Container -->
+
+</div>
+   
+
+<!-- End Color Scheme
+============================================ -->
+
+
+
+<!-- Include Libs & Plugins
+============================================ -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/slick-slider/slick.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/libs.js"></script>
+
+<!-- Theme files
+============================================ -->
+
+<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/so_megamenu.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/themejs/addtocart.js"></script>
+
+
+<script type="text/javascript">
+
+</script>
+
+</body>
+</html>
+
+

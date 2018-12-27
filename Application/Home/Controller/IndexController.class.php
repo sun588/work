@@ -6,6 +6,7 @@ class IndexController extends CommonController {
         $this->assign('headPic',$this->headPic());
         $this->assign('newProduct',$this->newProduct());
         $this->assign('discountProduct',$this->discountProduct());
+        $this->assign('hotProduct',$this->hotProduct());
         $this->assign('brandCommend',$this->brandCommend());
         $this->assign('brandList',$this->brandList());
 
@@ -79,6 +80,16 @@ class IndexController extends CommonController {
             $returnArr[] = $rs;
         }
         return $returnArr;
+    }
+
+    function hotProduct(){
+        $model = M('product');
+        $rs = $model->where('state=1')->field('id,name,type,pic1,pic2')->order('clicknum desc')->limit(10)->select();
+        for($i = 0; $i < count($rs); $i++){
+            $rs[$i]['pic1'] = $this->getThumpPic($rs[$i]['pic1']);
+            $rs[$i]['pic2'] = $this->getThumpPic($rs[$i]['pic2']);
+        }
+        return $rs;
     }
 
     /*页面底部的品牌列表 取前20个*/

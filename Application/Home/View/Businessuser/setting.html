@@ -106,10 +106,14 @@
                                 <label for="shopName" style="width: 12%;"><span class="sign">*</span>店铺名称： </label>
                                 <input type="text" id="shopName" name="shopName" value="<{$userInfo.shopname}>">
                             </div><!-- /.form-box -->
-                            <!--<div class="form-box">-->
-                                  <!--<label for="name-login" style="width: 12%;"><span class="sign">*</span>提现账户： </label>-->
-                                  <!--<input type="tel" name="telephone"  name="name-login" value="店铺名称">-->
-                            <!--</div>&lt;!&ndash; /.form-box &ndash;&gt;-->
+                            <div class="form-box">
+                                  <label for="alipayname" style="width: 12%;"><span class="sign">*</span>提现人姓名： </label>
+                                  <input type="text" id="alipayname" name="alipayname" value="<{$userInfo.alipayname}>">
+                            </div><!-- /.form-box -->
+                            <div class="form-box">
+                                  <label for="alipay" style="width: 12%;"><span class="sign">*</span>支付宝账号： </label>
+                                  <input type="text" id="alipay" name="alipay" value="<{$userInfo.alipay}>">
+                            </div><!-- /.form-box -->
                             <div class="form-box" >
                                   <div class="form-box" >
                                       <button style="background-color:#ff5e00;color:#fff;border:1px solid #ff5e00; width:80px;margin-left: 12%;" onclick="saveSetting()">保存</button>
@@ -172,9 +176,11 @@
         var headpic = $('#headpic').val();
         var nickname = $('#nickname').val();
         var shopName = $('#shopName').val();
+        var alipayname = $('#alipayname').val();
+        var alipay = $('#alipay').val();
         $.ajax({
             url:'<{:U("User/saveSetting")}>',
-            data:{headpic:headpic,nickname:nickname,shopName:shopName},
+            data:{headpic:headpic,nickname:nickname,shopName:shopName,alipayname:alipayname,alipay:alipay},
             type:'post',
             dataType:'json',
             success:function (rs) {

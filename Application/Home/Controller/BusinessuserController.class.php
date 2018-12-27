@@ -219,7 +219,7 @@ class BusinessuserController extends CommonController {
             $Page->parameter['send'] = I('get.send');
         }
         $show = $Page->show();
-        $model->alias('o')->field('o.id,o.pid,o.orderNo,o.outTradeNo,o.price,o.num,p.name,p.type,p.pic1,u.shopName');
+        $model->alias('o')->field('o.id,o.pid,o.orderNo,o.outTradeNo,o.price,o.num,o.send,p.name,p.type,p.pic1,u.shopName');
         $model->join('LEFT JOIN product p ON o.pid=p.id')->join("LEFT JOIN user u ON o.supplierID=u.id");
         $data = $model->where($where)->order('o.time desc')->limit("$Page->firstRow,$Page->listRows")->select();
 
@@ -280,7 +280,7 @@ class BusinessuserController extends CommonController {
 
     function setting(){
         $model = M('user');
-        $model->field('nickname,headpic,shopName');
+        $model->field('nickname,headpic,shopName,alipay,alipayname');
         $userInfo = $model->where("id=$this->uid")->find();
         $this->assign('userInfo',$userInfo);
         $this->display();
@@ -342,7 +342,144 @@ class BusinessuserController extends CommonController {
     function tixian(){
         $model = M('orders');
 
+        //可以提现总金额
+        $countMoney = $model->where("supplierID=$this->uid and finshed=1 and (send=3 or send=4)")->sum('total');
+        $this->assign('countMoney',$countMoney);
+
+        $finshed = I('get.finshed') ? I('get.finshed') : 1;
+        $where = "o.supplierID=$this->uid and o.send in(3,4) and o.finshed=$finshed";
+
+        $model->alias('o');
+        $model->join('LEFT JOIN product p ON o.pid=p.id');
+        $model->field('o.id,o.price,o.total,o.num,o.time,o.orderNo,o.outTradeNo,o.finshed,p.name,p.pic1');
+        $orders = $model->where($where)->select();
+        $this->assign('orders',$orders);
+
         $this->display();
     }
+
+    function tixianCheck(){
+        $model = M('orders');
+
+        $model->field('id,price,total,num,time,orderNo,outTradeNo');
+        $orderCount = $model->where("supplierID=$this->uid and finshed=1 and (send=3 or send=4)")->count();
+        $totalMoney = $model->where("supplierID=$this->uid and finshed=1 and (send=3 or send=4)")->sum('total');
+        $orderID = $model->where("supplierID=$this->uid and finshed=1 and (send=3 or send=4)")->field('id')->select();
+
+        $model = M('user');
+        $accountInfo = $model->where("id=$this->uid")->field('alipay,alipayname')->find();
+
+        $returnData = array(
+            'orderCount' => $orderCount,
+            'totalMoney' => $totalMoney,
+            'orderID' => $orderID,
+            'alipay' => $accountInfo['alipay'],
+            'alipayname' => $accountInfo['alipayname'],
+        );
+
+        exit(json_encode($returnData));
+    }
+
+    //申请提现
+    function applyTixianAll(){
+        $model = M('orders');
+        $orderCount = $model->where("supplierID=$this->uid and finshed=1 and (send=3 or send=4)")->count();
+        //$totalMoney = $model->where("supplierID=$this->uid and finshed=1 and send=3 or send=4")->sum('total');
+        //$orderID = $model->where("supplierID=$this->uid and finshed=1 and send=3 or send=4")->field('id')->select();
+
+        $model->startTrans();
+        $rs = $model->where("supplierID=$this->uid and finshed=1 and (send=3 or send=4)")->save(array('finshed'=>2));
+        if($rs == $orderCount){
+            $model->commit();
+            $this->success("申请提现成功");
+        }else{
+            $model->rollback();
+            $this->error('申请提现失败');
+        }
+    }
+
+    function applyTixianSingle(){
+
+    }
     /********************   提现   ************************/
+
+    /********************售后********************************/
+
+
+    function getCustomerService(){
+        $id = I('post.id');
+        $model = M('customerservice');
+        $rs = $model->field('id,serviceContent,buyerContent,sendTime')->where("id=$id")->find();
+        if($rs){
+            f_return(1,'success',$rs);
+        }else{
+            f_return(4001,'获取数据失败');
+        }
+    }
+
+    function customerList(){
+        $where = "o.supplierID=$this->uid";
+
+        if(I('orderNo')){
+            $where .= " and o.orderNo=" . I('orderNo');
+        }
+
+        $model = M('customerservice');
+        $model->alias('c');
+        $model->join('left join orders o ON c.orderID=o.id');
+        $count = $model->where($where)->count();
+
+        $Page = new \Think\Page($count,10);
+        $show = $Page->show();
+
+        $model->alias('c');
+        $model->join('left join orders o ON c.orderID=o.id')->join('left join product p on o.pid=p.id');
+        $model->field('p.name pname,p.type,o.num,o.orderNo,o.address,o.total,c.name,c.phone,c.serviceType,c.id,c.state');
+        $data = $model->where($where)->order('sendTime desc')->limit("$Page->firstRow,$Page->listRows")->select();
+
+        for($i = 0; $i < count($data); $i++){
+            if($data[$i]['servicetype'] == 1) $data[$i]['servicetype'] = '其他';
+            if($data[$i]['servicetype'] == 2) $data[$i]['servicetype'] = '退货/退款';
+            if($data[$i]['servicetype'] == 3) $data[$i]['servicetype'] = '换货';
+        }
+
+        $this->assign('page',$show);
+        $this->assign('data',$data);
+
+        //f_dump($data);exit;
+
+        $this->display();
+    }
+
+    function saveCurrent(){
+        $id = I('post.id');
+        $supplierContent = I('post.supplierContent');
+        $state = I('post.state');
+
+        $saveData = array(
+            'supplierContent' => $supplierContent,
+            'state' => $state,
+            'reviewTime' => time(),
+        );
+
+        $model = M('customerservice');
+        $rs = $model->where("id=$id")->save($saveData);
+        if($rs){
+            f_return(1,'保存成功');
+        }else{
+            f_return(4001,'保存失败');
+        }
+    }
+
+    function customerResult(){
+        $id = I('get.id');
+
+        $model = M('customerservice');
+        $rs = $model->where("id=$id")->field('state,reviewTime,supplierContent,buyerContent')->find();
+
+        $this->assign('result',$rs);
+
+        $this->display();
+    }
+    /********************售后********************************/
 }
